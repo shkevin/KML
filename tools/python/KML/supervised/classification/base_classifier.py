@@ -1,7 +1,4 @@
 class BaseClassifier:
-    def __init__(self):
-        print("Not Implemented")
-
     def set_params(self, **params):
         return None
 

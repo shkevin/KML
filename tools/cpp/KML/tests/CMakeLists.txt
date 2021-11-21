@@ -1,0 +1,14 @@
+set(BINARY ${CMAKE_PROJECT_NAME}_tests)
+
+set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
+set(BUILD_GTEST ON CACHE BOOL "" FORCE)
+
+file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false *.h *.cc)
+
+set(SOURCES ${TEST_SOURCES})
+
+add_executable(${BINARY} ${TEST_SOURCES})
+
+add_test(NAME ${BINARY} COMMAND ${BINARY})
+
+target_link_libraries(${BINARY} PUBLIC ${CMAKE_PROJECT_NAME}_lib gtest)

@@ -5,39 +5,47 @@ namespace NeuralNetwork {
 
     namespace Layer {
 
-        Layer::Layer(int units, 
-                Activation activation, 
+        Layer::Layer(const int a_units, 
+                Activators activation, 
                 Initializer kernel_initializer, 
-                Initializer bias_initializer)
+                Initializer bias_initializer) : m_units(a_units)
         {
             // Initialize the weights
             switch (kernel_initializer) {
                 case UNIFORM:
-                    this->weights = Initializers::uniform(units, 0.0, 1.0);
+                    this->m_weights = Initializers::uniform(a_units, 0.0, 1.0);
                 case ZEROS:
-                    this->weights = Initializers::zeros(units);
+                    this->m_weights = Initializers::zeros(a_units);
                 default:
-                    this->weights = Initializers::uniform(units, 0.0, 1.0);
+                    this->m_weights = Initializers::uniform(a_units, 0.0, 1.0);
             }
   
             // Initialize the bias
             switch (bias_initializer) {
                 case ZEROS:
-                    this->bias = Initializers::zeros(units);
+                    this->m_bias = Initializers::zeros(a_units);
                 case UNIFORM:
-                    this->bias = Initializers::uniform(units, 0, 1);
+                    this->m_bias = Initializers::uniform(a_units, 0, 1);
                 default:
-                    this->bias = Initializers::zeros(units);
+                    this->m_bias = Initializers::zeros(a_units);
             }
+
         }
 
         Layer::~Layer() {
 
         }
 
-        void Layer::update() {
-
+        template<typename T>
+        void Layer::update(vector<T> inputs) {
         }
 
+        template<typename T>
+        const vector<T> forward(vector<T> inputs) {
+        }
+
+        void backward() {
+
+        }
     }
 }

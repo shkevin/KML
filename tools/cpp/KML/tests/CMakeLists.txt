@@ -1,14 +1,14 @@
-set(BINARY ${CMAKE_PROJECT_NAME}_tests)
+SET(BINARY ${CMAKE_PROJECT_NAME}_test)
 
-set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
-set(BUILD_GTEST ON CACHE BOOL "" FORCE)
+FILE(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES true *.h *.cc)
 
-file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false *.h *.cc)
+# SET(SOURCES ${TEST_SOURCES})
 
-set(SOURCES ${TEST_SOURCES})
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
-add_executable(${BINARY} ${TEST_SOURCES})
+ADD_EXECUTABLE(${BINARY} ${TEST_SOURCES})
 
-add_test(NAME ${BINARY} COMMAND ${BINARY})
+ADD_TEST(NAME ${BINARY} COMMAND ${BINARY})
 
-target_link_libraries(${BINARY} PUBLIC ${CMAKE_PROJECT_NAME}_lib gtest)
+TARGET_LINK_LIBRARIES(${BINARY} PUBLIC ${CMAKE_PROJECT_NAME}_lib gtest gmock)

@@ -2,6 +2,7 @@
 #define DENSE_H
 
 #include "layer.h"
+#include "activations/activation.h"
 
 namespace NeuralNetwork {
 
@@ -11,7 +12,7 @@ namespace NeuralNetwork {
 
             public:
 
-                Dense(int units, Activation activation);
+                Dense(int units, Activators activation);
                 ~Dense();
                 void update();
 

@@ -4,19 +4,13 @@
 #include <eigen3/Eigen/Dense>
 
 #include "../utils/utils.h"
+#include "activations/activation.h"
 
 using namespace Eigen;
 
 namespace NeuralNetwork {
 
     namespace Layer {
-
-        enum Activation {
-            SIGMOID,
-            SOFTMAX,
-            TANH,
-            RELU,
-        };
 
         enum Initializer {
             UNIFORM,
@@ -28,13 +22,15 @@ namespace NeuralNetwork {
 
             public:
 
-                Layer(int units,
-                    Activation activation,
-                    Initializer kernel_initializer = UNIFORM,
-                    Initializer bias_initializer = ZEROS);
+                Layer(const int a_units,
+                    Activators a_activation,
+                    Initializer a_kernel_initializer = UNIFORM,
+                    Initializer a_bias_initializer = ZEROS);
 
                 ~Layer();
-                virtual void update() = 0;
+
+                template<typename T>
+                void update(vector<T> inputs);
 
             protected:
 
@@ -43,10 +39,9 @@ namespace NeuralNetwork {
 
                 virtual void backward() = 0;
 
-            private:
-
-                vector<double> weights;
-                vector<double> bias;
+                const int m_units;
+                vector<double> m_weights;
+                vector<double> m_bias;
         };
     }
 }

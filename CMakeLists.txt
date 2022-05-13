@@ -1,26 +1,26 @@
-# Minimum version of CMake required to build this<Plug>PeepOpenroject
-cmake_minimum_required(VERSION 3.0)
+# Minimum version of CMake required to build this project.
+CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
 ################################
 # Project
 ################################
 project(KML
 	VERSION 0.0.1
-	DESCRIPTION "Machine Learning in CPP"
+    DESCRIPTION "Streaming Machine Learning in c++/cython"
     LANGUAGES CXX)
 
 if(NOT DEFINED CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug)
+    SET(CMAKE_BUILD_TYPE Debug)
 endif()
 
 # Minimum cpp standard
-SET(CMAKE_CXX_STANDARD 20)
+SET(CMAKE_CXX_STANDARD 11)
 
 ################################
 # Macros
 ################################
 MACRO(HEADER_DIRECTORIES return_list)
-	FILE(GLOB_RECURSE new_list *.h)
+    FILE(GLOB_RECURSE new_list ${CPP_DIR}/include/*.h)
 	SET(dir_list "")
 	FOREACH(FILE_path ${new_list})
 		GET_FILENAME_COMPONENT(dir_path ${FILE_path} PATH)
@@ -37,15 +37,13 @@ SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-builtin -Wall -Wshadow -fno-strict-
 SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-exceptions -fcheck-new -fno-rtti -Wpedantic")
 SET(CMAKE_CXX_FLAGS "${AC_COMMON_FLAGS}")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g") # For debugging
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions") # Add exception handling
 
 # if compiler is Clang, link libc++, otherwise, link default libstdc++
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -fsanitize=signed-integer-overflow")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -fsanitize=signed-integer-overflow")
+    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
 endif()
-
-# Make binaries installed in bin folder
-# SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # UNIX, WIN32, WINRT, CYGWIN, APPLE are environment variables as flags SET by default system
 if(UNIX)
@@ -62,15 +60,30 @@ if(CMAKE_VERSION VERSION_LESS 3.12)
 	# this logic is deprecated in CMake after 3.12
 	FIND_PACKAGE(PythonInterp REQUIRED)
 else()
-	# the new hotness. This will preferentially find Python3 instead of Python2
+	# the new hotness. This will preferentially find Python3 instead of Python2.
+    # And also works with Virtual Environments.
 	FIND_PACKAGE(Python)
 	SET(PYTHON_EXECUTABLE ${Python_EXECUTABLE})
 endif()
 
+# Find CCACHE to speed up builds.
+MESSAGE(STATUS "Attempting to find ccache...")
+FIND_PROGRAM(CCACHE_FOUND ccache)
+if(CCACHE_FOUND)
+    MESSAGE(STATUS "ccache found!")
+    SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+    SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache) # Less useful to do it for linking, see edit2
+else()
+    MESSAGE(STATUS "ccache not found!")
+endif(CCACHE_FOUND)
+
+# Find Catch2 for Unit Testing
+# find_package(Catch2 REQUIRED)
+
 ################################
 # Normal Libraries & Executables
 ################################
-# If using microsfot visual studio.
+# If using microsoft visual studio.
 if(MSVC)
     SET(CMAKE_USE_RELATIVE_PATHS ON CACHE INTERNAL "" FORCE)
 endif()
@@ -81,20 +94,14 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL " ${CMAKE_BINARY_DIR}")
        You should create a separate directory for build FILEs.")
 endif()
 
-# Include eigen package
-FIND_PACKAGE(Eigen3 REQUIRED)
-LINK_DIRECTORIES(${Eigen_INCLUDE_DIRS})
-
-# Add cpp FILEs to build
-SET(BINARY ${PROJECT_NAME})
-MESSAGE(STATUS "Adding source and header files")
-SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp/KML")
-
 # Create a sources variable with a link to all cpp FILEs to compile
+SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp/KML")
 FILE(GLOB_RECURSE SOURCES "${CPP_DIR}/src/*.cc" "${CPP_DIR}/src/*.tcc")
 
+ADD_LIBRARY(${CMAKE_PROJECT_NAME}_lib STATIC ${SOURCES})
+
 # Add the directories needed.
-INCLUDE_DIRECTORIES(${BINARY}
+INCLUDE_DIRECTORIES(${CMAKE_PROJECT_NAME}_lib
     PUBLIC
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_BINARY_DIR}
@@ -102,30 +109,15 @@ INCLUDE_DIRECTORIES(${BINARY}
         "${CPP_DIR}/src"
 )
 
-# Fake main
-LIST(APPEND SOURCES "./main.cc")
-
-# Add an executable with the above sources
-ADD_EXECUTABLE(${BINARY} ${SOURCES})
-
-# Link the eigen libraries required.
-TARGET_LINK_LIBRARIES(${BINARY} ${Eigen_LIBRARIES})
-
 ################################
 # Testing
 ################################
-FIND_PACKAGE(GTest)
-OPTION(BUILD_TESTING "Build gtest unit test" ON)
+OPTION(BUILD_TESTING "Build gtest unit test" OFF)
 if (BUILD_TESTING)
 	MESSAGE(STATUS "Enabled testing")
-    add_library(${BINARY}_lib STATIC ${SOURCES})
-	enable_testing()
-    # LINK_DIRECTORIES("${CPP_DIR}/tests")
+    ENABLE_TESTING()
+    FIND_PACKAGE(GTest)
+    SET(BUILD_GMOCK OFF)
     ADD_SUBDIRECTORY("${CPP_DIR}/tests")
     ADD_SUBDIRECTORY("${CPP_DIR}/lib/googletest")
 endif()
-
-# SET(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
-# SET(CPACK_PACKAGE_VERSION "${VERSION}")
-# SET(CPACK_MONOLITHIC_INSTALL 1)
-# include(CPack)

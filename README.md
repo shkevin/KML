@@ -9,7 +9,7 @@ Folder Descriptions
 ./src      General sources
 ./include  Header files that expose the public interface and are to be installed
 ./lib      Library build directory
-./tests     Test suites that should be run during a `make test`
+./tests    Test suites that should be run during a `make test`
 
 Current Structure
 .

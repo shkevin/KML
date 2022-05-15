@@ -3,7 +3,6 @@
 #include <gtest/gtest.h>
 #include "statistics/StreamingVariance.h"
 #include <vector>
-#include <iostream>
 
 using KML::Statistics::StreamingVariance;
 
@@ -43,5 +42,5 @@ TEST_F(StreamingVarianceTest, TestVarianceCalculation)
 {
     std::vector<double> data{1, 1, 1, 2, 2};
     sv->update(data);
-    EXPECT_EQ(0.3, sv->evaluate());
+    EXPECT_FLOAT_EQ(0.24, sv->evaluate());
 }

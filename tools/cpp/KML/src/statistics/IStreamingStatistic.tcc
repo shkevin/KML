@@ -12,11 +12,6 @@ namespace KML
         template<typename T>
             IStreamingStatistic<T>::IStreamingStatistic(const uint64_t windowSize): m_windowSize(windowSize) {
                 if(m_windowSize <= 0) m_window = nullptr;
-                else if(m_windowSize < 5)
-                {
-                    throw std::invalid_argument("Window Size must either be 0 or greater than 5!");
-                }
-                /* else m_window->resize(m_windowSize); */
             }
 
         template<typename T>

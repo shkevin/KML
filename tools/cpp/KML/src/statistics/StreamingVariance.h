@@ -1,39 +1,40 @@
 /*!
- * @file  StreamingMean.h
- * @brief Provides the declarations for the StreamingMean calculation.
+ * @file  StreamingVariance.h
+ * @brief Provides the declarations for the StreamingVariance calculation.
  *
- * The StreamingMean computes the mean of a data stream. This class
+ * The StreamingVariance computes the variance of a data stream. This class
  * can work on all the data or a window of the data. Each update is
  * O(1), with at most O(window size) memory.
  */
 
-#ifndef __STREAMING_MEAN_H__
-#define __STREAMING_MEAN_H__
+#ifndef __STREAMING_VARIANCE_H__
+#define __STREAMING_VARIANCE_H__
 
 #include "IStreamingStatistic.h"
+#include "StreamingMean.h"
 
 namespace KML
 {
     namespace Statistics
     {
-        /*! @brief A StreamingMean class for calculating the mean of
+        /*! @brief A StreamingVariance class for calculating the mean of
          *  a datastream.
          */
-        class StreamingMean : public IStreamingStatistic<double>
+        class StreamingVariance : public IStreamingStatistic<double>
         {
             public:
                 /*!
                  * @brief Default Constructor.
-                 * @param windowSize The window size to calculate the streaming mean.
+                 * @param windowSize The window size to calculate the streaming variance.
                  *        This window size defaults to a window size of 0, meaning
-                 *        the mean is over the entire data stream.
+                 *        the variance is over the entire data stream.
                  */
-                StreamingMean(const uint64_t windowSize = 0);
+                StreamingVariance(const uint64_t windowSize = 0);
 
                 /*!
                  * @brief Destructor.
                  */
-                ~StreamingMean();
+                ~StreamingVariance();
 
                 /*!
                  * @copydoc IStreamingStatistic::update()
@@ -49,11 +50,16 @@ namespace KML
 
             protected:
                 /*!
-                 * @brief Sum of all elements within the window.
+                 * @brief Mean of all elements within the window.
                  */
-                double m_sum;
+                StreamingMean* m_mean;
+
+                /*!
+                 * @brief Mean of squared sum of all elements within the window.
+                 */
+                StreamingMean* m_sumSquared;
         };
     }
 }
 
-#endif // __STREAMING_MEAN_H__
+#endif // __STREAMING_VARIANCE_H__

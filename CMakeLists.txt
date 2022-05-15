@@ -85,12 +85,10 @@ endif()
 
 # Create a sources variable with a link to all cpp FILEs to compile
 SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp/KML")
-SET(PYTHON_DIR "${CMAKE_SOURCE_DIR}/tools/python/KML")
 FILE(GLOB_RECURSE SOURCES "${CPP_DIR}/src/*.cc" "${CPP_DIR}/src/*.tcc")
 
-ADD_LIBRARY(${CMAKE_PROJECT_NAME}_lib STATIC ${SOURCES})
-
 # Add the directories needed.
+ADD_LIBRARY(${CMAKE_PROJECT_NAME}_lib STATIC ${SOURCES})
 INCLUDE_DIRECTORIES(${CMAKE_PROJECT_NAME}_lib
     PUBLIC
         ${CMAKE_SOURCE_DIR}
@@ -110,7 +108,7 @@ if(BUILD_PYTHON)
         # this logic is deprecated in CMake after 3.12
         FIND_PACKAGE(PythonInterp REQUIRED)
     else()
-        # the new hotness. This will preferentially find Python3 instead of Python2.
+        # This will preferentially find Python3 instead of Python2.
         # And also works with Virtual Environments.
         FIND_PACKAGE(Python)
         SET(PYTHON_EXECUTABLE ${Python_EXECUTABLE})
@@ -136,6 +134,7 @@ if(BUILD_PYTHON)
     ADD_CUSTOM_TARGET(python_package ALL DEPENDS ${OUTPUT})
 
     if(BUILD_TESTING)
+        SET(PYTHON_DIR "${CMAKE_SOURCE_DIR}/tools/python/KML")
         ADD_SUBDIRECTORY("${PYTHON_DIR}/tests")
     endif(BUILD_TESTING)
 

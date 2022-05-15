@@ -17,12 +17,6 @@ class StreamingMeanTest : public ::testing::Test
         }
 };
 
-// Ensure that the window size can't be less than 5, except for 0.
-TEST_F(StreamingMeanTest, TestInvalidWindowSize)
-{
-    EXPECT_THROW(StreamingMean(4), std::invalid_argument);
-}
-
 // Evaluate with no updates should return 0.0 for mean.
 TEST_F(StreamingMeanTest, TestEmptyEvaluate)
 {

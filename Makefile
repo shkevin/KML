@@ -7,8 +7,18 @@ OBJEXT      := o
 all: directories compile test
 	@echo '*******************Compiled*********************'
 
-# Compile C++/Cython code
-compile:
+c:
+	cd $(BUILDDIR) && \
+	cmake \
+	    .. \
+	    -DCMAKE_BUILD_TYPE=Debug \
+	    -DBUILD_TESTING=ON \
+		-DBUILD_PYTHON=OFF \
+		-DBUILD_DOCUMENTATION=OFF && \
+	make
+
+# Compile C++/Cython/Documentation code
+compile-all:
 	cd $(BUILDDIR) && \
 	cmake \
 	    .. \

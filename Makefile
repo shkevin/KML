@@ -13,8 +13,8 @@ compile:
 	cmake \
 	    .. \
 	    -DCMAKE_BUILD_TYPE=Debug \
-	    -DBUILD_TESTING=OFF \
-		-DBUILD_PYTHON=OFF \
+	    -DBUILD_TESTING=ON \
+		-DBUILD_PYTHON=ON \
 		-DBUILD_DOCUMENTATION=ON && \
 	make
 

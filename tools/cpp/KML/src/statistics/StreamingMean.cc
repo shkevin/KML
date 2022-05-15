@@ -1,6 +1,9 @@
-#include "StreamingMean.h"
+/*!
+ * @file  StreamingMean.cc
+ * @brief Contains the implementation of the StreamingMean calculation.
+ */
 
-#include <iostream>
+#include "StreamingMean.h"
 
 namespace KML
 {

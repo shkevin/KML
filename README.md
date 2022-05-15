@@ -10,44 +10,6 @@ Folder Descriptions
 ./include  Header files that expose the public interface and are to be installed
 ./lib      Library build directory
 ./tests    Test suites that should be run during a `make test`
-
-Current Structure
-.
-├── CMakeLists.txt
-├── README.md
-├── doc
-├── examples
-└── tools
-    ├── cpp
-    │   └── KML
-    │       ├── include
-    │       │   ├── supervised
-    │       │   └── unsupervised
-    │       ├── src
-    │       │   ├── supervised
-    │       │   │   ├── classification
-    │       │   │   └── regression
-    │       │   └── unsupervised
-    │       │       ├── clustering
-    │       │       └── dimensionality_reduction
-    │       └── tests
-    ├── cython
-    │   └── KML
-    │       ├── supervised
-    │       │   ├── classification
-    │       │   └── regression
-    │       └── unsupervised
-    │           ├── clustering
-    │           └── dimensionality_reduction
-    └── python
-        └── KML
-            ├── supervised
-            │   ├── classification
-            │   └── regression
-            ├── tests
-            └── unsupervised
-                ├── clustering
-                └── dimensionality_reduction
 ```
 
 # Installation

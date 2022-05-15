@@ -5,7 +5,7 @@ FILE(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES true *.h *.cc)
 # SET(SOURCES ${TEST_SOURCES})
 
 # For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+SET(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 ADD_EXECUTABLE(${BINARY} ${TEST_SOURCES})
 

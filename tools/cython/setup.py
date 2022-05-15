@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 from glob import glob
 from os import scandir
 from os.path import sep
@@ -10,6 +11,7 @@ from setuptools.command.build_ext import build_ext as _build_ext
 try:
     from Cython.Build import cythonize
 except ImportError:
+    print("Cython could not be found!")
     use_cython = False
 else:
     use_cython = True
@@ -43,15 +45,19 @@ class my_build_ext(_build_ext):
 
 # Get Cython sources with their C++ files.
 CYTHON_DIR = "tools/cython/KML"
-CPPFLAGS = ["-O3", "-std=c++11"]
+PYTHON_DIR = "tools/python/KML"
 SRC_DIR = "tools/cpp/KML/src"
+CPPFLAGS = ["-O3", "-std=c++11"]
+pyx_sources = glob(f"{CYTHON_DIR}/**/*.pyx", recursive=True)
 pyx_sources = glob(f"{CYTHON_DIR}/**/*.pyx", recursive=True)
 include_dirs = [f.path for f in scandir(SRC_DIR) if f.is_dir()]
 
 # Build the Cython extensions.
 ext_modules = []
+to_strip = "tools/cython/"
+print(include_dirs)
 for pyx in pyx_sources:
-    name = pyx.split(".")[0].replace(sep, ".")
+    name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
     ext_modules.append(
         Extension(
             name=name,
@@ -73,7 +79,8 @@ setup(
     author_email="shkevin@yahoo.com",
     url="",
     cmdclass={"build_ext": my_build_ext},
-    packages=find_packages(),
+    # packages=find_packages(),
+    # package_data={"": [f"{PYTHON_DIR}/tests"]},
     ext_modules=cythonize(ext_modules, compiler_directives={"language_level": "3"}),
     classifiers=[
         "Programming Language :: Python :: 3",

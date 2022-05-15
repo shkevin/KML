@@ -9,5 +9,4 @@ cdef extern from "StreamingMean.h" namespace "KML::Statistics":
     cdef cppclass StreamingMean:
         StreamingMean(uint64_t) except +
         void update(double) except +
-        void update(vector[double]) except +
         double evaluate() except +

@@ -1,4 +1,5 @@
 #distutils: language = c++
+from collections.abc import Iterable
 from KML.statistics.StreamingMean cimport StreamingMean
 
 cdef class PyStreamingMean:
@@ -11,7 +12,11 @@ cdef class PyStreamingMean:
         self.c_SM = new StreamingMean(window_size)
 
     def update(self, observation):
-        return None
+        if isinstance(observation, Iterable):
+            for _ in observation:
+                self.c_SM.update(_)
+        else:
+            self.c_SM.update(observation)
 
     def evaluate(self):
         return self.c_SM.evaluate()

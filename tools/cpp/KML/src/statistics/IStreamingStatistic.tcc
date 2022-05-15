@@ -1,3 +1,8 @@
+/**
+ * @file IStreamingStatistic.tcc
+ * @brief Contains the templated implementation for the abstract streaming
+ *        statistic class.
+ */
 #include <stdexcept>
 
 namespace KML

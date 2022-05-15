@@ -5,8 +5,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 # Project
 ################################
 project(KML
-	VERSION 0.0.1
-    DESCRIPTION "Streaming Machine Learning in c++/cython"
+    VERSION 0.0.1
+    DESCRIPTION "Streaming Machine Learning in C++/Cython"
     LANGUAGES CXX)
 
 if(NOT DEFINED CMAKE_BUILD_TYPE)
@@ -16,18 +16,21 @@ endif()
 # Minimum cpp standard
 SET(CMAKE_CXX_STANDARD 11)
 
+# Change C++ build output
+MESSAGE(${CMAKE_CURRENT_SOURCE_DIR})
+
 ################################
 # Macros
 ################################
 MACRO(HEADER_DIRECTORIES return_list)
     FILE(GLOB_RECURSE new_list ${CPP_DIR}/include/*.h)
-	SET(dir_list "")
-	FOREACH(FILE_path ${new_list})
-		GET_FILENAME_COMPONENT(dir_path ${FILE_path} PATH)
-		SET(dir_list ${dir_list} ${dir_path})
-	ENDFOREACH()
-	LIST(REMOVE_DUPLICATES dir_list)
-	SET(${return_list} ${dir_list})
+    SET(dir_list "")
+    FOREACH(FILE_path ${new_list})
+        GET_FILENAME_COMPONENT(dir_path ${FILE_path} PATH)
+        SET(dir_list ${dir_list} ${dir_path})
+    ENDFOREACH()
+    LIST(REMOVE_DUPLICATES dir_list)
+    SET(${return_list} ${dir_list})
 ENDMACRO()
 
 ################################
@@ -47,38 +50,24 @@ endif()
 
 # UNIX, WIN32, WINRT, CYGWIN, APPLE are environment variables as flags SET by default system
 if(UNIX)
-	MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with ${CMAKE_CXX_STANDARD} CXX standard")
+    MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with ${CMAKE_CXX_STANDARD} CXX standard")
 elseif(WIN32)
-	MESSAGE("This is a Windows System. Not currently supported!")
+    MESSAGE("This is a Windows System. Not currently supported!")
 endif()
 
 ################################
-# Find Packages
+# Find Main Packages
 ################################
-# Find the python interpreter, SET the PYTHON_EXECUTABLE variable
-if(CMAKE_VERSION VERSION_LESS 3.12)
-	# this logic is deprecated in CMake after 3.12
-	FIND_PACKAGE(PythonInterp REQUIRED)
-else()
-	# the new hotness. This will preferentially find Python3 instead of Python2.
-    # And also works with Virtual Environments.
-	FIND_PACKAGE(Python)
-	SET(PYTHON_EXECUTABLE ${Python_EXECUTABLE})
-endif()
-
 # Find CCACHE to speed up builds.
 MESSAGE(STATUS "Attempting to find ccache...")
 FIND_PROGRAM(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
     MESSAGE(STATUS "ccache found!")
     SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-    SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache) # Less useful to do it for linking, see edit2
+    SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache) # Less useful to do it for linking.
 else()
     MESSAGE(STATUS "ccache not found!")
 endif(CCACHE_FOUND)
-
-# Find Catch2 for Unit Testing
-# find_package(Catch2 REQUIRED)
 
 ################################
 # Normal Libraries & Executables
@@ -96,6 +85,7 @@ endif()
 
 # Create a sources variable with a link to all cpp FILEs to compile
 SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp/KML")
+SET(PYTHON_DIR "${CMAKE_SOURCE_DIR}/tools/python/KML")
 FILE(GLOB_RECURSE SOURCES "${CPP_DIR}/src/*.cc" "${CPP_DIR}/src/*.tcc")
 
 ADD_LIBRARY(${CMAKE_PROJECT_NAME}_lib STATIC ${SOURCES})
@@ -110,14 +100,102 @@ INCLUDE_DIRECTORIES(${CMAKE_PROJECT_NAME}_lib
 )
 
 ################################
+# Python
+################################
+OPTION(BUILD_PYTHON "Build Python" OFF)
+if(BUILD_PYTHON)
+    MESSAGE(STATUS "Building Cython Modules")
+    # Find the python interpreter, SET the PYTHON_EXECUTABLE variable
+    if(CMAKE_VERSION VERSION_LESS 3.12)
+        # this logic is deprecated in CMake after 3.12
+        FIND_PACKAGE(PythonInterp REQUIRED)
+    else()
+        # the new hotness. This will preferentially find Python3 instead of Python2.
+        # And also works with Virtual Environments.
+        FIND_PACKAGE(Python)
+        SET(PYTHON_EXECUTABLE ${Python_EXECUTABLE})
+    endif()
+
+    SET(NUM_THREADS 10)
+    SET(BUILD_DIR ${CMAKE_BINARY_DIR})
+    SET(PACK_DIR ${CMAKE_BINARY_DIR}/packages)
+    SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
+    ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
+        COMMAND ${PYTHON_EXECUTABLE} tools/cython/setup.py
+            sdist --dist-dir=${PACK_DIR}
+            build --build-base=${BUILD_DIR} --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML
+            build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}
+            bdist_wheel --bdist-dir=${BUILD_DIR}/build --dist-dir=${PACK_DIR}
+        COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/PyKML.egg-info
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/bin
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        COMMENT "Building Python"
+        )
+
+    ADD_CUSTOM_TARGET(python_package ALL DEPENDS ${OUTPUT})
+
+    if(BUILD_TESTING)
+        ADD_SUBDIRECTORY("${PYTHON_DIR}/tests")
+    endif(BUILD_TESTING)
+
+endif(BUILD_PYTHON)
+
+################################
 # Testing
 ################################
-OPTION(BUILD_TESTING "Build gtest unit test" OFF)
-if (BUILD_TESTING)
-	MESSAGE(STATUS "Enabled testing")
+OPTION(BUILD_TESTING "Build C++ Unit Tests" OFF)
+if(BUILD_TESTING)
+    MESSAGE(STATUS "Enabled testing")
     ENABLE_TESTING()
-    FIND_PACKAGE(GTest)
-    SET(BUILD_GMOCK OFF)
+    FIND_PACKAGE(GTest REQUIRED)
+    # SET(BUILD_GMOCK OFF)
     ADD_SUBDIRECTORY("${CPP_DIR}/tests")
     ADD_SUBDIRECTORY("${CPP_DIR}/lib/googletest")
-endif()
+endif(BUILD_TESTING)
+
+################################################################################
+# Documentation
+################################################################################
+OPTION(BUILD_DOCUMENTATION "Build Documentation" OFF)
+if(BUILD_DOCUMENTATION)
+  # Doxygen documentation of main library
+  FIND_PACKAGE(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
+  if(DOXYGEN_DOT_EXECUTABLE)
+    SET(DOXYGEN_HAVE_DOT YES)
+  else()
+    SET(DOXYGEN_HAVE_DOT NO)
+  endif(DOXYGEN_DOT_EXECUTABLE)
+
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile)
+  ADD_CUSTOM_COMMAND(
+    OUTPUT ${CMAKE_BINARY_DIR}/docs/html/index.html
+    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/docs
+    DEPENDS
+      ${CMAKE_CURRENT_SOURCE_DIR}/README.md
+      ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
+      ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in
+    COMMENT "Building doxygen documentation for 'KML' library")
+  ADD_CUSTOM_TARGET(documentation ALL
+    DEPENDS
+      ${CMAKE_CURRENT_BINARY_DIR}/docs/html/index.html)
+
+  # Sphinx documentation of Python bindings
+  # if(BUILD_PYTHON_BINDINGS)
+  #   add_custom_command(
+  #     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html
+  #     COMMAND ${PYTHON_EXECUTABLE}
+  #       setup.py
+  #         build_sphinx
+  #     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings
+  #     DEPENDS
+  #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/README.md
+  #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/conf.py
+  #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/index.rst
+  #       foo-python-bindings
+  #     COMMENT "Building sphinx Python documentation for 'foo' library")
+  #   add_custom_target(foo-python-documentation DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html)
+  #   add_dependencies(documentation foo-python-documentation)
+  # endif(BUILD_PYTHON_BINDINGS)
+endif(BUILD_DOCUMENTATION)

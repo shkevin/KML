@@ -13,28 +13,36 @@ compile:
 	cmake \
 	    .. \
 	    -DCMAKE_BUILD_TYPE=Debug \
-	    -DBUILD_TESTING=ON \
-		-DBUILD_PYTHON=ON && \
+	    -DBUILD_TESTING=OFF \
+		-DBUILD_PYTHON=OFF \
+		-DBUILD_DOCUMENTATION=ON && \
 	make
 
 # Call Unittests for C++
 test:
-	cd $(BUILDDIR) && ctest -V
+	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
+	cd tools/python/KML/tests/ && python -m pytest .
 
-#Remake
+# Make documention. This only works if BUILD_DOCUMENTATIONS is ON
+docs:
+	[ -d $(BUILDDIR)/docs ] && \
+	cd $(BUILDDIR)/docs/latex && \
+	make
+
+# Remake entire project
 remake: clean all
 
-#Make the Directories
+# Create the Directories
 directories:
 	[ -d $(BUILDDIR)  ] || mkdir -p $(BUILDDIR)
 
-#Clean only Objects and tar file.
+# Clean only Objects and tar file.
 clean:
 	@$(RM) -rf $(BUILDDIR)
 
-#Full Clean, Objects,Binaries, and tar file.
+# Full Clean of entire project. This project formats c++ as .cc
 cleaner: clean
-	@$(RM) -rf $(BUILDDIR) *.cpp
+	@$(RM) -rf $(BUILDDIR) *.$(SRCEXT)
 
 #Non-File Targets
 .PHONY: all remake clean cleaner

@@ -38,7 +38,6 @@ namespace KML
                 /**
                  * @brief  Takes a single observation and updates the deriving class.
                  * @param  observation The observation used to update deriving class.
-                 * @return None
                  */
                 virtual void update(const T& observation) = 0;
 
@@ -46,20 +45,17 @@ namespace KML
                  * @brief  Takes in a list of one or more observations to update 
                  *         the deriving class.
                  * @param  observations List of observations to update deriving class.
-                 * @return None
                  */
                 virtual void update(const std::vector<T>& observations);
 
                 /**
                  * @brief  Evaluate everything in the current window.
-                 * @param  None
                  * @return The deriving class evaluate. 
                  */
                 virtual double evaluate() = 0;
 
                 /**
                  * @brief Retrive the current window.
-                 * @param None
                  * @return Pointer to current window.
                  */
                 virtual std::deque<T>* getWindow();

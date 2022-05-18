@@ -15,7 +15,10 @@ namespace KML
             m_sum = 0.0;
         }
 
-        StreamingMean::~StreamingMean() {}
+        StreamingMean::~StreamingMean() 
+        {
+            // Do nothing.
+        }
 
         void StreamingMean::update(const double& observation)
         {

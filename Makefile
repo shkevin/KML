@@ -4,7 +4,7 @@ SRCEXT      := cpp
 OBJEXT      := o
 
 #Defauilt Make
-all: directories compile test
+all: directories compile-all test
 	@echo '*******************Compiled*********************'
 
 # Compile C++/Cython code

@@ -1,7 +1,7 @@
 /*!
  * @file  StreamingP2Quantile.h
  * @brief Provides the declarations for the P2 quantile calculation.
- * @ref   https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf 
+ *        Reference: https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf 
  *
  * The StreamingP2Quantile computes quantile statistics of a data stream. This class
  * can work on all the data or a window of the data. Each update is

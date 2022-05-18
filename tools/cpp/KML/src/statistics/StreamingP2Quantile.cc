@@ -2,7 +2,7 @@
  * @file StreamingP2Quantile.cc
  * @brief Contains the implementation for the P2 streaming quantile approximation.
  *        This implementation uses the patches mentioned by aakinshin.
- * @ref https://aakinshin.net/tags/research-p2qe/
+ *        https://aakinshin.net/tags/research-p2qe/
  */
 #include "StreamingP2Quantile.h"
 #include <stdexcept>

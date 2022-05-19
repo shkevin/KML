@@ -119,7 +119,7 @@ if(BUILD_PYTHON)
     SET(PACK_DIR ${CMAKE_BINARY_DIR}/packages)
     SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
-        COMMAND ${PYTHON_EXECUTABLE} tools/cython/setup.py
+        COMMAND ${PYTHON_EXECUTABLE} setup.py
             sdist --dist-dir=${PACK_DIR}
             build --build-base=${BUILD_DIR} --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML
             build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}

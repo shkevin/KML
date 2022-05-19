@@ -735,13 +735,12 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__KML__statistics__StreamingMean
 #define __PYX_HAVE_API__KML__statistics__StreamingMean
 /* Early includes */
+#include <stdint.h>
+#include "StreamingMean.cc"
 #include "ios"
 #include "new"
 #include "stdexcept"
 #include "typeinfo"
-#include <vector>
-#include <stdint.h>
-#include "StreamingMean.cc"
 #include "StreamingMean.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -1289,8 +1288,6 @@ static int __Pyx_check_binary_version(void);
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
-
-/* Module declarations from 'libcpp.vector' */
 
 /* Module declarations from 'libc.stdint' */
 

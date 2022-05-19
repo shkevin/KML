@@ -1,5 +1,4 @@
 #distutils: language = c++
-from libcpp.vector cimport vector
 from libc.stdint cimport uint64_t
 
 cdef extern from "StreamingMean.cc":

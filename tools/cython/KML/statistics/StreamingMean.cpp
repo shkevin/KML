@@ -1302,7 +1302,6 @@ int __pyx_module_is_main_KML__statistics__StreamingMean = 0;
 
 /* Implementation of 'KML.statistics.StreamingMean' */
 static PyObject *__pyx_builtin_TypeError;
-static const char __pyx_k_Yes[] = "Yes";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_test[] = "__test__";
@@ -1323,7 +1322,6 @@ static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __red
 static PyObject *__pyx_n_s_Iterable;
 static PyObject *__pyx_n_s_PyStreamingMean;
 static PyObject *__pyx_n_s_TypeError;
-static PyObject *__pyx_n_u_Yes;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_collections_abc;
 static PyObject *__pyx_n_s_getstate;
@@ -1342,10 +1340,9 @@ static int __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean___init__
 static int __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_2__cinit__(struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self, PyObject *__pyx_v_window_size); /* proto */
 static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_4update(struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self, PyObject *__pyx_v_observation); /* proto */
 static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_6evaluate(struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_8__str__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self); /* proto */
-static void __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_10__dealloc__(struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static void __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_8__dealloc__(struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_3KML_10statistics_13StreamingMean_PyStreamingMean(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
@@ -1546,7 +1543,7 @@ static int __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_2__cinit
  * 
  *     def update(self, observation):             # <<<<<<<<<<<<<<
  *         if isinstance(observation, Iterable):
- *             for _ in observation:
+ *             for o in observation:
  */
 
 /* Python wrapper */
@@ -1563,7 +1560,7 @@ static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_5u
 }
 
 static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_4update(struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self, PyObject *__pyx_v_observation) {
-  PyObject *__pyx_v__ = NULL;
+  PyObject *__pyx_v_o = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1582,8 +1579,8 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_4u
  * 
  *     def update(self, observation):
  *         if isinstance(observation, Iterable):             # <<<<<<<<<<<<<<
- *             for _ in observation:
- *                 self.c_SM.update(_)
+ *             for o in observation:
+ *                 self.c_SM.update(o)
  */
   __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Iterable); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1595,8 +1592,8 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_4u
     /* "KML/statistics/StreamingMean.pyx":16
  *     def update(self, observation):
  *         if isinstance(observation, Iterable):
- *             for _ in observation:             # <<<<<<<<<<<<<<
- *                 self.c_SM.update(_)
+ *             for o in observation:             # <<<<<<<<<<<<<<
+ *                 self.c_SM.update(o)
  *         else:
  */
     if (likely(PyList_CheckExact(__pyx_v_observation)) || PyTuple_CheckExact(__pyx_v_observation)) {
@@ -1638,17 +1635,17 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_4u
         }
         __Pyx_GOTREF(__pyx_t_6);
       }
-      __Pyx_XDECREF_SET(__pyx_v__, __pyx_t_6);
+      __Pyx_XDECREF_SET(__pyx_v_o, __pyx_t_6);
       __pyx_t_6 = 0;
 
       /* "KML/statistics/StreamingMean.pyx":17
  *         if isinstance(observation, Iterable):
- *             for _ in observation:
- *                 self.c_SM.update(_)             # <<<<<<<<<<<<<<
+ *             for o in observation:
+ *                 self.c_SM.update(o)             # <<<<<<<<<<<<<<
  *         else:
  *             self.c_SM.update(observation)
  */
-      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v__); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 17, __pyx_L1_error)
+      __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_v_o); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 17, __pyx_L1_error)
       try {
         __pyx_v_self->c_SM->update(__pyx_t_7);
       } catch(...) {
@@ -1659,8 +1656,8 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_4u
       /* "KML/statistics/StreamingMean.pyx":16
  *     def update(self, observation):
  *         if isinstance(observation, Iterable):
- *             for _ in observation:             # <<<<<<<<<<<<<<
- *                 self.c_SM.update(_)
+ *             for o in observation:             # <<<<<<<<<<<<<<
+ *                 self.c_SM.update(o)
  *         else:
  */
     }
@@ -1670,14 +1667,14 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_4u
  * 
  *     def update(self, observation):
  *         if isinstance(observation, Iterable):             # <<<<<<<<<<<<<<
- *             for _ in observation:
- *                 self.c_SM.update(_)
+ *             for o in observation:
+ *                 self.c_SM.update(o)
  */
     goto __pyx_L3;
   }
 
   /* "KML/statistics/StreamingMean.pyx":19
- *                 self.c_SM.update(_)
+ *                 self.c_SM.update(o)
  *         else:
  *             self.c_SM.update(observation)             # <<<<<<<<<<<<<<
  * 
@@ -1699,7 +1696,7 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_4u
  * 
  *     def update(self, observation):             # <<<<<<<<<<<<<<
  *         if isinstance(observation, Iterable):
- *             for _ in observation:
+ *             for o in observation:
  */
 
   /* function exit code */
@@ -1711,7 +1708,7 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_4u
   __Pyx_AddTraceback("KML.statistics.StreamingMean.PyStreamingMean.update", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v__);
+  __Pyx_XDECREF(__pyx_v_o);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -1753,7 +1750,7 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_6e
  *     def evaluate(self):
  *         return self.c_SM.evaluate()             # <<<<<<<<<<<<<<
  * 
- *     def __str__(self):
+ *     def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
   try {
@@ -1790,87 +1787,34 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_6e
 /* "KML/statistics/StreamingMean.pyx":24
  *         return self.c_SM.evaluate()
  * 
- *     def __str__(self):             # <<<<<<<<<<<<<<
- *         return "Yes"
- * 
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_9__str__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_9__str__(PyObject *__pyx_v_self) {
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__str__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_8__str__(((struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *)__pyx_v_self));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_8__str__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("__str__", 0);
-
-  /* "KML/statistics/StreamingMean.pyx":25
- * 
- *     def __str__(self):
- *         return "Yes"             # <<<<<<<<<<<<<<
- * 
- *     def __dealloc__(self):
- */
-  __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_n_u_Yes);
-  __pyx_r = __pyx_n_u_Yes;
-  goto __pyx_L0;
-
-  /* "KML/statistics/StreamingMean.pyx":24
- *         return self.c_SM.evaluate()
- * 
- *     def __str__(self):             # <<<<<<<<<<<<<<
- *         return "Yes"
- * 
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "KML/statistics/StreamingMean.pyx":27
- *         return "Yes"
- * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         del self.c_SM
  */
 
 /* Python wrapper */
-static void __pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_11__dealloc__(PyObject *__pyx_v_self); /*proto*/
-static void __pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_11__dealloc__(PyObject *__pyx_v_self) {
+static void __pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_9__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_9__dealloc__(PyObject *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
-  __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_10__dealloc__(((struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *)__pyx_v_self));
+  __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_8__dealloc__(((struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-static void __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_10__dealloc__(struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self) {
+static void __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_8__dealloc__(struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "KML/statistics/StreamingMean.pyx":28
+  /* "KML/statistics/StreamingMean.pyx":25
  * 
  *     def __dealloc__(self):
  *         del self.c_SM             # <<<<<<<<<<<<<<
  */
   delete __pyx_v_self->c_SM;
 
-  /* "KML/statistics/StreamingMean.pyx":27
- *         return "Yes"
+  /* "KML/statistics/StreamingMean.pyx":24
+ *         return self.c_SM.evaluate()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         del self.c_SM
@@ -1887,19 +1831,19 @@ static void __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_10__dea
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_13__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_13__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_11__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_11__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_12__reduce_cython__(((struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_10__reduce_cython__(((struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self) {
+static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_10__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1944,19 +1888,19 @@ static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_12
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_15__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_15__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_13__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_13__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_14__setstate_cython__(((struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_12__setstate_cython__(((struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_3KML_10statistics_13StreamingMean_15PyStreamingMean_12__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3KML_10statistics_13StreamingMean_PyStreamingMean *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2018,7 +1962,7 @@ static void __pyx_tp_dealloc_3KML_10statistics_13StreamingMean_PyStreamingMean(P
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
     __Pyx_SET_REFCNT(o, Py_REFCNT(o) + 1);
-    __pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_11__dealloc__(o);
+    __pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_9__dealloc__(o);
     __Pyx_SET_REFCNT(o, Py_REFCNT(o) - 1);
     PyErr_Restore(etype, eval, etb);
   }
@@ -2028,8 +1972,8 @@ static void __pyx_tp_dealloc_3KML_10statistics_13StreamingMean_PyStreamingMean(P
 static PyMethodDef __pyx_methods_3KML_10statistics_13StreamingMean_PyStreamingMean[] = {
   {"update", (PyCFunction)__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_5update, METH_O, 0},
   {"evaluate", (PyCFunction)__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_7evaluate, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_13__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_15__setstate_cython__, METH_O, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_11__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_13__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -2059,7 +2003,7 @@ static PyTypeObject __pyx_type_3KML_10statistics_13StreamingMean_PyStreamingMean
   0, /*tp_as_mapping*/
   0, /*tp_hash*/
   0, /*tp_call*/
-  __pyx_pw_3KML_10statistics_13StreamingMean_15PyStreamingMean_9__str__, /*tp_str*/
+  0, /*tp_str*/
   0, /*tp_getattro*/
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
@@ -2154,7 +2098,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Iterable, __pyx_k_Iterable, sizeof(__pyx_k_Iterable), 0, 0, 1, 1},
   {&__pyx_n_s_PyStreamingMean, __pyx_k_PyStreamingMean, sizeof(__pyx_k_PyStreamingMean), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
-  {&__pyx_n_u_Yes, __pyx_k_Yes, sizeof(__pyx_k_Yes), 0, 1, 0, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_collections_abc, __pyx_k_collections_abc, sizeof(__pyx_k_collections_abc), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},

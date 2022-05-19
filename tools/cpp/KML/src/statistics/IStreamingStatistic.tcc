@@ -8,9 +8,14 @@ namespace KML
     namespace Statistics
     {
         template<typename T>
-            IStreamingStatistic<T>::IStreamingStatistic(const uint64_t windowSize): m_windowSize(windowSize) {
-                if(m_windowSize <= 0) m_window = nullptr;
+        IStreamingStatistic<T>::IStreamingStatistic(const uint64_t windowSize): m_windowSize(windowSize) 
+        {
+            if(m_windowSize <= 0) 
+            {
+                m_window = nullptr;
+                m_windowSize = 0;
             }
+        }
 
         template<typename T>
         IStreamingStatistic<T>::~IStreamingStatistic() 

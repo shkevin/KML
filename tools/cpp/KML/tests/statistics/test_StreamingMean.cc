@@ -13,7 +13,7 @@ class StreamingMeanTest : public ::testing::Test
 
         StreamingMeanTest()
         {
-            sm = new StreamingMean();
+            sm = new StreamingMean(10);
         }
 };
 

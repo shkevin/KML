@@ -27,11 +27,8 @@ namespace KML
                 /*!
                  * @brief Default Constructor.
                  * @param quantile The desired quantile to compute.
-                 * @param windowSize The window size to calculate the streaming quantile.
-                 *        This window size defaults to a window size of 0, meaning
-                 *        the quantile is over the entire data stream.
                  */
-                StreamingP2Quantile(const double quantile, const uint64_t windowSize = 0);
+                StreamingP2Quantile(const double quantile);
 
                 /*!
                  * @brief Destructor.

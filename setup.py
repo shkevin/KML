@@ -49,13 +49,11 @@ PYTHON_DIR = "tools/python/KML"
 SRC_DIR = "tools/cpp/KML/src"
 CPPFLAGS = ["-O3", "-std=c++11"]
 pyx_sources = glob(f"{CYTHON_DIR}/**/*.pyx", recursive=True)
-pyx_sources = glob(f"{CYTHON_DIR}/**/*.pyx", recursive=True)
 include_dirs = [f.path for f in scandir(SRC_DIR) if f.is_dir()]
 
 # Build the Cython extensions.
 ext_modules = []
 to_strip = "tools/cython/"
-print(include_dirs)
 for pyx in pyx_sources:
     name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
     ext_modules.append(

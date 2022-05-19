@@ -32,9 +32,9 @@ TEST_F(StreamingP2QuantileTest, TestEmptyWindowSize)
 // Median should come out to 1.0 for constant 1.
 TEST_F(StreamingP2QuantileTest, TestConstantMedian)
 {
-    std::vector<double> data{1, 1, 1, 1, 1};
+    std::vector<double> data{10, 10, 10, 10, 10};
     p2q->update(data);
-    EXPECT_EQ(1.0, p2q->evaluate());
+    EXPECT_EQ(10.0, p2q->evaluate());
 }
 
 // Variance should come out to 1.0 for this data.

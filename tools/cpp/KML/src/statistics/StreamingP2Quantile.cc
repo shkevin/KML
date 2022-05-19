@@ -9,22 +9,18 @@
 #include <algorithm>
 #include <cmath>
 
+#include <iostream>
+
 namespace KML 
 {
     namespace Statistics
     {
-        StreamingP2Quantile::StreamingP2Quantile(const double quantile, 
-                const uint64_t windowSize) : IStreamingStatistic(windowSize)
+        StreamingP2Quantile::StreamingP2Quantile(const double quantile) : IStreamingStatistic(0)
         {
-            // Ensure that the quantile and window size are appropriate.
+            // Ensure that the quantile range is appropriate.
             if((quantile <= 0) || (quantile >= 100))
             {
                 throw std::invalid_argument("Quantile must be in closed interval (0, 100)");
-            }
-
-            if((windowSize != 0) && (windowSize < 5))
-            {
-                throw std::invalid_argument("Window Size must be in [[0], [5, inf)]");
             }
 
             // Need to create markers/heights.
@@ -72,7 +68,6 @@ namespace KML
             {
                 m_markerPosition[k]++;
             }
-            // Verify this.
             m_desireMarkerPosition[1] = m_historyCount * m_quantile / 2;
             m_desireMarkerPosition[2] = m_historyCount * m_quantile;
             m_desireMarkerPosition[3] = m_historyCount * (1 + m_quantile) / 2;
@@ -85,7 +80,7 @@ namespace KML
 
         double StreamingP2Quantile::evaluate()
         {
-            if(m_historyCount <= 5)
+            if(m_historyCount < 5)
             {
                 // Ensure the heights are sorted before returning.
                 sort(m_heights.begin(), m_heights.end());

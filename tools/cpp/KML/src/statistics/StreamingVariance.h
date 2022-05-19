@@ -17,7 +17,7 @@ namespace KML
 {
     namespace Statistics
     {
-        /*! @brief A StreamingVariance class for calculating the mean of
+        /*! @brief A StreamingVariance class for calculating the variance of
          *  a datastream.
          */
         class StreamingVariance : public IStreamingStatistic<double>

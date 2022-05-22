@@ -13,8 +13,8 @@ namespace KML
             if(m_windowSize <= 0) 
             {
                 m_window = nullptr;
-                m_windowSize = 0;
             }
+            else m_window = new std::deque<T>(m_windowSize);
         }
 
         template<typename T>

@@ -24,6 +24,12 @@ class TestStreamingMean(unittest.TestCase):
         self.SM.update(self.DATA)
         self.assertEqual(self.SM.evaluate(), 10.0)
 
+    def test_drift(self):
+        sm = PyStreamingMean(5)
+        data = [10, 10, 10, 10, 10, 5, 5, 5, 5, 5]
+        sm.update(data)
+        self.assertEqual(sm.evaluate(), 5.0)
+
 
 if __name__ == "__main__":
     unittest.main()

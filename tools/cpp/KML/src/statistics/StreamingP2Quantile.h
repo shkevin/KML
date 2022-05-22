@@ -48,7 +48,7 @@ namespace KML
                 virtual double evaluate();
 
                 /*!
-                 * @brief Clear the current window history.
+                 * @brief Clear the current history counter.
                  */
                 virtual void clear();
 

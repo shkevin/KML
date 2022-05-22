@@ -1,6 +1,5 @@
 #distutils: language = c++
 from collections.abc import Iterable
-from KML.statistics.StreamingP2Quantile cimport StreamingP2Quantile
 
 cdef class PyStreamingP2Quantile:
     cdef StreamingP2Quantile* c_P2

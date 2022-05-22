@@ -47,7 +47,7 @@ namespace KML
                 using IStreamingStatistic<double>::evaluate;
                 virtual double evaluate();
 
-            protected:
+            private:
                 /*!
                  * @brief Sum of all elements within the window.
                  */

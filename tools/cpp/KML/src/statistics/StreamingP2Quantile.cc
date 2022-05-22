@@ -9,8 +9,6 @@
 #include <algorithm>
 #include <cmath>
 
-#include <iostream>
-
 namespace KML 
 {
     namespace Statistics
@@ -18,9 +16,9 @@ namespace KML
         StreamingP2Quantile::StreamingP2Quantile(const double quantile) : IStreamingStatistic(0)
         {
             // Ensure that the quantile range is appropriate.
-            if((quantile <= 0) || (quantile >= 100))
+            if((quantile <= 0) || (quantile >= 1))
             {
-                throw std::invalid_argument("Quantile must be in closed interval (0, 100)");
+                throw std::invalid_argument("Quantile must be in closed interval (0, 1)");
             }
 
             // Need to create markers/heights.
@@ -38,7 +36,8 @@ namespace KML
         {
             if(m_historyCount < 5)
             {
-                m_heights[m_historyCount++] = observation;
+                m_heights[m_historyCount] = observation;
+                m_historyCount += 1;
 
                 if(m_historyCount == 5)
                 {
@@ -50,16 +49,13 @@ namespace KML
                     m_markerPosition[2] = (uint8_t)std::round(l_heights[2]);
                     m_markerPosition[3] = (uint8_t)std::round(l_heights[3]);
 
-                    for(auto i = 1; i < 5; i++)
+                    for(auto i = 1; i <= 4; i++)
                     {
                         m_heights[i] = m_desireMarkerPosition[m_markerPosition[i]];
                     }
-
-                    for(auto i = 0; i < 5; i++)
-                    {
-                        m_desireMarkerPosition[i] = l_heights[i];
-                    }
+                    m_desireMarkerPosition = l_heights;
                 }
+                return;
             }
 
             // Once first 5 observations have been seen, calculate new quantile.
@@ -68,25 +64,28 @@ namespace KML
             {
                 m_markerPosition[k]++;
             }
-            m_desireMarkerPosition[1] = m_historyCount * m_quantile / 2;
-            m_desireMarkerPosition[2] = m_historyCount * m_quantile;
-            m_desireMarkerPosition[3] = m_historyCount * (1 + m_quantile) / 2;
-            m_desireMarkerPosition[4] = m_historyCount;
+            m_desireMarkerPosition[1] = (double)m_historyCount * m_quantile / 2;
+            m_desireMarkerPosition[2] = (double)m_historyCount * m_quantile;
+            m_desireMarkerPosition[3] = (double)m_historyCount * (1 + m_quantile) / 2;
+            m_desireMarkerPosition[4] = (double)m_historyCount;
 
             // Apply patch where quantile <= 0.5 can cause collissions.
-            if(m_quantile >= 0.5) for(auto i = 1; i < 5; i++) adjustHeights(i);
+            if(m_quantile >= 0.5) for(auto i = 1; i <= 3; i++) adjustHeights(i);
             else for(auto i = 3; i > 0; i--) adjustHeights(i);
+
+            m_historyCount += 1;
         }
 
         double StreamingP2Quantile::evaluate()
         {
-            if(m_historyCount < 5)
+            if(m_historyCount <= 5)
             {
                 // Ensure the heights are sorted before returning.
                 sort(m_heights.begin(), m_heights.end());
-                uint8_t index = (int)std::round((m_historyCount - 1) * m_quantile);
-                return m_heights[index];
+                uint8_t l_index = (int)std::round(std::abs((double)m_historyCount - 1) * m_quantile);
+                return m_heights[l_index];
             }
+
             return m_heights[2];
         }
 
@@ -102,7 +101,7 @@ namespace KML
             else 
             {
                 // q1-q4
-                for(auto i = 1; i < 5; i++)
+                for(auto i = 1; i <= 4; i++)
                 {
                     if(observation < m_heights[i])
                     {
@@ -111,6 +110,7 @@ namespace KML
                     }
                 }
                 //q5 < observation
+                m_heights[4] = observation;
                 k = 3;
             }
 
@@ -154,7 +154,6 @@ namespace KML
             return m_heights[i] + d_pos * (m_heights[i + d_pos] - m_heights[i]) / 
                 (m_markerPosition[i + d_pos] - m_markerPosition[i]);
         }
-
 
         void StreamingP2Quantile::clear()
         {

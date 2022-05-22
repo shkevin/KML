@@ -17,6 +17,16 @@ c:
 		-DBUILD_DOCUMENTATION=OFF && \
 	make
 
+python:
+	cd $(BUILDDIR) && \
+	cmake \
+	    .. \
+	    -DCMAKE_BUILD_TYPE=Debug \
+	    -DBUILD_TESTING=OFF \
+		-DBUILD_PYTHON=ON \
+		-DBUILD_DOCUMENTATION=OFF && \
+	make
+
 # Compile C++/Cython/Documentation code
 compile-all:
 	cd $(BUILDDIR) && \

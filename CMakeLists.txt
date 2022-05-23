@@ -147,10 +147,17 @@ OPTION(BUILD_TESTING "Build C++ Unit Tests" OFF)
 if(BUILD_TESTING)
     MESSAGE(STATUS "Enabled testing")
     ENABLE_TESTING()
-    FIND_PACKAGE(GTest REQUIRED)
-    # SET(BUILD_GMOCK OFF)
+
+    INCLUDE(FetchContent)
+    FetchContent_Declare(
+        googletest
+            URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+    )
+    # For Windows: Prevent overriding the<Plug>PeepOpenarent<Plug>PeepOpenroject's compiler/linker settings
+    SET(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    SET(gmock OFF CACHE BOOL "" FORCE)
+    FETCHCONTENT_MAKEAVAILABLE(googletest)
     ADD_SUBDIRECTORY("${CPP_DIR}/tests")
-    ADD_SUBDIRECTORY("${CPP_DIR}/lib/googletest")
 endif(BUILD_TESTING)
 
 ################################################################################

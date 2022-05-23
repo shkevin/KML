@@ -7,7 +7,7 @@ class TestWindowedP2Quantile(unittest.TestCase):
 
     WINDOW_SIZE = 10
     DATA = [10.0] * 300
-    P2 = None
+    WP2 = None
 
     @classmethod
     def setUpClass(cls):

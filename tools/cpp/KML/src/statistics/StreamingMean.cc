@@ -36,7 +36,7 @@ namespace KML
             m_sum += observation;
         }
 
-        double StreamingMean::evaluate()
+        double StreamingMean::evaluate() const
         {
             if(m_historyCount == 0) return 0.0;
             if(m_window != nullptr)

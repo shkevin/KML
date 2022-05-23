@@ -1,31 +1,29 @@
 /*!
- * @file  WindowedP2Quantile.h
- * @brief Windowed version of the p2 quantile data stream estimation.
- *        This algorithm is adapted from https://aakinshin.net/tags/research-p2qe/.
+ * @brief Fast Algorithm for Median Estimation (FAME). Calculate the median
+ *         of a data stream.
+ * @file WindowedFame.cc
  */
-
-#ifndef __WINDOWED_P2_QUANTILE_H__
-#define __WINDOWED_P2_QUANTILE_H__
+#ifndef __WINDOWED_FAME_H__
+#define __WINDOWED_FAME_H__
 
 #include "IStreamingStatistic.h"
-#include "StreamingP2Quantile.h"
 
 namespace KML
 {
     namespace Statistics
     {
-        class WindowedP2Quantile : IStreamingStatistic<double>
+        class WindowedFame : public IStreamingStatistic<double>
         {
             public:
                 /*!
                  * @brief
                  */
-                WindowedP2Quantile(const double quantile, const uint64_t windowSize = 0); 
+                WindowedFame(const double& stepSize = 0.0, const uint64_t& windowSize = 0);
 
                 /*!
                  * @brief
                  */
-                ~WindowedP2Quantile(); 
+                ~WindowedFame();
 
                 /*!
                  * @copydoc IStreamingStatistic::update()
@@ -39,19 +37,18 @@ namespace KML
                 using IStreamingStatistic<double>::evaluate;
                 virtual double evaluate() const;
 
-            protected: 
+            private:
                 /*!
-                 * @brief Quantile estimator used to keep track of statistics.
+                 * @brief
                  */
-                StreamingP2Quantile* m_p2;
+                double m_median;
 
                 /*!
-                 * @brief Previous quantile estimation.
+                 * @brief
                  */
-                double* m_previous;
+                double m_stepSize;
         };
     }
 }
 
-#endif // __WINDOWED_P2_QUANTILE_H__
-
+#endif // __WINDOWED_FAME_H__

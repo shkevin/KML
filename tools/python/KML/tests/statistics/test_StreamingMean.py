@@ -7,7 +7,7 @@ class TestStreamingMean(unittest.TestCase):
 
     WINDOW_SIZE = 5
     DATA = [10.0] * WINDOW_SIZE
-    sm = None
+    SM = None
 
     @classmethod
     def setUpClass(cls):
@@ -25,10 +25,9 @@ class TestStreamingMean(unittest.TestCase):
         self.assertEqual(self.SM.evaluate(), 10.0)
 
     def test_drift(self):
-        sm = PyStreamingMean(5)
         data = [10, 10, 10, 10, 10, 5, 5, 5, 5, 5]
-        sm.update(data)
-        self.assertEqual(sm.evaluate(), 5.0)
+        self.SM.update(data)
+        self.assertEqual(self.SM.evaluate(), 5.0)
 
 
 if __name__ == "__main__":

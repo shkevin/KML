@@ -42,7 +42,7 @@ namespace KML
             m_p2->update(observation);
         }
 
-        double WindowedP2Quantile::evaluate()
+        double WindowedP2Quantile::evaluate() const
         {
             if(m_previous)
             {

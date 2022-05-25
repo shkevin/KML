@@ -37,7 +37,7 @@ namespace KML
                  * @copydoc IStreamingStatistic::evaluate()
                  */
                 using IStreamingStatistic<double>::evaluate;
-                virtual double evaluate() const;
+                virtual double evaluate();
 
             protected: 
                 /*!
@@ -48,7 +48,7 @@ namespace KML
                 /*!
                  * @brief Previous quantile estimation.
                  */
-                double* m_previous;
+                double m_previous;
         };
     }
 }

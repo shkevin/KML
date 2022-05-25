@@ -52,7 +52,7 @@ namespace KML
                  * @brief  Evaluate everything in the current window.
                  * @return The deriving class evaluate. 
                  */
-                virtual double evaluate() const = 0;
+                virtual double evaluate() = 0;
 
                 /**
                  * @brief Retrive the current window.

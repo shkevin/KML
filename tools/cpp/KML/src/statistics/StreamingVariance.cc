@@ -28,7 +28,7 @@ namespace KML
             m_sumSquared->update(observation * observation);
         }
 
-        double StreamingVariance::evaluate() const 
+        double StreamingVariance::evaluate()
         {
             double mean = m_mean->evaluate();
             return m_sumSquared->evaluate() - (mean * mean);

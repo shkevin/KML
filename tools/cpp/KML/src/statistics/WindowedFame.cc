@@ -47,7 +47,7 @@ namespace KML
             m_historyCount += 1;
         }
 
-        double WindowedFame::evaluate() const
+        double WindowedFame::evaluate()
         {
             return m_median;
         }

@@ -20,7 +20,7 @@ namespace KML
                 throw std::invalid_argument("Need window size >= 5");
             }
             m_p2 = new StreamingP2Quantile(quantile);
-            m_previous = nullptr;
+            m_previous = 0.0;
         }
 
         WindowedP2Quantile::~WindowedP2Quantile() 
@@ -35,16 +35,16 @@ namespace KML
             {
                 if(m_historyCount % m_windowSize == 0)
                 {
-                    *m_previous = m_p2->evaluate();
+                    m_previous = m_p2->evaluate();
                     m_p2->clear();
                 }
             }
             m_p2->update(observation);
         }
 
-        double WindowedP2Quantile::evaluate() const
+        double WindowedP2Quantile::evaluate()
         {
-            if(m_previous)
+            if(m_historyCount == 0)
             {
                 return m_p2->evaluate();
             }
@@ -57,7 +57,7 @@ namespace KML
             double w2 = (m_historyCount % m_windowSize + 1) * 1.0 / m_windowSize;
             double w1 = 1.0 - w2;
 
-            return w1 * (*m_previous) + w2 * m_p2->evaluate();
+            return w1 * m_previous + w2 * m_p2->evaluate();
         }
     }
 }

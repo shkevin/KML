@@ -35,7 +35,7 @@ namespace KML
                  * @copydoc IStreamingStatistic::evaluate()
                  */
                 using IStreamingStatistic<double>::evaluate;
-                virtual double evaluate() const;
+                virtual double evaluate();
 
             private:
                 /*!

@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 #include "statistics/StreamingP2Quantile.h"
 #include <vector>
+#include <iostream>
 
 using KML::Statistics::StreamingP2Quantile;
 
@@ -34,6 +35,7 @@ TEST_F(StreamingP2QuantileTest, TestConstantMedian)
 {
     std::vector<double> data{10, 10, 10, 10, 10};
     p2q->update(data);
+    std::cout << p2q->evaluate() << std::endl;
     EXPECT_FLOAT_EQ(10.0, p2q->evaluate());
 }
 

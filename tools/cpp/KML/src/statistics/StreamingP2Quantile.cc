@@ -76,12 +76,12 @@ namespace KML
             m_historyCount += 1;
         }
 
-        double StreamingP2Quantile::evaluate() const
+        double StreamingP2Quantile::evaluate()
         {
             if(m_historyCount <= 5)
             {
                 // Ensure the heights are sorted before returning.
-                /* sort(m_heights.begin(), m_heights.end()); */
+                sort(m_heights.begin(), m_heights.end());
                 uint8_t l_index = (int)std::round(std::abs((double)m_historyCount - 1) * m_quantile);
                 return m_heights[l_index];
             }

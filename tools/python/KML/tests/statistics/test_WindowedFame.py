@@ -10,7 +10,7 @@ class TestWindowedFame(unittest.TestCase):
     FM = None
 
     def setUp(self):
-        self.FM = PyWindowedFame(0.0, self.WINDOW_SIZE)
+        self.FM = PyWindowedFame()
 
     def tearDown(self):
         self.FM = None
@@ -18,14 +18,9 @@ class TestWindowedFame(unittest.TestCase):
     def test_update(self):
         self.FM.update(self.DATA)
 
-    def test_evaluate(self):
+    def test_constant_median(self):
         self.FM.update(self.DATA)
         self.assertEqual(self.FM.evaluate(), 10.0)
-
-    def test_drift(self):
-        data = [10, 10, 10, 10, 10, 5, 5, 5, 5, 5]
-        self.FM.update(data)
-        self.assertEqual(self.FM.evaluate(), 5.0)
 
 
 if __name__ == "__main__":

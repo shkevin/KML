@@ -5,11 +5,11 @@ from KML.statistics.WindowedFame cimport WindowedFame
 cdef class PyWindowedFame:
     cdef WindowedFame* c_FM
 
-    def __init__(self, step_size=0.0, window_size=None):
+    def __init__(self, step_size=0.1, epsilon=0.0):
         pass
 
-    def __cinit__(self, step_size=0.0, window_size=None):
-        self.c_FM = new WindowedFame(step_size, window_size)
+    def __cinit__(self, step_size=0.1, epsilon=0.0):
+        self.c_FM = new WindowedFame(step_size, epsilon)
 
     def update(self, observation):
         if isinstance(observation, Iterable):

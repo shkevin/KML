@@ -18,7 +18,8 @@ namespace KML
                 /*!
                  * @brief
                  */
-                WindowedFame(const double& stepSize = 0.0, const uint64_t& windowSize = 0);
+                WindowedFame(const double& stepSize = 0.1, 
+                             const double& epsilon = 0.0);
 
                 /*!
                  * @brief
@@ -47,6 +48,11 @@ namespace KML
                  * @brief
                  */
                 double m_stepSize;
+
+                /*!
+                 * @brief
+                 */
+                double m_epsilon;
         };
     }
 }

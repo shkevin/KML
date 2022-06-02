@@ -15,12 +15,9 @@ namespace KML
         WindowedP2Quantile::WindowedP2Quantile(const double quantile,
                 const uint64_t windowSize) : IStreamingStatistic(windowSize)
         {
-            if(windowSize < 5)
-            {
-                throw std::invalid_argument("Need window size >= 5");
-            }
             m_p2 = new StreamingP2Quantile(quantile);
             m_previous = 0.0;
+            m_historyCount = 0;
         }
 
         WindowedP2Quantile::~WindowedP2Quantile() 
@@ -44,19 +41,13 @@ namespace KML
 
         double WindowedP2Quantile::evaluate()
         {
-            if(m_historyCount == 0)
-            {
-                return m_p2->evaluate();
-            }
-
             if(m_historyCount < m_windowSize)
             {
                 return m_p2->evaluate();
             }
 
-            double w2 = (m_historyCount % m_windowSize + 1) * 1.0 / m_windowSize;
+            double w2 = (m_historyCount % m_windowSize + 1.0) * 1.0 / (double)m_windowSize;
             double w1 = 1.0 - w2;
-
             return w1 * m_previous + w2 * m_p2->evaluate();
         }
     }

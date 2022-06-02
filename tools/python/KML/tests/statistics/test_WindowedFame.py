@@ -9,13 +9,11 @@ class TestWindowedFame(unittest.TestCase):
     DATA = [10.0] * WINDOW_SIZE
     FM = None
 
-    @classmethod
-    def setUpClass(cls):
-        cls.FM = PyWindowedFame(0.0, cls.WINDOW_SIZE)
+    def setUp(self):
+        self.FM = PyWindowedFame(0.0, self.WINDOW_SIZE)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.FM = None
+    def tearDown(self):
+        self.FM = None
 
     def test_update(self):
         self.FM.update(self.DATA)

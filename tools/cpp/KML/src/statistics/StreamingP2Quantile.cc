@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <cmath>
 
+#include <iostream>
+
 namespace KML 
 {
     namespace Statistics
@@ -22,9 +24,10 @@ namespace KML
             }
 
             // Need to create markers/heights.
-            m_desireMarkerPosition = std::vector<double>{0, 0, 0, 0, 0};
-            m_markerPosition = std::vector<uint8_t>{0, 0, 0, 0, 0};
+            m_desiredMarkerPosition = std::vector<double>{0, 0, 0, 0, 0};
+            m_markerPosition = std::vector<int>{0, 0, 0, 0, 0};
             m_heights = std::vector<double>{0, 0, 0, 0, 0};
+            m_quantile = quantile;
         }
 
         StreamingP2Quantile::~StreamingP2Quantile()
@@ -36,42 +39,48 @@ namespace KML
         {
             if(m_historyCount < 5)
             {
-                m_heights[m_historyCount] = observation;
-                m_historyCount += 1;
+                m_heights[m_historyCount++] = observation;
 
                 if(m_historyCount == 5)
                 {
                     sort(m_heights.begin(), m_heights.end());
-                    m_desireMarkerPosition = m_heights;
-                    std::vector<double> l_heights = {0, 2 * m_quantile, 4 * m_quantile,
-                        2 + 2 * m_quantile, 4};
-                    m_markerPosition[1] = (uint8_t)std::round(l_heights[1]);
-                    m_markerPosition[2] = (uint8_t)std::round(l_heights[2]);
-                    m_markerPosition[3] = (uint8_t)std::round(l_heights[3]);
+                    m_desiredMarkerPosition = m_heights;
+                    std::vector<double> l_heights = {0.0, 2.0 * m_quantile, 4.0 * m_quantile,
+                        2.0 + 2.0 * m_quantile, 4.0};
+                    m_markerPosition[1] = (int)std::round(l_heights[1]);
+                    m_markerPosition[2] = (int)std::round(l_heights[2]);
+                    m_markerPosition[3] = (int)std::round(l_heights[3]);
 
-                    for(auto i = 1; i <= 4; i++)
+                    for(auto i = 1; i < 4; i++)
                     {
-                        m_heights[i] = m_desireMarkerPosition[m_markerPosition[i]];
+                        m_heights[i] = m_desiredMarkerPosition[m_markerPosition[i]];
                     }
-                    m_desireMarkerPosition = l_heights;
+
+                    m_desiredMarkerPosition = l_heights;
                 }
                 return;
             }
 
             // Once first 5 observations have been seen, calculate new quantile.
-            uint8_t k = findK(observation);
-            for(auto i = k + 1; i < 5; i++)
+            int k = findK(observation);
+            for(int i = k + 1; i < 5; i++)
             {
-                m_markerPosition[k]++;
+                m_markerPosition[i] += 1;
             }
-            m_desireMarkerPosition[1] = (double)m_historyCount * m_quantile / 2;
-            m_desireMarkerPosition[2] = (double)m_historyCount * m_quantile;
-            m_desireMarkerPosition[3] = (double)m_historyCount * (1 + m_quantile) / 2;
-            m_desireMarkerPosition[4] = (double)m_historyCount;
+            m_desiredMarkerPosition[1] = (double)m_historyCount * m_quantile / 2;
+            m_desiredMarkerPosition[2] = (double)m_historyCount * m_quantile;
+            m_desiredMarkerPosition[3] = (double)m_historyCount * (1 + m_quantile) / 2;
+            m_desiredMarkerPosition[4] = (double)m_historyCount;
 
             // Apply patch where quantile <= 0.5 can cause collissions.
-            if(m_quantile >= 0.5) for(auto i = 1; i <= 3; i++) adjustHeights(i);
-            else for(auto i = 3; i > 0; i--) adjustHeights(i);
+            if(m_quantile >= 0.5)
+            {
+                for(auto i = 1; i <= 3; i++) adjustHeights(i);
+            }
+            else 
+            {
+                for(auto i = 3; i > 0; i--) adjustHeights(i);
+            }
 
             m_historyCount += 1;
         }
@@ -82,7 +91,7 @@ namespace KML
             {
                 // Ensure the heights are sorted before returning.
                 sort(m_heights.begin(), m_heights.end());
-                uint8_t l_index = (int)std::round(std::abs((double)m_historyCount - 1) * m_quantile);
+                int l_index = (int)std::floor(std::abs((double)m_historyCount - 1) * m_quantile);
                 return m_heights[l_index];
             }
 
@@ -119,7 +128,7 @@ namespace KML
 
         void StreamingP2Quantile::adjustHeights(uint8_t i)
         {
-            double d_pos = m_desireMarkerPosition[i] - m_markerPosition[i];
+            double d_pos = m_desiredMarkerPosition[i] - m_markerPosition[i];
 
             if(((d_pos >= 1) && (m_markerPosition[i+1] - m_markerPosition[i] > 1)) || 
                     ((d_pos <= -1) && (m_markerPosition[i-1] - m_markerPosition[i] < -1)))

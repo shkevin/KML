@@ -4,10 +4,10 @@ from collections.abc import Iterable
 cdef class PyStreamingP2Quantile:
     cdef StreamingP2Quantile* c_P2
 
-    def __init__(self, quantile):
+    def __init__(self, quantile=0.5):
         pass
 
-    def __cinit__(self, quantile):
+    def __cinit__(self, quantile=0.5):
         self.c_P2 = new StreamingP2Quantile(quantile)
 
     def update(self, observation):

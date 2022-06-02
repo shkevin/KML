@@ -9,13 +9,11 @@ class TestWindowedP2Quantile(unittest.TestCase):
     DATA = [10.0] * 300
     WP2 = None
 
-    @classmethod
-    def setUpClass(cls):
-        cls.WP2 = PyWindowedP2Quantile(quantile=0.5, window_size=cls.WINDOW_SIZE)
+    def setUp(self):
+        self.WP2 = PyWindowedP2Quantile(quantile=0.5, window_size=self.WINDOW_SIZE)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.WP2 = None
+    def tearDown(self):
+        self.WP2 = None
 
     def test_zero_evaluate(self):
         self.assertEqual(self.WP2.evaluate(), 0.0)

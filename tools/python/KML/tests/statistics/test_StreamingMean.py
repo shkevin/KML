@@ -9,13 +9,11 @@ class TestStreamingMean(unittest.TestCase):
     DATA = [10.0] * WINDOW_SIZE
     SM = None
 
-    @classmethod
-    def setUpClass(cls):
-        cls.SM = PyStreamingMean(cls.WINDOW_SIZE)
+    def setUp(self):
+        self.SM = PyStreamingMean(self.WINDOW_SIZE)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.SM = None
+    def tearDown(self):
+        self.SM = None
 
     def test_update(self):
         self.SM.update(self.DATA)

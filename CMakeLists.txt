@@ -80,21 +80,22 @@ endif()
 # Disable in-source builds to prevent source tree corruption.
 if("${CMAKE_SOURCE_DIR}" STREQUAL " ${CMAKE_BINARY_DIR}")
   MESSAGE(FATAL_ERROR "FATAL: In-source builds are not allowed.
-       You should create a separate directory for build FILEs.")
+       You should create a separate directory for build files.")
 endif()
 
-# Create a sources variable with a link to all cpp FILEs to compile
-SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp/KML")
-FILE(GLOB_RECURSE SOURCES "${CPP_DIR}/src/*.cc" "${CPP_DIR}/src/*.tcc")
+# Create a sources variable with a link to all cpp files to compile
+SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp")
+FILE(GLOB_RECURSE SOURCES "${CPP_DIR}/KML/src/*.cc" "${CPP_DIR}/KML/src/*.tcc")
+FILE(GLOB_RECURSE APP_SOURCES "${CPP_DIR}/apps/*.cc")
 
 # Add the directories needed.
-ADD_LIBRARY(${CMAKE_PROJECT_NAME}_lib STATIC ${SOURCES})
+ADD_LIBRARY(${CMAKE_PROJECT_NAME}_lib STATIC ${SOURCES} ${APP_SOURCES})
 INCLUDE_DIRECTORIES(${CMAKE_PROJECT_NAME}_lib
     PUBLIC
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_BINARY_DIR}
-        "${CPP_DIR}/include"
-        "${CPP_DIR}/src"
+        "${CPP_DIR}/KML/include"
+        "${CPP_DIR}/KML/src"
 )
 
 ################################
@@ -116,11 +117,12 @@ if(BUILD_PYTHON)
 
     SET(NUM_THREADS 10)
     SET(BUILD_DIR ${CMAKE_BINARY_DIR})
-    SET(PACK_DIR ${CMAKE_BINARY_DIR}/packages)
+    SET(PACK_DIR ${CMAKE_BINARY_DIR}/tools/packages)
     SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
         COMMAND ${PYTHON_EXECUTABLE} setup.py
             sdist --dist-dir=${PACK_DIR}
+            egg_info --egg-base=${BUILD_DIR}
             build --build-base=${BUILD_DIR} --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML
             build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}
             bdist_wheel --bdist-dir=${BUILD_DIR}/build --dist-dir=${PACK_DIR}
@@ -153,11 +155,11 @@ if(BUILD_TESTING)
         googletest
             URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
     )
-    # For Windows: Prevent overriding the<Plug>PeepOpenarent<Plug>PeepOpenroject's compiler/linker settings
+    # For Windows: Prevent overriding project's compiler/linker settings
     SET(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
     SET(gmock OFF CACHE BOOL "" FORCE)
     FETCHCONTENT_MAKEAVAILABLE(googletest)
-    ADD_SUBDIRECTORY("${CPP_DIR}/tests")
+    ADD_SUBDIRECTORY("${CPP_DIR}/KML/tests")
 endif(BUILD_TESTING)
 
 ################################################################################
@@ -165,43 +167,44 @@ endif(BUILD_TESTING)
 ################################################################################
 OPTION(BUILD_DOCUMENTATION "Build Documentation" OFF)
 if(BUILD_DOCUMENTATION)
-  # Doxygen documentation of main library
-  FIND_PACKAGE(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
-  if(DOXYGEN_DOT_EXECUTABLE)
-    SET(DOXYGEN_HAVE_DOT YES)
-  else()
-    SET(DOXYGEN_HAVE_DOT NO)
-  endif(DOXYGEN_DOT_EXECUTABLE)
+    MESSAGE(STATUS "Building Documentation")
+    # Doxygen documentation of main library
+    FIND_PACKAGE(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
+    if(DOXYGEN_DOT_EXECUTABLE)
+      SET(DOXYGEN_HAVE_DOT YES)
+    else()
+      SET(DOXYGEN_HAVE_DOT NO)
+    endif(DOXYGEN_DOT_EXECUTABLE)
 
-  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile)
-  ADD_CUSTOM_COMMAND(
-    OUTPUT ${CMAKE_BINARY_DIR}/docs/html/index.html
-    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/docs
-    DEPENDS
-      ${CMAKE_CURRENT_SOURCE_DIR}/README.md
-      ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
-      ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in
-    COMMENT "Building doxygen documentation for 'KML' library")
-  ADD_CUSTOM_TARGET(documentation ALL
-    DEPENDS
-      ${CMAKE_CURRENT_BINARY_DIR}/docs/html/index.html)
+    CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile)
+    ADD_CUSTOM_COMMAND(
+      OUTPUT ${CMAKE_BINARY_DIR}/docs/html/index.html
+      COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/docs
+      DEPENDS
+        ${CMAKE_CURRENT_SOURCE_DIR}/README.md
+        ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
+        ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in
+      COMMENT "Building doxygen documentation for 'KML' library")
+    ADD_CUSTOM_TARGET(documentation ALL
+      DEPENDS
+        ${CMAKE_CURRENT_BINARY_DIR}/docs/html/index.html)
 
-  # Sphinx documentation of Python bindings
-  # if(BUILD_PYTHON_BINDINGS)
-  #   add_custom_command(
-  #     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html
-  #     COMMAND ${PYTHON_EXECUTABLE}
-  #       setup.py
-  #         build_sphinx
-  #     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings
-  #     DEPENDS
-  #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/README.md
-  #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/conf.py
-  #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/index.rst
-  #       foo-python-bindings
-  #     COMMENT "Building sphinx Python documentation for 'foo' library")
-  #   add_custom_target(foo-python-documentation DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html)
-  #   add_dependencies(documentation foo-python-documentation)
-  # endif(BUILD_PYTHON_BINDINGS)
+    # Sphinx documentation of Python bindings
+    # if(BUILD_PYTHON_BINDINGS)
+    #   add_custom_command(
+    #     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html
+    #     COMMAND ${PYTHON_EXECUTABLE}
+    #       setup.py
+    #         build_sphinx
+    #     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings
+    #     DEPENDS
+    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/README.md
+    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/conf.py
+    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/index.rst
+    #       foo-python-bindings
+    #     COMMENT "Building sphinx Python documentation for 'foo' library")
+    #   add_custom_target(foo-python-documentation DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html)
+    #   add_dependencies(documentation foo-python-documentation)
+    # endif(BUILD_PYTHON_BINDINGS)
 endif(BUILD_DOCUMENTATION)

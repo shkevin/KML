@@ -8,13 +8,11 @@ class TestStreamingP2Quantile(unittest.TestCase):
     DATA = [10.0] * 5
     P2 = None
 
-    @classmethod
-    def setUpClass(cls):
-        cls.P2 = PyStreamingP2Quantile(quantile=0.5)
+    def setUp(self):
+        self.P2 = PyStreamingP2Quantile(quantile=0.5)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.P2 = None
+    def tearDown(self):
+        self.P2 = None
 
     def test_zero_evaluate(self):
         self.assertEqual(self.P2.evaluate(), 0.0)

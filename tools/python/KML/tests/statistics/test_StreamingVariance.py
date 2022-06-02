@@ -9,13 +9,11 @@ class TestStreamingVariance(unittest.TestCase):
     DATA = [10.0] * WINDOW_SIZE
     SV = None
 
-    @classmethod
-    def setUpClass(cls):
-        cls.SV = PyStreamingVariance(cls.WINDOW_SIZE)
+    def setUp(self):
+        self.SV = PyStreamingVariance(self.WINDOW_SIZE)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.SV = None
+    def tearDown(self):
+        self.SV = None
 
     def test_update(self):
         self.SV.update(self.DATA)

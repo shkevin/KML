@@ -83,12 +83,12 @@ namespace KML
                 /*!
                  * @brief Integer valued marker locations.
                  */
-                std::vector<uint8_t> m_markerPosition;
+                std::vector<int> m_markerPosition;
 
                 /*!
                  * @brief Real valued desired locations to move markers.
                  */
-                std::vector<double> m_desireMarkerPosition;
+                std::vector<double> m_desiredMarkerPosition;
 
                 /*!
                  * @brief Quantile heights approximated by interpolation.

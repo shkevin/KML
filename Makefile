@@ -35,7 +35,7 @@ compile-all:
 	    -DCMAKE_BUILD_TYPE=Debug \
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=ON \
-		-DBUILD_DOCUMENTATION=ON && \
+		-DBUILD_DOCUMENTATION=OFF && \
 	make
 
 # Call Unittests for C++

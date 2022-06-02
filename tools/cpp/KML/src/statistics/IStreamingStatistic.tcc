@@ -15,6 +15,7 @@ namespace KML
                 m_window = nullptr;
             }
             else m_window = new std::deque<T>(m_windowSize);
+            m_historyCount = 0;
         }
 
         template<typename T>

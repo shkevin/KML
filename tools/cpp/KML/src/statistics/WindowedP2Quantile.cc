@@ -27,16 +27,16 @@ namespace KML
 
         void WindowedP2Quantile::update(const double& observation)
         {
-            m_historyCount += 1;
+            m_historyCount++;
+            m_p2->update(observation);
             if(m_window != nullptr)
             {
-                if(m_historyCount % m_windowSize == 0)
+                if(m_historyCount % (m_windowSize + 1) == 0) 
                 {
                     m_previous = m_p2->evaluate();
                     m_p2->clear();
                 }
             }
-            m_p2->update(observation);
         }
 
         double WindowedP2Quantile::evaluate()
@@ -46,7 +46,7 @@ namespace KML
                 return m_p2->evaluate();
             }
 
-            double w2 = (m_historyCount % m_windowSize + 1.0) * 1.0 / (double)m_windowSize;
+            double w2 = (m_historyCount % m_windowSize + 1.0);
             double w1 = 1.0 - w2;
             return w1 * m_previous + w2 * m_p2->evaluate();
         }

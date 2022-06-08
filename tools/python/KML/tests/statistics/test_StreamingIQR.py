@@ -5,8 +5,8 @@ from KML.statistics.StreamingIQR import PyStreamingIQR
 
 class TestStreamingIQR(unittest.TestCase):
 
-    WINDOW_SIZE = 10
     DATA = list(range(1, 11))
+    WINDOW_SIZE = len(DATA)
     IQR = None
 
     def setUp(self):

@@ -34,7 +34,7 @@ namespace KML
         {
             m_low->update(observation);
             m_high->update(observation);
-            m_historyCount += 1;
+            m_historyCount++;
         }
 
         double StreamingIQR::evaluate()

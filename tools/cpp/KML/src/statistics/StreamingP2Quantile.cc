@@ -15,7 +15,8 @@ namespace KML
 {
     namespace Statistics
     {
-        StreamingP2Quantile::StreamingP2Quantile(const double quantile) : IStreamingStatistic(0)
+        StreamingP2Quantile::StreamingP2Quantile(const double quantile) : 
+            IStreamingStatistic(0), m_quantile(quantile)
         {
             // Ensure that the quantile range is appropriate.
             if((quantile <= 0) || (quantile >= 1))
@@ -25,9 +26,8 @@ namespace KML
 
             // Need to create markers/heights.
             m_desiredMarkerPosition = std::vector<double>{0, 0, 0, 0, 0};
-            m_markerPosition = std::vector<int>{0, 0, 0, 0, 0};
+            m_markerPosition = std::vector<int>{0, 1, 2, 3, 4};
             m_heights = std::vector<double>{0, 0, 0, 0, 0};
-            m_quantile = quantile;
         }
 
         StreamingP2Quantile::~StreamingP2Quantile()
@@ -43,46 +43,39 @@ namespace KML
 
                 if(m_historyCount == 5)
                 {
+                    // Need to sort heights to correcty index right "quantile".
                     sort(m_heights.begin(), m_heights.end());
-                    m_desiredMarkerPosition = m_heights;
-                    std::vector<double> l_heights = {0.0, 2.0 * m_quantile, 4.0 * m_quantile,
-                        2.0 + 2.0 * m_quantile, 4.0};
-                    m_markerPosition[1] = (int)std::round(l_heights[1]);
-                    m_markerPosition[2] = (int)std::round(l_heights[2]);
-                    m_markerPosition[3] = (int)std::round(l_heights[3]);
 
-                    for(auto i = 1; i < 4; i++)
-                    {
-                        m_heights[i] = m_desiredMarkerPosition[m_markerPosition[i]];
-                    }
-
-                    m_desiredMarkerPosition = l_heights;
+                    // Set the desired marker positions.
+                    m_desiredMarkerPosition[0] = 0;
+                    m_desiredMarkerPosition[1] = 2.0 * m_quantile;
+                    m_desiredMarkerPosition[2] = 4.0 * m_quantile;
+                    m_desiredMarkerPosition[3] = 2.0 + 2.0 * m_quantile;
+                    m_desiredMarkerPosition[4] = 4.0;
                 }
                 return;
             }
 
             // Once first 5 observations have been seen, calculate new quantile.
-            int k = findK(observation);
-            for(int i = k + 1; i < 5; i++)
-            {
-                m_markerPosition[i] += 1;
-            }
-            m_desiredMarkerPosition[1] = (double)m_historyCount * m_quantile / 2;
+            int l_k = findK(observation);
+            for(int i = l_k + 1; i < 5; i++) m_markerPosition[i]++;
+            m_desiredMarkerPosition[1] = (double)m_historyCount * m_quantile / 2.0;
             m_desiredMarkerPosition[2] = (double)m_historyCount * m_quantile;
-            m_desiredMarkerPosition[3] = (double)m_historyCount * (1 + m_quantile) / 2;
+            m_desiredMarkerPosition[3] = (double)m_historyCount * (1.0 + m_quantile) / 2.0;
             m_desiredMarkerPosition[4] = (double)m_historyCount;
 
             // Apply patch where quantile <= 0.5 can cause collissions.
+            // Update everything except Min/Max.
             if(m_quantile >= 0.5)
             {
-                for(auto i = 1; i <= 3; i++) adjustHeights(i);
+                for(int i = 1; i <= 3; i++) adjustHeights(i);
             }
             else 
             {
-                for(auto i = 3; i > 0; i--) adjustHeights(i);
+                for(int i = 3; i > 0; i--) adjustHeights(i);
             }
 
-            m_historyCount += 1;
+            m_historyCount++;
         }
 
         double StreamingP2Quantile::evaluate()
@@ -91,34 +84,30 @@ namespace KML
             {
                 // Ensure the heights are sorted before returning.
                 sort(m_heights.begin(), m_heights.end());
-                int l_index = (int)std::floor(std::abs((double)m_historyCount - 1) * m_quantile);
+                int l_index = (int)std::round(std::abs((double)m_historyCount - 1) * m_quantile);
                 return m_heights[l_index];
             }
 
             return m_heights[2];
         }
 
-        uint8_t StreamingP2Quantile::findK(const double& observation)
+        int StreamingP2Quantile::findK(const double& observation)
         {
-            uint8_t k = 0;
-            // q0
+            int k = 0;
+            // Check Minimum
             if(observation < m_heights[0])
             {
+                // Update minimum.
                 m_heights[0] = observation;
                 k = 0;
             }
-            else 
+            else if(observation < m_heights[1]) k = 0;
+            else if(observation < m_heights[2]) k = 1;
+            else if(observation < m_heights[3]) k = 2;
+            else if(observation < m_heights[4]) k = 3;
+            else
             {
-                // q1-q4
-                for(auto i = 1; i <= 4; i++)
-                {
-                    if(observation < m_heights[i])
-                    {
-                        k = i - 1;
-                        return k;
-                    }
-                }
-                //q5 < observation
+                // Update maximum.
                 m_heights[4] = observation;
                 k = 3;
             }
@@ -126,39 +115,43 @@ namespace KML
             return k;
         }
 
-        void StreamingP2Quantile::adjustHeights(uint8_t i)
+        void StreamingP2Quantile::adjustHeights(int i)
         {
-            double d_pos = m_desiredMarkerPosition[i] - m_markerPosition[i];
+            double d_pos = m_desiredMarkerPosition[i] - (double)m_markerPosition[i];
 
-            if(((d_pos >= 1) && (m_markerPosition[i+1] - m_markerPosition[i] > 1)) || 
-                    ((d_pos <= -1) && (m_markerPosition[i-1] - m_markerPosition[i] < -1)))
+            if((d_pos >= 1 && m_markerPosition[i+1] - m_markerPosition[i] > 1) || 
+                    (d_pos <= -1 && m_markerPosition[i-1] - m_markerPosition[i] < -1))
             {
-                d_pos = std::signbit(d_pos);
-                double p2 = parabolic(i, d_pos);
+                double d = copysign(d_pos);
+                double p2 = parabolic(i, d);
 
-                if((m_heights[i - 1] < p2) && (p2 < m_heights[i + 1]))
+                if(m_heights[i - 1] < p2 && p2 < m_heights[i + 1])
                 {
                     m_heights[i] = p2;
                 }
-                else m_heights[i] = linear(i, d_pos);
+                else m_heights[i] = linear(i, d);
+                m_markerPosition[i] += d;
             }
-
         }
 
-        double StreamingP2Quantile::parabolic(uint8_t i, bool d_pos) 
+        int StreamingP2Quantile::copysign(const double number)
         {
-            double eps = 1e-9;  // For some reason division by zero happens.
-            double l_leftHand = m_heights[i] + d_pos / 
-                (m_markerPosition[i + 1] - m_markerPosition[i - 1] + eps);
-            double l_innerLeft = (m_markerPosition[i] - m_markerPosition[i - 1] + d_pos) * 
-                (m_heights[i + 1] - m_heights[i]) / (m_markerPosition[i + 1] - m_markerPosition[i] + eps);
-            double l_innerRight = (m_markerPosition[i + 1] - m_markerPosition[i] - d_pos) * 
-                (m_heights[i] - m_heights[i - 1]) / (m_markerPosition[i] - m_markerPosition[i - 1] + eps);
-
-            return l_leftHand * (l_innerLeft + l_innerRight);
+            if (number > 0) return 1;
+            if (number < 0) return -1;
+            return 0;
         }
 
-        double StreamingP2Quantile::linear(uint8_t i, bool d_pos)
+        double StreamingP2Quantile::parabolic(int i, double d_pos)
+        {
+			return m_heights[i] + d_pos / (m_markerPosition[i + 1] - m_markerPosition[i - 1]) * (
+				(m_markerPosition[i] - m_markerPosition[i - 1] + d_pos) * 
+					(m_heights[i + 1] - m_heights[i]) / (m_markerPosition[i + 1] - m_markerPosition[i]) +
+				(m_markerPosition[i + 1] - m_markerPosition[i] - d_pos) * 
+					(m_heights[i] - m_heights[i - 1]) / (m_markerPosition[i] - m_markerPosition[i - 1])
+				);
+        }
+
+        double StreamingP2Quantile::linear(int i, double d_pos)
         {
             return m_heights[i] + d_pos * (m_heights[i + d_pos] - m_heights[i]) / 
                 (m_markerPosition[i + d_pos] - m_markerPosition[i]);

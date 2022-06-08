@@ -57,27 +57,33 @@ namespace KML
                  * @brief Find the position k where the observation falls within quantiles.
                  * @param observation The observation used to find position for.
                  */
-                virtual uint8_t findK(const double& observation);
+                virtual int findK(const double& observation);
 
                 /*!
                  * @brief Parabolic quantile interpolation.
                  * @param pos Position to interpolate.
                  * @param desired_pos Sign of desired position (-1, 0, 1);
                  */
-                virtual double parabolic(uint8_t pos, bool desired_pos);
+                virtual double parabolic(int pos, double d_pos);
 
                 /*!
                  * @brief Linear quantile interpolation.
                  * @param pos Position to interpolate.
                  * @param desired_pos Sign of desired position (-1, 0, 1);
                  */
-                virtual double linear(uint8_t i, bool d_pos);
+                virtual double linear(int i, double d_pos);
 
                 /*!
                  * @brief Adjust the quantile height at the given position.
                  * @param position Position of quantile to adjust.
                  */
-                virtual void adjustHeights(uint8_t position);
+                virtual void adjustHeights(int position);
+
+                /*!
+                 * @brief
+                 * @param
+                 */
+                virtual int copysign(const double number);
 
             protected:
                 /*!

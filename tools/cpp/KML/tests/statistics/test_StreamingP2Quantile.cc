@@ -38,12 +38,28 @@ TEST_F(StreamingP2QuantileTest, TestConstantMedian)
     EXPECT_FLOAT_EQ(10.0, p2q->evaluate());
 }
 
-// Median should come out to 1.0 for this data.
-TEST_F(StreamingP2QuantileTest, TestMedianBasic)
+TEST_F(StreamingP2QuantileTest, TestSimpleMedian)
 {
-    std::vector<double> data{1, 1, 1, 2, 2};
-    p2q->update(data);
-    EXPECT_FLOAT_EQ(1.0, p2q->evaluate());
+    StreamingP2Quantile* l_p2q = new StreamingP2Quantile(0.5);
+    std::vector<double> data{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    l_p2q->update(data);
+    EXPECT_FLOAT_EQ(5, l_p2q->evaluate());
+}
+
+TEST_F(StreamingP2QuantileTest, TestSimpleQ1)
+{
+    StreamingP2Quantile* l_p2q = new StreamingP2Quantile(0.25);
+    std::vector<double> data{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    l_p2q->update(data);
+    EXPECT_FLOAT_EQ(3, l_p2q->evaluate());
+}
+
+TEST_F(StreamingP2QuantileTest, TestSimpleQ3)
+{
+    StreamingP2Quantile* l_p2q = new StreamingP2Quantile(0.75);
+    std::vector<double> data{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    l_p2q->update(data);
+    EXPECT_FLOAT_EQ(7, l_p2q->evaluate());
 }
 
 TEST_F(StreamingP2QuantileTest, TestMedianAdvancedUnsorted)

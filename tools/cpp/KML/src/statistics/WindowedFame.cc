@@ -1,5 +1,5 @@
 /*!
- * @brief https://ieeexplore.ieee.org/document/4261339
+ * @brief 
  * @file WindowedFame.cc
  */
 #include "WindowedFame.h"

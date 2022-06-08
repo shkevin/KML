@@ -18,12 +18,17 @@ namespace KML
         {
             public:
                 /*!
-                 * @brief
+                 * @brief Default Constructor.
+                 * @param Desired quantile to calculate.
+                 * @param windowSize The window size to calculate the streaming quantile.
+                 *        This window size defaults to a window size of 0, meaning
+                 *        the quantile is over the entire data stream.
+ 
                  */
                 WindowedP2Quantile(const double quantile, const uint64_t windowSize = 0); 
 
                 /*!
-                 * @brief
+                 * @brief Destructor. 
                  */
                 ~WindowedP2Quantile(); 
 

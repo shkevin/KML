@@ -5,7 +5,7 @@ from KML.statistics.StreamingP2Quantile import PyStreamingP2Quantile
 
 class TestStreamingP2Quantile(unittest.TestCase):
 
-    DATA = [10.0] * 5
+    DATA = list(range(1, 11))
     P2 = None
 
     def setUp(self):
@@ -19,7 +19,17 @@ class TestStreamingP2Quantile(unittest.TestCase):
 
     def test_median_evaluate(self):
         self.P2.update(self.DATA)
-        self.assertAlmostEqual(self.P2.evaluate(), 10.0)
+        self.assertAlmostEqual(self.P2.evaluate(), 5.0)
+
+    def test_q1(self):
+        self.P2 = PyStreamingP2Quantile(quantile=0.25)
+        self.P2.update(self.DATA)
+        self.assertAlmostEqual(self.P2.evaluate(), 3.0)
+
+    def test_q3(self):
+        self.P2 = PyStreamingP2Quantile(quantile=0.75)
+        self.P2.update(self.DATA)
+        self.assertAlmostEqual(self.P2.evaluate(), 7.0)
 
 
 if __name__ == "__main__":

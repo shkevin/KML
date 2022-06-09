@@ -13,11 +13,9 @@ namespace KML
     namespace Statistics
     {
         WindowedP2Quantile::WindowedP2Quantile(const double quantile,
-                const uint64_t windowSize) : IStreamingStatistic(windowSize)
+                const uint64_t windowSize) : IStreamingStatistic(windowSize), m_previous(0.0)
         {
             m_p2 = new StreamingP2Quantile(quantile);
-            m_previous = 0.0;
-            m_historyCount = 0;
         }
 
         WindowedP2Quantile::~WindowedP2Quantile() 
@@ -39,7 +37,7 @@ namespace KML
             }
         }
 
-        double WindowedP2Quantile::evaluate()
+        double WindowedP2Quantile::evaluate() const
         {
             if(m_historyCount < m_windowSize)
             {

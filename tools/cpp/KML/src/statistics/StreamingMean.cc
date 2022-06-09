@@ -9,11 +9,8 @@ namespace KML
 {
     namespace Statistics
     {
-        StreamingMean::StreamingMean(const uint64_t windowSize): IStreamingStatistic(windowSize)
-        {
-            m_historyCount = 0;
-            m_sum = 0.0;
-        }
+        StreamingMean::StreamingMean(const uint64_t windowSize): 
+            IStreamingStatistic(windowSize), m_sum(0.0) {}
 
         StreamingMean::~StreamingMean() 
         {
@@ -36,7 +33,7 @@ namespace KML
             m_sum += observation;
         }
 
-        double StreamingMean::evaluate()
+        double StreamingMean::evaluate() const
         {
             if(m_historyCount == 0) return 0.0;
             if(m_window != nullptr)

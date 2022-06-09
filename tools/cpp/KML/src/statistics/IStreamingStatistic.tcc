@@ -8,14 +8,13 @@ namespace KML
     namespace Statistics
     {
         template<typename T>
-        IStreamingStatistic<T>::IStreamingStatistic(const uint64_t windowSize): m_windowSize(windowSize) 
+        IStreamingStatistic<T>::IStreamingStatistic(const uint64_t windowSize): 
+            m_window(nullptr), m_windowSize(windowSize), m_historyCount(0)
         {
-            if(m_windowSize <= 0) 
+            if(m_windowSize > 0) 
             {
-                m_window = nullptr;
+                m_window = new std::deque<T>(m_windowSize);
             }
-            else m_window = new std::deque<T>(m_windowSize);
-            m_historyCount = 0;
         }
 
         template<typename T>

@@ -25,7 +25,17 @@ namespace KML
                  *        the quantile is over the entire data stream.
  
                  */
-                WindowedP2Quantile(const double quantile, const uint64_t windowSize = 0); 
+                explicit WindowedP2Quantile(const double quantile, const uint64_t windowSize = 0); 
+
+                /*!
+                 * Copy Constructor.
+                 */
+                WindowedP2Quantile(const WindowedP2Quantile&) = delete; // No copy
+
+                /*!
+                 * Copy Assignment Operator.
+                 */
+                WindowedP2Quantile& operator=(const WindowedP2Quantile&) = delete; // No copy
 
                 /*!
                  * @brief Destructor. 
@@ -36,13 +46,13 @@ namespace KML
                  * @copydoc IStreamingStatistic::update()
                  */
                 using IStreamingStatistic<double>::update;
-                virtual void update(const double& observation);
+                virtual void update(const double& observation) override;
 
                 /*!
                  * @copydoc IStreamingStatistic::evaluate()
                  */
                 using IStreamingStatistic<double>::evaluate;
-                virtual double evaluate();
+                virtual double evaluate() const override;
 
             protected: 
                 /*!

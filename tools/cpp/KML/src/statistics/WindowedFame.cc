@@ -12,14 +12,13 @@ namespace KML
     namespace Statistics
     {
         WindowedFame::WindowedFame(const double& stepSize, const double& epsilon) : 
-            IStreamingStatistic(0), m_stepSize(stepSize), m_epsilon(epsilon)
+            IStreamingStatistic(0), m_median(0.0), m_stepSize(stepSize), m_epsilon(epsilon)
         {
             // Ensure that the quantile range is appropriate.
             if((m_epsilon < 0) || (m_epsilon >= 1))
             {
                 throw std::invalid_argument("Epsilon must be in half closed interval [0, 1)");
             }
-            m_median = 0.0; 
         }
 
         WindowedFame::~WindowedFame() 
@@ -54,7 +53,7 @@ namespace KML
             m_historyCount += 1;
         }
 
-        double WindowedFame::evaluate()
+        double WindowedFame::evaluate() const
         {
             return m_median;
         }

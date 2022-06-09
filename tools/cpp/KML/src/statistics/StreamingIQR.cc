@@ -37,7 +37,7 @@ namespace KML
             m_historyCount++;
         }
 
-        double StreamingIQR::evaluate()
+        double StreamingIQR::evaluate() const
         {
             return m_high->evaluate() - m_low->evaluate();
         }

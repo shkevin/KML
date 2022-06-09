@@ -30,6 +30,16 @@ namespace KML
                  */
                 IStreamingStatistic(const uint64_t windowSize = 0);
 
+                /*!
+                 * @brief Default Copy Constructor.
+                 */
+                IStreamingStatistic(const IStreamingStatistic& a_rhs) = delete;
+
+                /*!
+                 * @brief Default Assignment Constructor.
+                 */
+                IStreamingStatistic& operator=(const IStreamingStatistic& a_rhs) = delete;
+
                 /**
                  * @brief Destructor.
                  */
@@ -52,7 +62,7 @@ namespace KML
                  * @brief  Evaluate everything in the current window.
                  * @return The deriving class evaluate. 
                  */
-                virtual double evaluate() = 0;
+                virtual double evaluate() const = 0;
 
                 /**
                  * @brief Retrive the current window.
@@ -69,7 +79,7 @@ namespace KML
                 /**
                  * @brief The current window size.
                  */
-                uint64_t m_windowSize;
+                const uint64_t m_windowSize;
 
                 /**
                  * @brief The number of observations seen by deriving class.

@@ -32,6 +32,16 @@ namespace KML
                 StreamingVariance(const uint64_t windowSize = 0);
 
                 /*!
+                 * Copy Constructor.
+                 */
+                StreamingVariance(const StreamingVariance&) = delete; // No copy
+
+                /*!
+                 * Copy Assignment Operator.
+                 */
+                StreamingVariance& operator=(const StreamingVariance&) = delete; // No copy
+
+                /*!
                  * @brief Destructor.
                  */
                 ~StreamingVariance();
@@ -40,13 +50,13 @@ namespace KML
                  * @copydoc IStreamingStatistic::update()
                  */
                 using IStreamingStatistic<double>::update;
-                virtual void update(const double& observation);
+                virtual void update(const double& observation) override;
 
                 /*!
                  * @copydoc IStreamingStatistic::evaluate()
                  */
                 using IStreamingStatistic<double>::evaluate;
-                virtual double evaluate();
+                virtual double evaluate() const override;
 
             protected:
                 /*!

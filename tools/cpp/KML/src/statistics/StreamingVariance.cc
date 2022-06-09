@@ -13,7 +13,6 @@ namespace KML
         {
             m_sumSquared = new StreamingMean(windowSize);
             m_mean = new StreamingMean(windowSize);
-            m_historyCount = 0;
         }
 
         StreamingVariance::~StreamingVariance() 
@@ -28,7 +27,7 @@ namespace KML
             m_sumSquared->update(observation * observation);
         }
 
-        double StreamingVariance::evaluate()
+        double StreamingVariance::evaluate() const
         {
             double mean = m_mean->evaluate();
             return m_sumSquared->evaluate() - (mean * mean);

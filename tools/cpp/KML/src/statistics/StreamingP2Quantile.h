@@ -28,7 +28,7 @@ namespace KML
                  * @brief Default Constructor.
                  * @param quantile The desired quantile to compute.
                  */
-                StreamingP2Quantile(const double quantile);
+                StreamingP2Quantile(const double quantile = 0.5);
 
                 /*!
                  * @brief Destructor.
@@ -39,51 +39,51 @@ namespace KML
                  * @copydoc IStreamingStatistic::update()
                  */
                 using IStreamingStatistic<double>::update;
-                virtual void update(const double& observation);
+                virtual void update(const double& observation) override;
 
                 /*!
-                 * @copydoc IStreamingStatistic::evaluate()
+                 * @copydoc IStreamingStatistic::update()
                  */
-                /* using IStreamingStatistic<double>::evaluate; */
-                virtual double evaluate();
+                using IStreamingStatistic<double>::evaluate;
+                virtual double evaluate() const override;
 
                 /*!
                  * @brief Clear the current history counter.
                  */
-                virtual void clear();
+                void clear();
 
             private:
                 /*!
                  * @brief Find the position k where the observation falls within quantiles.
                  * @param observation The observation used to find position for.
                  */
-                virtual int findK(const double& observation);
+                int findK(const double& observation);
 
                 /*!
                  * @brief Parabolic quantile interpolation.
                  * @param pos Position to interpolate.
                  * @param desired_pos Sign of desired position (-1, 0, 1);
                  */
-                virtual double parabolic(int pos, double d_pos);
+                double parabolic(int pos, double d_pos);
 
                 /*!
                  * @brief Linear quantile interpolation.
                  * @param pos Position to interpolate.
                  * @param desired_pos Sign of desired position (-1, 0, 1);
                  */
-                virtual double linear(int i, double d_pos);
+                double linear(int i, double d_pos);
 
                 /*!
                  * @brief Adjust the quantile height at the given position.
                  * @param position Position of quantile to adjust.
                  */
-                virtual void adjustHeights(int position);
+                void adjustHeights(int position);
 
                 /*!
                  * @brief
                  * @param
                  */
-                virtual int copysign(const double number);
+                int copysign(const double number);
 
             protected:
                 /*!
@@ -99,12 +99,12 @@ namespace KML
                 /*!
                  * @brief Quantile heights approximated by interpolation.
                  */
-                std::vector<double> m_heights;
+                mutable std::vector<double> m_heights;
 
                 /*!
                  * @brief Desired quantile to compute.
                  */
-                double m_quantile;
+                const double m_quantile;
         };
     }
 }

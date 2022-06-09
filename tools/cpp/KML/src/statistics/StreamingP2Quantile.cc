@@ -78,7 +78,7 @@ namespace KML
             m_historyCount++;
         }
 
-        double StreamingP2Quantile::evaluate()
+        double StreamingP2Quantile::evaluate() const
         {
             if(m_historyCount <= 5)
             {

@@ -4,7 +4,7 @@ SRCEXT      := cpp
 OBJEXT      := o
 
 #Defauilt Make
-all: directories compile-all test
+all: directories compile-all test coverage
 	@echo '*******************Compiled*********************'
 
 c:
@@ -44,6 +44,9 @@ compile-all:
 test:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
 	cd tools/python/KML/tests/ && python -m pytest -n auto --cov=. --doctest-modules
+
+coverage:
+	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) make coverage
 
 # Make documention. This only works if BUILD_DOCUMENTATIONS is ON
 docs:

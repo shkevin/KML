@@ -18,8 +18,7 @@ else:
     use_cython = True
 
 # Get Cython sources with their C++ files.
-THIS_DIR = Path(__file__).resolve().parent
-PARENT_DIR = realpath(join(THIS_DIR, "../../.."))
+PARENT_DIR = Path(__file__).resolve().parent
 CYTHON_DIR = PurePath(PARENT_DIR, "tools/cython")
 SRC_DIR = PurePath(PARENT_DIR, "tools/cpp/KML/src")
 CPPFLAGS = ["-O3", "-std=c++11"]

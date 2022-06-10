@@ -120,7 +120,7 @@ if(BUILD_PYTHON)
     SET(PACK_DIR ${CMAKE_BINARY_DIR}/tools/packages)
     SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
-        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/python/KML/setup.py
+        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py
             sdist --dist-dir=${PACK_DIR}
             egg_info --egg-base=${BUILD_DIR}
             build --build-base=${BUILD_DIR} --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML
@@ -157,7 +157,7 @@ if(BUILD_COVERAGE)
     setup_target_for_coverage_gcovr_html(
         NAME coverage EXECUTABLE ctest
         --schedule-random -j 4 --test-dir tools/cpp/KML/tests
-        EXCLUDE "build/*"
+        EXCLUDE "build/*" "*main.cc*"
         )
     # setup_target_for_coverage_gcovr_xml(${PROJECT_NAME}_coverage NAME coverage)
 endif(BUILD_COVERAGE)

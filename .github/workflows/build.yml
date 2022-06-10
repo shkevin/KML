@@ -103,7 +103,7 @@ jobs:
             -DBUILD_DOCUMENTATION=OFF
             
       - name: Build
-        working-directory: build
+        working-directory: /home/runner/work/KML/KML/build
         run: make -j
                     
       - name: Test

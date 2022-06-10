@@ -113,7 +113,7 @@ jobs:
         run: |
           pip3 install ${{github.workspace}}/build/tools/packages/KML*.whl
           cd ${{github.workspace}}/build/tools/python/KML/tests/
-          python -m pytest -n auto --cov=. --doctest-modules
+          python3 -m pytest -n auto --cov=. --doctest-modules
 
       - name: CPP Coverage
         working-directory: ${{github.workspace}}/build

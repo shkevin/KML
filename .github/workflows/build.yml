@@ -87,26 +87,23 @@ jobs:
           brew install p7zip cmake ninja gcovr doxygen
           ninja --version
           cmake --version
-
-      - name: Configure
-        id: configure_and_build
-        shell: bash
-        run: |
-          mkdir build
-          cd build
-          cmake \
-            .. \
-            -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
-            -G "${{ matrix.config.generators }}" \
+            
+      - name: Configure CMake
+        # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+        # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+        run: cmake -B ${{github.workspace}}/build \
+            -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} \
             -DBUILD_TESTING=ON \
             -DBUILD_PYTHON=ON \
             -DBUILD_COVERAGE=ON \
             -DBUILD_DOCUMENTATION=OFF
             
       - name: Build
-        working-directory: ${{ steps.configure_and_build }}/../build
-        run: make -j
-                    
+        # Build your program with the given configuration
+        run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
+
       - name: Test
-        working-directory: ${{ github.workspace }}/build
-        run: ctest -C ${{ matrix.config.build_type }}
+        working-directory: ${{github.workspace}}/build
+        # Execute tests defined by the CMake configuration.  
+        # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+        run: ctest -C ${{matrix.config.build_type}}

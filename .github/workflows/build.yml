@@ -94,18 +94,14 @@ jobs:
           mkdir ${{ github.workspace }}/build
           cd ${{ github.workspace }}/build
           cmake \
-            /home/runner/work/KML/KML/build/ \
+            ${{ github.workspace }} \
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
             -DBUILD_TESTING=ON \
             -DBUILD_PYTHON=ON \
             -DBUILD_COVERAGE=ON \
             -DBUILD_DOCUMENTATION=OFF
-            
-      - name: Build
-        shell: bash
-        working-directory: ${{ github.workspace }}/build
-        run: make -j
+          make -j
                     
       - name: Test
         working-directory: ${{ github.workspace }}/build

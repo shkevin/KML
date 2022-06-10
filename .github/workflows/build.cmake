@@ -58,7 +58,7 @@ jobs:
           }
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Print env
         run: |
@@ -106,4 +106,10 @@ jobs:
 
       - name: Build
         shell: bash
-        run: cmake --build . --config ${{ matrix.config.build_type }}
+        run: cmake \
+               --build ${{ github.workspace }}/build \
+               --config ${{ matrix.config.build_type }}
+
+     - name: Test
+       working-directory: ${{ github.workspace }}/build
+       run: ctest -C ${{ matrix.config.build_type }}

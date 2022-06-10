@@ -100,9 +100,9 @@ jobs:
             -G "${{ matrix.config.generators }}" \
             -DCMAKE_INSTALL_PREFIX:PATH=instdir \
             -DBUILD_TESTING=ON \
-		    -DBUILD_PYTHON=OFF \
-		    -DBUILD_COVERAGE=ON \
-		    -DBUILD_DOCUMENTATION=OFF
+            -DBUILD_PYTHON=OFF \
+            -DBUILD_COVERAGE=ON \
+            -DBUILD_DOCUMENTATION=OFF
 
       - name: Build
         shell: bash

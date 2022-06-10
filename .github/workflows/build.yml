@@ -77,6 +77,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache
+          pip install cython
           ninja --version
           cmake --version
           gcc --version
@@ -85,12 +86,12 @@ jobs:
         if: startsWith(matrix.config.os, 'macos')
         run: |
           brew install p7zip cmake ninja gcovr doxygen ccache
+          pip install cython
           ninja --version
           cmake --version
 
       - name: Configure CMake
         run: |
-          pip install cython
           cmake -S . -B ${{github.workspace}}/build \
             -DBUILD_TESTING=ON \
             -DBUILD_PYTHON=ON \
@@ -100,10 +101,17 @@ jobs:
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
-        # run: |
-            # cd ${{github.workspace}}/build
-            # ninja
 
-      - name: Test
+      - name: CPP Test
         working-directory: ${{github.workspace}}/build
-        run: ctest -C ${{matrix.config.build_type}}
+        run: ctest -V -C ${{matrix.config.build_type}}
+
+      - name: Pytest
+        working-directory: ${{github.workspace}}/build
+        run: |
+          pip install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
+          python -m pytest -n auto --cov=. --doctest-modules
+
+      - name: CPP Coverage
+        working-directory: ${{github.workspace}}/build
+        run: make coverage

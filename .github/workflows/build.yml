@@ -77,6 +77,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache
+          pip install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
           pip install cython
           ninja --version
           cmake --version
@@ -86,6 +87,7 @@ jobs:
         if: startsWith(matrix.config.os, 'macos')
         run: |
           brew install p7zip cmake ninja gcovr doxygen ccache
+          pip install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
           pip install cython
           ninja --version
           cmake --version
@@ -109,7 +111,7 @@ jobs:
       - name: Pytest
         working-directory: ${{github.workspace}}/build
         run: |
-          pip install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
+          cd ${{github.workspace}}/tools/python/KML/tests/
           python -m pytest -n auto --cov=. --doctest-modules
 
       - name: CPP Coverage

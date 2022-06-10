@@ -106,9 +106,7 @@ jobs:
 
       - name: Build
         shell: bash
-        run: cmake \
-               --build . \
-               --config ${{ matrix.config.build_type }}
+        run: make -j
                     
       - name: Test
         working-directory: ${{ github.workspace }}

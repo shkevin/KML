@@ -112,6 +112,7 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: |
           PYTHONPATH=${{github.workspace}}/build/
+          ls ${{github.workspace}}/build/
           cd ${{github.workspace}}/build/tools/python/KML/tests/
           python -m pytest -n auto --cov=. --doctest-modules
 

@@ -94,7 +94,7 @@ jobs:
           mkdir ${{ github.workspace }}/build
           cd ${{ github.workspace }}/build
           cmake \
-            .. \
+            ${{ github.workspace }} \
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
             -DBUILD_TESTING=ON \

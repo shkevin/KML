@@ -89,18 +89,19 @@ jobs:
           cmake --version
 
       - name: Configure CMake
-        run: cmake -S . -B ${{github.workspace}}/build \
-               -DBUILD_TESTING=ON \
-               -DBUILD_PYTHON=ON \
-               -DBUILD_COVERAGE=ON \
-               -DBUILD_DOCUMENTATION=OFF \
-               -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
+        run: |
+          cmake -S . -B ${{github.workspace}}/build \
+            -DBUILD_TESTING=ON \
+            -DBUILD_PYTHON=ON \
+            -DBUILD_COVERAGE=ON \
+            -DBUILD_DOCUMENTATION=OFF \
+            -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
 
       - name: Build
-        # run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
-        run: |
-            cd ${{github.workspace}}/build
-            ninja -j
+        run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
+        # run: |
+            # cd ${{github.workspace}}/build
+            # ninja
 
       - name: Test
         working-directory: ${{github.workspace}}/build

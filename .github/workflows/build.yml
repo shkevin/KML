@@ -106,6 +106,7 @@ jobs:
 
       - name: Build
         shell: bash
+        working-directory: build
         run: make -j
                     
       - name: Test

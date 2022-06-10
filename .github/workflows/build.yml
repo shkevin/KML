@@ -89,6 +89,7 @@ jobs:
           cmake --version
 
       - name: Configure
+        id: configure_and_build
         shell: bash
         run: |
           mkdir build
@@ -103,7 +104,7 @@ jobs:
             -DBUILD_DOCUMENTATION=OFF
             
       - name: Build
-        working-directory: /home/runner/work/KML/KML/build
+        working-directory: ${{ steps.configure_and_build }}/build
         run: make -j
                     
       - name: Test

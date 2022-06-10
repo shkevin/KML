@@ -109,7 +109,3 @@ jobs:
         run: cmake \
                --build ${{ github.workspace }}/build \
                --config ${{ matrix.config.build_type }}
-
-     - name: Test
-       working-directory: ${{ github.workspace }}/build
-       run: ctest -C ${{ matrix.config.build_type }}

@@ -113,3 +113,4 @@ jobs:
      - name: Test
        working-directory: ${{ github.workspace }}/build
        run: ctest -C ${{ matrix.config.build_type }}
+

@@ -101,7 +101,10 @@ jobs:
             -DBUILD_PYTHON=ON \
             -DBUILD_COVERAGE=ON \
             -DBUILD_DOCUMENTATION=OFF
-          make -j
+            
+      - name: Build
+        working-directory: build
+        run: make -j
                     
       - name: Test
         working-directory: ${{ github.workspace }}/build

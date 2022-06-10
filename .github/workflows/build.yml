@@ -103,18 +103,20 @@ jobs:
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
 
   test:
-    name: Test
-    matrix:
-      config:
-        - {
-            name: "Ubuntu Latest Test",
-            os: ubuntu-latest,
-          }
-        - {
-            name: "MacOS Latest Test",
-            os: macos-latest,
-          }
-    runs-on: ${{matrix.os}}
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {
+              name: "Ubuntu Latest Test",
+              os: ubuntu-latest,
+            }
+          - {
+              name: "MacOS Latest Test",
+              os: macos-latest,
+            }
     needs: [build]
     steps:
       - name: Install test dependencies on ubuntu

@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 from glob import glob
 from os import scandir
-from os.path import relpath, sep
+from os.path import join, realpath, relpath, sep
+from pathlib import Path, PurePath
 from sys import argv
 
 from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext as _build_ext
 
-# check if cython is installed
+# check if cython is installed.
 try:
     from Cython.Build import cythonize
 except ImportError:
@@ -15,6 +16,16 @@ except ImportError:
     use_cython = False
 else:
     use_cython = True
+
+# Get Cython sources with their C++ files.
+THIS_DIR = Path(__file__).resolve().parent
+PARENT_DIR = realpath(join(THIS_DIR, "../../.."))
+CYTHON_DIR = PurePath(PARENT_DIR, "tools/cython")
+SRC_DIR = PurePath(PARENT_DIR, "tools/cpp/KML/src")
+CPPFLAGS = ["-O3", "-std=c++11"]
+REQUIREMENTS_DIR = "requirements"
+pyx_sources = glob(f"{CYTHON_DIR}/KML/**/*.pyx", recursive=True)
+include_dirs = [f.path for f in scandir(SRC_DIR) if f.is_dir()]
 
 
 def get_version():
@@ -35,11 +46,22 @@ def get_readme():
         return f.read()
 
 
+def get_reqs(fname="requirements.txt"):
+    with open(REQUIREMENTS_DIR / fname) as fd:
+        return fd.read().splitlines()
+
+
 def get_buildlib():
-    build_lib = None
-    for a in argv:
+    build_lib = "."
+    print(argv)
+    for i, a in enumerate(argv):
+        # Handle python setup.py call
         if a.startswith("--build-lib"):
             build_lib = a.split("=")[-1]
+            break
+        # Handle pip wheel call
+        elif a.startswith("-w"):
+            build_lib = argv[i + 1]
             break
 
     return build_lib
@@ -53,18 +75,10 @@ class my_build_ext(_build_ext):
         super().build_extensions()
 
 
-# Get Cython sources with their C++ files.
-CYTHON_DIR = "tools/cython/KML"
-PYTHON_DIR = "tools/python/KML"
-SRC_DIR = "tools/cpp/KML/src"
-CPPFLAGS = ["-O3", "-std=c++11"]
-pyx_sources = glob(f"{CYTHON_DIR}/**/*.pyx", recursive=True)
-include_dirs = [f.path for f in scandir(SRC_DIR) if f.is_dir()]
-build_dir = get_buildlib()
-
 # Build the Cython extensions.
 ext_modules = []
-to_strip = "tools/cython/"
+to_strip = str(CYTHON_DIR) + sep
+build_dir = get_buildlib()
 for pyx in pyx_sources:
     name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
     ext_modules.append(
@@ -86,18 +100,23 @@ setup(
     long_description_content_type="text/markdown",
     author="Kevin Cox",
     author_email="shkevin@yahoo.com",
-    url="",
+    url="https://github.com/shkevin/KML",
     cmdclass={"build_ext": my_build_ext},
-    # packages=find_packages(),
-    # package_data={"": [f"{PYTHON_DIR}/tests"]},
     ext_modules=cythonize(
         ext_modules,
         compiler_directives={"language_level": "3"},
         build_dir=relpath(build_dir),
     ),
     classifiers=[
-        "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: Implementation :: CPython",
+        "Programming Language :: Python :: Implementation :: PyPy",
         "Operating System :: MacOS",
         "Operating System :: Unix",
     ],

@@ -14,6 +14,7 @@ c:
 	    -DCMAKE_BUILD_TYPE=Debug \
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=OFF \
+		-DBUILD_COVERAGE=ON \
 		-DBUILD_DOCUMENTATION=OFF && \
 	make
 
@@ -27,7 +28,7 @@ python:
 		-DBUILD_DOCUMENTATION=OFF && \
 	make
 
-# Compile C++/Cython/Documentation code
+# Compile C++/Cython/Documentation code.
 compile-all:
 	cd $(BUILDDIR) && \
 	cmake \
@@ -35,13 +36,14 @@ compile-all:
 	    -DCMAKE_BUILD_TYPE=Debug \
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=ON \
+		-DBUILD_COVERAGE=ON \
 		-DBUILD_DOCUMENTATION=OFF && \
 	make
 
-# Call Unittests for C++
+# Call Unittests for C++/Python.
 test:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
-	cd tools/python/KML/tests/ && python -m pytest .
+	cd tools/python/KML/tests/ && python -m pytest -n auto --cov=. --doctest-modules
 
 # Make documention. This only works if BUILD_DOCUMENTATIONS is ON
 docs:
@@ -49,10 +51,10 @@ docs:
 	cd $(BUILDDIR)/docs/latex && \
 	make
 
-# Remake entire project
+# Remake entire project.
 remake: clean all
 
-# Create the Directories
+# Create the Directories.
 directories:
 	[ -d $(BUILDDIR)  ] || mkdir -p $(BUILDDIR)
 

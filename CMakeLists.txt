@@ -4,7 +4,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 ################################
 # Project
 ################################
-project(KML
+PROJECT(KML
     VERSION 0.0.1
     DESCRIPTION "Streaming Machine Learning in C++/Cython"
     LANGUAGES CXX)
@@ -120,7 +120,7 @@ if(BUILD_PYTHON)
     SET(PACK_DIR ${CMAKE_BINARY_DIR}/tools/packages)
     SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
-        COMMAND ${PYTHON_EXECUTABLE} setup.py
+        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/python/KML/setup.py
             sdist --dist-dir=${PACK_DIR}
             egg_info --egg-base=${BUILD_DIR}
             build --build-base=${BUILD_DIR} --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML
@@ -143,7 +143,27 @@ if(BUILD_PYTHON)
 endif(BUILD_PYTHON)
 
 ################################
-# Testing
+# C++ Code Coverage
+################################
+OPTION(BUILD_COVERAGE "Create C++ Coverage" OFF)
+if(BUILD_COVERAGE)
+	# if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+    MESSAGE(STATUS "Building Coverage")
+    SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+	INCLUDE(CodeCoverage)
+    append_coverage_compiler_flags()
+	SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+	SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+    setup_target_for_coverage_gcovr_html(
+        NAME coverage EXECUTABLE ctest
+        --schedule-random -j 4 --test-dir tools/cpp/KML/tests
+        EXCLUDE "build/*"
+        )
+    # setup_target_for_coverage_gcovr_xml(${PROJECT_NAME}_coverage NAME coverage)
+endif(BUILD_COVERAGE)
+
+################################
+# C++ Testing
 ################################
 OPTION(BUILD_TESTING "Build C++ Unit Tests" OFF)
 if(BUILD_TESTING)

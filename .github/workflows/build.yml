@@ -4,8 +4,6 @@ on:
   push:
   pull_request:
   release:
-    # tags:
-    # - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   build:
@@ -103,6 +101,34 @@ jobs:
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
+
+  test:
+    name: Test
+    matrix:
+      config:
+        - {
+            name: "Ubuntu Latest Test",
+            os: ubuntu-latest,
+          }
+        - {
+            name: "MacOS Latest Test",
+            os: macos-latest,
+          }
+    runs-on: ${{matrix.os}}
+    needs: [build]
+    steps:
+      - name: Install test dependencies on ubuntu
+        if: startsWith(matrix.config.name, 'Ubuntu')
+        run: |
+          sudo apt-get update
+          sudo apt-get install ninja-build cmake
+          pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
+
+      - name: Install test dependencies on macos
+        if: startsWith(matrix.config.os, 'MacOS')
+        run: |
+          brew install cmake ninja
+          pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
 
       - name: CPP Test
         working-directory: ${{github.workspace}}/build

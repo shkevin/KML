@@ -82,10 +82,6 @@ jobs:
           ninja --version
           cmake --version
           gcc --version
-        - uses: actions/upload-artifact@v3
-          with:
-            name: ${{matrix.config.artifact}}
-            path: ./${{matrix.config.artifact}}
 
       - name: Install dependencies on macos
         if: startsWith(matrix.config.os, 'macos')

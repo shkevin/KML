@@ -1,12 +1,12 @@
 #ifndef LAYER_H
 #define LAYER_H
 
-#include <eigen3/Eigen/Dense>
+/* #include <eigen3/Eigen/Dense> */
 
 #include "../utils/utils.h"
 #include "activations/activation.h"
 
-using namespace Eigen;
+/* using namespace Eigen; */
 
 namespace NeuralNetwork {
 

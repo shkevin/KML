@@ -1,0 +1,115 @@
+name: CMake Build Matrix
+
+on:
+  push:
+  pull_request:
+  release:
+    # tags:
+    # - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        # - {
+        #     name: "Windows Latest MSVC",
+        #     os: windows-latest,
+        #     artifact: "windows_msvc.7z",
+        #     build_type: "Release",
+        #     cc: "cl",
+        #     cxx: "cl",
+        #     environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
+        #     archiver: "7z a",
+        #     generators: "Visual Studio 16 2019"
+        #   }
+        # - {
+        #     name: "Windows Latest MinGW",
+        #     os: windows-latest,
+        #     artifact: "windows_mingw.7z",
+        #     build_type: "Release",
+        #     cc: "gcc",
+        #     cxx: "g++",
+        #     archiver: "7z a",
+        #     generators: "Ninja"
+        #   }
+        - {
+            name: "Ubuntu_Latest_GCC",
+            os: ubuntu-latest,
+            artifact: "ubuntu_gcc.7z",
+            build_type: "Release",
+            cc: "gcc",
+            cxx: "g++",
+            archiver: "7z a",
+            generators: "Ninja"
+          }
+        - {
+            name: "macOS Latest Clang",
+            os: macos-latest,
+            artifact: "macos_clang.7z",
+            build_type: "Release",
+            cc: "clang",
+            cxx: "clang++",
+            archiver: "7za a",
+            generators: "Ninja"
+          }
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Print env
+        run: |
+          echo github.event.action: ${{ github.event.action }}
+          echo github.event_name: ${{ github.event_name }}
+
+      - name: Install dependencies on windows
+        if: startsWith(matrix.config.os, 'windows')
+        run: |
+          choco install ninja cmake gcovr doxygen
+          ninja --version
+          cmake --version
+
+      - name: Install dependencies on ubuntu
+        if: startsWith(matrix.config.name, 'Ubuntu_Latest_GCC')
+        run: |
+          sudo apt-get update
+          sudo apt-get install ninja-build cmake gcovr doxygen
+          ninja --version
+          cmake --version
+          gcc --version
+
+      - name: Install dependencies on macos
+        if: startsWith(matrix.config.os, 'macos')
+        run: |
+          brew install p7zip cmake ninja gcovr doxygen
+          ninja --version
+          cmake --version
+
+      - name: Configure
+        shell: bash
+        run: |
+          mkdir build
+          mkdir instdir
+          cmake \
+            -S . \
+            -B . \
+            -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
+            -G "${{ matrix.config.generators }}" \
+            -DCMAKE_INSTALL_PREFIX:PATH=instdir \
+            -DBUILD_TESTING=ON \
+            -DBUILD_PYTHON=OFF \
+            -DBUILD_COVERAGE=ON \
+            -DBUILD_DOCUMENTATION=OFF
+
+      - name: Build
+        shell: bash
+        run: cmake \
+               --build ${{ github.workspace }}/build \
+               --config ${{ matrix.config.build_type }}
+
+     - name: Test
+       working-directory: ${{ github.workspace }}/build
+       run: ctest -C ${{ matrix.config.build_type }}

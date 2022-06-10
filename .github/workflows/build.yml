@@ -90,6 +90,7 @@ jobs:
 
       - name: Configure CMake
         run: |
+          pip install cython
           cmake -S . -B ${{github.workspace}}/build \
             -DBUILD_TESTING=ON \
             -DBUILD_PYTHON=ON \

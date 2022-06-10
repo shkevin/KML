@@ -104,7 +104,7 @@ jobs:
             -DBUILD_DOCUMENTATION=OFF
             
       - name: Build
-        working-directory: ${{ steps.configure_and_build }}/build
+        working-directory: ${{ steps.configure_and_build }}/../build
         run: make -j
                     
       - name: Test

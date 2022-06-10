@@ -35,7 +35,7 @@ jobs:
         #     generators: "Ninja"
         #   }
         - {
-            name: "Ubuntu_Latest_GCC",
+            name: "Ubuntu Latest GCC",
             os: ubuntu-latest,
             artifact: "ubuntu_gcc.7z",
             build_type: "Debug",
@@ -45,7 +45,7 @@ jobs:
             generators: "Ninja"
           }
         - {
-            name: "macOS Latest Clang",
+            name: "MacOS Latest Clang",
             os: macos-latest,
             artifact: "macos_clang.7z",
             build_type: "Debug",
@@ -71,7 +71,7 @@ jobs:
           cmake --version
 
       - name: Install dependencies on ubuntu
-        if: startsWith(matrix.config.name, 'Ubuntu_Latest_GCC')
+        if: startsWith(matrix.config.name, 'Ubuntu')
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache
@@ -82,7 +82,7 @@ jobs:
           gcc --version
 
       - name: Install dependencies on macos
-        if: startsWith(matrix.config.os, 'macos')
+        if: startsWith(matrix.config.os, 'MacOS')
         run: |
           brew install p7zip cmake ninja gcovr doxygen ccache
           pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
@@ -102,6 +102,12 @@ jobs:
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
 
+      - name: use cache
+        uses: actions/cache@v3
+        with:
+          path: "/output"
+          key: ${{ runner.os }}-$GITHUB_RUN_ID
+
   test:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
@@ -117,19 +123,22 @@ jobs:
               name: "MacOS Latest Test",
               os: macos-latest,
             }
-    needs: [build]
+    needs: build
     steps:
+      - name: use cache
+        uses: actions/cache@v3
+        with:
+         path: "/output"
+         key: ${{ runner.os }}-$GITHUB_RUN_ID
+
       - name: Install test dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu')
         run: |
-          sudo apt-get update
-          sudo apt-get install ninja-build cmake
           pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
 
       - name: Install test dependencies on macos
         if: startsWith(matrix.config.os, 'MacOS')
         run: |
-          brew install cmake ninja
           pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
 
       - name: CPP Test

@@ -35,7 +35,7 @@ jobs:
         #     generators: "Ninja"
         #   }
         - {
-            name: "Ubuntu Latest",
+            name: "Ubuntu_Latest",
             os: ubuntu-latest,
             artifact: "ubuntu_gcc.7z",
             build_type: "Debug",
@@ -45,7 +45,7 @@ jobs:
             generators: "Ninja"
           }
         - {
-            name: "MacOS Latest",
+            name: "MacOS_Latest",
             os: macos-latest,
             artifact: "macos_clang.7z",
             build_type: "Debug",
@@ -103,12 +103,12 @@ jobs:
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}} -j
 
       - name: Compress Uploads
-        run: tar -cvf ${{matrix.config.name}}_build ${{github.workspace}}/build
+        run: tar -cvf ${{matrix.config.name}}.tar ${{github.workspace}}/build
 
       - uses: actions/upload-artifact@v3
         with:
           name: ${{matrix.config.name}} artifacts
-          path: ${{github.workspace}}_build
+          path: ${{github.workspace}}.tar
           retention-days: 1
 
 
@@ -120,11 +120,11 @@ jobs:
       matrix:
         config:
           - {
-              name: "Ubuntu Latest",
+              name: "Ubuntu_Latest",
               os: ubuntu-latest,
             }
           - {
-              name: "MacOS Latest",
+              name: "MacOS_Latest",
               os: macos-latest,
             }
     needs: build
@@ -133,7 +133,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
             name: ${{matrix.config.name}} artifacts
-            path: ${{github.workspace}}_build
+            path: ${{github.workspace}}.tar
 
       - name: Unpack Artifacts
         run: |

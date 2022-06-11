@@ -92,7 +92,7 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -S . -B ${{github.workspace}}/build \
+          cmake --build . -B ${{github.workspace}}/build \
             -DBUILD_TESTING=ON \
             -DBUILD_PYTHON=ON \
             -DBUILD_COVERAGE=ON \
@@ -101,11 +101,15 @@ jobs:
 
       - name: Build and create artifact
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
+
+      - name: Compress Uploads
+        run: tar -cvf ${{matrix.config.name}}_build ${{github.workspace}}/build
+
       - uses: actions/upload-artifact@v3
         with:
           name: ${{matrix.config.name}} artifacts
-          path: ${{github.workspace}}/build
-          retention-days: 2
+          path: ${{github.workspace}}_build
+          retention-days: 1
 
 
   test:
@@ -129,7 +133,12 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
             name: ${{matrix.config.name}} artifacts
-            path: ${{github.workspace}}/build
+            path: ${{github.workspace}}_build
+
+      - name: Unpack Artifacts
+        run: |
+          tar -xvf ${{github.workspace}}_build
+          ls ${{github.workspace}}
 
       - name: Install test dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu')

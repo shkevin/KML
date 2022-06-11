@@ -101,10 +101,11 @@ jobs:
 
       - name: Build and create artifact
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{matrix.config.name}} artifacts
-      #     path: public/
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{matrix.config.name}} artifacts
+          path: ${{github.workspace}}/build
+          retention-days: 2
 
 
   test:
@@ -125,10 +126,10 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v3
-      # - uses: actions/download-artifact@v3
-      #   with:
-      #       name: ${{matrix.config.name}} artifacts
-      #       path: public/
+      - uses: actions/download-artifact@v3
+        with:
+            name: ${{matrix.config.name}} artifacts
+            path: ${{github.workspace}}/build
 
       - name: Install test dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu')

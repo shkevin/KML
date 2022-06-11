@@ -124,7 +124,7 @@ jobs:
             }
     needs: build
     steps:
-      - uses: actions/checkoutv3
+      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
             name: ${{matrix.config.name}} artifacts

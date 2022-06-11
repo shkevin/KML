@@ -108,7 +108,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: ${{matrix.config.name}} artifacts
-          path: ${{github.workspace}}.tar
+          path: ${{matrix.config.name}}.tar
           retention-days: 1
 
 
@@ -133,11 +133,11 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
             name: ${{matrix.config.name}} artifacts
-            path: ${{github.workspace}}.tar
+            path: ${{matrix.config.name}}.tar
 
       - name: Unpack Artifacts
         run: |
-          tar -xvf ${{github.workspace}}_build
+          tar -xvf ${{matrix.config.name}}.tar
           ls ${{github.workspace}}
 
       - name: Install test dependencies on ubuntu

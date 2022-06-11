@@ -35,7 +35,7 @@ jobs:
         #     generators: "Ninja"
         #   }
         - {
-            name: "Ubuntu Latest GCC",
+            name: "Ubuntu Latest",
             os: ubuntu-latest,
             artifact: "ubuntu_gcc.7z",
             build_type: "Debug",
@@ -45,7 +45,7 @@ jobs:
             generators: "Ninja"
           }
         - {
-            name: "MacOS Latest Clang",
+            name: "MacOS Latest",
             os: macos-latest,
             artifact: "macos_clang.7z",
             build_type: "Debug",
@@ -99,8 +99,13 @@ jobs:
             -DBUILD_DOCUMENTATION=OFF \
             -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
 
-      - name: Build
+      - name: Build and create artifact
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{matrix.config.name}} artifacts
+          path: public/
+
 
   test:
     name: ${{ matrix.config.name }}
@@ -110,15 +115,21 @@ jobs:
       matrix:
         config:
           - {
-              name: "Ubuntu Latest Test",
+              name: "Ubuntu Latest",
               os: ubuntu-latest,
             }
           - {
-              name: "MacOS Latest Test",
+              name: "MacOS Latest",
               os: macos-latest,
             }
     needs: build
     steps:
+      - uses: actions/checkoutv3
+      - uses: actions/download-artifact@v3
+        with:
+            name: ${{matrix.config.name}} artifacts
+            path: public/
+
       - name: Install test dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu')
         run: |

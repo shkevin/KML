@@ -89,6 +89,7 @@ jobs:
           pip3 install cython
           ninja --version
           cmake --version
+          clang --version
 
       - name: Configure CMake
         run: |
@@ -103,7 +104,7 @@ jobs:
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}} -j
 
       - name: Compress Uploads
-        run: tar -cvf ${{github.workspace}}/${{matrix.config.name}}.tar ${{github.workspace}}/build
+        run: tar -czvf ${{matrix.config.name}}.tar ${{github.workspace}}/build
 
       - uses: actions/upload-artifact@v3
         with:
@@ -129,7 +130,6 @@ jobs:
             }
     needs: build
     steps:
-      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
             name: ${{matrix.config.name}} artifacts
@@ -138,7 +138,7 @@ jobs:
       - name: Unpack Artifacts
         run: |
           ls ${{github.workspace}}
-          tar -xvf ${{github.workspace}}/${{matrix.config.name}}.tar -C ${{github.workspace}}
+          tar -xzvf ${{matrix.config.name}}.tar -C ${{github.workspace}}
 
       - name: Install test dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu')

@@ -104,12 +104,12 @@ jobs:
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}} -j
 
       - name: Compress Uploads
-        run: tar -czvf ${{matrix.config.name}}.tar ${{github.workspace}}/build
+        run: tar -czvf ${{matrix.config.name}}.tar.gz ${{github.workspace}}/build
 
       - uses: actions/upload-artifact@v3
         with:
           name: ${{matrix.config.name}} artifacts
-          path: ${{matrix.config.name}}.tar
+          path: ${{matrix.config.name}}.tar.gz
           retention-days: 1
 
 
@@ -133,12 +133,13 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
             name: ${{matrix.config.name}} artifacts
-            path: ${{matrix.config.name}}.tar
+            # path: ${{matrix.config.name}}.tar.gz
+            path: ${{github.workspace}}
 
       - name: Unpack Artifacts
         run: |
           ls ${{github.workspace}}
-          tar -xzvf ${{matrix.config.name}}.tar -C ${{github.workspace}}
+          tar -xzvf ${{matrix.config.name}}.tar.gz -C ${{github.workspace}}
 
       - name: Install test dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu')

@@ -103,7 +103,7 @@ jobs:
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}} -j
 
       - name: Compress Uploads
-        run: tar -cvf ${{matrix.config.name}}.tar ${{github.workspace}}/build
+        run: tar -cvf ${{github.workspace}}/${{matrix.config.name}}.tar ${{github.workspace}}/build
 
       - uses: actions/upload-artifact@v3
         with:
@@ -137,8 +137,8 @@ jobs:
 
       - name: Unpack Artifacts
         run: |
-          tar -xvf ${{matrix.config.name}}.tar
           ls ${{github.workspace}}
+          tar -xvf ${{github.workspace}}/${{matrix.config.name}}.tar -C ${{github.workspace}}
 
       - name: Install test dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu')

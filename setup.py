@@ -24,7 +24,8 @@ CYTHON_DIR = PurePath(PARENT_DIR, "tools/cython")
 SRC_DIR = PurePath(PARENT_DIR, "tools/cpp/KML/src")
 CPPFLAGS = ["-O3", "-std=c++11"]
 REQUIREMENTS_DIR = "./tools/python/KML/requirements/"
-pyx_sources = glob(f"{CYTHON_DIR}escape(/KML/**/*.pyx)", recursive=True)
+pyx_location = str(PurePath("/KML/**/*.pyx"))
+pyx_sources = glob(f"{CYTHON_DIR}{pyx_location}", recursive=True)
 include_dirs = [f.path for f in scandir(SRC_DIR) if f.is_dir()]
 
 

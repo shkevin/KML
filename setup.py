@@ -18,11 +18,12 @@ else:
     use_cython = True
 
 # Get Cython sources with their C++ files.
+PACKAGE_NAME = "KML"
 PARENT_DIR = Path(__file__).resolve().parent
 CYTHON_DIR = PurePath(PARENT_DIR, "tools/cython")
 SRC_DIR = PurePath(PARENT_DIR, "tools/cpp/KML/src")
 CPPFLAGS = ["-O3", "-std=c++11"]
-REQUIREMENTS_DIR = "requirements"
+REQUIREMENTS_DIR = "./tools/python/KML/requirements/"
 pyx_sources = glob(f"{CYTHON_DIR}/KML/**/*.pyx", recursive=True)
 include_dirs = [f.path for f in scandir(SRC_DIR) if f.is_dir()]
 
@@ -46,23 +47,26 @@ def get_readme():
 
 
 def get_reqs(fname="requirements.txt"):
-    with open(REQUIREMENTS_DIR / fname) as fd:
-        return fd.read().splitlines()
+    with open(PurePath(REQUIREMENTS_DIR, fname)) as fd:
+        reqs = fd.read().splitlines()
+        return list(filter(lambda x: not x.startswith("#"), reqs))
 
 
 def get_buildlib():
     build_lib = "."
-    print(argv)
     for i, a in enumerate(argv):
         # Handle python setup.py call
-        if a.startswith("--build-lib"):
-            build_lib = a.split("=")[-1]
-            break
+        if a == "build_ext":
+            for build_arg in argv[i:]:
+                if build_arg.startswith("--build-lib"):
+                    build_lib = build_arg.split("=")[-1]
+                    break
         # Handle pip wheel call
         elif a.startswith("-w"):
             build_lib = argv[i + 1]
             break
 
+    build_lib = PurePath(build_lib)
     return build_lib
 
 
@@ -77,9 +81,11 @@ class my_build_ext(_build_ext):
 # Build the Cython extensions.
 ext_modules = []
 to_strip = str(CYTHON_DIR) + sep
-build_dir = get_buildlib()
+pyx_to_strip = str(PARENT_DIR) + sep
 for pyx in pyx_sources:
     name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
+    pyx = pyx.replace(pyx_to_strip, "")
+    print(pyx)
     ext_modules.append(
         Extension(
             name=name,
@@ -104,7 +110,7 @@ setup(
     ext_modules=cythonize(
         ext_modules,
         compiler_directives={"language_level": "3"},
-        build_dir=relpath(build_dir),
+        build_dir=relpath(get_buildlib()),
     ),
     classifiers=[
         "License :: OSI Approved :: MIT License",
@@ -120,6 +126,7 @@ setup(
         "Operating System :: Unix",
     ],
     python_requires=">=3.6",
-    setup_requires=["cython>=0.24.1"],
-    install_requires=["cython>=0.24.1"],
+    setup_requires=["wheel", "cython>=0.24.1"],
+    install_requires=get_reqs("requirements.txt"),
+    extras_require={"test": get_reqs("test_requirements.txt")},
 )

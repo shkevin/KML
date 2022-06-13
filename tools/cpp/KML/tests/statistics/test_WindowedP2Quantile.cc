@@ -65,7 +65,6 @@ TEST_F(WindowedP2QuantileTest, TestWindowedMedian)
     l_wp2 = new WindowedP2Quantile(0.5, 5);
     std::vector<double> data{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     l_wp2->update(data);
-    std::cout << l_wp2->evaluate() << std::endl;
     EXPECT_FLOAT_EQ(8, l_wp2->evaluate());
 }
 

@@ -1,12 +1,8 @@
-# Main requirements
--r requirements.txt
-
 # Testing requirements
 pytest>=6.2.3,<6.3.0
 pytest-xdist>=2.5.0,<2.6.0
 pytest-clarity==1.0.1
 pytest-cov==3.0.0
-colorama==0.4.4
 
 # Repo maintenance tooling
 black>=22.0.0,<23.0.0

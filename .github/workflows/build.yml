@@ -140,18 +140,18 @@ jobs:
       - name: Unpack Artifacts
         run: |
           ls ${{github.workspace}}
-          tar -xzvf ${{matrix.config.name}}.tar.gz
+          tar -xzvf ${{matrix.config.name}}.tar.gz -C ${{github.workspace}}
 
-      - name: Install test dependencies on ubuntu
-        if: startsWith(matrix.config.name, 'Ubuntu')
-        run: |
-          ls ${{github.workspace}}
-          pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
+      # - name: Install test dependencies on ubuntu
+      #   if: startsWith(matrix.config.name, 'Ubuntu')
+      #   run: |
+      #     ls ${{github.workspace}}
+      #     pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
 
-      - name: Install test dependencies on macos
-        if: startsWith(matrix.config.os, 'MacOS')
-        run: |
-          pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
+      # - name: Install test dependencies on macos
+      #   if: startsWith(matrix.config.os, 'MacOS')
+      #   run: |
+      #     pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
 
       - name: CPP Test
         working-directory: ${{github.workspace}}/build
@@ -160,7 +160,7 @@ jobs:
       - name: Pytest
         working-directory: ${{github.workspace}}/build
         run: |
-          pip3 install ${{github.workspace}}/build/tools/packages/KML*.whl
+          pip3 install ${{github.workspace}}/build/tools/packages/KML*.whl[test]
           cd ${{github.workspace}}/build/tools/python/KML/tests/
           python3 -m pytest -n auto --cov=. --doctest-modules
 

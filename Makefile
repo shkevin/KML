@@ -45,6 +45,12 @@ test:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
 	cd tools/python/KML/tests/ && python -m pytest -n auto --cov=. --doctest-modules
 
+test_wheel:
+	[ -d $(BUILDDIR) ] && cd $(BUILDDIR)/tools/packages && \
+	pip3 install KML*.whl --force-reinstall && \
+	python3 -m pytest -n auto ../python/KML/tests/ && \
+	pip uninstall KML
+
 coverage:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) make coverage
 

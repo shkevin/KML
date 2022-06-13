@@ -16,9 +16,6 @@ endif()
 # Minimum cpp standard
 SET(CMAKE_CXX_STANDARD 11)
 
-# Change C++ build output
-MESSAGE(${CMAKE_CURRENT_SOURCE_DIR})
-
 ################################
 # Macros
 ################################
@@ -107,11 +104,13 @@ if(BUILD_PYTHON)
     # Find the python interpreter, SET the PYTHON_EXECUTABLE variable
     if(CMAKE_VERSION VERSION_LESS 3.12)
         # this logic is deprecated in CMake after 3.12
-        FIND_PACKAGE(PythonInterp REQUIRED)
+        FIND_PACKAGE(PythonInterp3 REQUIRED)
     else()
         # This will preferentially find Python3 instead of Python2.
         # And also works with Virtual Environments.
-        FIND_PACKAGE(Python)
+        SET(Python3_FIND_STRATEGY VERSION)
+        SET(Python3_FIND_VIRTUALENV FIRST)
+        FIND_PACKAGE(Python3 COMPONENTS Interpreter)
         SET(PYTHON_EXECUTABLE ${Python_EXECUTABLE})
     endif()
 
@@ -119,11 +118,12 @@ if(BUILD_PYTHON)
     SET(BUILD_DIR ${CMAKE_BINARY_DIR})
     SET(PACK_DIR ${CMAKE_BINARY_DIR}/tools/packages)
     SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
+    file(MAKE_DIRECTORY ${BUILD_DIR}/KML)
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py
             sdist --dist-dir=${PACK_DIR}
-            egg_info --egg-base=${BUILD_DIR}
-            build --build-base=${BUILD_DIR} --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML
+            egg_info --egg-base=${BUILD_DIR}/KML
+            build --build-base=${BUILD_DIR}/KML --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/KML
             build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}
             bdist_wheel --bdist-dir=${BUILD_DIR}/build --dist-dir=${PACK_DIR}
         COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}

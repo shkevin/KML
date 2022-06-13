@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from glob import glob
+from glob import escape, glob
 from os import scandir
 from os.path import join, realpath, relpath, sep
 from pathlib import Path, PurePath
@@ -24,7 +24,7 @@ CYTHON_DIR = PurePath(PARENT_DIR, "tools/cython")
 SRC_DIR = PurePath(PARENT_DIR, "tools/cpp/KML/src")
 CPPFLAGS = ["-O3", "-std=c++11"]
 REQUIREMENTS_DIR = "./tools/python/KML/requirements/"
-pyx_sources = glob(f'{CYTHON_DIR}/KML/**/*.pyx', recursive=True)
+pyx_sources = glob(escape(f"{CYTHON_DIR}/KML/**/*.pyx"), recursive=True)
 include_dirs = [f.path for f in scandir(SRC_DIR) if f.is_dir()]
 
 

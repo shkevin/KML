@@ -10,7 +10,7 @@ jobs:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         config:
         # - {
@@ -112,30 +112,51 @@ jobs:
           path: ${{matrix.config.name}}.tar.gz
           retention-days: 1
 
+  # lint:
+  #   name: Lint code
+  #   runs-on: ${{matrix.config.os}}
+  #   strategy:
+  #     fail-fast: true
+  #     matrix:
+  #       config:
+  #           - {
+  #                name: "Ubuntu_Latest"
+  #                os: ubuntu-latest
+  #             }
+  #   needs: build
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: Run Linter
+  #       uses: github/super-linter@v3
+  #       env:
+  #         DEFAULT_BRANCH: main
+  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   test:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         config:
           - {
               name: "Ubuntu_Latest",
               os: ubuntu-latest,
             }
-          - {
-              name: "MacOS_Latest",
-              os: macos-latest,
-            }
+          # - {
+          #     name: "MacOS_Latest",
+          #     os: macos-latest,
+          #   }
     needs: build
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
             name: ${{matrix.config.name}} artifacts
-            # path: ${{matrix.config.name}}.tar.gz
-            path: ${{github.workspace}}
+            path: ${{matrix.config.name}}.tar.gz
+            # path: ${{github.workspace}}
 
       - name: Unpack Artifacts
         run: |

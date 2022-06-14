@@ -175,11 +175,14 @@ jobs:
 
       - name: CPP Test
         working-directory: ${{github.workspace}}/build
-        run: ctest -V -C ${{matrix.config.build_type}}
+        run: |
+          ls ${{github.workspace}}
+          ctest -V -C ${{matrix.config.build_type}}
 
       - name: Pytest
         working-directory: ${{github.workspace}}/build
         run: |
+          ls ${{github.workspace}}
           pip3 install ${{github.workspace}}/build/tools/packages/KML*.whl[test]
           cd ${{github.workspace}}/build/tools/python/KML/tests/
           python3 -m pytest -n auto --cov=. --doctest-modules

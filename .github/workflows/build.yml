@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build and test
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: true
@@ -103,20 +103,23 @@ jobs:
       - name: Build and create artifact
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}} -j
 
-      # - name: Compress Uploads
-      #   run: tar -czvf ${{matrix.config.name}}.tar.gz ${{github.workspace}}/build
+      - name: CPP Test
+        working-directory: ${{github.workspace}}/build
+        run: |
+          ls ${{github.workspace}}
+          ctest -V -C ${{matrix.config.build_type}}
 
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{matrix.config.name}} artifacts
-      #     path: ${{matrix.config.name}}.tar.gz
-      #     retention-days: 1
+      - name: Pytest
+        working-directory: ${{github.workspace}}/build
+        run: |
+          ls ${{github.workspace}}
+          pip3 install ${{github.workspace}}/build/tools/packages/KML*.whl[test]
+          cd ${{github.workspace}}/build/tools/python/KML/tests/
+          python3 -m pytest -n auto --cov=. --doctest-modules
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: ${{matrix.config.name}} artifacts
-          path: ${{github.workspace}}/build
-          retention-days: 1
+      - name: CPP Coverage
+        working-directory: ${{github.workspace}}/build
+        run: make coverage
 
   # lint:
   #   name: Lint code
@@ -139,60 +142,3 @@ jobs:
   #       env:
   #         DEFAULT_BRANCH: main
   #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-  test:
-    name: Test
-    runs-on: ${{matrix.config.os}}
-    strategy:
-      fail-fast: true
-      matrix:
-        config:
-          - {
-              name: "Ubuntu_Latest",
-              os: ubuntu-latest,
-            }
-          # - {
-          #     name: "MacOS_Latest",
-          #     os: macos-latest,
-          #   }
-    needs: build
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
-        with:
-            name: ${{matrix.config.name}} artifacts
-            path: ${{github.workspace}}
-
-      # - name: Unpack Artifacts
-      #   run: |
-      #     ls ${{github.workspace}}
-      #     tar -xzvf ${{github.workspace}}/${{matrix.config.name}}.tar.gz -C ${{github.workspace}}
-
-      # - name: Install test dependencies on ubuntu
-      #   if: startsWith(matrix.config.name, 'Ubuntu')
-      #   run: |
-      #     ls ${{github.workspace}}
-      #     pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
-
-      # - name: Install test dependencies on macos
-      #   if: startsWith(matrix.config.os, 'MacOS')
-      #   run: |
-      #     pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
-
-      - name: CPP Test
-        working-directory: ${{github.workspace}}/build
-        run: |
-          ls ${{github.workspace}}
-          ctest -V -C ${{matrix.config.build_type}}
-
-      - name: Pytest
-        working-directory: ${{github.workspace}}/build
-        run: |
-          ls ${{github.workspace}}
-          pip3 install ${{github.workspace}}/build/tools/packages/KML*.whl[test]
-          cd ${{github.workspace}}/build/tools/python/KML/tests/
-          python3 -m pytest -n auto --cov=. --doctest-modules
-
-      - name: CPP Coverage
-        working-directory: ${{github.workspace}}/build
-        run: make coverage

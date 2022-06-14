@@ -54,7 +54,7 @@ def get_reqs(fname="requirements.txt"):
 
 
 def get_buildlib():
-    build_lib = "."
+    build_lib = "./build"
     for i, a in enumerate(argv):
         # Handle python setup.py call
         if a == "build_ext":

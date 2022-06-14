@@ -135,8 +135,8 @@ jobs:
   #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   test:
-    name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
+    name: ${{matrix.config.name}}
+    runs-on: ${{matrix.config.os}}
     strategy:
       fail-fast: true
       matrix:
@@ -155,13 +155,12 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
             name: ${{matrix.config.name}} artifacts
-            path: ${{matrix.config.name}}.tar.gz
-            # path: ${{github.workspace}}
+            path: ${{github.workspace}}
 
       - name: Unpack Artifacts
         run: |
           ls ${{github.workspace}}
-          tar -xzvf ${{matrix.config.name}}.tar.gz -C ${{github.workspace}}
+          tar -xzvf ${{github.workspace}}/${{matrix.config.name}}.tar.gz -C ${{github.workspace}}/build
 
       # - name: Install test dependencies on ubuntu
       #   if: startsWith(matrix.config.name, 'Ubuntu')

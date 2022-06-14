@@ -137,8 +137,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Exclude directories
+        run: rm -rf ${{github.workspace}}/tools/cpp/KML/lib
+
       - name: Run Linter
-        uses: github/super-linter@v3.17.0
+        uses: github/super-linter@v4
+        working-directory: ${{github.workspace}}/tools
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

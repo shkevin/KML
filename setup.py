@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-from glob import escape, glob
+from glob import glob
 from os import scandir
-from os.path import join, realpath, relpath, sep
+from os.path import relpath, sep
 from pathlib import Path, PurePath
 from sys import argv
 
@@ -86,7 +86,6 @@ pyx_to_strip = str(PARENT_DIR) + sep
 for pyx in pyx_sources:
     name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
     pyx = pyx.replace(pyx_to_strip, "")
-    print(pyx)
     ext_modules.append(
         Extension(
             name=name,

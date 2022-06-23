@@ -15,14 +15,14 @@
 
 namespace KML 
 {
-    /*! @brief An Abstract interface for streaming statistics. */
+    /*! @brief An Abstract interface for streaming algorithms. */
     template<typename T = double>
     class IStreaming
     {
         public:
             /**
              * @brief   IStreaming Constructor.
-             * @details Constructor for every Streaming .
+             * @details Constructor for every Streaming algorithms.
              * @param   windowSize Window size of number of items held in memory (range [0,..)).
              */
             IStreaming(const uint64_t& windowSize = 0);

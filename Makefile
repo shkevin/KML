@@ -12,14 +12,11 @@ DOCKER_TAG=latest
 all: directories compile-all test coverage
 	@echo '*******************Compiled*********************'
 
-<<<<<<< HEAD
-=======
 # Build docker image
 build: clean
 	docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
 
 # Compile C++ code
->>>>>>> alternative_windows
 c: directories
 	cd $(BUILDDIR) && \
 	cmake \
@@ -31,10 +28,7 @@ c: directories
 		-DBUILD_DOCUMENTATION=OFF && \
 	make
 
-<<<<<<< HEAD
-=======
 # Compile Cython/Python code
->>>>>>> alternative_windows
 python: directories
 	cd $(BUILDDIR) && \
 	cmake \

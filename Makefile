@@ -7,7 +7,7 @@ OBJEXT      := o
 all: directories compile-all test coverage
 	@echo '*******************Compiled*********************'
 
-c:
+c: directories
 	cd $(BUILDDIR) && \
 	cmake \
 	    .. \
@@ -18,7 +18,7 @@ c:
 		-DBUILD_DOCUMENTATION=OFF && \
 	make
 
-python:
+python: directories
 	cd $(BUILDDIR) && \
 	cmake \
 	    .. \

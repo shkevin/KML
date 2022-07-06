@@ -1,7 +1,7 @@
 // unittest_streaming_P2Quantile
 
 #include <gtest/gtest.h>
-#include "statistics/StreamingP2Quantile.h"
+#include "StreamingP2Quantile.h"
 #include <vector>
 #include <iostream>
 

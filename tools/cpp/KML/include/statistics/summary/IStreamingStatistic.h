@@ -23,7 +23,7 @@ namespace KML
         class IStreamingStatistic : public IStreaming<T>
         {
             public:
-                /**
+                /*!
                  * @brief   IStreamingStatistic Constructor.
                  * @details Constructor for every Streaming Statistic.
                  * @param   windowSize Window size of number of items held in memory (range [0,..)).
@@ -40,7 +40,7 @@ namespace KML
                  */
                 IStreamingStatistic& operator=(const IStreamingStatistic& a_rhs) = delete;
 
-                /**
+                /*!
                  * @brief Destructor.
                  */
                 virtual ~IStreamingStatistic();

@@ -1,6 +1,5 @@
 #distutils: language = c++
 from collections.abc import Iterable
-from KML.statistics.StreamingIQR cimport StreamingIQR
 
 cdef class PyStreamingIQR:
     cdef StreamingIQR* c_IQR

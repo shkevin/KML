@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from glob import glob
-from os import scandir
+from os import scandir, walk
 from os.path import relpath, sep
 from pathlib import Path, PurePath
 from sys import argv
@@ -22,11 +22,13 @@ PACKAGE_NAME = "KML"
 PARENT_DIR = Path(__file__).resolve().parent
 CYTHON_DIR = PurePath(PARENT_DIR, "tools/cython")
 SRC_DIR = PurePath(PARENT_DIR, "tools/cpp/KML/src")
+HEADERS_DIR = PurePath(PARENT_DIR, "tools/cpp/KML/include")
 CPPFLAGS = ["-O3", "-std=c++11"]
 REQUIREMENTS_DIR = "./tools/python/KML/requirements/"
 pyx_location = str(PurePath("/KML/**/*.pyx"))
 pyx_sources = glob(f"{CYTHON_DIR}{pyx_location}", recursive=True)
-include_dirs = [f.path for f in scandir(SRC_DIR) if f.is_dir()] + [str(SRC_DIR)]
+include_dirs = [x[0] for x in walk(HEADERS_DIR)]
+src_dirs = [x[0] for x in walk(SRC_DIR)]
 
 
 def get_version():
@@ -79,54 +81,56 @@ class my_build_ext(_build_ext):
         super().build_extensions()
 
 
+print(include_dirs)
 # Build the Cython extensions.
-ext_modules = []
-to_strip = str(CYTHON_DIR) + sep
-pyx_to_strip = str(PARENT_DIR) + sep
-for pyx in pyx_sources:
-    name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
-    pyx = pyx.replace(pyx_to_strip, "")
-    ext_modules.append(
-        Extension(
-            name=name,
-            sources=[pyx],
-            library_dirs=include_dirs,
-            include_dirs=include_dirs,
-            language="c++",
-            extra_compile_args=CPPFLAGS,
-        )
-    )
+# ext_modules = []
+# to_strip = str(CYTHON_DIR) + sep
+# pyx_to_strip = str(PARENT_DIR) + sep
+# for pyx in pyx_sources:
+#     print(pyx)
+#     name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
+#     pyx = pyx.replace(pyx_to_strip, "")
+#     ext_modules.append(
+#         Extension(
+#             name=name,
+#             sources=[pyx],
+#             library_dirs=src_dirs,
+#             include_dirs=include_dirs,
+#             language="c++",
+#             extra_compile_args=CPPFLAGS,
+#         )
+#     )
 
-setup(
-    name="KML",
-    version=get_version(),
-    description="Streaming Machine Learning in C++/Cython.",
-    long_description=get_readme(),
-    long_description_content_type="text/markdown",
-    author="Kevin Cox",
-    author_email="shkevin@yahoo.com",
-    url="https://github.com/shkevin/KML",
-    cmdclass={"build_ext": my_build_ext},
-    ext_modules=cythonize(
-        ext_modules,
-        compiler_directives={"language_level": "3"},
-        build_dir=relpath(get_buildlib()),
-    ),
-    classifiers=[
-        "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: Implementation :: CPython",
-        "Programming Language :: Python :: Implementation :: PyPy",
-        "Operating System :: MacOS",
-        "Operating System :: Unix",
-    ],
-    python_requires=">=3.6",
-    setup_requires=["wheel", "cython>=0.24.1"],
-    install_requires=get_reqs("requirements.txt"),
-    extras_require={"test": get_reqs("test_requirements.txt")},
-)
+# setup(
+#     name="KML",
+#     version=get_version(),
+#     description="Streaming Machine Learning in C++/Cython.",
+#     long_description=get_readme(),
+#     long_description_content_type="text/markdown",
+#     author="Kevin Cox",
+#     author_email="shkevin@yahoo.com",
+#     url="https://github.com/shkevin/KML",
+#     cmdclass={"build_ext": my_build_ext},
+#     ext_modules=cythonize(
+#         ext_modules,
+#         compiler_directives={"language_level": "3"},
+#         build_dir=relpath(get_buildlib()),
+#     ),
+#     classifiers=[
+#         "License :: OSI Approved :: MIT License",
+#         "Programming Language :: Python",
+#         "Programming Language :: Python :: 3",
+#         "Programming Language :: Python :: 3.6",
+#         "Programming Language :: Python :: 3.7",
+#         "Programming Language :: Python :: 3.8",
+#         "Programming Language :: Python :: 3.9",
+#         "Programming Language :: Python :: Implementation :: CPython",
+#         "Programming Language :: Python :: Implementation :: PyPy",
+#         "Operating System :: MacOS",
+#         "Operating System :: Unix",
+#     ],
+#     python_requires=">=3.6",
+#     setup_requires=["wheel", "cython>=0.24.1"],
+#     install_requires=get_reqs("requirements.txt"),
+#     extras_require={"test": get_reqs("test_requirements.txt")},
+# )

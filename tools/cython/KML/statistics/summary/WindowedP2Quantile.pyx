@@ -1,6 +1,5 @@
 #distutils: language = c++
 from collections.abc import Iterable
-from KML.statistics.WindowedP2Quantile cimport WindowedP2Quantile
 
 cdef class PyWindowedP2Quantile:
     cdef WindowedP2Quantile* c_WP2

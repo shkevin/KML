@@ -1,7 +1,7 @@
 // unittest_windowed_fame
 
 #include <gtest/gtest.h>
-#include "statistics/WindowedFame.h"
+#include "WindowedFame.h"
 #include <vector>
 
 using KML::Statistics::WindowedFame;

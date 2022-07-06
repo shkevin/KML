@@ -1,6 +1,5 @@
 #distutils: language = c++
 from collections.abc import Iterable
-from KML.statistics.StreamingMean cimport StreamingMean
 
 cdef class PyStreamingMean:
     cdef StreamingMean* c_SM

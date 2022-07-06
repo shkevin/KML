@@ -1,6 +1,5 @@
 #distutils: language = c++
 from collections.abc import Iterable
-from KML.statistics.StreamingVariance cimport StreamingVariance
 
 cdef class PyStreamingVariance:
     cdef StreamingVariance* c_SV

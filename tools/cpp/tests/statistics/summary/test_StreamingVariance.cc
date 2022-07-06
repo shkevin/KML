@@ -1,7 +1,7 @@
 // unittest_streaming_variance
 
 #include <gtest/gtest.h>
-#include "statistics/StreamingVariance.h"
+#include "StreamingVariance.h"
 #include <vector>
 
 using KML::Statistics::StreamingVariance;

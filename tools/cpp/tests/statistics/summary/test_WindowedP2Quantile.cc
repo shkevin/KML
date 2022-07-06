@@ -1,7 +1,7 @@
 // unittest_Windowed_P2Quantile
 
 #include <gtest/gtest.h>
-#include "statistics/WindowedP2Quantile.h"
+#include "WindowedP2Quantile.h"
 #include <vector>
 
 using KML::Statistics::WindowedP2Quantile;

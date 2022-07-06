@@ -1,5 +1,5 @@
 # Minimum version of CMake required to build this project.
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.14 FATAL_ERROR)
 
 ################################
 # Project
@@ -19,16 +19,6 @@ SET(CMAKE_CXX_STANDARD 11)
 ################################
 # Macros
 ################################
-MACRO(HEADER_DIRECTORIES return_list)
-    FILE(GLOB_RECURSE new_list ${CPP_DIR}/include/*.h)
-    SET(dir_list "")
-    FOREACH(FILE_path ${new_list})
-        GET_FILENAME_COMPONENT(dir_path ${FILE_path} PATH)
-        SET(dir_list ${dir_list} ${dir_path})
-    ENDFOREACH()
-    LIST(REMOVE_DUPLICATES dir_list)
-    SET(${return_list} ${dir_list})
-ENDMACRO()
 
 ################################
 # Compiler Flags
@@ -82,18 +72,12 @@ endif()
 
 # Create a sources variable with a link to all cpp files to compile
 SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp")
-FILE(GLOB_RECURSE SOURCES "${CPP_DIR}/KML/src/*.cc" "${CPP_DIR}/KML/src/*.tcc")
-FILE(GLOB_RECURSE APP_SOURCES "${CPP_DIR}/apps/*.cc")
+# FILE(GLOB_RECURSE SOURCES "${CPP_DIR}/KML/src/*.cc" "${CPP_DIR}/KML/src/*.tcc")
+# FILE(GLOB_RECURSE APP_SOURCES "${CPP_DIR}/apps/*.cc")
 
-# Add the directories needed.
-ADD_LIBRARY(${CMAKE_PROJECT_NAME}_lib STATIC ${SOURCES} ${APP_SOURCES})
-INCLUDE_DIRECTORIES(${CMAKE_PROJECT_NAME}_lib
-    PUBLIC
-        ${CMAKE_SOURCE_DIR}
-        ${CMAKE_BINARY_DIR}
-        "${CPP_DIR}/KML/include"
-        "${CPP_DIR}/KML/src"
-)
+# Add the directories needed for main files.
+ADD_SUBDIRECTORY("${CPP_DIR}/KML")
+ADD_SUBDIRECTORY("${CPP_DIR}/apps")
 
 ################################
 # Python
@@ -155,7 +139,7 @@ if(BUILD_COVERAGE)
 	SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
     setup_target_for_coverage_gcovr_html(
         NAME coverage EXECUTABLE ctest
-        --schedule-random -j 4 --test-dir tools/cpp/KML/tests
+        --schedule-random -j 4 --test-dir tools/cpp/tests
         EXCLUDE "build/*" "*main.cc*"
         )
     # setup_target_for_coverage_gcovr_xml(${PROJECT_NAME}_coverage NAME coverage)
@@ -178,7 +162,7 @@ if(BUILD_TESTING)
     SET(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
     SET(gmock OFF CACHE BOOL "" FORCE)
     FETCHCONTENT_MAKEAVAILABLE(googletest)
-    ADD_SUBDIRECTORY("${CPP_DIR}/KML/tests")
+    ADD_SUBDIRECTORY("${CPP_DIR}/tests")
 endif(BUILD_TESTING)
 
 ################################################################################

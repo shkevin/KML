@@ -1,7 +1,7 @@
 // unittest_streaming_means
 
 #include <gtest/gtest.h>
-#include "statistics/StreamingMean.h"
+#include "StreamingMean.h"
 #include <vector>
 
 using KML::Statistics::StreamingMean;

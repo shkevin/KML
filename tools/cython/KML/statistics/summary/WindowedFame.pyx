@@ -1,6 +1,5 @@
 #distutils: language = c++
 from collections.abc import Iterable
-from KML.statistics.WindowedFame cimport WindowedFame
 
 cdef class PyWindowedFame:
     cdef WindowedFame* c_FM

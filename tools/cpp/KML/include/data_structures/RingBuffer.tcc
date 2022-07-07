@@ -1,7 +1,8 @@
 /*!
- * @file 
- * @brief
- * https://embeddedartistry.com/blog/2017/05/17/creating-a-circular-buffer-in-c-and-c/
+ * @file RingBuffer.tcc
+ * @brief Contains the templated implementation for the abstract ring buffer
+ *        data structure..
+ * Reference: https://embeddedartistry.com/blog/2017/05/17/creating-a-circular-buffer-in-c-and-c/
  */
 namespace KML
 {
@@ -73,7 +74,7 @@ namespace KML
         }
 
         template<typename T>
-        T RingBuffer<T>::get()
+        T RingBuffer<T>::pop()
         {
             std::lock_guard<std::mutex> lock(m_mutex);
 

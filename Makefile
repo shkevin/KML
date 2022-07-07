@@ -61,7 +61,7 @@ develop:
 
 # Call Unittests for C++/Python.
 test:
-	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
+	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest && \
 	cd tools/python/KML/tests/ && python -m pytest -n auto --cov=. --doctest-modules
 
 # Call Unittests for C++/Python for built wheel.

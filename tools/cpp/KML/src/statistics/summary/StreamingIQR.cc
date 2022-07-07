@@ -2,10 +2,7 @@
  * @file StreamingIQR.cc
  * @brief Contains the implementation of the StreamingIQR calculation.
  */
-
 #include "StreamingIQR.h"
-
-#include <iostream>
 
 namespace KML
 {

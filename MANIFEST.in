@@ -1,4 +1,7 @@
 recursive-include tools/python/KML *.py
 recursive-include tools/cython/KML/ *.cpp *.pyx *.pxd
-recursive-include tools/cpp/KML/src *.cc *.h *.tcc
+recursive-include tools/cpp/KML/src *.cc *.tcc
+recursive-include tools/cpp/KML/include *.h
 recursive-include tools/python/KML/requirements/ *.txt
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

@@ -5,7 +5,10 @@
 #ifndef __LINKED_LIST_H__
 #define __LINKED_LIST_H__
 
+#include <mutex> // Lock
+
 #include "IDataStructure.h"
+#include "Node.h"
 
 namespace KML
 {
@@ -25,12 +28,12 @@ namespace KML
                  * @brief  Takes a single item and updates the deriving class.
                  * @param  item The item used to update deriving class.
                  */
-                virtual void put(const T& item) override;
+                virtual void update(const T& item) override;
 
                 /*!
                  * @brief
                  */
-                virtual T get() override;
+                virtual T pop() override;
 
                 /*!
                  * @brief
@@ -53,10 +56,30 @@ namespace KML
                 virtual void reset() override;
 
             private:
+                /*!
+                 * @brief Lock used to lock operations. This allows for threading the 
+                 *        ring buffer.
+                 */
+                std::mutex m_mutex;
 
+                /*!
+                 * @brief
+                 */
+                Node<T> *m_head = nullptr;
+
+                /*!
+                 * @brief
+                 */
+                Node<T> *m_tail = nullptr;
+
+                /*!
+                 * @brief
+                 */
+                size_t m_size = 0;
         };
     } // DataStructures
 } // KML
 
+#include "LinkedList.tcc"
 
 #endif // __LINKED_LIST_H__

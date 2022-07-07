@@ -4,3 +4,4 @@ build
 *googletest
 *.tox
 *.egg*
+*.ipynb_checkpoints

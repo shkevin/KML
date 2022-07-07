@@ -1,4 +1,4 @@
-# MESSAGE(STATUS "Adding cpp apps")
+MESSAGE(STATUS "Adding cpp apps")
 
 # SET(BINARY ${CMAKE_PROJECT_NAME})
 

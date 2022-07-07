@@ -44,7 +44,7 @@ namespace KML
                 /*!
                  * @brief
                  */
-                virtual T get() = 0;
+                virtual T pop() = 0;
 
                 /*!
                  * @brief

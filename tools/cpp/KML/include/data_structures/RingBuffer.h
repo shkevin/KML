@@ -1,6 +1,6 @@
 /*!
  * @file RingBuffer.h
- * @brief
+ * @brief Provides the declarations for the ring buffer data structure.
  */
 #ifndef __RING_BUFFER_H__
 #define __RING_BUFFER_H__
@@ -25,12 +25,13 @@ namespace KML
 
             public:
                 /*!
-                 * @brief
+                 * @brief Default Constructor.
+                 * @param windowSize The desired size of the ring buffer.
                  */
                 explicit RingBuffer(const size_t& windowSize);
 
                 /*!
-                 * @brief
+                 * @brief Default Destructor.
                  */
                 virtual ~RingBuffer() = delete;
 
@@ -41,55 +42,57 @@ namespace KML
                 virtual void update(const T& item) override;
 
                 /*!
-                 * @brief
+                 * @brief Pop the oldest element from the buffer (tail).
                  */
-                virtual T get();
+                virtual T pop();
 
                 /*!
-                 * @brief
+                 * @brief Determine if the ring buffer is full.
                  */
                 virtual bool full() const override;
 
                 /*!
-                 * @brief
+                 * @brief Determine if the ring buffer is empty.
                  */
                 virtual bool empty() const override;
 
                 /*!
-                 * @brief
+                 * @brief Calculate the current size of the ring buffer.
                  */
                 virtual size_t size() const override;
 
                 /*!
-                 * @brief
+                 * @brief Reset the ring buffer data. Size will be zero after.
                  */
                 virtual void reset() override;
 
             protected:
                 /*!
-                 * @brief
+                 * @brief Underlying data structure to maintain.
                  */
                 Data m_buffer;
 
                 /*!
-                 * @brief
+                 * @brief Lock used to lock operations. This allows for threading the 
+                 *        ring buffer.
                  */
                 std::mutex m_mutex;
 
                 /*!
-                 * @brief
+                 * @brief Current head index of the ring buffer.
                  */
                 size_t m_head = 0;
 
                 /*!
-                 * @brief
+                 * @brief Current tail index of the ring buffer.
                  */
                 size_t m_tail = 0;
 
                 /*!
-                 * @brief
+                 * @brief Whether the ring buffer is currently full. This is determined
+                 *        by the input size windowSize.
                  */
-                size_t m_full = 0;
+                bool m_full = false;
         };
     } // DataStructures
 } // KML

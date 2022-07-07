@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <gtest/gtest.h>
-#include "data_structures/RingBuffer.h"
+#include "RingBuffer.h"
 
 using KML::DataStructures::RingBuffer;
 
@@ -18,10 +18,9 @@ class RingBufferTest : public::testing::Test
         }
 };
 
-// Evaluate with no updates should return 0.0.
-TEST_F(RingBufferTest, TestEmptyGet)
+TEST_F(RingBufferTest, TestEmptyPop)
 {
-    EXPECT_FLOAT_EQ(0.0, rb->get());
+    EXPECT_FLOAT_EQ(0.0, rb->pop());
 }
 
 TEST_F(RingBufferTest, TestCircularSize)
@@ -32,10 +31,10 @@ TEST_F(RingBufferTest, TestCircularSize)
     {
         rb->update(*i);
     }
-    EXPECT_EQ(2, rb->size());
+    EXPECT_EQ(m_windowSize, rb->size());
 }
 
-TEST_F(RingBufferTest, TestCircularGet)
+TEST_F(RingBufferTest, TestCircularPop)
 {
     std::vector<double> l_data = {1, 2, 3, 4};
     /* rb->update(l_data); */
@@ -44,5 +43,5 @@ TEST_F(RingBufferTest, TestCircularGet)
         rb->update(*i);
     }
     // Should return 3 since 3 is now the tail with window size = 2.
-    EXPECT_EQ(3, rb->get());
+    EXPECT_EQ(3, rb->pop());
 }

@@ -1,3 +1,4 @@
+MESSAGE(STATUS "Adding C++ tests")
 SET(BINARY ${CMAKE_PROJECT_NAME}_test)
 
 # Find the test sources

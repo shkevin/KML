@@ -1,3 +1,4 @@
+MESSAGE(STATUS "Adding C++ Sources")
 SET(BINARY ${CMAKE_PROJECT_NAME}_lib)
 
 MACRO(HEADER_DIRECTORIES return_list)
@@ -12,7 +13,7 @@ MACRO(HEADER_DIRECTORIES return_list)
 ENDMACRO()
 
 # Get the source files and the subdirectories for headers.
-FILE(GLOB_RECURSE SOURCES LIST_DIRECTORIES true *.cc *.tcc)
+FILE(GLOB_RECURSE SOURCES LIST_DIRECTORIES true *.h *.cc *.tcc)
 HEADER_DIRECTORIES(HEADERS)
 
 ADD_LIBRARY(${BINARY} STATIC ${SOURCES})

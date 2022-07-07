@@ -51,7 +51,7 @@ FIND_PROGRAM(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
     MESSAGE(STATUS "ccache found!")
     SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-    SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache) # Less useful to do it for linking.
+    # SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache) # Less useful to do it for linking.
 else()
     MESSAGE(STATUS "ccache not found!")
 endif(CCACHE_FOUND)

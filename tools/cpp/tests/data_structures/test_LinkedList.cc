@@ -35,17 +35,29 @@ TEST_F(LinkedListTest, TestSize)
     EXPECT_EQ(m_windowSize, ll->size());
 }
 
-/* TEST_F(LinkedListTest, TestPop) */
-/* { */
-/*     std::vector<double> l_data = {1, 2, 3, 4}; */
-/*     /1* ll->update(l_data); *1/ */
-/*     for(auto i = l_data.begin(); i < l_data.end(); i++) */
-/*     { */
-/*         ll->update(*i); */
-/*     } */
-/*     // Should return 3 since 3 is now the head with window size = 2. */
-/*     std::cout << "window == " << ll->size() << std::endl; */
-/*     std::cout << "pop = " << ll->pop() << std::endl; */
-/*     std::cout << "window == " << ll->size() << std::endl; */
-/*     /1* EXPECT_EQ(3, ll->pop()); *1/ */
-/* } */
+TEST_F(LinkedListTest, TestPop)
+{
+    std::vector<double> l_data = {1, 2, 3, 4};
+    /* ll->update(l_data); */
+    for(auto i = l_data.begin(); i < l_data.end(); i++)
+    {
+        ll->update(*i);
+    }
+    // Should return 3 since 3 is now the head with window size = 2.
+    EXPECT_EQ(3, ll->pop());
+
+    // Should have 1 less value after pop.
+    EXPECT_EQ(m_windowSize - 1, ll->size());
+}
+
+TEST_F(LinkedListTest, TestReset)
+{
+    std::vector<double> l_data = {1, 2, 3, 4};
+    /* ll->update(l_data); */
+    for(auto i = l_data.begin(); i < l_data.end(); i++)
+    {
+        ll->update(*i);
+    }
+    ll->reset();
+    EXPECT_EQ(0, ll->size());
+}

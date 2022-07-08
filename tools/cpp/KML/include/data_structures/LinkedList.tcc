@@ -14,31 +14,29 @@ namespace KML
         }
 
         template<typename T>
+        LinkedList<T>::~LinkedList() 
+        {
+            reset();
+        }
+
+        template<typename T>
         void LinkedList<T>::update(const T& item)
         {
-            /* std::lock_guard<std::mutex> lock(m_mutex); */
+            Node<T> *l_node = new Node<T>(item);
 
-            std::cout << "Item = " << item << std::endl;
-            Node<T> l_node = Node<T>(item);
-            if(nullptr == m_head)
+            if(empty())
             {
-                m_head = &l_node;
-                m_tail = &l_node;
+                m_head = l_node;
+                m_tail = l_node;
             }
             else
             {
-                if(nullptr == m_tail)
-                {
-                    l_node.m_previous = m_head;
-                    m_tail = &l_node;
-                }
-                else
-                {
-                    m_tail->m_next = &l_node;
-                    l_node.m_previous = m_tail;
-                    m_tail = &l_node;
-                }
+                // Update tail with new node.
+                m_tail->m_next = l_node;
+                l_node->m_previous = m_tail;
+                m_tail = l_node;
 
+                // Need to ensure window doesn't overflow.
                 if(m_size == this->m_windowSize) pop();
             }
 
@@ -49,7 +47,17 @@ namespace KML
         template<typename T>
         void LinkedList<T>::reset()
         {
-            std::lock_guard<std::mutex> lock(m_mutex);
+            Node<T> *l_next = m_head->m_next;
+            while(l_next)
+            {
+                l_next->m_previous = nullptr;
+                delete l_next->m_previous;
+                l_next = l_next->m_next;
+            }
+
+            m_size = 0;
+            m_head = nullptr;
+            m_tail = nullptr;
         }
 
         template<typename T>
@@ -71,24 +79,28 @@ namespace KML
         }
 
         template<typename T>
+        void LinkedList<T>::display() const
+        {
+            Node<T> *l_next = m_head;
+            while(l_next)
+            {
+                std::cout << l_next->m_value << " ";
+                l_next = l_next->m_next;
+            }
+            std::cout << "" << std::endl;
+        }
+
+        template<typename T>
         T LinkedList<T>::pop()
         {
-            /* std::lock_guard<std::mutex> lock(m_mutex); */
-
             // If empty return data type.
-            std::cout << "Size = " << size() << std::endl;
-            if(empty())
-            {
-                std::cout << "EMPTY" << std::endl;
-                return T();
-            }
-
-            if(!m_head) std::cout << "BAD" << std::endl;
-            T l_value = (*m_head).m_value;
-            std::cout << "ValueP = " << l_value << std::endl;
-            m_head = m_head->m_next;
-            m_head->m_previous = nullptr;
-            std::cout << "ValueA = " << l_value << std::endl;
+            if(empty()) return T();
+            
+            // Pop head and update reference.
+            Node<T> *l_next = m_head->m_next;
+            T l_value = m_head->m_value;
+            delete m_head;
+            m_head = l_next;
 
             m_size--;
             return l_value;

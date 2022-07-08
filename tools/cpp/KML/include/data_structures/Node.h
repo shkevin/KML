@@ -15,9 +15,24 @@ namespace KML
         class Node
         {
             public:
+                /*!
+                 * @brief
+                 */
                 explicit Node(const T& value);
+
+                /*!
+                 * @brief
+                 */
                 T m_value;
+
+                /*!
+                 * @brief
+                 */
                 Node *m_next = nullptr;
+
+                /*!
+                 * @brief
+                 */
                 Node *m_previous = nullptr;
         };
     } // DataStructures

@@ -20,9 +20,14 @@ namespace KML
         {
             public:
                 /*!
-                 * @brief
+                 * @brief Default Constructor.
                  */
                 explicit LinkedList(const size_t& windowSize);
+
+                /*!
+                 * @brief Destructor.
+                 */
+                ~LinkedList();
 
                 /**
                  * @brief  Takes a single item and updates the deriving class.
@@ -55,13 +60,12 @@ namespace KML
                  */
                 virtual void reset() override;
 
-            private:
                 /*!
-                 * @brief Lock used to lock operations. This allows for threading the 
-                 *        ring buffer.
+                 * @brief
                  */
-                std::mutex m_mutex;
+                void display() const;
 
+            private:
                 /*!
                  * @brief
                  */

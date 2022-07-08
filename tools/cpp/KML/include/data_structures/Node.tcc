@@ -1,6 +1,6 @@
 /*!
  * @file Node.cc
- * @brief
+ * @brief Contains the templated implementation for the Node data structure class.
  */
 #include "Node.h"
 

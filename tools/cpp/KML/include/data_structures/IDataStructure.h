@@ -42,27 +42,27 @@ namespace KML
                 virtual void update(const std::vector<T>& items);
 
                 /*!
-                 * @brief
+                 * @brief Remove the head and return the value of head.
                  */
                 virtual T pop() = 0;
 
                 /*!
-                 * @brief
+                 * @brief Determine if the Linked List is full.
                  */
                 virtual bool full() const = 0;
 
                 /*!
-                 * @brief
+                 * @brief Determine if the Linked List is empty.
                  */
                 virtual bool empty() const = 0;
 
                 /*!
-                 * @brief
+                 * @brief Retrieve the current number of nodes in the list.
                  */
                 virtual size_t size() const = 0;
 
                 /*!
-                 * @brief
+                 * @brief Completely reset the linked list.
                  */
                 virtual void reset() = 0;
 

@@ -1,6 +1,6 @@
 /*!
- * @file
- * @brief
+ * @file Node.h
+ * @brief Provides the declarations for the Node data structure.
  */
 #ifndef __NODE_H__
 #define __NODE_H__
@@ -16,22 +16,23 @@ namespace KML
         {
             public:
                 /*!
-                 * @brief
+                 * @brief Default Constructor.
+                 * @param value The value the node holds.
                  */
                 explicit Node(const T& value);
 
                 /*!
-                 * @brief
+                 * @brief The value of this node.
                  */
                 T m_value;
 
                 /*!
-                 * @brief
+                 * @brief Pointer to next node in sequence.
                  */
                 Node *m_next = nullptr;
 
                 /*!
-                 * @brief
+                 * @brief Pointer to previous node in sequence.
                  */
                 Node *m_previous = nullptr;
         };

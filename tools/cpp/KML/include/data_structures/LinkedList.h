@@ -1,6 +1,6 @@
 /*!
- * @file
- * @brief
+ * @file DoublyLinkedList.h
+ * @brief Provides the declarations for the Doubly Linked List data structure.
  */
 #ifndef __LINKED_LIST_H__
 #define __LINKED_LIST_H__
@@ -21,6 +21,7 @@ namespace KML
             public:
                 /*!
                  * @brief Default Constructor.
+                 * @param windowSize the Number of nodes to hold in linked list.
                  */
                 explicit LinkedList(const size_t& windowSize);
 
@@ -29,55 +30,64 @@ namespace KML
                  */
                 ~LinkedList();
 
-                /**
-                 * @brief  Takes a single item and updates the deriving class.
-                 * @param  item The item used to update deriving class.
+                /*!
+                 * Copy Constructor.
+                 */
+                LinkedList(const LinkedList&) = delete; // No copy
+
+                /*!
+                 * Copy Assignment Operator.
+                 */
+                LinkedList& operator=(const LinkedList&) = delete; // No copy
+
+                /*!
+                 * @copydoc IStreamingStatistic::update()
                  */
                 virtual void update(const T& item) override;
 
                 /*!
-                 * @brief
+                 * @copydoc IStreamingStatistic::pop()
                  */
                 virtual T pop() override;
 
                 /*!
-                 * @brief
+                 * @copydoc IStreamingStatistic::full()
                  */
                 virtual bool full() const override;
 
                 /*!
-                 * @brief
+                 * @copydoc IStreamingStatistic::empty()
                  */
                 virtual bool empty() const override;
 
                 /*!
-                 * @brief
+                 * @copydoc IStreamingStatistic::size()
                  */
                 virtual size_t size() const override;
 
                 /*!
-                 * @brief
+                 * @copydoc IStreamingStatistic::reset()
                  */
                 virtual void reset() override;
 
                 /*!
-                 * @brief
+                 * @brief Print out the node values to standard out.
                  */
                 void display() const;
 
             private:
                 /*!
-                 * @brief
+                 * @brief Pointer to the current head of the linked list.
                  */
                 Node<T> *m_head = nullptr;
 
                 /*!
-                 * @brief
+                 * @brief Pointer to the current tail of the linked list.
                  */
                 Node<T> *m_tail = nullptr;
 
                 /*!
-                 * @brief
+                 * @brief Number of nodes in linked list.
                  */
                 size_t m_size = 0;
         };

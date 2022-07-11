@@ -8,7 +8,8 @@ namespace KML
     namespace DataStructures
     {
         template<typename T>
-        LinkedList<T>::LinkedList(const size_t& windowSize) : IDataStructure<T>(windowSize)
+        LinkedList<T>::LinkedList(const size_t& windowSize) : IDataStructure<T>(windowSize),
+            m_head(nullptr), m_tail(nullptr)
         {
             // Do nothing
         }
@@ -94,7 +95,7 @@ namespace KML
         T LinkedList<T>::pop()
         {
             // If empty return data type.
-            if(empty()) return T();
+            if(empty() | m_size <= 0) return T();
             
             // Pop head and update reference.
             Node<T> *l_next = m_head->m_next;

@@ -28,7 +28,7 @@ namespace KML
                 /*!
                  * @brief Destructor.
                  */
-                ~LinkedList();
+                virtual ~LinkedList();
 
                 /*!
                  * Copy Constructor.

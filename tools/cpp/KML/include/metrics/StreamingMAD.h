@@ -2,8 +2,11 @@
  * @file StreamingMAD.h
  * @brief
  */
+#ifndef __STREAMING_MAD_H__
+#define __STREAMING_MAD_H__
+
 #include "IMetric.h"
-#include "WindowedFame.h"
+#include "WindowedFAME.h"
 
 using KML::Statistics::WindowedFAME;
 
@@ -59,3 +62,5 @@ namespace KML
         };
     }
 }
+
+#endif // __STREAMING_MAD_H__

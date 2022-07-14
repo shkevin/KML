@@ -1,5 +1,5 @@
 /*!
- * @file
+ * @file StreamingMAD.cc
  * @brief
  */
 #include <cmath>

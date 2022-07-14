@@ -103,6 +103,7 @@ if(BUILD_PYTHON)
     SET(PACK_DIR ${CMAKE_BINARY_DIR}/tools/packages)
     SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
     file(MAKE_DIRECTORY ${BUILD_DIR}/KML)
+
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py
             sdist --dist-dir=${PACK_DIR}

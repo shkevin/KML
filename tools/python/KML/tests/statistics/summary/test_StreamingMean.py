@@ -1,6 +1,6 @@
 import unittest
 
-from KML.statistics.StreamingMean import PyStreamingMean
+from KML.statistics.summary.StreamingMean import PyStreamingMean
 
 
 class TestStreamingMean(unittest.TestCase):

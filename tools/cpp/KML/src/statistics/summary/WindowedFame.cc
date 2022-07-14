@@ -1,8 +1,8 @@
 /*!
  * @brief 
- * @file WindowedFame.cc
+ * @file WindowedFAME.cc
  */
-#include "WindowedFame.h"
+#include "WindowedFAME.h"
 #include <cmath>
 
 #include <iostream>
@@ -11,7 +11,7 @@ namespace KML
 {
     namespace Statistics
     {
-        WindowedFame::WindowedFame(const double& stepSize, const double& epsilon) : 
+        WindowedFAME::WindowedFAME(const double& stepSize, const double& epsilon) : 
             IStreamingStatistic(0), m_median(0.0), m_stepSize(stepSize), m_epsilon(epsilon)
         {
             // Ensure that the quantile range is appropriate.
@@ -21,12 +21,12 @@ namespace KML
             }
         }
 
-        WindowedFame::~WindowedFame() 
+        WindowedFAME::~WindowedFAME() 
         {
             // Do nothing
         }
 
-        void WindowedFame::update(const double& observation)
+        void WindowedFAME::update(const double& observation)
         {
             if(m_historyCount == 0)
             {
@@ -53,7 +53,7 @@ namespace KML
             m_historyCount += 1;
         }
 
-        double WindowedFame::evaluate() const
+        double WindowedFAME::evaluate() const
         {
             return m_median;
         }

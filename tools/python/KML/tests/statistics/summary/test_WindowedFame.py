@@ -1,16 +1,16 @@
 import unittest
 
-from KML.statistics.WindowedFame import PyWindowedFame
+from KML.statistics.summary.WindowedFAME import PyWindowedFAME
 
 
-class TestWindowedFame(unittest.TestCase):
+class TestWindowedFAME(unittest.TestCase):
 
     WINDOW_SIZE = 5
     DATA = [10.0] * WINDOW_SIZE
     FM = None
 
     def setUp(self):
-        self.FM = PyWindowedFame()
+        self.FM = PyWindowedFAME()
 
     def tearDown(self):
         self.FM = None

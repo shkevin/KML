@@ -1,6 +1,6 @@
 import unittest
 
-from KML.statistics.StreamingP2Quantile import PyStreamingP2Quantile
+from KML.statistics.summary.StreamingP2Quantile import PyStreamingP2Quantile
 
 
 class TestStreamingP2Quantile(unittest.TestCase):

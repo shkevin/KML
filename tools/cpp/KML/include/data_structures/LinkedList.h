@@ -16,7 +16,7 @@ namespace KML
     {
 
         template<typename T = double>
-        class LinkedList : IDataStructure<T>
+        class LinkedList : public IDataStructure<T>
         {
             public:
                 /*!

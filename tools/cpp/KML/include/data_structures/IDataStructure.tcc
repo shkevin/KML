@@ -1,8 +1,9 @@
-/**
+/*!
  * @file IDataStructure.tcc
  * @brief Contains the templated implementation for the abstract data structure class.
  */
-#include <iostream>
+#include <stdexcept>
+
 namespace KML
 {
     namespace DataStructures

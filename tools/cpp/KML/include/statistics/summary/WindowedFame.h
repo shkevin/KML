@@ -2,7 +2,7 @@
  * @brief Fast Algorithm for Median Estimation (FAME). Calculate the median
  *         of a data stream. This algorithm is adapted from
  *         https://ieeexplore.ieee.org/document/4261339
- * @file WindowedFame.cc
+ * @file WindowedFAME.h
  */
 #ifndef __WINDOWED_FAME_H__
 #define __WINDOWED_FAME_H__
@@ -13,7 +13,7 @@ namespace KML
 {
     namespace Statistics
     {
-        class WindowedFame : public IStreamingStatistic<double>
+        class WindowedFAME : public IStreamingStatistic<double>
         {
             public:
                 /*!
@@ -22,13 +22,13 @@ namespace KML
                  * @param epsilon The exponential growth factor. This gives the 
                  *        median calculation a "windowing flavor".
                  */
-                WindowedFame(const double& stepSize = 0.1, 
+                WindowedFAME(const double& stepSize = 0.1, 
                              const double& epsilon = 0.0);
 
                 /*!
                  * @brief Destructor.
                  */
-                ~WindowedFame();
+                ~WindowedFAME();
 
                 /*!
                  * @copydoc IStreamingStatistic::update()

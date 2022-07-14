@@ -1,28 +1,28 @@
 // unittest_windowed_fame
 
 #include <gtest/gtest.h>
-#include "WindowedFame.h"
+#include "WindowedFAME.h"
 #include <vector>
 
-using KML::Statistics::WindowedFame;
+using KML::Statistics::WindowedFAME;
 
-class WindowedFameTest : public ::testing::Test
+class WindowedFAMETest : public ::testing::Test
 {
     public:
-        WindowedFame* fm;
+        WindowedFAME* fm;
 
-        WindowedFameTest()
+        WindowedFAMETest()
         {
-            fm = new WindowedFame(0.1, 0.3);
+            fm = new WindowedFAME(0.1, 0.3);
         }
 };
 
-TEST_F(WindowedFameTest, TestEmptyEvaluate)
+TEST_F(WindowedFAMETest, TestEmptyEvaluate)
 {
     EXPECT_FLOAT_EQ(0.0, fm->evaluate());
 }
 
-TEST_F(WindowedFameTest, TestMedianConstant)
+TEST_F(WindowedFAMETest, TestMedianConstant)
 {
     std::vector<double> data{10, 10, 10};
     fm->update(data);

@@ -1,6 +1,6 @@
 import unittest
 
-from KML.statistics.StreamingVariance import PyStreamingVariance
+from KML.statistics.summary.StreamingVariance import PyStreamingVariance
 
 
 class TestStreamingVariance(unittest.TestCase):

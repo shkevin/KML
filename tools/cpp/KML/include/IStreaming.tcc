@@ -5,7 +5,7 @@
 namespace KML
 {
     template<typename T>
-    IStreaming<T>::IStreaming(const uint64_t& windowSize): 
+    IStreaming<T>::IStreaming(const size_t& windowSize): 
         m_window(nullptr), m_windowSize(windowSize), m_historyCount(0)
     {
         if(m_windowSize > 0) 

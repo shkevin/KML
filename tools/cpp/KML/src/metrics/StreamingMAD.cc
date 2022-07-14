@@ -10,7 +10,7 @@ namespace KML
 {
     namespace Metrics
     {
-        StreamingMAD::StreamingMAD(const size_t& windowSize) : IMetric(windowSize)
+        StreamingMAD::StreamingMAD() : IMetric(0)
         {
             m_scoreMedian = new WindowedFAME();
             m_errorMedian = new WindowedFAME();
@@ -26,6 +26,12 @@ namespace KML
         {
             m_scoreMedian->update(observation);
             m_errorMedian->update(std::abs(observation - m_scoreMedian->evaluate()));
+            m_historyCount += 1;
+        }
+
+        double StreamingMAD::evaluate() const
+        {
+            return m_errorMedian->evaluate();
         }
     } // Metrics
 } // KML

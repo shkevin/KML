@@ -5,34 +5,20 @@
 #ifndef __METRIC_H__
 #define __METRIC_H__
 
+#include "IStreaming.h"
+
 namespace KML
 {
     namespace Metrics
     {
         template<typename T = double>
-        class IMetric
+        class IMetric : public IStreaming<T>
         {
             public:
                 /*!
                  * @brief
                  */
                 IMetric(const size_t& windowSize);
-
-                /*!
-                 * @brief
-                 */
-                virtual void update(const T& observation) = 0;
-
-            protected:
-                /*!
-                 * @brief
-                 */
-                size_t m_windowSize = 0;
-
-                /*!
-                 * @brief
-                 */
-                size_t m_historyCount = 0;
         };
     } // Metrics
 } // KML

@@ -17,7 +17,7 @@ namespace KML
                 /*!
                  * @brief
                  */
-                StreamingMAD(const size_t& windowSize);
+                StreamingMAD();
 
                 /*!
                  * @brief
@@ -25,9 +25,26 @@ namespace KML
                 ~StreamingMAD();
 
                 /*!
+                 * Copy Constructor.
+                 */
+                StreamingMAD(const StreamingMAD&) = delete; // No copy
+
+                /*!
+                 * Copy Assignment Operator.
+                 */
+                StreamingMAD& operator=(const StreamingMAD&) = delete; // No copy
+
+                /*!
                  * @copydoc IMetric::update()
                  */
+                using IMetric<double>::update;
                 virtual void update(const double& observation) override;
+
+                /*!
+                 * @copydoc IMetric::evaluate()
+                 */
+                using IMetric<double>::evaluate;
+                virtual double evaluate() const override;
 
             private:
                 /*!

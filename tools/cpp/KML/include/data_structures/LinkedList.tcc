@@ -96,7 +96,7 @@ namespace KML
         T LinkedList<T>::pop()
         {
             // If empty return data type.
-            if(empty() | m_size <= 0) return T();
+            if(empty()) return T();
             
             // Pop head and update reference.
             Node<T> *l_next = m_head->m_next;

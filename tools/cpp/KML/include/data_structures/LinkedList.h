@@ -77,6 +77,12 @@ namespace KML
 
             private:
                 /*!
+                 * @brief Lock used to lock operations. This allows for threading the 
+                 *        ring buffer.
+                 */
+                std::mutex m_mutex;
+
+                /*!
                  * @brief Pointer to the current head of the linked list.
                  */
                 Node<T> *m_head = nullptr;

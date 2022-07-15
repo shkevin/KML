@@ -62,13 +62,13 @@ develop:
 # Call Unittests for C++/Python.
 test:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
-	cd tools/python/KML/tests/ && python -m pytest --cov=. --doctest-modules
+	cd tools/python/KML/tests/ && python -m pytest -p no:cacheprovider --cov=. --doctest-modules
 
 # Call Unittests for C++/Python for built wheel.
 test_wheel:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR)/tools/packages && \
 	pip3 install KML*.whl --force-reinstall && \
-	python3 -m pytest ../python/KML/tests/ && \
+	python3 -m pytest -p no:cacheprovider ../python/KML/tests/ && \
 	pip uninstall KML
 
 # Test Docker image

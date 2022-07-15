@@ -1,6 +1,7 @@
 #distutils: language = c++
 from collections.abc import Iterable
 
+
 cdef class PyWindowedFAME:
     cdef WindowedFAME* c_FM
 

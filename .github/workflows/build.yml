@@ -113,7 +113,7 @@ jobs:
         working-directory: ${{github.workspace}}/build
         run: |
           ls ${{github.workspace}}
-          pip3 install ./tools/packages/KML*.whl
+          pip3 install ./tools/packages/KML*.whl --force-reinstall
           cd ./tools/python/KML/tests/
           python3 -m pytest -n auto --cov=. --doctest-modules
 

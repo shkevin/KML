@@ -115,7 +115,7 @@ jobs:
           ls ${{github.workspace}}
           pip3 install ./tools/packages/KML*.whl --force-reinstall
           cd ./tools/python/KML/tests/
-          python3 -m pytest -n auto --cov=. --doctest-modules
+          python3 -m pytest -p no:cacheprovider -n auto --cov=. --doctest-modules
 
       - name: CPP Coverage
         working-directory: ${{github.workspace}}/build

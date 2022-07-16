@@ -26,22 +26,14 @@ TEST_F(RingBufferTest, TestEmptyPop)
 TEST_F(RingBufferTest, TestCircularSize)
 {
     std::vector<double> l_data = {1, 2, 3, 4};
-    /* rb->update(l_data); */
-    for(auto i = l_data.begin(); i < l_data.end(); i++)
-    {
-        rb->update(*i);
-    }
+    rb->update(l_data);
     EXPECT_EQ(m_windowSize, rb->size());
 }
 
 TEST_F(RingBufferTest, TestCircularPop)
 {
     std::vector<double> l_data = {1, 2, 3, 4};
-    /* rb->update(l_data); */
-    for(auto i = l_data.begin(); i < l_data.end(); i++)
-    {
-        rb->update(*i);
-    }
+    rb->update(l_data);
     // Should return 3 since 3 is now the tail with window size = 2.
     EXPECT_EQ(3, rb->pop());
 }

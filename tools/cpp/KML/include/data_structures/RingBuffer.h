@@ -36,33 +36,37 @@ namespace KML
                 virtual ~RingBuffer() = delete;
 
                 /*!
-                 * @brief  Takes a single item and updates the deriving class.
-                 * @param  item The item used to update deriving class.
+                 * @copydoc IDataStructure::update()
                  */
                 virtual void update(const T& item) override;
 
+                /**
+                 * @copydoc IDataStructure::update()
+                 */
+                virtual void update(const std::vector<T>& items);
+
                 /*!
-                 * @brief Pop the oldest element from the buffer (tail).
+                 * @copydoc IDataStructure::pop()
                  */
                 virtual T pop();
 
                 /*!
-                 * @brief Determine if the ring buffer is full.
+                 * @copydoc IDataStructure::full()
                  */
                 virtual bool full() const override;
 
                 /*!
-                 * @brief Determine if the ring buffer is empty.
+                 * @copydoc IDataStructure::empty()
                  */
                 virtual bool empty() const override;
 
                 /*!
-                 * @brief Calculate the current size of the ring buffer.
+                 * @copydoc IDataStructure::size()
                  */
                 virtual size_t size() const override;
 
                 /*!
-                 * @brief Reset the ring buffer data. Size will be zero after.
+                 * @copydoc IDataStructure::reset()
                  */
                 virtual void reset() override;
 

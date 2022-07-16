@@ -27,22 +27,14 @@ TEST_F(LinkedListTest, TestEmptyPop)
 TEST_F(LinkedListTest, TestSize)
 {
     std::vector<double> l_data = {1, 2, 3, 4};
-    /* ll->update(l_data); */
-    for(auto i = l_data.begin(); i < l_data.end(); i++)
-    {
-        ll->update(*i);
-    }
+    ll->update(l_data);
     EXPECT_EQ(m_windowSize, ll->size());
 }
 
 TEST_F(LinkedListTest, TestPop)
 {
     std::vector<double> l_data = {1, 2, 3, 4};
-    /* ll->update(l_data); */
-    for(auto i = l_data.begin(); i < l_data.end(); i++)
-    {
-        ll->update(*i);
-    }
+    ll->update(l_data);
     // Should return 3 since 3 is now the head with window size = 2.
     EXPECT_EQ(3, ll->pop());
 
@@ -53,11 +45,7 @@ TEST_F(LinkedListTest, TestPop)
 TEST_F(LinkedListTest, TestReset)
 {
     std::vector<double> l_data = {1, 2, 3, 4};
-    /* ll->update(l_data); */
-    for(auto i = l_data.begin(); i < l_data.end(); i++)
-    {
-        ll->update(*i);
-    }
+    ll->update(l_data);
     ll->reset();
     EXPECT_EQ(0, ll->size());
 }

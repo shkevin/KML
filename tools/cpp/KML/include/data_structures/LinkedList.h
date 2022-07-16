@@ -41,32 +41,37 @@ namespace KML
                 LinkedList& operator=(const LinkedList&) = delete; // No copy
 
                 /*!
-                 * @copydoc IStreamingStatistic::update()
+                 * @copydoc IDataStructure::update()
                  */
                 virtual void update(const T& item) override;
 
+                /**
+                 * @copydoc IDataStructure::update()
+                 */
+                virtual void update(const std::vector<T>& items) override;
+
                 /*!
-                 * @copydoc IStreamingStatistic::pop()
+                 * @copydoc IDataStructure::pop()
                  */
                 virtual T pop() override;
 
                 /*!
-                 * @copydoc IStreamingStatistic::full()
+                 * @copydoc IDataStructure::full()
                  */
                 virtual bool full() const override;
 
                 /*!
-                 * @copydoc IStreamingStatistic::empty()
+                 * @copydoc IDataStructure::empty()
                  */
                 virtual bool empty() const override;
 
                 /*!
-                 * @copydoc IStreamingStatistic::size()
+                 * @copydoc IDataStructure::size()
                  */
                 virtual size_t size() const override;
 
                 /*!
-                 * @copydoc IStreamingStatistic::reset()
+                 * @copydoc IDataStructure::reset()
                  */
                 virtual void reset() override;
 

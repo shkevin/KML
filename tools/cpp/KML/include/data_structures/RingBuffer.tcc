@@ -36,6 +36,15 @@ namespace KML
         }
 
         template<typename T>
+        void RingBuffer<T>::update(const std::vector<T>& items) 
+        {
+            for(auto it = items.begin(); it != items.end(); it++)
+            {
+                this->update(*it);
+            }
+        }
+
+        template<typename T>
         void RingBuffer<T>::reset()
         {
             std::lock_guard<std::mutex> lock(m_mutex);

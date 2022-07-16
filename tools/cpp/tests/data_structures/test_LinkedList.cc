@@ -59,5 +59,5 @@ TEST_F(LinkedListTest, TestReset)
         ll->update(*i);
     }
     ll->reset();
-    /* EXPECT_EQ(0, ll->size()); */
+    EXPECT_EQ(0, ll->size());
 }

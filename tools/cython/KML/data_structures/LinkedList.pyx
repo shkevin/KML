@@ -32,5 +32,5 @@ cdef class PyLinkedList:
     def size(self):
         return self.c_LL.size()
 
-    def __dealloc__(self):
-        del self.c_LL
+    # def __dealloc__(self):
+    #     del self.c_LL

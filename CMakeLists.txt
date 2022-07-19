@@ -79,6 +79,20 @@ SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp")
 ADD_SUBDIRECTORY("${CPP_DIR}/KML")
 ADD_SUBDIRECTORY("${CPP_DIR}/apps")
 
+# Include Eigen Library
+OPTION(BUILD_EIGEN "Build EIGEN" OFF)
+if(BUILD_EIGEN)
+    FIND_PACKAGE(Eigen3 REQUIRED)
+    if(NOT EIGEN3_INCLUDE_DIR)
+        MESSAGE(FATAL_ERROR "EIGEN Not Found!")
+    else()
+        MESSAGE(STATUS "EIGEN Found!")
+        # ADD_DEFINITIONS(-DEIGEN)
+        ADD_COMPILE_DEFINITIONS(-DEIGEN)
+        INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIR})
+    endif()
+endif(BUILD_EIGEN)
+
 ################################
 # Python
 ################################

@@ -8,6 +8,18 @@ DOCKER_IMAGE=kml
 GIT_COMMIT_ID=$$(git log --format="%H" -n 1 | head -c 7)
 DOCKER_TAG=latest
 
+define ANNOUNCE_BODY
+ /$$   /$$ /$$      /$$ /$$
+| $$  /$$/| $$$    /$$$| $$
+| $$ /$$/ | $$$$  /$$$$| $$
+| $$$$$/  | $$ $$/$$ $$| $$
+| $$  $$  | $$  $$$| $$| $$
+| $$\  $$ | $$\  $ | $$| $$
+| $$ \  $$| $$ \/  | $$| $$$$$$$$
+|__/  \__/|__/     |__/|________/
+endef
+export ANNOUNCE_BODY
+
 # Default Make
 all: directories compile-all test coverage
 	@echo '*******************Compiled*********************'
@@ -26,6 +38,7 @@ c: directories
 		-DBUILD_PYTHON=OFF \
 		-DBUILD_COVERAGE=ON \
 		-DBUILD_DOCUMENTATION=OFF && \
+		-DBUILD_EIGEN=ON && \
 	make
 
 # Compile Cython/Python code

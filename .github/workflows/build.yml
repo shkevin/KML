@@ -66,7 +66,7 @@ jobs:
       - name: Install dependencies on windows
         if: startsWith(matrix.config.os, 'windows')
         run: |
-          choco install ninja cmake gcovr doxygen
+          choco install ninja cmake gcovr doxygen libeigen3-dev
           ninja --version
           cmake --version
 

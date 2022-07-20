@@ -37,9 +37,9 @@ c: directories
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=OFF \
 		-DBUILD_COVERAGE=ON \
-		-DBUILD_DOCUMENTATION=OFF && \
+		-DBUILD_DOCUMENTATION=OFF \
 		-DBUILD_EIGEN=ON && \
-	make
+	make -j
 
 # Compile Cython/Python code
 python: directories
@@ -60,9 +60,10 @@ compile-all: directories
 	    -DCMAKE_BUILD_TYPE=Debug \
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=ON \
-		-DBUILD_COVERAGE=ON \
-		-DBUILD_DOCUMENTATION=OFF && \
-	make
+		-DBUILD_COVERAGE=OFF \
+		-DBUILD_DOCUMENTATION=OFF \
+		-DBUILD_EIGEN=ON && \
+	make -j
 
 # Mount repo to Docker image
 develop:

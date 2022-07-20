@@ -17,15 +17,23 @@
 /* /1* #define KMatrix KSimpleMatrix *1/ */
 /* #endif //if defined(BUILD_EIGEN) */
 
+#ifdef EIGEN
 #include <eigen3/Eigen/Dense>
+typedef Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> Base;
+#else
+#include "KSimpleMatrix.h"
+typedef KML::DataStructures::KSimpleMatrix Base;
+#endif // ifdef EIGEN
 
 namespace KML
 {
     namespace DataStructures
     {
-        class KMatrix : public Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic>
+        /* class KMatrix : public Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> */
+        class KMatrix : public Base
         {
             public:
+#ifdef EIGEN
             	KMatrix(void) : Eigen::MatrixXd() {}
 
 				// Inherit the Eigen Constructors.
@@ -44,6 +52,11 @@ namespace KML
     			    this->Eigen::MatrixXd::operator=(other);
     			    return *this;
     			}
+#else
+                using KML::DataStructures::KSimpleMatrix::KSimpleMatrix;
+#endif // ifdef EIGEN
+
+                // Additional declarations shared across Eigen/KSimpleMatrix here.
         };
     } // DataStructures
 } // KML

@@ -20,6 +20,16 @@ namespace KML
                  */
                 KSimpleMatrix(const size_t numRows, const size_t numCols);
 
+                /*!
+                 * @brief
+                 */
+                size_t rows() const;
+
+                /*!
+                 * @brief
+                 */
+                size_t cols() const;
+
             private:
                 /*!
                  * @brief

@@ -15,5 +15,15 @@ namespace KML
         {
             throw std::runtime_error("KSimpleMatrix not written! Ensure BUILD_EIGEN ON");
         }
+
+        size_t KSimpleMatrix::rows() const
+        {
+            return m_numRows;
+        }
+
+        size_t KSimpleMatrix::cols() const
+        {
+            return m_numCols;
+        }
     } // DataStructures
 } // KML

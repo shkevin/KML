@@ -1,6 +1,6 @@
 /*!
- * @file
- * @brief
+ * @file IModel.h
+ * @brief Provides the interface for Neural Network models.
  */
 #ifndef __IMODEL_H__
 #define __IMODEL_H__
@@ -20,6 +20,9 @@ namespace KML
     {
         namespace Models
         {
+            /*!
+             * @brief Abstract interface for Neural Network models.
+             */
             class IModel : public IModule
             {
                 public:

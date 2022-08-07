@@ -1,6 +1,6 @@
 /*!
  * @file ITransformer.h
- * @brief
+ * @brief Provides the interface for the Transformers.
  */
 #ifndef __STREAMING_TRANSFORMER_H__
 #define __STREAMING_TRANSFORMER_H__
@@ -12,12 +12,13 @@ namespace KML
     namespace Transformers
     {
 
+        /*! @brief An Abstract interface for transformers*/
         template<typename T = double>
         class ITransformer
         {
             public:
                 /*!
-                 * @brief
+                 * @brief Default Constructor.
                  */
                 ITransformer();
 
@@ -32,26 +33,26 @@ namespace KML
                 ITransformer& operator=(const ITransformer& a_rhs) = delete;
 
                 /*!
-                 * @brief
+                 * @brief Fit transformer on a single observation.
                  */
                 virtual void fit(const T& observation) = 0;
 
                 /*!
-                 * @brief
+                 * @brief Fit transformer on observations.
                  */
                 virtual void fit(const std::vector<T>& observations);
 
                 /*!
-                 * @brief
+                 * @brief Transform the given observation.
                  */
                 virtual T transform(const T& observation) = 0;
 
                 /*!
-                 * @brief
+                 * @brief Transform the given observations.
                  */
                 virtual std::vector<T>& transform(const std::vector<T>& observations);
         };
-    }
-}
+    } // Transformers
+} // KML
 
 #endif // __STREAMING_TRANSFORMER_H__

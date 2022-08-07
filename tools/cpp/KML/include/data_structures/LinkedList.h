@@ -1,5 +1,5 @@
 /*!
- * @file DoublyLinkedList.h
+ * @file LinkedList.h
  * @brief Provides the declarations for the Doubly Linked List data structure.
  */
 #ifndef __LINKED_LIST_H__

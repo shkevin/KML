@@ -99,14 +99,14 @@ QUIET                  = NO
 WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
-WARN_NO_PARAMDOC       = NO
-WARN_AS_ERROR          = NO
+WARN_NO_PARAMDOC       = YES
+WARN_AS_ERROR          = YES
 WARN_FORMAT            = "$file:$line: $text"
 WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/tools/cpp/KML/src
+INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/tools/cpp/KML/
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.cc \
@@ -159,6 +159,7 @@ RECURSIVE              = YES
 EXCLUDE                =
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       =
+EXCLUDE_PATTERNS       = */lib/*
 EXCLUDE_SYMBOLS        =
 EXAMPLE_PATH           =
 EXAMPLE_PATTERNS       = *

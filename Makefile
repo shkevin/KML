@@ -50,7 +50,7 @@ python: directories
 	    -DBUILD_TESTING=OFF \
 		-DBUILD_PYTHON=ON \
 		-DBUILD_DOCUMENTATION=OFF && \
-	make
+	make -j
 
 # Compile C++/Cython/Documentation code.
 compile-all: directories

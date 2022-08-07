@@ -87,7 +87,7 @@ if(BUILD_EIGEN)
         MESSAGE(FATAL_ERROR "EIGEN Not Found!")
     else()
         MESSAGE(STATUS "EIGEN Found!")
-        ADD_DEFINITIONS(-DEIGEN) # Doesn't seem to work?
+        add_compile_options(-DWITH_EIGEN)
         INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIR})
     endif()
 endif(BUILD_EIGEN)

@@ -6,8 +6,8 @@
  * KML streaming statitic. Every statistic should inherit from this
  * interface.
  */
-#ifndef __STREAMING_STATISTIC_H__
-#define __STREAMING_STATISTIC_H__
+#ifndef __ISTREAMING_STATISTIC_H__
+#define __ISTREAMING_STATISTIC_H__
 
 #include <cstdint>
 #include <vector>
@@ -50,4 +50,4 @@ namespace KML
 
 #include "IStreamingStatistic.tcc"
 
-#endif // __STREAMING_STATISTIC_H__
+#endif // __ISTREAMING_STATISTIC_H__

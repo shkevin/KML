@@ -15,10 +15,20 @@ namespace KML
         {
             public:
                 /*!
+                 * @brief Default Constructor.
+                 */
+                KSimpleMatrix() = default;
+
+                /*!
                  * @brief THIS CONSTRUCTOR NEEDS TO MIMIC EIGEN MATRIXXD CONSTRUCTOR!
                  * This class is simply a place holder for now.
                  */
                 KSimpleMatrix(const size_t numRows, const size_t numCols);
+
+                /*!
+                 * @brief Default Destructor.
+                 */
+                ~KSimpleMatrix();
 
                 /*!
                  * @brief

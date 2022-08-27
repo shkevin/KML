@@ -17,15 +17,15 @@
     <img src="doc/images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">KML</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    Streaming machine learning framework.
     <br />
     <a href="https://github.com/shkevin/KML"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <!-- <a href="https://github.com/shkevin/KML">View Demo</a> -->
+    <a href="https://github.com/shkevin/KML/tools/python/notebooks">View Examples</a>
     ·
     <a href="https://github.com/shkevin/KML/issues">Report Bug</a>
     ·
@@ -89,10 +89,8 @@ Follow the guidelines for building and installing KML.
 
 Software used in building KML are listed below.
 
-|               |                       |                                   |
-|---------------|-----------------------|-----------------------------------|
 |Software       |Version                |Description                        |
-|---            |---                    |---                                |
+|---------------|-----------------------|-----------------------------------|
 |cmake          |3.14+                  |cmake for building project         |
 |c++11 compiler |e.g., gnu c++, clang++ |kml uses c++11 for developed tools |
 |cython         |0.29.24+               |cython version required to compile |
@@ -164,8 +162,8 @@ used to build the wheel, and DIST is the OS distribution used during build (e.g.
 
 - [X] Basic summary statistics
 - [X] Windowed data structures
-- [] Neural Network Framework
-    - [] Streaming Autoencoder
+- [ ] Neural Network Framework
+	- [ ] Streaming Autoencoder
 
 See the [open issues](https://github.com/shkevin/KML/issues) for a full list of proposed features (and known issues).
 
@@ -232,10 +230,10 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/
 
-[cpp-shield]: https://img.shields.io/badge/-C++-black.svg?color=Blue&style=flat-squarae&logo=cplusplus&colorB=555
+[cpp-shield]: https://img.shields.io/badge/-C++-black.svg?color=Blue&style=flat-square&logo=cplusplus&colorB=555
 [cpp-url]: https://isocpp.org/wiki/faq/cpp11
-[python-shield]: https://img.shields.io/badge/-Python-black.svg?color=Blue&style=flat-squarae&logo=python&colorB=555
+[python-shield]: https://img.shields.io/badge/-Python-black.svg?color=Blue&style=flat-square&logo=python&colorB=555
 [python-url]: https://www.python.org/
-[eigen-shield]: https://img.shields.io/badge/-Eigen3-black.svg?color=Blue&style=flat-squarae&logo=cplusplus&colorB=555
+[eigen-shield]: https://img.shields.io/badge/-Eigen3-black.svg?color=Blue&style=flat-square&logo=cplusplus&colorB=555
 [eigen-url]: https://eigen.tuxfamily.org/index.php?title=Main_Page
 <!-- [product-screenshot]: images/screenshot.png -->

@@ -165,6 +165,6 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 [issues-url]: https://github.com/shkevin/KML/issues
 [license-shield]: https://img.shields.io/github/license/shkevin/KML
 [license-url]: https://github.com/shkevin/KML/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=flat&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/
 <!-- [product-screenshot]: images/screenshot.png -->

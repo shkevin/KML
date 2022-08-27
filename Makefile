@@ -26,7 +26,7 @@ c: directories
 		-DBUILD_PYTHON=OFF \
 		-DBUILD_COVERAGE=ON \
 		-DBUILD_DOCUMENTATION=OFF && \
-	make
+	make -j
 
 # Compile Cython/Python code
 python: directories
@@ -37,7 +37,7 @@ python: directories
 	    -DBUILD_TESTING=OFF \
 		-DBUILD_PYTHON=ON \
 		-DBUILD_DOCUMENTATION=OFF && \
-	make
+	make -j
 
 # Compile C++/Cython/Documentation code.
 compile-all: directories
@@ -49,7 +49,7 @@ compile-all: directories
 		-DBUILD_PYTHON=ON \
 		-DBUILD_COVERAGE=ON \
 		-DBUILD_DOCUMENTATION=OFF && \
-	make
+	make -j
 
 # Mount repo to Docker image
 develop:
@@ -86,7 +86,7 @@ coverage:
 docs:
 	[ -d $(BUILDDIR)/docs ] && \
 	cd $(BUILDDIR)/docs/latex && \
-	make
+	make -j
 
 # Remake entire project.
 remake: clean all

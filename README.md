@@ -35,7 +35,7 @@
 </div>
 
 <!-- TABLE OF CONTENTS -->
-<details>
+<details open>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -74,8 +74,9 @@ other researchers, data scientists, or machine learning engineers.
 KML was developed with these libraries and frameworks.
 
 * [![C++][cpp-shield]][cpp-url]
-* [![Eigen3][eigen-shield]][eigen-url]
+    * [![Eigen3][eigen-shield]][eigen-url]
 * [![Python][python-shield]][python-url]
+    * [![Cython][cython-shield]][cython-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -90,12 +91,12 @@ Software used in building KML are listed below.
 
 |Software       |Version                |Description                        |
 |---------------|-----------------------|-----------------------------------|
-|cmake          |3.14+                  |cmake for building project         |
-|c++11 compiler |e.g., gnu c++, clang++ |kml uses c++11 for developed tools |
-|cython         |0.29.24+               |cython version required to compile |
-|python3        |3+                     |python version supported           |
-|doxygen        |1.8.17+ (optional)     |for building c++ documentation     |
-|gcovr          |4.2+    (optional)     |for creating c++ coverage          |
+|Cmake          |3.14+                  |Cmake for building project         |
+|C++11 compiler |e.g., gnu c++, clang++ |KML uses C++11 for developed tools |
+|Cython         |0.29.24+               |Cython version required to compile |
+|Python3        |3+                     |Python version supported           |
+|Doxygen        |1.8.17+ (optional)     |For building C++ documentation     |
+|gcovr          |4.2+    (optional)     |For creating C++ coverage          |
 
 ### Building
 
@@ -154,6 +155,9 @@ used to build the wheel, and DIST is the OS distribution used during build (e.g.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+Common Python usage examples can be found in the "View Examples" link above. See the documentation for a
+more detailed usage for C++.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
@@ -187,9 +191,9 @@ Operations:
 If you have a suggestion that would make this better, please fork the repo and create a pull request.
 
 1. Fork the Project
-2. Create your Feature Branch
-3. Commit your Changes
-4. Push to the Branch
+2. Create your Feature Branch (`git checkout -b feature/NewFeature`)
+3. Commit your Changes (`git commit -m 'Adding some new feature'`)
+4. Push to the Branch (`git push origin feature/NewFeature`)
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -211,7 +215,7 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
-<!-- ## Acknowledgments -->
+## Acknowledgments
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -229,10 +233,12 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/
 
+<!-- Languages/Frameworks -->
 [cpp-shield]: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
 [cpp-url]: https://isocpp.org/wiki/faq/cpp11
-[python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
-[python-url]: https://www.python.org/
 [eigen-shield]: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf
 [eigen-url]: https://eigen.tuxfamily.org/index.php?title=Main_Page
-<!-- [product-screenshot]: images/screenshot.png -->
+[python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
+[python-url]: https://www.python.org/
+[cython-shield]: https://img.shields.io/badge/-Cython-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellow
+[cython-url]: https://cython.org/

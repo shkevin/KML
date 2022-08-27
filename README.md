@@ -211,46 +211,28 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
-<!-- ## Acknowledgments -->
+## Acknowledgments
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- [contributors-shield]: https://img.shields.io/github/contributors/shkevin/KML -->
-<!-- [contributors-url]: https://github.com/shkevin/KML/graphs/contributors -->
-<!-- [forks-shield]: https://img.shields.io/github/forks/shkevin/KML -->
-<!-- [forks-url]: https://github.com/shkevin/KML/network/members -->
-<!-- [stars-shield]: https://img.shields.io/github/stars/shkevin/shields -->
-<!-- [stars-url]: https://github.com/shkevin/KML/stargazers -->
-<!-- [issues-shield]: https://img.shields.io/github/issues/shkevin/KML -->
-<!-- [issues-url]: https://github.com/shkevin/KML/issues -->
-<!-- [license-shield]: https://img.shields.io/github/license/shkevin/KML -->
-<!-- [license-url]: https://github.com/shkevin/KML/blob/master/LICENSE.txt -->
-<!-- [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555 -->
-<!-- [linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/ -->
-<!-- [cpp-shield]: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black -->
-<!-- [cpp-url]: https://isocpp.org/wiki/faq/cpp11 -->
-<!-- [python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen -->
-<!-- [python-url]: https://www.python.org/ -->
-<!-- [eigen-shield]: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf -->
-<!-- [eigen-url]: https://eigen.tuxfamily.org/index.php?title=Main_Page -->
-
-[contributors-shield]: http://192.168.1.54:32790/github/contributors/shkevin/KML
+[contributors-shield]: https://img.shields.io/github/contributors/shkevin/KML
 [contributors-url]: https://github.com/shkevin/KML/graphs/contributors
-[forks-shield]: http://192.168.1.54:32790/github/forks/shkevin/KML
+[forks-shield]: https://img.shields.io/github/forks/shkevin/KML
 [forks-url]: https://github.com/shkevin/KML/network/members
-[stars-shield]: http://192.168.1.54:32790/github/stars/shkevin/shields
+[stars-shield]: https://img.shields.io/github/stars/shkevin/shields
 [stars-url]: https://github.com/shkevin/KML/stargazers
-[issues-shield]: http://192.168.1.54:32790/github/issues/shkevin/KML
+[issues-shield]: https://img.shields.io/github/issues/shkevin/KML
 [issues-url]: https://github.com/shkevin/KML/issues
-[license-shield]: http://192.168.1.54:32790/github/license/shkevin/KML
+[license-shield]: https://img.shields.io/github/license/shkevin/KML
 [license-url]: https://github.com/shkevin/KML/blob/master/LICENSE.txt
-[linkedin-shield]: http://192.168.1.54:32790/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/
-[cpp-shield]: http://192.168.1.54:32790/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
+[cpp-shield]: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
 [cpp-url]: https://isocpp.org/wiki/faq/cpp11
-[python-shield]: http://192.168.1.54:32790/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
+[python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
 [python-url]: https://www.python.org/
-[eigen-shield]: http://192.168.1.54:32790/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf
+[eigen-shield]: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf
 [eigen-url]: https://eigen.tuxfamily.org/index.php?title=Main_Page
+
 <!-- [product-screenshot]: images/screenshot.png -->

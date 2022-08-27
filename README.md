@@ -35,7 +35,7 @@
 </div>
 
 <!-- TABLE OF CONTENTS -->
-<details>
+<details open>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -241,4 +241,4 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 [python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
 [python-url]: https://www.python.org/
 [cython-shield]: https://img.shields.io/badge/-Cython-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellow
-[python-url]: https://cython.org/
+[cython-url]: https://cython.org/

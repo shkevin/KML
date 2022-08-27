@@ -154,16 +154,15 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-https://img.shields.io/github/forks/shkevin/KML?color=Blue&style=social
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [contributors-shield]: https://img.shields.io/github/contributors/shkevin/KML.svg?color=Blue&style=social
 [contributors-url]: https://github.com/shkevin/KML/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/shkevin/KML?style=social
+[forks-shield]: https://img.shields.io/github/forks/shkevin/KML?color=Blue&style=social
 [forks-url]: https://github.com/shkevin/KML/network/members
 [stars-shield]: https://img.shields.io/github/stars/shkevin/KML.svg?color=Blue&style=social
 [stars-url]: https://github.com/shkevin/KML/stargazers
-[issues-shield]: https://img.shields.io/github/issues/shkevin/KML.svg?color=Yello&style=social
+[issues-shield]: https://img.shields.io/github/issues/shkevin/KML
 [issues-url]: https://github.com/shkevin/KML/issues
 [license-shield]: https://img.shields.io/github/license/shkevin/KML?style=social
 [license-url]: https://github.com/shkevin/KML/blob/master/LICENSE.txt

@@ -154,17 +154,16 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield](https://img.shields.io/github/contributors/shkevin/KML)
+[contributors-shield]: https://img.shields.io/github/contributors/shkevin/KML
 [contributors-url]: https://github.com/shkevin/KML/graphs/contributors
-[forks-shield](https://img.shields.io/github/forks/shkevin/KML)
+[forks-shield]: https://img.shields.io/github/forks/shkevin/KML
 [forks-url]: https://github.com/shkevin/KML/network/members
-[stars-shield](https://img.shields.io/github/stars/shkevin/shields)
+[stars-shield]: https://img.shields.io/github/stars/shkevin/shields
 [stars-url]: https://github.com/shkevin/KML/stargazers
-[issues-shield](https://img.shields.io/github/issues/shkevin/KML)
+[issues-shield]: https://img.shields.io/github/issues/shkevin/KML
 [issues-url]: https://github.com/shkevin/KML/issues
-[license-shield](https://img.shields.io/github/license/shkevin/KML)
+[license-shield]: https://img.shields.io/github/license/shkevin/KML
 [license-url]: https://github.com/shkevin/KML/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=flat&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/

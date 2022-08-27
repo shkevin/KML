@@ -230,10 +230,10 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/
 
-[cpp-shield]: https://img.shields.io/badge/-C++-black.svg?color=Blue&style=flat-square&logo=cplusplus&colorB=555
+[cpp-shield]: https://img.shields.io/badge/-C++-black.svg?color=Blue&logo=cplusplus
 [cpp-url]: https://isocpp.org/wiki/faq/cpp11
-[python-shield]: https://img.shields.io/badge/-Python-black.svg?color=Blue&style=flat-square&logo=python&colorB=555
+[python-shield]: https://img.shields.io/badge/-Python-black.svg?color=Blue&logo=python
 [python-url]: https://www.python.org/
-[eigen-shield]: https://img.shields.io/badge/-Eigen3-black.svg?color=Blue&style=flat-square&logo=cplusplus&colorB=555
+[eigen-shield]: https://img.shields.io/badge/-Eigen3-black.svg?color=Blue&logo=cplusplus
 [eigen-url]: https://eigen.tuxfamily.org/index.php?title=Main_Page
 <!-- [product-screenshot]: images/screenshot.png -->

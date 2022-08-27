@@ -144,9 +144,9 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 <!-- MARKDOWN LINKS & IMAGES -->
 [contributors-shield]: https://img.shields.io/github/contributors/shkevin/KML.svg?style=for-the-badge
 [contributors-url]: https://github.com/shkevin/KML/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/shkevin/KML.svg?style=for-the-badge
+[forks-shield]: [https://img.shields.io/github/forks/shkevin/KML.svg?style=for-the-badge](https://img.shields.io/github/forks/shkevin/KML?style=social)
 [forks-url]: https://github.com/shkevin/KML/network/members
-[stars-shield]: https://img.shields.io/github/stars/shkevin/KML.svg?style=for-the-badge
+[stars-shield]: [https://img.shields.io/github/stars/shkevin/KML.svg?style=for-the-badge](https://img.shields.io/github/stars/shkevin/KML?style=social)
 [stars-url]: https://github.com/shkevin/KML/stargazers
 [issues-shield]: https://img.shields.io/github/issues/shkevin/KML.svg?style=for-the-badge
 [issues-url]: https://github.com/shkevin/KML/issues

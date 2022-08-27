@@ -90,12 +90,12 @@ Software used in building KML are listed below.
 
 |Software       |Version                |Description                        |
 |---------------|-----------------------|-----------------------------------|
-|cmake          |3.14+                  |cmake for building project         |
-|c++11 compiler |e.g., gnu c++, clang++ |kml uses c++11 for developed tools |
-|cython         |0.29.24+               |cython version required to compile |
-|python3        |3+                     |python version supported           |
-|doxygen        |1.8.17+ (optional)     |for building c++ documentation     |
-|gcovr          |4.2+    (optional)     |for creating c++ coverage          |
+|Cmake          |3.14+                  |Cmake for building project         |
+|C++11 compiler |e.g., gnu c++, clang++ |KML uses C++11 for developed tools |
+|Cython         |0.29.24+               |Cython version required to compile |
+|Python3        |3+                     |Python version supported           |
+|Doxygen        |1.8.17+ (optional)     |For building C++ documentation     |
+|gcovr          |4.2+    (optional)     |For creating C++ coverage          |
 
 ### Building
 
@@ -216,23 +216,41 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/shkevin/KML
-[contributors-url]: https://github.com/shkevin/KML/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/shkevin/KML
-[forks-url]: https://github.com/shkevin/KML/network/members
-[stars-shield]: https://img.shields.io/github/stars/shkevin/shields
-[stars-url]: https://github.com/shkevin/KML/stargazers
-[issues-shield]: https://img.shields.io/github/issues/shkevin/KML
-[issues-url]: https://github.com/shkevin/KML/issues
-[license-shield]: https://img.shields.io/github/license/shkevin/KML
-[license-url]: https://github.com/shkevin/KML/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/
+<!-- [contributors-shield]: https://img.shields.io/github/contributors/shkevin/KML -->
+<!-- [contributors-url]: https://github.com/shkevin/KML/graphs/contributors -->
+<!-- [forks-shield]: https://img.shields.io/github/forks/shkevin/KML -->
+<!-- [forks-url]: https://github.com/shkevin/KML/network/members -->
+<!-- [stars-shield]: https://img.shields.io/github/stars/shkevin/shields -->
+<!-- [stars-url]: https://github.com/shkevin/KML/stargazers -->
+<!-- [issues-shield]: https://img.shields.io/github/issues/shkevin/KML -->
+<!-- [issues-url]: https://github.com/shkevin/KML/issues -->
+<!-- [license-shield]: https://img.shields.io/github/license/shkevin/KML -->
+<!-- [license-url]: https://github.com/shkevin/KML/blob/master/LICENSE.txt -->
+<!-- [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555 -->
+<!-- [linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/ -->
+<!-- [cpp-shield]: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black -->
+<!-- [cpp-url]: https://isocpp.org/wiki/faq/cpp11 -->
+<!-- [python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen -->
+<!-- [python-url]: https://www.python.org/ -->
+<!-- [eigen-shield]: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf -->
+<!-- [eigen-url]: https://eigen.tuxfamily.org/index.php?title=Main_Page -->
 
-[cpp-shield]: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
+[contributors-shield]: http://192.168.1.54:32790/github/contributors/shkevin/KML
+[contributors-url]: https://github.com/shkevin/KML/graphs/contributors
+[forks-shield]: http://192.168.1.54:32790/github/forks/shkevin/KML
+[forks-url]: https://github.com/shkevin/KML/network/members
+[stars-shield]: http://192.168.1.54:32790/github/stars/shkevin/shields
+[stars-url]: https://github.com/shkevin/KML/stargazers
+[issues-shield]: http://192.168.1.54:32790/github/issues/shkevin/KML
+[issues-url]: https://github.com/shkevin/KML/issues
+[license-shield]: http://192.168.1.54:32790/github/license/shkevin/KML
+[license-url]: https://github.com/shkevin/KML/blob/master/LICENSE.txt
+[linkedin-shield]: http://192.168.1.54:32790/badge/-LinkedIn-black.svg?color=Blue&style=social&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/
+[cpp-shield]: http://192.168.1.54:32790/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
 [cpp-url]: https://isocpp.org/wiki/faq/cpp11
-[python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
+[python-shield]: http://192.168.1.54:32790/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
 [python-url]: https://www.python.org/
-[eigen-shield]: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf
+[eigen-shield]: http://192.168.1.54:32790/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf
 [eigen-url]: https://eigen.tuxfamily.org/index.php?title=Main_Page
 <!-- [product-screenshot]: images/screenshot.png -->

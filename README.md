@@ -231,8 +231,8 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 
 [cpp-shield]: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
 [cpp-url]: https://isocpp.org/wiki/faq/cpp11
-[python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat
+[python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellow
 [python-url]: https://www.python.org/
-[eigen-shield]: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat
+[eigen-shield]: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf
 [eigen-url]: https://eigen.tuxfamily.org/index.php?title=Main_Page
 <!-- [product-screenshot]: images/screenshot.png -->

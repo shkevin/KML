@@ -3,12 +3,13 @@
 
 <!-- PROJECT SHIELDS -->
 [![CI](https://github.com/shkevin/KML/actions/workflows/build.yml/badge.svg)](https://github.com/shkevin/KML/actions/workflows/build.yml)
-<!-- [![Contributors][contributors-shield]][contributors-url] -->
-<!-- [![Forks][forks-shield]][forks-url] -->
-<!-- [![Stargazers][stars-shield]][stars-url] -->
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+
+<!-- [![Contributors][contributors-shield]][contributors-url] -->
+<!-- [![Forks][forks-shield]][forks-url] -->
+<!-- [![Stargazers][stars-shield]][stars-url] -->
 
 <!-- PROJECT LOGO -->
 <br />
@@ -232,8 +233,8 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 
 [cpp-shield]: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat
 [cpp-url]: https://isocpp.org/wiki/faq/cpp11
-[python-shield]: https://img.shields.io/badge/-Python-.svg?color=Blue&logo=python
+[python-shield]: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat
 [python-url]: https://www.python.org/
-[eigen-shield]: https://img.shields.io/badge/-Eigen3-.svg?color=Blue&logo=cplusplus
+[eigen-shield]: https://img.shields.io/badge/-Eigen3-00599?logo=cplusplus&logoColor=white&style=flat
 [eigen-url]: https://eigen.tuxfamily.org/index.php?title=Main_Page
 <!-- [product-screenshot]: images/screenshot.png -->

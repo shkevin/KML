@@ -108,6 +108,19 @@ See the [open issues](https://github.com/shkevin/KML/issues) for a full list of 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
+## Project leaders
+
+Maintainers:
+
+- [shkevin](https://github.com/shkevin)
+
+Operations:
+
+- [shkevin](https://github.com/shkevin)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
 ## Contributing
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request.
@@ -142,16 +155,16 @@ Project Link: [https://github.com/shkevin/KML](https://github.com/shkevin/KML)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/shkevin/KML.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/shkevin/KML.svg?style=social
 [contributors-url]: https://github.com/shkevin/KML/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/shkevin/KML.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/shkevin/KML?style=social
 [forks-url]: https://github.com/shkevin/KML/network/members
-[stars-shield]: https://img.shields.io/github/stars/shkevin/KML.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/shkevin/KML.svg??style=social
 [stars-url]: https://github.com/shkevin/KML/stargazers
-[issues-shield]: https://img.shields.io/github/issues/shkevin/KML.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/shkevin/KML.svg??style=social
 [issues-url]: https://github.com/shkevin/KML/issues
-[license-shield]: https://img.shields.io/github/license/shkevin/KML
+[license-shield]: https://img.shields.io/github/license/shkevin/KML?style=social
 [license-url]: https://github.com/shkevin/KML/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=social&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kevin-cox-640334195/
 <!-- [product-screenshot]: images/screenshot.png -->

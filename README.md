@@ -15,7 +15,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/shkevin/KML">
-    <img src="doc/images/HQ 01-03.png" alt="Logo" width="80" height="80">
+    <img src="doc/images/HQ 01-03.jpg" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">KML</h3>

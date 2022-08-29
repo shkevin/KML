@@ -102,13 +102,13 @@ if(BUILD_PYTHON)
     SET(BUILD_DIR ${CMAKE_BINARY_DIR})
     SET(PACK_DIR ${CMAKE_BINARY_DIR}/tools/packages)
     SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
-    file(MAKE_DIRECTORY ${BUILD_DIR}/KML)
+    FILE(MAKE_DIRECTORY ${BUILD_DIR}/KML)
 
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py
             sdist --dist-dir=${PACK_DIR}
             egg_info --egg-base=${BUILD_DIR}/KML
-            build --build-base=${BUILD_DIR}/KML --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/KML
+            build --build-base=${BUILD_DIR}/build --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/KML
             build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}
             bdist_wheel --bdist-dir=${BUILD_DIR}/build --dist-dir=${PACK_DIR}
         COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}

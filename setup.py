@@ -1,21 +1,15 @@
 #!/usr/bin/env python
+
+# from distutils.command.build import build as _build
 from glob import glob
-from os import scandir, walk
-from os.path import relpath, sep
+from os import walk
+from os.path import sep
 from pathlib import Path, PurePath
 from sys import argv
 
-from setuptools import Extension, setup
+from setuptools import Extension, find_packages, setup
+from setuptools.command.build import build as _build
 from setuptools.command.build_ext import build_ext as _build_ext
-
-# check if cython is installed.
-try:
-    from Cython.Build import cythonize
-except ImportError:
-    print("Cython could not be found!")
-    use_cython = False
-else:
-    use_cython = True
 
 # Get Cython sources with their C++ files.
 PACKAGE_NAME = "KML"
@@ -82,19 +76,32 @@ class my_build_ext(_build_ext):
         super().build_extensions()
 
 
+class my_build(_build):
+    def finalize_options(self):
+        super().finalize_options()
+        __builtins__.__NUMPY_SETUP__ = False
+        import numpy
+
+        for extension in self.distribution.ext_modules:
+            extension.include_dirs.append(numpy.get_include())
+        from Cython.Build import cythonize
+
+        self.distribution.ext_modules = cythonize(
+            self.distribution.ext_modules, language_level=3
+        )
+
+
 # Build the Cython extensions.
 ext_modules = []
 to_strip = str(CYTHON_DIR) + sep
 pyx_to_strip = str(PARENT_DIR) + sep
 for pyx in pyx_sources:
-    print(pyx)
     name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
     pyx = pyx.replace(pyx_to_strip, "")
     ext_modules.append(
         Extension(
             name=name,
             sources=[pyx],
-            library_dirs=include_all,  # Path to .a or .so file(s)
             include_dirs=include_all,  # Path to .h files
             language="c++",
             extra_compile_args=CPPFLAGS,
@@ -104,18 +111,15 @@ for pyx in pyx_sources:
 setup(
     name=PACKAGE_NAME,
     version=get_version(),
-    description="Streaming Machine Learning in C++/Cython.",
+    description="Streaming/Online Machine Learning in C++/Cython.",
     long_description=get_readme(),
     long_description_content_type="text/markdown",
     author="Kevin Cox",
     author_email="shkevin@yahoo.com",
     url="https://github.com/shkevin/KML",
-    cmdclass={"build_ext": my_build_ext},
-    ext_modules=cythonize(
-        ext_modules,
-        compiler_directives={"language_level": "3"},
-        build_dir=get_buildlib(),
-    ),
+    cmdclass={"build_ext": my_build_ext, "build": my_build},
+    ext_modules=ext_modules,
+    packages=find_packages(),
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
@@ -129,6 +133,7 @@ setup(
         "Operating System :: MacOS",
         "Operating System :: Unix",
     ],
+    zip_safe=False,
     python_requires=">=3.6",
     setup_requires=["wheel", "cython>=0.24.1"],
     install_requires=get_reqs("requirements.txt"),

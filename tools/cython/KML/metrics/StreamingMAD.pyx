@@ -22,6 +22,8 @@ cdef class PyStreamingMAD:
 
     Streaming Median Absolute Deviation (MAD) wrapper for the C++ StreamingMAD class.
     This code contains the public interface usage for the StreamingMAD metric.
+    The mad value is calculated using the WindowedFame code, and inherently adjusts
+    for data drift.
 
     Attributes:
         c_MAD (StreamingMAD*): Pointer to the C++ StreamingMAD implementation.
@@ -53,6 +55,9 @@ cdef class PyStreamingMAD:
 
         Retrieve the current streaming median absolute deviation
         value from the previous items updated.
+
+        Returns:
+            float: Median Absoluate Deviation for seen items.
         """
         return self.c_MAD.evaluate()
 

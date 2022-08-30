@@ -12,13 +12,11 @@ from setuptools import Extension, setup
 from setuptools.command.build_ext import build_ext as _build_ext
 
 # Get Cython sources with their C++ files.
-PACKAGE_NAME = "KML"
 PARENT_DIR = Path(__file__).resolve().parent
 CYTHON_DIR = Path(PARENT_DIR, "tools/cython")
 SRC_DIR = Path(PARENT_DIR, "tools/cpp/KML/src")
 HEADERS_DIR = Path(PARENT_DIR, "tools/cpp/KML/include")
 CPPFLAGS = ["-O3", "-std=c++11"]
-REQUIREMENTS_DIR = "./tools/python/KML/requirements/"
 pyx_location = str(PurePath("/KML/**/*.pyx"))
 pyx_sources = glob(f"{CYTHON_DIR}{pyx_location}", recursive=True)
 include_dirs = [x[0] for x in walk(HEADERS_DIR)]
@@ -111,7 +109,6 @@ def get_extensions() -> List[Extension]:
     return ext_modules
 
 
-print(get_buildlib())
 setup(
     cmdclass={"build_ext": my_build_ext, "build": my_build},
     ext_modules=get_extensions(),

@@ -29,11 +29,11 @@ cdef class PyLinkedList:
     the public interface usage for the LinkedList data structure.
 
     Args:
-        window_size (int): Human readable string describing the exception.
+        window_size (int): Desired window size for LinkedList.
 
     Attributes:
         c_LL (LinkedList[float]*): Pointer to the C++ LinkedList implementation.
-        window_size (int): Human readable string describing the exception.
+        window_size (int): Desired window size for LinkedList.
     """
     cdef LinkedList[float] *c_LL
 

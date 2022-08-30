@@ -28,11 +28,11 @@ cdef class PyRingBuffer:
     the public interface usage for the RingBuffer data structure.
 
     Args:
-        window_size (int): Human readable string describing the exception.
+        window_size (int): Desired window size for ring buffer.
 
     Attributes:
         c_RB (RingBuffer[float]*): Pointer to the C++ RingBuffer implementation.
-        window_size (int): Human readable string describing the exception.
+        window_size (int): Desired window size for ring buffer.
     """
     cdef RingBuffer[float] *c_RB
 

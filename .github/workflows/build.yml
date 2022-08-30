@@ -98,7 +98,10 @@ jobs:
             -DBUILD_DOCUMENTATION=OFF \
             -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
 
-      - name: Build and create artifact
+      - name: Fetch version
+        run: git fetch --prune --unshallow
+
+      - name: Build and create artifacts
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}} -j
 
       - name: CPP Test

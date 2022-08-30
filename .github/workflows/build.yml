@@ -75,7 +75,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache
-          pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
           pip3 install cython
           ninja --version
           cmake --version
@@ -85,7 +84,6 @@ jobs:
         if: startsWith(matrix.config.os, 'MacOS')
         run: |
           brew install p7zip cmake ninja gcovr doxygen ccache
-          pip3 install -r ${{github.workspace}}/tools/python/KML/requirements/test_requirements.txt
           pip3 install cython
           ninja --version
           cmake --version

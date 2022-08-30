@@ -10,7 +10,8 @@ class TestWindowedP2Quantile(unittest.TestCase):
     WP2 = None
 
     def setUp(self):
-        self.WP2 = PyWindowedP2Quantile(quantile=0.5, window_size=self.WINDOW_SIZE)
+        self.WP2 = PyWindowedP2Quantile(quantile=0.5,
+                                        window_size=self.WINDOW_SIZE)
 
     def tearDown(self):
         self.WP2 = None
@@ -21,7 +22,3 @@ class TestWindowedP2Quantile(unittest.TestCase):
     def test_median_evaluate(self):
         self.WP2.update(self.DATA)
         self.assertEqual(self.WP2.evaluate(), 10.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

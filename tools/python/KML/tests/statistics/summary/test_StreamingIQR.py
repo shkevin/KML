@@ -24,7 +24,3 @@ class TestStreamingIQR(unittest.TestCase):
     def test_simple_iqr(self):
         self.IQR.update(self.DATA)
         self.assertEqual(self.IQR.evaluate(), 4.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

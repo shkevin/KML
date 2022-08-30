@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools~=61.0.0", "wheel", "Cython>=0.29.22", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "KML"
+authors = [{name = "Kevin Cox", email = "shk3vin7@gmail.com"}]
+readme = "README.md"
+description="Streaming/Online Machine Learning in C++/Cython."
+classifiers=[
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Operating System :: MacOS",
+    "Operating System :: Unix",
+]
+requires-python = ">=3.6,<3.10"
+dependencies = []
+
+dynamic = ["version"]
+
+[project.urls]
+Source = "https://github.com/shkevin/KML"
+
+[project.optional-dependencies]
+test = ["pytest>=6.2.3,<6.3.0",
+        "pytest-xdist>=2.5.0,<2.6.0",
+        "pytest-clarity==1.0.1",
+        "pytest-cov==3.0.0"]
+dev = ["black>=22.0.0,<23.0.0",
+       "flake8>=3.9.0,<3.10.0",
+       "mypy==0.812",
+       "isort==5.8.0",
+       "yapf>=0.32.0",
+       "pyproject-flake8"]
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 95"
+
+[tool.coverage.run]
+source = ["tools/python/KML"]
+
+[tool.pylint]
+max-line-length = 88
+disable = [
+    # "C0103", # (invalid-name)
+    # "C0114", # (missing-module-docstring)
+    # "C0115", # (missing-class-docstring)
+    # "C0116", # (missing-function-docstring)
+    # "R0903", # (too-few-public-methods)
+    # "R0913", # (too-many-arguments)
+    # "W0105", # (pointless-string-statement)
+    "E0401", # (Unable to import)
+    "E0611", # (No name)
+]
+
+[tool.setuptools.packages.find]
+include = ["KML*"]
+
+[tool.setuptools_scm]
+write_to = "tools/cython/KML/_version.py"
+version_scheme = "release-branch-semver"

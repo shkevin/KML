@@ -8,7 +8,7 @@ from pathlib import Path, PurePath
 from sys import argv
 from typing import List
 
-from setuptools import Extension, setup
+from setuptools import Extension, setup, find_packages
 from setuptools.command.build_ext import build_ext as _build_ext
 
 # Get Cython sources with their C++ files.
@@ -134,6 +134,7 @@ setup(
     name="KML",
     url="https://github.com/shkevin/KML",
     version=get_version(),
+    packages=find_packages(),
     cmdclass={"build_ext": my_build_ext, "build": my_build},
     ext_modules=get_extensions(),
 )

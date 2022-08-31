@@ -7,6 +7,8 @@ OBJEXT      := o
 DOCKER_IMAGE=kml
 GIT_COMMIT_ID=$$(git log --format="%H" -n 1 | head -c 7)
 DOCKER_TAG=latest
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+
 
 # Default Make
 all: directories compile-all test coverage
@@ -67,15 +69,15 @@ test:
 # Call Unittests for C++/Python for built wheel.
 test_wheel:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR)/tools/packages && \
-	pip3 install KML*.whl --force-reinstall && \
-	python3 -m pytest -p no:cacheprovider ../python/KML/tests/ && \
+	pip3 install KML*.whl --force-reinstall && cd && \
+	python3 -m pytest -p no:cacheprovider $(ROOT_DIR)/$(BUILDDIR)/tools/python/KML/tests/ && \
 	pip uninstall KML
 
 test_source:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR)/tools/packages && \
 	pip3 install KML*.tar.gz --force-reinstall && \
 	python3 -m pytest -p no:cacheprovider ../python/KML/tests/ && \
-	pip uninstall KML
+	pip uninstall KML -y
 
 # Test Docker image
 docker_test: build

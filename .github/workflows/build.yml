@@ -60,7 +60,7 @@ jobs:
         #     archiver: "7za a",
         #     generators: "Ninja"
         #   }
-        python_version: ['3.6', '3.7', '3.8', '3.9']
+        python_version: ['3.6', '3.7', '3.8', '3.9', '3.10']
 
     name: ${{matrix.config.os}} - Python ${{matrix.python_version}}
     steps:
@@ -91,7 +91,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache
-          pip3 install cython
+          pip3 install cython wheel setuptools build
           ninja --version
           cmake --version
           gcc --version
@@ -117,10 +117,10 @@ jobs:
       - name: Build package
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}} -j
 
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install --upgrade wheel setuptools build
+      # - name: Install Python dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install --upgrade wheel setuptools build
 
       - name: CPP Test
         working-directory: ${{github.workspace}}/build

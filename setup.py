@@ -131,6 +131,8 @@ def get_extensions() -> List[Extension]:
 
 
 setup(
+    name="KML",
+    url="https://github.com/shkevin/KML",
     version=get_version(),
     cmdclass={"build_ext": my_build_ext, "build": my_build},
     ext_modules=get_extensions(),

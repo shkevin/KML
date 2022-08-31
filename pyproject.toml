@@ -23,7 +23,8 @@ classifiers=[
 requires-python = ">=3.6,<3.10"
 dependencies = []
 
-dynamic = ["version"]
+# dynamic = ["version"]
+version = "0.1.0"
 
 [project.urls]
 Source = "https://github.com/shkevin/KML"

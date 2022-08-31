@@ -24,6 +24,27 @@ src_dirs = [x[0] for x in walk(SRC_DIR)]
 include_all = include_dirs + src_dirs
 
 
+def get_version():
+    """Load the version from version.py
+
+    Load the version from version.py without importing it.
+    This function assumes that the last line in the file contains a
+    variable defining the version string with single quotes.
+
+    Returns:
+        str: Version number
+    """
+    try:
+        with open(Path(CYTHON_DIR, "KML", "_version.py"), "r") as f:
+            version_tuple = f.read().splitlines()[-1]
+            version = ".".join(
+                str(x) for x in eval(version_tuple.split("version_tuple =")[-1])[:3]
+            )
+            return version
+    except IOError:
+        return "0.0.1"
+
+
 def get_buildlib():
     """Attempt to parse build lib from user input.
 
@@ -110,6 +131,7 @@ def get_extensions() -> List[Extension]:
 
 
 setup(
+    version=get_version(),
     cmdclass={"build_ext": my_build_ext, "build": my_build},
     ext_modules=get_extensions(),
 )

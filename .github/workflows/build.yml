@@ -91,7 +91,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache
-          pip3 install cython wheel setuptools>=61.0.0 build
+          pip3 install cython wheel setuptools>=61.0.0 build pytest
           ninja --version
           cmake --version
           gcc --version

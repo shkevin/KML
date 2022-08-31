@@ -91,16 +91,19 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache
-          pip3 install -U cython wheel setuptools>=61.0.0 setuptools_scm
+          pip install -U cython wheel setuptools>=61.0.0 setuptools_scm
           ninja --version
           cmake --version
           gcc --version
+          python --version
+          python3 --version
+          pip list
 
       - name: Install dependencies on macos
         if: startsWith(matrix.config.os, 'MacOS')
         run: |
           brew install p7zip cmake ninja gcovr doxygen ccache
-          pip3 install cython
+          pip install cython
           ninja --version
           cmake --version
           clang --version

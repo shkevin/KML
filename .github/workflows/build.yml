@@ -91,7 +91,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache
-          pip3 install cython wheel setuptools>=61.0.0 build pytest
           ninja --version
           cmake --version
           gcc --version
@@ -132,14 +131,14 @@ jobs:
         working-directory: ${{github.workspace}}
         run: |
           ls ${{github.workspace}}
-          pip3 install ./build/tools/packages/*.whl --force-reinstall
+          pip3 install ./build/tools/packages/*.whl[test] --force-reinstall
           python3 -m pytest -p no:cacheprovider -n auto --cov=. --doctest-modules
 
       - name: Pytest sdist
         working-directory: ${{github.workspace}}
         run: |
           ls ${{github.workspace}}
-          pip3 install ./build/tools/packages/*.tar.gz --force-reinstall
+          pip3 install ./build/tools/packages/*.tar.gz[test] --force-reinstall
           python3 -m pytest -p no:cacheprovider -n auto --cov=. --doctest-modules
 
       # - name: CPP Coverage

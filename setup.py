@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import multiprocessing
+import os
 from distutils.command.build import build as _build
 from glob import glob
 from os import walk
@@ -8,15 +9,15 @@ from pathlib import Path, PurePath
 from sys import argv
 from typing import List
 
-from setuptools import Extension, setup, find_packages
+from setuptools import Extension, find_packages, setup
 from setuptools.command.build_ext import build_ext as _build_ext
 
 # Get Cython sources with their C++ files.
 PARENT_DIR = Path(__file__).resolve().parent
-CYTHON_DIR = Path(PARENT_DIR, "tools/cython")
+CYTHON_DIR = Path("./KML")
 SRC_DIR = Path(PARENT_DIR, "tools/cpp/KML/src")
 HEADERS_DIR = Path(PARENT_DIR, "tools/cpp/KML/include")
-CPPFLAGS = ["-O3", "-std=c++11"]
+CPPFLAGS = ["-Wall", "-O3", "-std=c++11"]
 pyx_location = str(PurePath("/KML/**/*.pyx"))
 pyx_sources = glob(f"{CYTHON_DIR}{pyx_location}", recursive=True)
 include_dirs = [x[0] for x in walk(HEADERS_DIR)]
@@ -35,7 +36,7 @@ def get_version():
         str: Version number
     """
     try:
-        with open(Path(CYTHON_DIR, "KML", "_version.py"), "r") as f:
+        with open(Path("KML", "_version.py"), "r") as f:
             version_tuple = f.read().splitlines()[-1]
             version = ".".join(
                 str(x) for x in eval(version_tuple.split("version_tuple =")[-1])[:3]
@@ -67,7 +68,7 @@ def get_buildlib():
             build_lib = argv[i + 1]
             break
 
-    build_lib = PurePath(PARENT_DIR, build_lib)
+    # build_lib = PurePath(build_lib)
     return build_lib
 
 
@@ -104,29 +105,57 @@ class my_build(_build):
         )
 
 
-def get_extensions() -> List[Extension]:
-    """Get Cython extensions from project.
+# def get_extensions() -> List[Extension]:
+#     """Get Cython extensions from project.
 
-    Build the Cython extensions with the cpp headers and sources.
+#     Build the Cython extensions with the cpp headers and sources.
 
-    Returns:
-        List[Extension]: List of Cython Extensions.
-    """
+#     Returns:
+#         List[Extension]: List of Cython Extensions.
+#     """
+#     ext_modules = []
+#     to_strip = str(CYTHON_DIR) + sep
+#     pyx_to_strip = str(PARENT_DIR) + sep
+#     sources = []
+#     for pyx in pyx_sources:
+#         name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
+#         pyx = pyx.replace(pyx_to_strip, "")
+#         ext_modules.append(
+#             Extension(
+#                 name=name,
+#                 sources=[pyx],
+#                 include_dirs=include_all,  # Path to .h files
+#                 language="c++",
+#                 extra_compile_args=CPPFLAGS,
+#             )
+#         )
+#     return ext_modules
+
+
+def scandir(dir, files=[]):
+    for file in os.listdir(dir):
+        path = os.path.join(dir, file)
+        if os.path.isfile(path) and path.endswith(".pyx"):
+            path = path.replace("tools/cython/", "")
+            files.append(path.replace(os.path.sep, ".")[:-4])
+        elif os.path.isdir(path):
+            scandir(path, files)
+    return files
+
+
+def get_extensions():
+    ext_names = scandir(CYTHON_DIR)
     ext_modules = []
-    to_strip = str(CYTHON_DIR) + sep
-    pyx_to_strip = str(PARENT_DIR) + sep
-    for pyx in pyx_sources:
-        name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
-        pyx = pyx.replace(pyx_to_strip, "")
-        ext_modules.append(
-            Extension(
-                name=name,
-                sources=[pyx],
-                include_dirs=include_all,  # Path to .h files
-                language="c++",
-                extra_compile_args=CPPFLAGS,
-            )
+    for name in ext_names:
+        extPath = name.replace(".", os.path.sep) + ".pyx"
+        extension = Extension(
+            name,
+            [str(extPath)],
+            include_dirs=["."] + include_all,
+            extra_compile_args=CPPFLAGS,
+            extra_link_args=["-g"],
         )
+        ext_modules.append(extension)
     return ext_modules
 
 
@@ -134,7 +163,8 @@ setup(
     name="KML",
     url="https://github.com/shkevin/KML",
     version=get_version(),
-    packages=find_packages(),
     cmdclass={"build_ext": my_build_ext, "build": my_build},
     ext_modules=get_extensions(),
+    zip_safe=False,
+    include_package_data=True,
 )

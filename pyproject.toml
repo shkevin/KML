@@ -26,6 +26,7 @@ dynamic = ["version"]
 
 [project.urls]
 Source = "https://github.com/shkevin/KML"
+Homepage = "https://github.com/shkevin/KML"
 
 [project.optional-dependencies]
 test = ["pytest>=6.2.3,<6.3.0",
@@ -59,9 +60,11 @@ disable = [
     "E0611", # (No name)
 ]
 
+
 [tool.setuptools.packages.find]
+# where = tools/cython/
 include = ["KML*"]
 
 [tool.setuptools_scm]
-write_to = "tools/cython/KML/_version.py"
+write_to = "KML/_version.py"
 version_scheme = "release-branch-semver"

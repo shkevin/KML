@@ -69,7 +69,7 @@ test:
 # Call Unittests for C++/Python for built wheel.
 test_wheel:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR)/tools/packages && \
-	pip3 install KML*.whl --force-reinstall && cd && \
+	pip3 install KML*.whl --force-reinstall && \
 	python3 -m pytest -p no:cacheprovider $(ROOT_DIR)/$(BUILDDIR)/tools/python/KML/tests/ && \
 	pip uninstall KML
 

@@ -60,7 +60,7 @@ jobs:
         #     archiver: "7za a",
         #     generators: "Ninja"
         #   }
-        python_version: ['3.6', '3.7', '3.8', '3.9', '3.10']
+        python_version: ['3.7', '3.8', '3.9', '3.10', '3.11.0-alpha - 3.11.0']
 
     name: ${{matrix.config.os}} - Python ${{matrix.python_version}}
     steps:

@@ -132,12 +132,12 @@ jobs:
           ctest -V -C ${{matrix.config.build_type}}
 
       - name: Pytest wheel
-        working-directory: ${{github.workspace}}/build/
+        working-directory: ${{github.workspace}}/build/tools/
         run: |
-          ls
-          pip3 install KML*.whl --force-reinstall
+          ls packages
+          pip3 install packages/KML*.whl --force-reinstall
           pip3 install KML[test] # Install test dependencies
-          python3 -m pytest -p no:cacheprovider -n auto ../python/KML/tests
+          python3 -m pytest -p no:cacheprovider -n auto ./python/KML/tests
 
       - name: Pytest sdist
         working-directory: ${{github.workspace}}

@@ -21,7 +21,3 @@ class TestWindowedFAME(unittest.TestCase):
     def test_constant_median(self):
         self.FM.update(self.DATA)
         self.assertEqual(self.FM.evaluate(), 10.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

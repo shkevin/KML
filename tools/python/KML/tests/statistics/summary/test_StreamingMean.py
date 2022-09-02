@@ -26,7 +26,3 @@ class TestStreamingMean(unittest.TestCase):
         data = [10, 10, 10, 10, 10, 5, 5, 5, 5, 5]
         self.SM.update(data)
         self.assertEqual(self.SM.evaluate(), 5.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

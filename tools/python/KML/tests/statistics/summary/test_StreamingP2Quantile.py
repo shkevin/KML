@@ -30,7 +30,3 @@ class TestStreamingP2Quantile(unittest.TestCase):
         self.P2 = PyStreamingP2Quantile(quantile=0.75)
         self.P2.update(self.DATA)
         self.assertAlmostEqual(self.P2.evaluate(), 7.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

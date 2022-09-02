@@ -52,7 +52,7 @@ compile-all: directories
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=ON \
 		-DBUILD_COVERAGE=ON \
-		-DBUILD_DOCUMENTATION=OFF && \
+		-DBUILD_DOCUMENTATION=ON && \
 	make -j
 
 # Mount repo to Docker image

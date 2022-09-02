@@ -161,7 +161,7 @@ def get_extensions():
             include_dirs=["."] + include_all,
             extra_compile_args=CPPFLAGS,
             extra_link_args=["-g"],
-            include_path=[str(Path(PARENT_DIR, CYTHON_DIR))],
+            # include_path=[str(Path(PARENT_DIR, CYTHON_DIR))],
         )
         ext_modules.append(extension)
     return ext_modules

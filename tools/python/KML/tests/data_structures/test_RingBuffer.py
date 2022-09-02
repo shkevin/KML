@@ -33,7 +33,3 @@ class TestRingBuffer(unittest.TestCase):
         self.RB.update(self.DATA)
         self.RB.reset()
         self.assertEqual(self.RB.empty(), True)
-
-
-if __name__ == "__main__":
-    unittest.main()

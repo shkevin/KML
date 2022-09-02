@@ -21,7 +21,3 @@ class TestStreamingVariance(unittest.TestCase):
     def test_evaluate(self):
         self.SV.update(self.DATA)
         self.assertEqual(self.SV.evaluate(), 0.0)
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -1,5 +1,6 @@
 [build-system]
-requires = ["setuptools>=61.0.0", "wheel", "Cython>=0.29.22", "setuptools_scm[toml]>=6.2"]
+# setuptools should be >= 61.0.0, but python 3.6 doesn't support it.
+requires = ["setuptools>=59.6.0", "wheel", "Cython>=0.29.22", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]

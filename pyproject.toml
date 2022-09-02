@@ -43,28 +43,29 @@ dev = ["black>=22.0.0,<23.0.0",
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 95"
 
-[tool.coverage.run]
-source = ["tools/python/KML"]
+# [tool.coverage.run]
+# source = ["tools/python/KML"]
 
-[tool.pylint]
-max-line-length = 88
-disable = [
-    # "C0103", # (invalid-name)
-    # "C0114", # (missing-module-docstring)
-    # "C0115", # (missing-class-docstring)
-    # "C0116", # (missing-function-docstring)
-    # "R0903", # (too-few-public-methods)
-    # "R0913", # (too-many-arguments)
-    # "W0105", # (pointless-string-statement)
-    "E0401", # (Unable to import)
-    "E0611", # (No name)
-]
+# [tool.pylint]
+# max-line-length = 88
+# disable = [
+#     # "C0103", # (invalid-name)
+#     # "C0114", # (missing-module-docstring)
+#     # "C0115", # (missing-class-docstring)
+#     # "C0116", # (missing-function-docstring)
+#     # "R0903", # (too-few-public-methods)
+#     # "R0913", # (too-many-arguments)
+#     # "W0105", # (pointless-string-statement)
+#     "E0401", # (Unable to import)
+#     "E0611", # (No name)
+# ]
 
 
-[tool.setuptools.packages.find]
-# where = tools/cython/
-include = ["KML*"]
+# [tool.setuptools.packages.find]
+# # where = tools/cython/
+# include = ["KML*"]
+# exclude = [".gitattributes", "build"]
 
 [tool.setuptools_scm]
-write_to = "KML/_version.py"
+write_to = "tools/cython/KML/_version.py"
 version_scheme = "release-branch-semver"

@@ -8,10 +8,12 @@ DOCKER_IMAGE=kml
 GIT_COMMIT_ID=$$(git log --format="%H" -n 1 | head -c 7)
 DOCKER_TAG=latest
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+PPATH=$(PYTHONPATH)
+undefine PYTHONPATH
 
 
 # Default Make
-all: directories compile-all test coverage
+all: directories compile-all test test_wheel coverage
 	@echo '*******************Compiled*********************'
 
 # Build docker image
@@ -63,20 +65,21 @@ develop:
 
 # Call Unittests for C++/Python.
 test:
-	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
-	cd tools/python/KML/tests/ && python -m pytest -p no:cacheprovider --cov=. --doctest-modules
+	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V
 
 # Call Unittests for C++/Python for built wheel.
 test_wheel:
-	[ -d $(BUILDDIR) ] && cd $(BUILDDIR)/tools/packages && \
-	pip3 install KML*.whl --force-reinstall && \
-	python3 -m pytest -p no:cacheprovider $(ROOT_DIR)/$(BUILDDIR)/tools/python/KML/tests/ && \
+	[ -d $(BUILDDIR) ] && \
+	cd $(BUILDDIR)/tools/packages && \
+	python3 -m pip install KML*.whl --force-reinstall && \
+	python3 -m pytest -p no:cacheprovider ../python/KML/tests && \
 	pip uninstall KML
 
 test_source:
-	[ -d $(BUILDDIR) ] && cd $(BUILDDIR)/tools/packages && \
+	[ -d $(BUILDDIR) ] && \
+	cd $(BUILDDIR)/tools/packages && \
 	pip3 install KML*.tar.gz --force-reinstall && \
-	python3 -m pytest -p no:cacheprovider ../python/KML/tests/ && \
+	python3 -m pytest -p no:cacheprovider ../python/KML/tests && \
 	pip uninstall KML -y
 
 # Test Docker image

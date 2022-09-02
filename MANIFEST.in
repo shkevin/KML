@@ -1,7 +1,5 @@
 recursive-include tools/python/KML *.py
-recursive-include KML/ *.pyx *.pxd
-recursive-include tools/cpp/KML/src *.cc
-recursive-include tools/cpp/KML/include *.h *.tcc
-recursive-include tools/python/KML/requirements/ *.txt
-recursive-exclude . *.py[co]
-include Makefile
+recursive-include tools/cython/KML/ *.pyx *.pxd
+recursive-include tools/cpp/KML/src *.cc *.tcc
+recursive-include tools/cpp/KML/include *.h
+recursive-exclude * *.py[co]

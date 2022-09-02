@@ -43,12 +43,12 @@ namespace KML
                 /**
                  * @copydoc IDataStructure::update()
                  */
-                virtual void update(const std::vector<T>& items);
+                virtual void update(const std::vector<T>& items) override;
 
                 /*!
                  * @copydoc IDataStructure::pop()
                  */
-                virtual T pop();
+                virtual T pop() override;
 
                 /*!
                  * @copydoc IDataStructure::full()

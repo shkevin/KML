@@ -17,7 +17,7 @@
   <a href="https://github.com/shkevin/KML">
     <!-- <img src="doc/images/PNG 01-00.png" alt="Logo" width="250" height="250"> -->
     <!-- <img src="doc/images/3D Mockup 01-00.jpg" alt="Logo" height="400"> -->
-    <img src="doc/images/HQ 01-03.jpg" alt="Logo" width="500" height="400">
+    <img src="doc/images/HQ 01-03.jpg" alt="Logo" width="700" height="400">
   </a>
 
   <h3 align="center">KML</h3>

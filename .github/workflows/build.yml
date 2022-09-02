@@ -134,7 +134,6 @@ jobs:
       - name: Pytest wheel
         working-directory: ${{github.workspace}}/build/packages
         run: |
-          ls ${{github.workspace}}
           pip3 install KML*.whl --force-reinstall
           pip3 install KML[test] # Install test dependencies
           python3 -m pytest -p no:cacheprovider -n auto ../python/KML/tests

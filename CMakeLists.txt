@@ -179,7 +179,7 @@ if(BUILD_DOCUMENTATION)
       SET(DOXYGEN_HAVE_DOT NO)
     endif(DOXYGEN_DOT_EXECUTABLE)
 
-    CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile)
+    CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile)
     ADD_CUSTOM_COMMAND(
       OUTPUT ${CMAKE_BINARY_DIR}/docs/html/index.html
       COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
@@ -187,7 +187,7 @@ if(BUILD_DOCUMENTATION)
       DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/README.md
         ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
-        ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in
+        ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
       COMMENT "Building doxygen documentation for 'KML' library")
     ADD_CUSTOM_TARGET(documentation ALL
       DEPENDS

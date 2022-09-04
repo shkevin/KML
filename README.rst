@@ -1,213 +1,64 @@
-.. raw:: html
-
-   <!--Adapted from https://github.com/othneildrew/Best-README-Template/blob/master/README.md-->
+.. Adapted from https://github.com/othneildrew/Best-README-Template/blob/master/README.md
 
 .. raw:: html
+   <a name="readme-top"></a>
 
-   <!-- PROJECT SHIELDS -->
-
+.. Shields
 |CI| |Issues| |MIT License| |LinkedIn|
 
+.. PROJECT LOGO
 .. raw:: html
+	<br />
+	<div align="center">
+	  <a href="https://github.com/shkevin/KML">
+	    <!-- <img src="docs/images/PNG 01-00.png" alt="Logo" width="250" height="250"> -->
+	    <!-- <img src="docs/images/3D Mockup 01-00.jpg" alt="Logo" height="400"> -->
+	    <img src="docs/images/HQ 01-03.jpg" alt="Logo" width="800" height="400">
+	  </a>
 
-   <!-- [![Contributors][contributors-shield]][contributors-url] -->
+	  <h3 align="center">KML</h3>
 
+	  <p align="center">
+	    Streaming machine learning framework.
+	    <br />
+	    <a href="https://github.com/shkevin/KML"><strong>Explore the docs »</strong></a>
+	    <br />
+	    <br />
+	    <a href="https://github.com/shkevin/KML/tools/python/notebooks">View Examples</a>
+	    ·
+	    <a href="https://github.com/shkevin/KML/issues">Report Bug</a>
+	    ·
+	    <a href="https://github.com/shkevin/KML/issues">Request Feature</a>
+	  </p>
+	</div>
+
+.. Table of Contents
 .. raw:: html
-
-   <!-- [![Forks][forks-shield]][forks-url] -->
-
-.. raw:: html
-
-   <!-- [![Stargazers][stars-shield]][stars-url] -->
-
-.. raw:: html
-
-   <!-- PROJECT LOGO -->
-
-.. container::
-
-   .. raw:: html
-
-      <h3 align="center">
-
-   KML
-
-   .. raw:: html
-
-      </h3>
-
-   .. raw:: html
-
-      <p align="center">
-
-   Streaming machine learning framework. Explore the docs » View
-   Examples · Report Bug · Request Feature
-
-   .. raw:: html
-
-      </p>
-
-.. raw:: html
-
-   <!-- TABLE OF CONTENTS -->
-
-.. raw:: html
-
-   <details open>
-
-Table of Contents
-
-.. raw:: html
-
-   <ol>
-
-.. raw:: html
-
-   <li>
-
-About The Project
-
-.. raw:: html
-
-   <ul>
-
-.. raw:: html
-
-   <li>
-
-Built With
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   </ul>
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-Getting Started
-
-.. raw:: html
-
-   <ul>
-
-.. raw:: html
-
-   <li>
-
-Requirements
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-Building
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-Installation
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-Usage
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   </ul>
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-Roadmap
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-Contributing
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-License
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-Contact
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   <li>
-
-Acknowledgments
-
-.. raw:: html
-
-   </li>
-
-.. raw:: html
-
-   </ol>
-
-.. raw:: html
-
-   </details>
-
-.. raw:: html
-
-   <!-- ABOUT THE PROJECT -->
+	<details open>
+	  <summary>Table of Contents</summary>
+	  <ol>
+	    <li>
+	      <a href="#about-the-project">About The Project</a>
+	      <ul>
+	        <li><a href="#built-with">Built With</a></li>
+	      </ul>
+	    </li>
+	    <li>
+	      <a href="#getting-started">Getting Started</a>
+	      <ul>
+	        <li><a href="#requirements">Requirements</a></li>
+	        <li><a href="#building">Building</a></li>
+	        <li><a href="#installation">Installation</a></li>
+	        <li><a href="#usage">Usage</a></li>
+	      </ul>
+	    </li>
+	    <li><a href="#roadmap">Roadmap</a></li>
+	    <li><a href="#contributing">Contributing</a></li>
+	    <li><a href="#license">License</a></li>
+	    <li><a href="#contact">Contact</a></li>
+	    <li><a href="#acknowledgments">Acknowledgments</a></li>
+	  </ol>
+	</details>
 
 About The Project
 -----------------
@@ -219,14 +70,7 @@ Cython compilation. Python was used in order to be easily adopted by
 other researchers, data scientists, or machine learning engineers.
 
 .. raw:: html
-
-   <p align="right">
-
-(back to top)
-
-.. raw:: html
-
-   </p>
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Built With
 ~~~~~~~~~~
@@ -242,18 +86,7 @@ KML was developed with these libraries and frameworks.
    -  |Cython|
 
 .. raw:: html
-
-   <p align="right">
-
-(back to top)
-
-.. raw:: html
-
-   </p>
-
-.. raw:: html
-
-   <!-- GETTING STARTED -->
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Getting Started
 ---------------
@@ -336,18 +169,9 @@ where PYVERSION is the Python version used to build the wheel, and DIST
 is the OS distribution used during build (e.g., linux).
 
 .. raw:: html
-
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
    <p align="right">
 
-(back to top)
-
-.. raw:: html
-
-   </p>
-
-.. raw:: html
-
-   <!-- USAGE EXAMPLES -->
 
 Usage
 ~~~~~
@@ -356,18 +180,7 @@ Common Python usage examples can be found in the “View Examples” link
 above. See the documentation for a more detailed usage for C++.
 
 .. raw:: html
-
-   <p align="right">
-
-(back to top)
-
-.. raw:: html
-
-   </p>
-
-.. raw:: html
-
-   <!-- ROADMAP -->
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Roadmap
 -------
@@ -382,18 +195,7 @@ See the `open issues <https://github.com/shkevin/KML/issues>`__ for a
 full list of proposed features (and known issues).
 
 .. raw:: html
-
-   <p align="right">
-
-(back to top)
-
-.. raw:: html
-
-   </p>
-
-.. raw:: html
-
-   <!-- CONTRIBUTING -->
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Project leaders
 ---------------
@@ -407,18 +209,7 @@ Operations:
 -  `shkevin <https://github.com/shkevin>`__
 
 .. raw:: html
-
-   <p align="right">
-
-(back to top)
-
-.. raw:: html
-
-   </p>
-
-.. raw:: html
-
-   <!-- CONTRIBUTING -->
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Contributing
 ------------
@@ -433,18 +224,7 @@ repo and create a pull request.
 5. Open a Pull Request
 
 .. raw:: html
-
-   <p align="right">
-
-(back to top)
-
-.. raw:: html
-
-   </p>
-
-.. raw:: html
-
-   <!-- LICENSE -->
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 License
 -------
@@ -453,18 +233,7 @@ Distributed under the MIT License. See ``LICENSE.txt`` for more
 information.
 
 .. raw:: html
-
-   <p align="right">
-
-(back to top)
-
-.. raw:: html
-
-   </p>
-
-.. raw:: html
-
-   <!-- CONTACT -->
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Contact
 -------
@@ -474,40 +243,15 @@ Kevin Cox - shk3vin7@gmail.com
 Project Link: https://github.com/shkevin/KML
 
 .. raw:: html
-
-   <p align="right">
-
-(back to top)
-
-.. raw:: html
-
-   </p>
-
-.. raw:: html
-
-   <!-- ACKNOWLEDGMENTS -->
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Acknowledgments
 ---------------
 
 .. raw:: html
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-   <p align="right">
-
-(back to top)
-
-.. raw:: html
-
-   </p>
-
-.. raw:: html
-
-   <!-- MARKDOWN LINKS & IMAGES -->
-
-.. raw:: html
-
-   <!-- Languages/Frameworks -->
-
+.. Languages/Frameworks
 .. |CI| image:: https://github.com/shkevin/KML/actions/workflows/build.yml/badge.svg
    :target: https://github.com/shkevin/KML/actions/workflows/build.yml
 .. |Issues| image:: https://img.shields.io/github/issues/shkevin/KML

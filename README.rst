@@ -7,58 +7,64 @@
 |CI| |Issues| |MIT License| |LinkedIn|
 
 .. PROJECT LOGO
+.. role:: raw-html-m2r(raw)
+   :format: html
+
+:raw-html-m2r:`<br />`
+
 .. raw:: html
-	<br />
-	<div align="center">
-	  <a href="https://github.com/shkevin/KML">
-	    <!-- <img src="docs/images/PNG 01-00.png" alt="Logo" width="250" height="250"> -->
-	    <!-- <img src="docs/images/3D Mockup 01-00.jpg" alt="Logo" height="400"> -->
-	    <img src="docs/images/HQ 01-03.jpg" alt="Logo" width="800" height="400">
-	  </a>
 
-	  <h3 align="center">KML</h3>
+   <div align="center">
+     <a href="https://github.com/shkevin/KML">
+       <!-- <img src="docs/images/PNG 01-00.png" alt="Logo" width="250" height="250"> -->
+       <!-- <img src="docs/images/3D Mockup 01-00.jpg" alt="Logo" height="400"> -->
+       <img src="docs/images/HQ 01-03.jpg" alt="Logo" width="800" height="400">
+     </a>
 
-	  <p align="center">
-	    Streaming machine learning framework.
-	    <br />
-	    <a href="https://github.com/shkevin/KML"><strong>Explore the docs »</strong></a>
-	    <br />
-	    <br />
-	    <a href="https://github.com/shkevin/KML/tools/python/notebooks">View Examples</a>
-	    ·
-	    <a href="https://github.com/shkevin/KML/issues">Report Bug</a>
-	    ·
-	    <a href="https://github.com/shkevin/KML/issues">Request Feature</a>
-	  </p>
-	</div>
+     <h3 align="center">KML</h3>
+
+     <p align="center">
+       Streaming machine learning framework.
+       <br />
+       <a href="https://github.com/shkevin/KML"><strong>Explore the docs »</strong></a>
+       <br />
+       <br />
+       <a href="https://github.com/shkevin/KML/tools/python/notebooks">View Examples</a>
+       ·
+       <a href="https://github.com/shkevin/KML/issues">Report Bug</a>
+       ·
+       <a href="https://github.com/shkevin/KML/issues">Request Feature</a>
+     </p>
+   </div>
 
 .. Table of Contents
 .. raw:: html
-	<details open>
-	  <summary>Table of Contents</summary>
-	  <ol>
-	    <li>
-	      <a href="#about-the-project">About The Project</a>
-	      <ul>
-	        <li><a href="#built-with">Built With</a></li>
-	      </ul>
-	    </li>
-	    <li>
-	      <a href="#getting-started">Getting Started</a>
-	      <ul>
-	        <li><a href="#requirements">Requirements</a></li>
-	        <li><a href="#building">Building</a></li>
-	        <li><a href="#installation">Installation</a></li>
-	        <li><a href="#usage">Usage</a></li>
-	      </ul>
-	    </li>
-	    <li><a href="#roadmap">Roadmap</a></li>
-	    <li><a href="#contributing">Contributing</a></li>
-	    <li><a href="#license">License</a></li>
-	    <li><a href="#contact">Contact</a></li>
-	    <li><a href="#acknowledgments">Acknowledgments</a></li>
-	  </ol>
-	</details>
+
+   <details open>
+     <summary>Table of Contents</summary>
+     <ol>
+       <li>
+         <a href="#about-the-project">About The Project</a>
+         <ul>
+           <li><a href="#built-with">Built With</a></li>
+         </ul>
+       </li>
+       <li>
+         <a href="#getting-started">Getting Started</a>
+         <ul>
+           <li><a href="#requirements">Requirements</a></li>
+           <li><a href="#building">Building</a></li>
+           <li><a href="#installation">Installation</a></li>
+           <li><a href="#usage">Usage</a></li>
+         </ul>
+       </li>
+       <li><a href="#roadmap">Roadmap</a></li>
+       <li><a href="#contributing">Contributing</a></li>
+       <li><a href="#license">License</a></li>
+       <li><a href="#contact">Contact</a></li>
+       <li><a href="#acknowledgments">Acknowledgments</a></li>
+     </ol>
+   </details>
 
 About The Project
 -----------------

@@ -100,30 +100,17 @@ KML was developed with these libraries and frameworks.
      :target: https://isocpp.org/wiki/faq/cpp11
      :alt: C++
 
-* `
-  .. image:: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
-     :target: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
-     :alt: C++
-   <https://isocpp.org/wiki/faq/cpp11>`_
-
-  * `
-    .. image:: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf
-       :target: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf
+  * .. image:: https://img.shields.io/badge/-Eigen3-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black&color=9cf
+       :target: https://eigen.tuxfamily.org/index.php?title=Main_Page
        :alt: Eigen3
-     <https://eigen.tuxfamily.org/index.php?title=Main_Page>`_
 
-* `
-  .. image:: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
-     :target: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
+* .. image:: https://img.shields.io/badge/-Python3-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellowgreen
+     :target: https://www.python.org/
      :alt: Python
-   <https://www.python.org/>`_
 
-  * `
-    .. image:: https://img.shields.io/badge/-Cython-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellow
-       :target: https://img.shields.io/badge/-Cython-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellow
+  * .. image:: https://img.shields.io/badge/-Cython-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellow
+       :target: https://cython.org/
        :alt: Cython
-     <https://cython.org/>`_
-
 
 .. raw:: html
 

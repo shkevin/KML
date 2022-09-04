@@ -73,7 +73,7 @@ test_wheel:
 	cd $(BUILDDIR)/tools/packages && \
 	python3 -m pip install KML*.whl --force-reinstall && \
 	python3 -m pytest -p no:cacheprovider ../python/KML/tests && \
-	pip uninstall KML
+	pip uninstall KML -y
 
 test_source:
 	[ -d $(BUILDDIR) ] && \
@@ -94,10 +94,10 @@ coverage:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) make coverage
 
 # Make documention. This only works if BUILD_DOCUMENTATIONS is ON
-docs:
-	[ -d $(BUILDDIR)/docs ] && \
-	cd $(BUILDDIR)/docs/latex && \
-	make -j
+# docs:
+# 	[ -d $(BUILDDIR)/docs ] && \
+# 	cd $(BUILDDIR)/docs/latex && \
+# 	make -j
 
 # Remake entire project.
 remake: clean all

@@ -170,44 +170,15 @@ endif(BUILD_TESTING)
 ################################################################################
 OPTION(BUILD_DOCUMENTATION "Build Documentation" OFF)
 if(BUILD_DOCUMENTATION)
-    MESSAGE(STATUS "Building Documentation")
-    # Doxygen documentation of main library
-    FIND_PACKAGE(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
-    if(DOXYGEN_DOT_EXECUTABLE)
-      SET(DOXYGEN_HAVE_DOT YES)
-    else()
-      SET(DOXYGEN_HAVE_DOT NO)
-    endif(DOXYGEN_DOT_EXECUTABLE)
-
-    CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile)
-    ADD_CUSTOM_COMMAND(
-      OUTPUT ${CMAKE_BINARY_DIR}/docs/html/index.html
-      COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/docs
-      DEPENDS
-        ${CMAKE_CURRENT_SOURCE_DIR}/README.md
-        ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
-        ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
-      COMMENT "Building doxygen documentation for 'KML' library")
-    ADD_CUSTOM_TARGET(documentation ALL
-      DEPENDS
-        ${CMAKE_CURRENT_BINARY_DIR}/docs/html/index.html)
-
-    # Sphinx documentation of Python bindings
-    # if(BUILD_PYTHON_BINDINGS)
-    #   add_custom_command(
-    #     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html
-    #     COMMAND ${PYTHON_EXECUTABLE}
-    #       setup.py
-    #         build_sphinx
-    #     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings
-    #     DEPENDS
-    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/README.md
-    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/conf.py
-    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/index.rst
-    #       foo-python-bindings
-    #     COMMENT "Building sphinx Python documentation for 'foo' library")
-    #   add_custom_target(foo-python-documentation DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html)
-    #   add_dependencies(documentation foo-python-documentation)
-    # endif(BUILD_PYTHON_BINDINGS)
+    # FILE(COPY docs DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    ADD_SUBDIRECTORY("docs")
+    # SET(OUTPUT "${CMAKE_BINARY_DIR}/docs")
+    # ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
+    #     COMMAND ${PYTHON_EXECUTABLE} -m sphinx-autodoc -f -o
+    #         ${CMAKE_BINARY_DIR}/docs
+    #         ${CMAKE_SOURCE_DIR}/tools/cython
+    #     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    #     COMMENT "Building Cython Documentation"
+    # )
+    # ADD_CUSTOM_TARGET(cython_doc ALL DEPENDS ${OUTPUT})
 endif(BUILD_DOCUMENTATION)

@@ -12,7 +12,7 @@ from setuptools.command.build_ext import build_ext as _build_ext
 
 # Get Cython sources with their C++ files.
 PARENT_DIR = Path(os.path.abspath(__file__))
-CYTHON_DIR = Path("tools/cython/KML")
+CYTHON_DIR = Path("./tools/cython/KML")
 SRC_DIR = Path("tools/cpp/KML/src")
 HEADERS_DIR = Path("tools/cpp/KML/include")
 CPPFLAGS = ["-Wall", "-O3", "-std=c++11"]

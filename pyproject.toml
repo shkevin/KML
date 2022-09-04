@@ -62,7 +62,7 @@ disable = [
 
 # [tool.setuptools.packages.find]
 # # where = tools/cython/
-# include = ["KML*"]
+# include = ["tools/cython/KML/**/*.p[yx|xd]"]
 # exclude = [".gitattributes", "build"]
 
 [tool.setuptools_scm]

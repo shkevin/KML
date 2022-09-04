@@ -17,7 +17,8 @@
   <a href="https://github.com/shkevin/KML">
     <!-- <img src="docs/images/PNG 01-00.png" alt="Logo" width="250" height="250"> -->
     <!-- <img src="docs/images/3D Mockup 01-00.jpg" alt="Logo" height="400"> -->
-    <img src="docs/images/HQ 01-03.jpg" alt="Logo" width="800" height="400">
+    <!-- <img src="docs/images/HQ 01-03.jpg" alt="Logo" width="800" height="400"> -->
+    <img src="docs/images/HQ 01-03-resized.png" alt="Logo" width="800" height="400">
   </a>
 
   <h3 align="center">KML</h3>
@@ -124,10 +125,23 @@ cmake \
     -DBUILD_TESTING=ON \
     -DBUILD_PYTHON=ON \
     -DBUILD_COVERAGE=OFF \
-    -DBUILD_DOCUMENTATION=OFF
+    -DBUILD_DOCUMENTATION=ON
 
 make -j
 ```
+
+#### Building Documentation
+
+After compiling with BUILD_DOCUMENTATION=ON
+
+```bash
+cd build # Default build directory
+
+make docs
+
+```
+
+The built documentation will be in the
 
 ### Installation
 

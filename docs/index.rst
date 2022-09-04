@@ -6,16 +6,14 @@
 Welcome to KML's documentation!
 ===============================
 
+.. .. include:: ../README.md
+..    :parser: myst_parser.sphinx_
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    modules
-
-.. toctree::
-   :maxdepth: 2
-
-   about
    api/library_root
 
 Indices and tables

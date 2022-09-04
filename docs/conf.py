@@ -8,6 +8,7 @@
 # -- Path setup --------------------------------------------------------------
 
 import os
+import pathlib
 import subprocess
 import sys
 
@@ -15,9 +16,8 @@ import sys
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 
-PARENT_DIR = os.path.abspath(".")
 PROJECT_DIR = os.path.abspath("..")
-sys.path.insert(0, os.path.abspath("../tools/cython"))
+sys.path.insert(0, os.path.abspath("../tools/cython/KML/"))
 
 # Doxygen
 subprocess.call("doxygen Doxyfile.in", shell=True)
@@ -43,9 +43,12 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx_sitemap",
     "sphinx.ext.inheritance_diagram",
+    "sphinx.ext.napoleon",
     "breathe",
     "exhale",
-    "sphinx.ext.napoleon",
+    "recommonmark",
+    "sphinx_markdown_tables",
+    # "myst_parser",
 ]
 
 # Setup the `breathe` extension
@@ -181,6 +184,30 @@ github_url = "https://github.com/shkevin/KML"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+
+source_suffix = [".rst", ".md"]
+source_parsers = {
+    ".md": "recommonmark.parser.CommonMarkParser",
+}
+
+# Plugin settings
+napoleon_google_docstring = True
+napoleon_use_param = False
+napoleon_use_ivar = True
+
+from recommonmark.transform import AutoStructify
+
+
+def setup(app):
+    app.add_config_value(
+        "recommonmark_config",
+        {
+            "auto_toc_tree_section": "Contents",
+        },
+        True,
+    )
+    app.add_transform(AutoStructify)
+
 
 # -- Breathe configuration -------------------------------------------------
 

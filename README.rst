@@ -96,9 +96,9 @@ Built With
 
 KML was developed with these libraries and frameworks.
 
-|C++|
-.. |C++| image: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
-   :target: https://isocpp.org/wiki/faq/cpp11
+.. image:: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black
+     :target: https://isocpp.org/wiki/faq/cpp11
+     :alt: C++
 
 * `
   .. image:: https://img.shields.io/badge/-C++11-00599C?logo=cplusplus&logoColor=white&style=flat&labelColor=black

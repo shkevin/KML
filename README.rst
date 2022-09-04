@@ -7,6 +7,11 @@
    <a name="readme-top"></a>
 
    <!-- PROJECT SHIELDS -->
+.. image:: https://github.com/shkevin/KML/actions/workflows/build.yml/badge.svg
+     :target: https://github.com/shkevin/KML/actions/workflows/build.yml
+     :alt: CI
+
+
    [![CI](https://github.com/shkevin/KML/actions/workflows/build.yml/badge.svg)](https://github.com/shkevin/KML/actions/workflows/build.yml)
    [![Issues][issues-shield]][issues-url]
    [![MIT License][license-shield]][license-url]

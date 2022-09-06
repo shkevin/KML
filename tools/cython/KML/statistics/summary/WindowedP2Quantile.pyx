@@ -15,6 +15,7 @@ Example:
 	```
 """
 from collections.abc import Iterable
+from typing import Union
 
 
 cdef class PyWindowedP2Quantile:
@@ -34,13 +35,13 @@ cdef class PyWindowedP2Quantile:
     """
     cdef WindowedP2Quantile* c_WP2
 
-    def __init__(self, quantile, window_size=None):
+    def __init__(self, quantile, window_size=None) -> None:
         pass
 
-    def __cinit__(self, quantile, window_size=None):
+    def __cinit__(self, quantile, window_size=None) -> None:
         self.c_WP2 = new WindowedP2Quantile(quantile, window_size)
 
-    def update(self, observation):
+    def update(self, observation: Union[float, Iterable]) -> None:
         """Update the Windowed P2 Quantile with the given item.
 
         Update the streaming quantile with the given item.
@@ -54,7 +55,7 @@ cdef class PyWindowedP2Quantile:
         else:
             self.c_WP2.update(observation)
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         """Retrieve the current quantile statistic.
 
         Retrieve the current streaming quantile statisic from the previous items
@@ -65,5 +66,5 @@ cdef class PyWindowedP2Quantile:
         """
         return self.c_WP2.evaluate()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         del self.c_WP2

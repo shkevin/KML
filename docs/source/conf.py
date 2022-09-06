@@ -1,33 +1,25 @@
 # -*- coding: utf-8 -*-
 # Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 # -- Path setup --------------------------------------------------------------
-
 import os
-import pathlib
 import subprocess
 import sys
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-
-PROJECT_DIR = os.path.abspath("..")
-sys.path.insert(0, os.path.abspath("../tools/cython/KML/"))
+PROJECT_DIR = os.path.abspath("../..")
+sys.path.insert(0, os.path.abspath(f"{PROJECT_DIR}/tools/cython/KML/"))
 
 # Doxygen
-subprocess.call("doxygen Doxyfile.in", shell=True)
+# subprocess.call("doxygen ../Doxyfile.in", shell=True)
 
 # -- Project information -----------------------------------------------------
 
 project = "KML"
 copyright = "2022, Kevin Cox"
 author = "Kevin Cox"
-
 
 # -- General configuration ---------------------------------------------------
 
@@ -44,16 +36,10 @@ extensions = [
     "sphinx_sitemap",
     "sphinx.ext.inheritance_diagram",
     "sphinx.ext.napoleon",
+    "sphinx.ext.autosummary",
     "breathe",
     "exhale",
-    "recommonmark",
-    "sphinx_markdown_tables",
-    # "myst_parser",
 ]
-
-# Setup the `breathe` extension
-breathe_projects = {"KML": "_doxygen/xml"}
-breathe_default_project = "KML"
 
 # Setup the `exhale` extension
 from textwrap import dedent
@@ -62,23 +48,18 @@ exhale_args = {
     ############################################################################
     # These arguments are required.                                            #
     ############################################################################
-    "containmentFolder": "./api",
+    "containmentFolder": "_build/api",
     "rootFileName": "library_root.rst",
     "rootFileTitle": "C++ API",
-    "doxygenStripFromPath": f"{PROJECT_DIR}/tools/cpp/",
+    "doxygenStripFromPath": f"{PROJECT_DIR}/tools/cpp/KML",
     ############################################################################
     # Suggested optional arguments.                                            #
     ############################################################################
-    "createTreeView": True,
+    "createTreeView": False,
     "exhaleExecutesDoxygen": True,
     "exhaleDoxygenStdin": dedent(
         """
-        INPUT       = ../tools/cpp/KML/include
-        # For this code-base, the following helps Doxygen get past a macro
-        # that it has trouble with.  It is only meaningful for this code,
-        # not for yours.
-        PREDEFINED += NAMESPACE_BEGIN(arbitrary)="namespace arbitrary {"
-        PREDEFINED += NAMESPACE_END(arbitrary)="}"
+        INPUT       = ../../tools/cpp/KML/include
     """
     ),
     ############################################################################
@@ -93,48 +74,17 @@ exhale_args = {
     ############################################################################
     "afterTitleDescription": dedent(
         """
-        Welcome to the developer reference to Exhale Companion.  The code being
-        documented here is largely meaningless and was only created to test
-        various corner cases e.g. nested namespaces and the like.
-
-        .. note::
-
-            The text you are currently reading was fed to ``exhale_args`` using
-            the :py:data:`~exhale.configs.afterTitleDescription` key.  Full
-            reStructuredText syntax can be used.
-
-        .. tip::
-
-           Sphinx / Exhale support unicode!  You're ``conf.py`` already has
-           it's encoding declared as ``# -*- coding: utf-8 -*-`` **by
-           default**.  If you want to pass Unicode strings into Exhale, simply
-           prefix them with a ``u`` e.g. ``u"👽😱💥"`` (of course you would
-           actually do this because you are writing with åçćëñtß or
-           non-English 寫作 😉).
+        Welcome to the developer reference to the KLM library. This documentation
+        is specific only to the C++ library portion.
     """
     ),
     "afterHierarchyDescription": dedent(
         """
-        Below the hierarchies comes the full API listing.
-
-        1. The text you are currently reading is provided by
-           :py:data:`~exhale.configs.afterHierarchyDescription`.
-        2. The Title of the next section *just below this* normally defaults to
-           ``Full API``, but the title was changed by providing an argument to
-           :py:data:`~exhale.configs.fullApiSubSectionTitle`.
-        3. You can control the number of bullet points for each linked item on
-           the remainder of the page using
-           :py:data:`~exhale.configs.fullToctreeMaxDepth`.
     """
     ),
-    "fullApiSubSectionTitle": "Custom Full API SubSection Title",
+    "fullApiSubSectionTitle": "Full API",
     "afterBodySummary": dedent(
         """
-        You read all the way to the bottom?!  This text is specified by giving
-        an argument to :py:data:`~exhale.configs.afterBodySummary`.  As the docs
-        state, this summary gets put in after a **lot** of information.  It's
-        available for you to use if you want it, but from a design perspective
-        it's rather unlikely any of your users will even see this text.
     """
     ),
     ############################################################################
@@ -143,8 +93,7 @@ exhale_args = {
     # Example of adding contents directives on custom kinds with custom title
     "contentsTitle": "Page Contents",
     "kindsWithContentsDirectives": ["class", "file", "namespace", "struct"],
-    # This is a testing site which is why I'm adding this
-    "includeTemplateParamOrderList": True,
+    "includeTemplateParamOrderList": False,
     ############################################################################
     # useful to see ;)
     "verboseBuild": True,
@@ -176,14 +125,13 @@ html_theme_options = {
     "includehidden": True,
     "titles_only": False,
 }
-html_logo = "images/HQ 01-03-resized.png"
+html_logo = "../images/HQ 01-03-resized.png"
 github_url = "https://github.com/shkevin/KML"
-# html_baseurl = ''
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+html_static_path = []
 
 source_suffix = [".rst", ".md"]
 source_parsers = {
@@ -191,26 +139,20 @@ source_parsers = {
 }
 
 # Plugin settings
+# Napoleon settings
 napoleon_google_docstring = True
-napoleon_use_param = False
-napoleon_use_ivar = True
-
-from recommonmark.transform import AutoStructify
-
-
-def setup(app):
-    app.add_config_value(
-        "recommonmark_config",
-        {
-            "auto_toc_tree_section": "Contents",
-        },
-        True,
-    )
-    app.add_transform(AutoStructify)
-
+napoleon_numpy_docstring = True
+napoleon_include_init_with_doc = False
+napoleon_include_private_with_doc = False
+napoleon_include_special_with_doc = True
+napoleon_use_admonition_for_examples = False
+napoleon_use_admonition_for_notes = False
+napoleon_use_admonition_for_references = False
+napoleon_use_ivar = False
+napoleon_use_param = True
+napoleon_use_rtype = True
 
 # -- Breathe configuration -------------------------------------------------
-
-# breathe_projects = {"KML": "_build/xml/"}
-# breathe_default_project = "KML"
-# breathe_default_members = ("members", "undoc-members")
+breathe_default_project = "KML"
+breathe_projects = {"KML": "_build/_doxygen/xml"}
+breathe_default_members = ("members", "undoc-members")

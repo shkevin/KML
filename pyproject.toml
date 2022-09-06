@@ -5,6 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "KML"
 authors = [{name = "Kevin Cox", email = "shk3vin7@gmail.com"}]
+maintainers = [{name = "Kevin Cox", email = "shk3vin7@gmail.com"}]
 readme = "README.md"
 description="Streaming/Online Machine Learning in C++/Cython."
 classifiers=[

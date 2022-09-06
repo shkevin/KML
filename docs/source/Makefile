@@ -1,7 +1,5 @@
 # Minimal makefile for Sphinx documentation
-#
 .PHONY: help Makefile clean
-.PHONY: help Makefile
 
 # You can set these variables from the command line, and also
 # from the environment for the first two.
@@ -15,7 +13,6 @@ help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 clean:
-	rm -rf _doxygen/ api/
 	@$(SPHINXBUILD) -M clean "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 # Catch-all target: route all unknown targets to Sphinx using the new
@@ -27,4 +24,4 @@ html: sphinx
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 sphinx:
-	sphinx-apidoc -f -o _build ../tools/cython/
+	sphinx-apidoc -f -o _build ../../tools/cython/KML

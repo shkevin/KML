@@ -18,6 +18,7 @@ Reference:
     https://ieeexplore.ieee.org/document/4261339
 """
 from collections.abc import Iterable
+from typing import Union
 
 
 cdef class PyWindowedFAME:
@@ -40,13 +41,13 @@ cdef class PyWindowedFAME:
     """
     cdef WindowedFAME* c_FM
 
-    def __init__(self, step_size=0.1, epsilon=0.0):
+    def __init__(self, step_size=0.1, epsilon=0.0) -> None:
         pass
 
-    def __cinit__(self, step_size=0.1, epsilon=0.0):
+    def __cinit__(self, step_size=0.1, epsilon=0.0) -> None:
         self.c_FM = new WindowedFAME(step_size, epsilon)
 
-    def update(self, observation):
+    def update(self, observation: Union[float, Iterable]) -> None:
         """Update the Median with the given item.
 
         Update the Windowed FAME median calculation with the given item.
@@ -60,7 +61,7 @@ cdef class PyWindowedFAME:
         else:
             self.c_FM.update(observation)
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         """Retrieve the current median approximation.
 
         Retrieve the current FAME median from the previous items updated.
@@ -70,5 +71,5 @@ cdef class PyWindowedFAME:
         """
         return self.c_FM.evaluate()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         del self.c_FM

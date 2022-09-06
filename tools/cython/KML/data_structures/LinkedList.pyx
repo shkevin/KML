@@ -37,13 +37,13 @@ cdef class PyLinkedList:
     """
     cdef LinkedList[float] *c_LL
 
-    def __init__(self, window_size=None):
+    def __init__(self, window_size=None) -> None:
         pass
 
-    def __cinit__(self, window_size=None):
+    def __cinit__(self, window_size=None) -> None:
         self.c_LL = new LinkedList[float](window_size)
 
-    def update(self, item: Union[float, Iterable]):
+    def update(self, item: Union[float, Iterable]) -> None:
         """Update the LinkedList with the given item.
 
         Update the streaming LinkedList with the given item. If the item the
@@ -59,7 +59,7 @@ cdef class PyLinkedList:
         else:
             self.c_LL.update(item)
 
-    def pop(self):
+    def pop(self) -> float:
         """Remove the head of the LinkedList and return the value.
 
         Pop the head of the LinkedList and return the heads value.
@@ -69,14 +69,14 @@ cdef class PyLinkedList:
         """
         return self.c_LL.pop()
 
-    def reset(self):
+    def reset(self) -> None:
         """Reset this LinkedList to empty.
 
         Reset will completely remove all elements in the current LinkedList.
         """
         self.c_LL.reset()
 
-    def empty(self):
+    def empty(self) -> bool:
         """Determine if this LinkedList is empty.
 
         Return a boolean value that showcases whether this LinkedList contains
@@ -87,7 +87,7 @@ cdef class PyLinkedList:
         """
         return self.c_LL.empty()
 
-    def full(self):
+    def full(self) -> bool:
         """Determine if this LinkedList is has window_size elements.
 
         Determine if this LinkedList is full based off of the specified
@@ -98,7 +98,7 @@ cdef class PyLinkedList:
         """
         return self.c_LL.full()
 
-    def size(self):
+    def size(self) -> int:
         """Retrieve the current number of nodes.
 
         Retrieve the current number of nodes in this LinkedList.

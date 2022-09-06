@@ -4,9 +4,6 @@
 
    <a name="readme-top"></a>
 
-.. Shields
-|CI| |Issues| |MIT License| |LinkedIn|
-
 .. PROJECT LOGO
 .. role:: raw-html-m2r(raw)
    :format: html
@@ -37,6 +34,10 @@
        <a href="https://github.com/shkevin/KML/issues">Request Feature</a>
      </p>
    </div>
+
+.. inclusion-marker-do-not-remove
+.. Shields
+|CI| |Issues| |MIT License| |LinkedIn|
 
 .. Table of Contents
 .. raw:: html

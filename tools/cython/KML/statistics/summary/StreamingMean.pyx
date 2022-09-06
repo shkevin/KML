@@ -15,6 +15,7 @@ Example:
 	```
 """
 from collections.abc import Iterable
+from typing import Union
 
 
 cdef class PyStreamingMean:
@@ -32,13 +33,13 @@ cdef class PyStreamingMean:
     """
     cdef StreamingMean *c_SM
 
-    def __init__(self, window_size=None):
+    def __init__(self, window_size=None) -> None:
         pass
 
-    def __cinit__(self, window_size=None):
+    def __cinit__(self, window_size=None) -> None:
         self.c_SM = new StreamingMean(window_size)
 
-    def update(self, observation):
+    def update(self, observation: Union[float, Iterable]) -> None:
         """Update the Streaming Mean with the given item.
 
         Update the streaming Mean with the given item. The window_size
@@ -53,7 +54,7 @@ cdef class PyStreamingMean:
         else:
             self.c_SM.update(observation)
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         """Retrieve the current Streaming Mean value.
 
         Retrieve the current streaming mean value from the previous items
@@ -64,5 +65,5 @@ cdef class PyStreamingMean:
         """
         return self.c_SM.evaluate()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         del self.c_SM

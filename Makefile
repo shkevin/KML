@@ -93,12 +93,6 @@ docker_test: build
 coverage:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) make coverage
 
-# Make documention. This only works if BUILD_DOCUMENTATIONS is ON
-# docs:
-# 	[ -d $(BUILDDIR)/docs ] && \
-# 	cd $(BUILDDIR)/docs/latex && \
-# 	make -j
-
 # Remake entire project.
 remake: clean all
 
@@ -112,7 +106,7 @@ clean:
 
 # Full Clean of entire project. This project formats c++ as .cc
 cleaner: clean
-	@$(RM) -rf $(BUILDDIR) *.$(SRCEXT)
+	@$(RM) -rf $(BUILDDIR) *.$(SRCEXT) *__pycache__
 
 # Non-File Targets
 .PHONY: all remake clean cleaner

@@ -18,6 +18,7 @@ Reference:
     https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf
 """
 from collections.abc import Iterable
+from typing import Union
 
 
 cdef class PyStreamingP2Quantile:
@@ -35,13 +36,13 @@ cdef class PyStreamingP2Quantile:
     """
     cdef StreamingP2Quantile* c_P2
 
-    def __init__(self, quantile=0.5):
+    def __init__(self, quantile=0.5) -> None:
         pass
 
-    def __cinit__(self, quantile=0.5):
+    def __cinit__(self, quantile=0.5) -> None:
         self.c_P2 = new StreamingP2Quantile(quantile)
 
-    def update(self, observation):
+    def update(self, observation: Union[float, Iterable]) -> None:
         """Update the Streaming P2 Quantile with the given item.
 
         Update the streaming quantile with the given item.
@@ -55,7 +56,7 @@ cdef class PyStreamingP2Quantile:
         else:
             self.c_P2.update(observation)
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         """Retrieve the current Streaming P2 Quantile statistic.
 
         Retrieve the current streaming quantile statisic from the previous items
@@ -66,5 +67,5 @@ cdef class PyStreamingP2Quantile:
         """
         return self.c_P2.evaluate()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         del self.c_P2

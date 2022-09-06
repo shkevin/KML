@@ -3,21 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to KML's documentation!
-===============================
 
-.. .. include:: ../README.md
-..    :parser: myst_parser.sphinx_
+KML Documentation
+************************
+
+.. toctree::
+   :maxdepth: 3
+   :caption: API:
+
+   modules
+   _build/api/library_root
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: README:
 
-   modules
-   api/library_root
+   readme
 
 Indices and tables
-==================
+========================
 
 * :ref:`genindex`
 * :ref:`modindex`

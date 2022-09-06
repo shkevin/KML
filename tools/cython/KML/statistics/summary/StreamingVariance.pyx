@@ -15,6 +15,7 @@ Example:
 	```
 """
 from collections.abc import Iterable
+from typing import Union
 
 
 cdef class PyStreamingVariance:
@@ -32,13 +33,13 @@ cdef class PyStreamingVariance:
     """
     cdef StreamingVariance* c_SV
 
-    def __init__(self, window_size=None):
+    def __init__(self, window_size=None) -> None:
         pass
 
-    def __cinit__(self, window_size=None):
+    def __cinit__(self, window_size=None) -> None:
         self.c_SV = new StreamingVariance(window_size)
 
-    def update(self, observation):
+    def update(self, observation: Union[float, Iterable]) -> None:
         """Update the Streaming Variance with the given item.
 
         Update the streaming Variance with the given item. The window_size
@@ -53,7 +54,7 @@ cdef class PyStreamingVariance:
         else:
             self.c_SV.update(observation)
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         """Retrieve the current Streaming Variance value.
 
         Retrieve the current streaming mean value from the previous items
@@ -64,5 +65,5 @@ cdef class PyStreamingVariance:
         """
         return self.c_SV.evaluate()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         del self.c_SV

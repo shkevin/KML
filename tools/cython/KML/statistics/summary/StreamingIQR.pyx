@@ -15,6 +15,7 @@ Example:
 	```
 """
 from collections.abc import Iterable
+from typing import Union
 
 
 cdef class PyStreamingIQR:
@@ -36,16 +37,16 @@ cdef class PyStreamingIQR:
     """
     cdef StreamingIQR* c_IQR
 
-    def __init__(self, low=None, high=None, window_size=None):
+    def __init__(self, low=None, high=None, window_size=None) -> None:
         pass
 
-    def __cinit__(self, low=None, high=None, window_size=None):
+    def __cinit__(self, low=None, high=None, window_size=None) -> None:
         if low is None or high is None:
            self.c_IQR = new StreamingIQR(window_size)
         else:
            self.c_IQR = new StreamingIQR(low, high, window_size)
 
-    def update(self, observation):
+    def update(self, observation: Union[float, Iterable]) -> None:
         """Update the Streaming IQR with the given item.
 
         Update the streaming IQR with the given item. The window_size
@@ -60,7 +61,7 @@ cdef class PyStreamingIQR:
         else:
             self.c_IQR.update(observation)
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         """Retrieve the current Streaming IQR value.
 
         Retrieve the current streaming iqr value from the previous items
@@ -71,5 +72,5 @@ cdef class PyStreamingIQR:
         """
         return self.c_IQR.evaluate()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         del self.c_IQR

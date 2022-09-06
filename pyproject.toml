@@ -7,7 +7,7 @@ name = "KML"
 authors = [{name = "Kevin Cox", email = "shk3vin7@gmail.com"}]
 maintainers = [{name = "Kevin Cox", email = "shk3vin7@gmail.com"}]
 readme = "README.rst"
-license_file = "LICENSE.rst"
+license = "MIT"
 description="Streaming/Online Machine Learning in C++/Cython."
 classifiers=[
     "License :: OSI Approved :: MIT License",

@@ -7,16 +7,11 @@ specifally uses the float generic template.
 
 Example:
 
-	```python
-	from KML.data_structures.LinkedList import PyLinkedList
-
-	LL = PyLinkedList(window_size=5)
-
-    for i in range(5):
-        LL.update(i)
-
-    assert LL.size() == 5
-	```
+    >>> from KML.data_structures.LinkedList import PyLinkedList
+    >>> LL = PyLinkedList(window_size=5)
+    >>> for i in range(5):
+    >>>     LL.update(i)
+    >>> assert LL.size() == 5
 """
 from collections.abc import Iterable
 from typing import Union

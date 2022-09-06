@@ -6,13 +6,10 @@ This module is used to wrap the C++ StreamingMAD implemtation.
 
 Example:
 
-	```python
-    from KML.metrics.StreamingMAD import PyStreamingMAD
-
-    MAD = PyStreamingMAD()
-    MAD.update(list(range(1, 5)))
-    print(MAD.evaluate())
-	```
+    >>> from KML.metrics.StreamingMAD import PyStreamingMAD
+    >>> MAD = PyStreamingMAD()
+    >>> MAD.update(list(range(1, 5)))
+    >>> print(MAD.evaluate())
 
 TODO: Add arguments for windowed fame in streaming mad init.
 """

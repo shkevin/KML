@@ -6,7 +6,9 @@ build-backend = "setuptools.build_meta"
 name = "KML"
 authors = [{name = "Kevin Cox", email = "shk3vin7@gmail.com"}]
 maintainers = [{name = "Kevin Cox", email = "shk3vin7@gmail.com"}]
-readme = "README.md"
+readme = "README.rst"
+license = "MIT"
+license_file = "LICENSE.rst"
 description="Streaming/Online Machine Learning in C++/Cython."
 classifiers=[
     "License :: OSI Approved :: MIT License",
@@ -40,6 +42,7 @@ dev = ["black>=22.0.0,<23.0.0",
        "isort==5.8.0",
        "yapf>=0.32.0",
        "pyproject-flake8"]
+docs = ["sphinx", "sphinx_rtd_theme", "breathe", "exhale"]
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 95"
@@ -61,10 +64,11 @@ disable = [
     "E0611", # (No name)
 ]
 
-# [tool.setuptools.packages.find]
-# # where = tools/cython/
-# include = ["tools/cython/KML/**/*.p[yx|xd]"]
-# exclude = [".gitattributes", "build"]
+[tool.setuptools.package-data]
+KML = ["*.rst"]
+
+[tool.setuptools.exclude-package-data]
+KML = [".gitattributes", "build"]
 
 [tool.setuptools_scm]
 write_to = "tools/cython/KML/_version.py"

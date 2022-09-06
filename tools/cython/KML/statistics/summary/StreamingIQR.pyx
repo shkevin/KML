@@ -6,13 +6,10 @@ This module is used to wrap the C++ Streaming IQR implemtation.
 
 Example:
 
-	```python
-    from KML.statistics.summary.StreamingIQR import PyStreamingIQR
-
-    iqr = PyStreamingIQR(window_size=10)
-    iqr.update(list(range(1, 10)))
-    print(iqr.evaluate())
-	```
+    >>> from KML.statistics.summary.StreamingIQR import PyStreamingIQR
+    >>> iqr = PyStreamingIQR(window_size=10)
+    >>> iqr.update(list(range(1, 10)))
+    >>> print(iqr.evaluate())
 """
 from collections.abc import Iterable
 from typing import Union

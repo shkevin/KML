@@ -141,15 +141,14 @@ if(BUILD_PYTHON)
     SET(NUM_THREADS 10) # Default to building with 10 threads.
     SET(BUILD_DIR ${CMAKE_BINARY_DIR})
     SET(PACK_DIR ${CMAKE_BINARY_DIR}/tools/packages)
-    SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
-    FILE(MAKE_DIRECTORY ${BUILD_DIR}/KML)
+    SET(OUTPUT "${BUILD_DIR}/tools/python_timestamp")
 
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py
             sdist --dist-dir=${PACK_DIR}
-            egg_info --egg-base=${BUILD_DIR}/KML
-            build --build-base=${BUILD_DIR}/build --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/KML
-            build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}
+            egg_info --egg-base=${BUILD_DIR}
+            build --build-base=${BUILD_DIR}/build --build-lib=${BUILD_DIR}/tools/cython --build-temp=${BUILD_DIR}
+            build_ext --build-lib=${BUILD_DIR}/tools/cython --build-temp=${BUILD_DIR} -j${NUM_THREADS}
             bdist_wheel --bdist-dir=${BUILD_DIR}/build --dist-dir=${PACK_DIR}
         COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/bin

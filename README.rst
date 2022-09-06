@@ -71,7 +71,7 @@
 About The Project
 -----------------
 
-The KML tool was developed for streaming machine learning (ML), and is
+The KML tool was developed for streaming machine/online learning (ML), and is
 implemented in C++11 and Python. The core framework was developed in C++
 in order to achieve high performance, while Python is exposed through
 Cython compilation. Python was used in order to be easily adopted by
@@ -242,7 +242,7 @@ repo and create a pull request.
 License
 -------
 
-Distributed under the MIT License. See ``LICENSE.txt`` for more
+Distributed under the MIT License. See ``LICENSE.rst`` for more
 information.
 
 .. raw:: html

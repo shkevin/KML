@@ -2,4 +2,5 @@ recursive-include tools/python/KML *.py
 recursive-include tools/cython/KML/ *.pyx *.pxd
 recursive-include tools/cpp/KML/src *.cc *.tcc
 recursive-include tools/cpp/KML/include *.h
+include *.rst
 exclude build

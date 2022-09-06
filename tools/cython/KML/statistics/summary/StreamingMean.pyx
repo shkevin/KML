@@ -6,13 +6,10 @@ This module is used to wrap the C++ Streaming mean implemtation.
 
 Example:
 
-	```python
-    from KML.statistics.summary.StreamingMean import PyStreamingMean
-
-    sm = PyStreamingMean(5)
-    sm.update(list(range(1, 11)))
-    print(sm.evaluate())
-	```
+    >>> from KML.statistics.summary.StreamingMean import PyStreamingMean
+    >>> sm = PyStreamingMean(5)
+    >>> sm.update(list(range(1, 11)))
+    >>> print(sm.evaluate())
 """
 from collections.abc import Iterable
 from typing import Union

@@ -24,4 +24,4 @@ html: sphinx
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 sphinx:
-	sphinx-apidoc -f -o _build ../../tools/cython/KML
+	sphinx-apidoc -M -f -o _build ../../tools/cython/KML

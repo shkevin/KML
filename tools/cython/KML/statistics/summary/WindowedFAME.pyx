@@ -6,13 +6,10 @@ This module is used to wrap the C++ Windowed FAME implemtation.
 
 Example:
 
-	```python
-    from KML.statistics.summary.WindowedFAME import PyWindowedFAME
-
-    fame = PyWindowedFAME()
-    fame.update(list(range(1, 11)))
-    print(fame.evaluate())
-	```
+    >>> from KML.statistics.summary.WindowedFAME import PyWindowedFAME
+    >>> fame = PyWindowedFAME()
+    >>> fame.update(list(range(1, 11)))
+    >>> print(fame.evaluate())
 
 Reference:
     https://ieeexplore.ieee.org/document/4261339

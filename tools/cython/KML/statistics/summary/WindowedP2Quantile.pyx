@@ -6,13 +6,10 @@ This module is used to wrap the C++ Windowed P2 Quantile implemtation.
 
 Example:
 
-	```python
-    from KML.statistics.summary.WindowedP2Quantile import PyWindowedP2Quantile
-
-    p2 = PyWindowedP2Quantile(quantile=0.5, window_size=10)
-    p2.update(list(range(1, 11)))
-    print(p2.evaluate())
-	```
+    >>> from KML.statistics.summary.WindowedP2Quantile import PyWindowedP2Quantile
+    >>> p2 = PyWindowedP2Quantile(quantile=0.5, window_size=10)
+    >>> p2.update(list(range(1, 11)))
+    >>> print(p2.evaluate())
 """
 from collections.abc import Iterable
 from typing import Union

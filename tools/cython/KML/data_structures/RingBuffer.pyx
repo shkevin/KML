@@ -7,16 +7,11 @@ specifally uses the float generic template.
 
 Example:
 
-	```python
-	from KML.data_structures.RingBuffer import PyRingBuffer
-
-	RB = PyRingBuffer(window_size=5)
-
-    for i in range(5):
-        RB.update(i)
-
-    assert RB.size() == 5
-	```
+    >>> from KML.data_structures.RingBuffer import PyRingBuffer
+    >>> RB = PyRingBuffer(window_size=5)
+    >>> for i in range(5):
+    >>>     RB.update(i)
+    >>> assert RB.size() == 5
 """
 from collections.abc import Iterable
 from typing import Union

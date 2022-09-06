@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 # Configuration file for the Sphinx documentation builder.
 
-# -- Path setup --------------------------------------------------------------
 import os
-import subprocess
 import sys
+
+# -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-PROJECT_DIR = os.path.abspath("../..")
-sys.path.insert(0, os.path.abspath(f"{PROJECT_DIR}/tools/cython/KML/"))
-
-# Doxygen
-# subprocess.call("doxygen ../Doxyfile.in", shell=True)
+PROJECT_DIR = os.path.abspath("../../")
+sys.path.insert(0, os.path.abspath("../../tools/cython/"))
 
 # -- Project information -----------------------------------------------------
 
@@ -23,11 +20,12 @@ author = "Kevin Cox"
 
 # -- General configuration ---------------------------------------------------
 
+master_doc = "index"
+
 # Tell Sphinx to use both the `breathe` and `exhale` extensions
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
-    "sphinx.ext.autosectionlabel",
     "sphinx.ext.todo",
     "sphinx.ext.coverage",
     "sphinx.ext.mathjax",
@@ -39,6 +37,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "breathe",
     "exhale",
+    "myst_parser",
 ]
 
 # Setup the `exhale` extension
@@ -48,14 +47,15 @@ exhale_args = {
     ############################################################################
     # These arguments are required.                                            #
     ############################################################################
-    "containmentFolder": "_build/api",
+    "containmentFolder": "_build/cpp_api",
     "rootFileName": "library_root.rst",
     "rootFileTitle": "C++ API",
-    "doxygenStripFromPath": f"{PROJECT_DIR}/tools/cpp/KML",
+    "doxygenStripFromPath": f"{PROJECT_DIR}/tools/cpp",
     ############################################################################
     # Suggested optional arguments.                                            #
     ############################################################################
-    "createTreeView": False,
+    "createTreeView": True,
+    "includeTemplateParamOrderList": True,
     "exhaleExecutesDoxygen": True,
     "exhaleDoxygenStdin": dedent(
         """
@@ -117,42 +117,32 @@ html_theme_options = {
     "display_version": True,
     "prev_next_buttons_location": "bottom",
     "style_external_links": False,
-    "logo_only": True,
+    "logo_only": False,
     # Toc options
     "collapse_navigation": True,
     "sticky_navigation": True,
     "navigation_depth": 4,
-    "includehidden": True,
+    "includehidden": False,
     "titles_only": False,
 }
 html_logo = "../images/HQ 01-03-resized.png"
 github_url = "https://github.com/shkevin/KML"
+pygments_style = "sphinx"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = []
 
-source_suffix = [".rst", ".md"]
-source_parsers = {
-    ".md": "recommonmark.parser.CommonMarkParser",
-}
+source_suffix = [".rst"]
 
 # Plugin settings
-# Napoleon settings
-napoleon_google_docstring = True
-napoleon_numpy_docstring = True
-napoleon_include_init_with_doc = False
-napoleon_include_private_with_doc = False
-napoleon_include_special_with_doc = True
-napoleon_use_admonition_for_examples = False
-napoleon_use_admonition_for_notes = False
-napoleon_use_admonition_for_references = False
-napoleon_use_ivar = False
-napoleon_use_param = True
-napoleon_use_rtype = True
+
+# Autodoc
+doc_settings = ["members", "undoc-members", "show-inheritance", "inherited-members"]
+autodoc_default_flags = doc_settings
 
 # -- Breathe configuration -------------------------------------------------
 breathe_default_project = "KML"
 breathe_projects = {"KML": "_build/_doxygen/xml"}
-breathe_default_members = ("members", "undoc-members")
+breathe_default_members = tuple(doc_settings)

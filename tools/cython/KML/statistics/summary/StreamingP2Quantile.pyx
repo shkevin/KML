@@ -6,13 +6,10 @@ This module is used to wrap the C++ Streaming P2 Quantile implemtation.
 
 Example:
 
-	```python
-    from KML.statistics.summary.StreamingP2Quantile import PyStreamingP2Quantile
-
-    quant = PyStreamingP2Quantile(quantile=0.5)
-    quant.update(list(range(1, 10)))
-    print(quant.evaluate())
-	```
+    >>> from KML.statistics.summary.StreamingP2Quantile import PyStreamingP2Quantile
+    >>> quant = PyStreamingP2Quantile(quantile=0.5)
+    >>> quant.update(list(range(1, 10)))
+    >>> print(quant.evaluate())
 
 Reference:
     https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf

@@ -60,17 +60,17 @@ def get_buildlib():
         Path: Path to build directory.
     """
     build_lib = "./build"
-    for i, a in enumerate(argv):
-        # Handle python setup.py call
-        if a == "build_ext":
-            for build_arg in argv[i:]:
-                if build_arg.startswith("--build-lib"):
-                    build_lib = build_arg.split("=")[-1]
-                    break
-        # Handle pip wheel call
-        elif a.startswith("-w"):
-            build_lib = argv[i + 1]
-            break
+    # for i, a in enumerate(argv):
+    #     # Handle python setup.py call
+    #     if a == "build_ext":
+    #         for build_arg in argv[i:]:
+    #             if build_arg.startswith("--build-lib"):
+    #                 build_lib = build_arg.split("=")[-1]
+    #                 break
+    #     # Handle pip wheel call
+    #     elif a.startswith("-w"):
+    #         build_lib = argv[i + 1]
+    #         break
 
     # build_lib = PurePath(build_lib)
     build_lib = os.path.relpath(build_lib)
@@ -176,5 +176,5 @@ setup(
     package_dir={"": "tools/cython"},
     ext_modules=get_extensions(),
     zip_safe=False,
-    include_package_data=False,
+    # include_package_data=True,
 )

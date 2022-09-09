@@ -7,6 +7,6 @@ INCLUDE(FindPackageHandleStandardArgs)
 
 # Handle standard arguments to find_package like REQUIRED and QUIET
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(
-	Sphinx
+    Sphinx
     "Failed to find sphinx-build executable"
     SPHINX_EXECUTABLE)

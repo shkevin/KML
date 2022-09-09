@@ -98,7 +98,7 @@ class my_build(_build):
             self.distribution.ext_modules = cythonize(
                 self.distribution.ext_modules,
                 # Don't build in source tree (this leaves behind .c files)
-                build_dir=get_buildlib(),
+                # build_dir=get_buildlib(),
                 # Don't generate an .html output file. This will contain source.
                 annotate=False,
                 # Parallelize our build
@@ -108,33 +108,6 @@ class my_build(_build):
                 # (Optional) Always rebuild, even if files untouched
                 force=False,
             )
-
-
-# def get_extensions() -> List[Extension]:
-#     """Get Cython extensions from project.
-
-#     Build the Cython extensions with the cpp headers and sources.
-
-#     Returns:
-#         List[Extension]: List of Cython Extensions.
-#     """
-#     ext_modules = []
-#     to_strip = str(CYTHON_DIR) + sep
-#     pyx_to_strip = str(PARENT_DIR) + sep
-#     sources = []
-#     for pyx in pyx_sources:
-#         name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
-#         # pyx = pyx.replace(pyx_to_strip, "")
-#         ext_modules.append(
-#             Extension(
-#                 name=name,
-#                 sources=[pyx],
-#                 include_dirs=include_all,  # Path to .h files
-#                 language="c++",
-#                 extra_compile_args=CPPFLAGS,
-#             )
-#         )
-#     return ext_modules
 
 
 def scandir(_dir, files=[]):
@@ -176,5 +149,5 @@ setup(
     package_dir={"": "tools/cython"},
     ext_modules=get_extensions(),
     zip_safe=False,
-    # include_package_data=True,
+    include_package_data=True,
 )

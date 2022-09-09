@@ -62,6 +62,19 @@ endfunction()
 # Macros
 ################################
 
+# Copy python from given source to binary KML directory.
+MACRO(CopyPython src)
+    FILE(GLOB_RECURSE py_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/${src} ${src}/*.py)
+    FOREACH(py ${py_files})
+        ADD_CUSTOM_COMMAND(TARGET python_package
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_CURRENT_SOURCE_DIR}/${src}/${py}"
+            "${CMAKE_BINARY_DIR}/KML/${py}"
+        )
+    ENDFOREACH(py)
+ENDMACRO(CopyPython)
+
 ################################
 # Compiler Flags
 ################################
@@ -146,9 +159,8 @@ if(BUILD_PYTHON)
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py
             sdist --dist-dir=${PACK_DIR}
-            egg_info --egg-base=${BUILD_DIR}
-            build --build-base=${BUILD_DIR}/build --build-lib=${BUILD_DIR}/tools/cython --build-temp=${BUILD_DIR}
-            build_ext --build-lib=${BUILD_DIR}/tools/cython --build-temp=${BUILD_DIR} -j${NUM_THREADS}
+            build --build-base=${BUILD_DIR}/build --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/KML
+            build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}
             bdist_wheel --bdist-dir=${BUILD_DIR}/build --dist-dir=${PACK_DIR}
         COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/bin
@@ -157,6 +169,9 @@ if(BUILD_PYTHON)
         )
 
     ADD_CUSTOM_TARGET(python_package ALL DEPENDS ${OUTPUT})
+
+    CopyPython("tools/python/KML")
+    CopyPython("tools/cython/KML")
 
     if(BUILD_TESTING)
         SET(PYTHON_DIR "${CMAKE_SOURCE_DIR}/tools/python/KML")

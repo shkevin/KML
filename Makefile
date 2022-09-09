@@ -80,7 +80,7 @@ test_source:
 	cd $(BUILDDIR)/tools/packages && \
 	pip3 install KML*.tar.gz --force-reinstall && \
 	python3 -m pytest -p no:cacheprovider ../python/KML/tests && \
-	pip uninstall KML -y
+	pip uninstall KML
 
 # Test Docker image
 docker_test: build

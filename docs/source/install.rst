@@ -1,39 +1,54 @@
+.. image:: _static/r_KMLSimple.png
+   :width: 200px
+   :align: right
+   :target: https://github.com/shkevin/KML
+
+.. _install:
+
 ============
 Installation
 ============
 
-Users
------
+Python
+^^^^^^^^^^^^
 
-To use KML install it with pip::
+Using a Package Manager
+-----------------------------
 
-    pip install KML
+A package manager (conda, apt, yum, MacPorts, etc) should generally be your
+first stop for installing KML - it will make it easy to install KML and
+its dependencies, keep them up-to-date, and uninstall them cleanly.
 
-Developers
-----------
+If you're new to Python or unsure where to start, we strongly recommend taking
+a look at :ref:`Anaconda <anaconda-installation>`, which the KML developers
+use during their day-to-day work.
 
-If you are a developer that also wants to work on KML, install it from git::
+.. toctree::
+  :maxdepth: 2
 
-    git clone git://github.com/shkevin/KML.git
-    cd KML
-    mkvirtualenv kml
+  anaconda-installation.rst
 
-    python install -e .
+Using Pip
+---------
 
-.. note::
+If your package manager doesn't support KML, or doesn't have the latest
+version, your next option should be Python setup tools like `pip`.  You can
+always install the latest stable version of KML and its required
+dependencies using::
 
-    To run the KML tests with coverage, you must build the KML package. Refer to KML/Makefile
-	for examples.
+    $ pip install KML
 
-Supported platforms
--------------------
+... following that, you'll be able to use all of KML's features.
 
-KML supports the following versions of Python:
+From Source
+-----------
 
-* Python 3.7 - 3.11.0
+Finally, if you want to work with the latest, bleeding-edge KML goodness,
+you can install it using the source code::
 
-It is tested primarily on Linux, but due to its minimal dependencies it should work perfectly on both Mac and Windows.
+    $ git clone https://github.com/shkevin/KML
+    $ cd KML
+    $ pip isntall -e .
 
-.. note::
-
-    KML also works with `iPython <http://ipython.org/>`_ or `Jupyter <https://jupyter.org/>`_.
+The setup script installs KML's required dependencies and copies KML into
+your Python site-packages directory, ready to go.

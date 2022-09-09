@@ -1,7 +1,14 @@
 .. KML documentation master file.
 
-KML Overview
-************************
+.. image:: _static/r_KMLSimple.png
+   :width: 200px
+   :align: right
+   :target: https://github.com/shkevin/KML
+
+.. _index:
+
+Welcome!
+========
 
 The KML tool was developed for streaming machine/online learning (ML), and is
 implemented in C++11 and Python. The core framework was developed in C++
@@ -14,23 +21,17 @@ can be written in either language. This is intended to help the community that r
 performance as well as the community that desires ease of use and flexibility.
 
 .. toctree::
-   :maxdepth: 1
-   :caption: KML Information
+   :maxdepth: 2
 
    about
    install
+   modules
+   roadmap
    contributing
    release
-   license
    changelog
+   license
    readme
-
-.. toctree::
-   :maxdepth: 1
-   :caption: API
-
-   modules
-   _build/cpp_api/library_root
 
 Documentation
 =============

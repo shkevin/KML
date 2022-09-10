@@ -1,14 +1,11 @@
 .. Adapted from https://github.com/othneildrew/Best-README-Template/blob/master/README.md
 
-.. container::
+|Logo|
 
-   |Logo|
-   .. rubric:: KML
-   :name: kml
+.. class:: center
 
-   | Streaming machine learning framework.
-   | `Explore the docs » <https://github.com/shkevin/KML>`__
-   | `View
+   | `Explore the docs <https://github.com/shkevin/KML>`__
+     `View
      Examples <https://github.com/shkevin/KML/tools/python/notebooks>`__
      · `Report Bug <https://github.com/shkevin/KML/issues>`__ · `Request
      Feature <https://github.com/shkevin/KML/issues>`__

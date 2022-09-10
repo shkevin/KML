@@ -1,39 +1,17 @@
 .. Adapted from https://github.com/othneildrew/Best-README-Template/blob/master/README.md
 
-.. .. raw:: html
+.. container::
 
-..    <a name="readme-top"></a>
+   |Logo|
+   .. rubric:: KML
+   :name: kml
 
-.. PROJECT LOGO
-.. role:: raw-html-m2r(raw)
-   :format: html
-
-:raw-html-m2r:`<br />`
-
-.. raw:: html
-
-   <div align="center">
-     <a href="https://github.com/shkevin/KML">
-       <!-- <img src="docs/images/PNG 01-00.png" alt="Logo" width="250" height="250"> -->
-       <!-- <img src="docs/images/3D Mockup 01-00.jpg" alt="Logo" height="400"> -->
-       <img src="docs/images/HQ 01-03-resized.png" alt="Logo" width="800" height="400">
-     </a>
-
-     <h3 align="center">KML</h3>
-
-     <p align="center">
-       Streaming machine learning framework.
-       <br />
-       <a href="https://github.com/shkevin/KML"><strong>Explore the docs »</strong></a>
-       <br />
-       <br />
-       <a href="https://github.com/shkevin/KML/tools/python/notebooks">View Examples</a>
-       ·
-       <a href="https://github.com/shkevin/KML/issues">Report Bug</a>
-       ·
-       <a href="https://github.com/shkevin/KML/issues">Request Feature</a>
-     </p>
-   </div>
+   | Streaming machine learning framework.
+   | `Explore the docs » <https://github.com/shkevin/KML>`__
+   | `View
+     Examples <https://github.com/shkevin/KML/tools/python/notebooks>`__
+     · `Report Bug <https://github.com/shkevin/KML/issues>`__ · `Request
+     Feature <https://github.com/shkevin/KML/issues>`__
 
 .. inclusion-marker-do-not-remove
 
@@ -41,34 +19,25 @@
 
 |CI| |Issues| |MIT License| |LinkedIn|
 
-.. Table of Contents
-.. raw:: html
+Table of Contents
+-----------------
 
-   <details open>
-     <summary>Table of Contents</summary>
-     <ol>
-       <li>
-         <a href="#about-the-project">About The Project</a>
-         <ul>
-           <li><a href="#built-with">Built With</a></li>
-         </ul>
-       </li>
-       <li>
-         <a href="#getting-started">Getting Started</a>
-         <ul>
-           <li><a href="#requirements">Requirements</a></li>
-           <li><a href="#building">Building</a></li>
-           <li><a href="#installation">Installation</a></li>
-           <li><a href="#usage">Usage</a></li>
-         </ul>
-       </li>
-       <li><a href="#roadmap">Roadmap</a></li>
-       <li><a href="#contributing">Contributing</a></li>
-       <li><a href="#license">License</a></li>
-       <li><a href="#contact">Contact</a></li>
-       <li><a href="#acknowledgments">Acknowledgments</a></li>
-     </ol>
-   </details>
+#. `About The Project <#about-the-project>`__
+
+   -  `Built With <#built-with>`__
+
+#. `Getting Started <#getting-started>`__
+
+   -  `Requirements <#requirements>`__
+   -  `Building <#building>`__
+   -  `Installation <#installation>`__
+   -  `Usage <#usage>`__
+
+#. `Roadmap <#roadmap>`__
+#. `Contributing <#contributing>`__
+#. `License <#license>`__
+#. `Contact <#contact>`__
+#. `Acknowledgments <#acknowledgments>`__
 
 About The Project
 -----------------
@@ -79,26 +48,16 @@ in order to achieve high performance, while Python is exposed through
 Cython compilation. Python was used in order to be easily adopted by
 other researchers, data scientists, or machine learning engineers.
 
-.. .. raw:: html
-
-..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 Built With
 ~~~~~~~~~~
 
 KML was developed with these libraries and frameworks.
 
--  |C++|
-
-   -  |Eigen3|
-
--  |Python|
-
-   -  |Cython|
-
-.. .. raw:: html
-
-..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
+============== ======================
+|C++|          |Python|
+============== ======================
+|Eigen3|       |Cython|
+============== ======================
 
 Getting Started
 ---------------
@@ -180,19 +139,11 @@ Where MAJOR, MINOR, and PATCH are from the current KML version. And
 where PYVERSION is the Python version used to build the wheel, and DIST
 is the OS distribution used during build (e.g., linux).
 
-.. .. raw:: html
-
-..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 Usage
 ~~~~~
 
 Common Python usage examples can be found in the “View Examples” link
 above. See the documentation for a more detailed usage for C++.
-
-.. .. raw:: html
-
-..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Roadmap
 -------
@@ -205,10 +156,6 @@ Roadmap
 
 See the `open issues <https://github.com/shkevin/KML/issues>`__ for a
 full list of proposed features (and known issues).
-
-.. .. raw:: html
-
-..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Project leaders
 ---------------
@@ -237,19 +184,11 @@ repo and create a pull request.
 4. Push to the Branch (``git push origin feature/NewFeature``)
 5. Open a Pull Request
 
-.. .. raw:: html
-
-..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 License
 -------
 
 Distributed under the MIT License. See ``LICENSE.rst`` for more
 information.
-
-.. .. raw:: html
-
-..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Contact
 -------
@@ -258,16 +197,8 @@ Kevin Cox - shk3vin7@gmail.com
 
 Project Link: https://github.com/shkevin/KML
 
-.. .. raw:: html
-
-..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 Acknowledgments
 ---------------
-
-.. .. raw:: html
-
-..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 .. Languages/Frameworks
 .. |CI| image:: https://github.com/shkevin/KML/actions/workflows/build.yml/badge.svg
@@ -286,3 +217,8 @@ Acknowledgments
    :target: https://www.python.org/
 .. |Cython| image:: https://img.shields.io/badge/-Cython-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellow
    :target: https://cython.org/
+
+.. |Logo| image:: docs/images/HQ%2001-03-resized.png
+   :width: 800px
+   :height: 400px
+   :target: https://github.com/shkevin/KML

@@ -191,21 +191,21 @@ jobs:
         name: dist
         path: dist
 
-  # dist_check:
-  #   runs-on: ubuntu-latest
-  #   needs: [dist]
-  #   steps:
-  #   - uses: actions/setup-python@v4
-  #     with:
-  #       python-version: "3.8"
+  dist_check:
+    runs-on: ubuntu-latest
+    needs: [dist]
+    steps:
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.8"
 
-  #   - name: Install dependencies
-  #     run: pip install twine
-  #   - uses: actions/download-artifact@v3
-  #     with:
-  #       name: dist
-  #       path: dist
-  #   - run: twine check --strict dist/*
+    - name: Install dependencies
+      run: pip install twine
+    - uses: actions/download-artifact@v3
+      with:
+        name: dist
+        path: dist
+    - run: twine check --strict dist/*
 
   # dist_upload:
   #   runs-on: ubuntu-latest

@@ -151,6 +151,8 @@ def get_extensions() -> List[Extension]:
 setup(
     name="KML",
     url="https://github.com/shkevin/KML",
+    author="Kevin Cox",
+    author_email="shk3vin7@gmail.com",
     long_description=get_readme(),
     long_description_content_type="text/x-rst",
     version=get_version(),

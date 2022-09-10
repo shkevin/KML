@@ -1,9 +1,16 @@
 .. Adapted from https://github.com/othneildrew/Best-README-Template/blob/master/README.md
-.. container::
 
-   |Logo|
+|Logo|
 
-   <p style="text-align: center;">A piece of centered text</p>
+.. class:: center
+
+    | KML
+    | Streaming machine learning framework.
+    | `Explore the docs » <https://github.com/shkevin/KML>`__
+    | `View
+      Examples <https://github.com/shkevin/KML/tools/python/notebooks>`__
+      · `Report Bug <https://github.com/shkevin/KML/issues>`__ · `Request
+      Feature <https://github.com/shkevin/KML/issues>`__
 
 .. inclusion-marker-do-not-remove
 

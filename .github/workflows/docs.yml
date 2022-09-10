@@ -18,7 +18,6 @@ jobs:
 
     - name: Checkout repo
       uses: actions/checkout@3
-
     - name: Build docs
       run: |
           cmake -S . -B ${{github.workspace}}/build \

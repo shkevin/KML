@@ -15,7 +15,7 @@ Reference:
     https://ieeexplore.ieee.org/document/4261339
 """
 from collections.abc import Iterable
-from typing import Union
+from typing import Union, Optional
 
 
 cdef class PyWindowedFAME:
@@ -26,22 +26,24 @@ cdef class PyWindowedFAME:
     statistic.
 
     Args:
-        step_size (int): The step size to take when calculating median.
-        epsilon (float): epsilon The exponential growth factor. This gives the
-                         median calculation a "windowing flavor".
+        step_size (int, optional): The step size to take when calculating median. Defaults to 0.1.
+        epsilon (float, optional): epsilon The exponential growth factor. This gives the
+                         median calculation a "windowing flavor". Defaults to 0.0.
 
     Attributes:
         c_FM (WindowedFAME*) : Pointer to the C++ WindowedFAME implementation.
-        step_size (int): The step size to take when calculating median.
-        epsilon (float): epsilon The exponential growth factor. This gives the
-                         median calculation a "windowing flavor".
+        step_size (int, optional): The step size to take when calculating median. Defaults to 0.1.
+        epsilon (float, optional): epsilon The exponential growth factor. This gives the
+                         median calculation a "windowing flavor". Defaults to 0.0.
     """
     cdef WindowedFAME* c_FM
 
-    def __init__(self, step_size=0.1, epsilon=0.0) -> None:
+    def __init__(self, step_size: Optional[float]=0.1,
+                 epsilon: Optional[float]=0.0) -> None:
         pass
 
-    def __cinit__(self, step_size=0.1, epsilon=0.0) -> None:
+    def __cinit__(self, step_size: Optional[float]=0.1,
+                  epsilon: Optional[float]=0.0) -> None:
         self.c_FM = new WindowedFAME(step_size, epsilon)
 
     def update(self, observation: Union[float, Iterable]) -> None:
@@ -50,7 +52,7 @@ cdef class PyWindowedFAME:
         Update the Windowed FAME median calculation with the given item.
 
         Args:
-            item (float, Iterable): Item to update iqr.
+            observation (float, Iterable): Item to update iqr.
         """
         if isinstance(observation, Iterable):
             for o in observation:

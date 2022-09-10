@@ -31,16 +31,13 @@ Coding Style
 
 The KML source code follows the `PEP-8 Style Guide for Python Code <http://legacy.python.org/dev/peps/pep-0008>`_.
 
-Test Coverage
-^^^^^^^^^^^^^
-
 Building the Documentation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To build the documentation, run::
 
-    $ cd KML/docs/source
-    $ make html
+    $ cd into main directory KML
+    $ make
 
 Once the documentation is built, you can view it by opening
 `KML/docs/source/_build/html/index.html` in a web browser.

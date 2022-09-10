@@ -12,7 +12,7 @@ Example:
     >>> print(iqr.evaluate())
 """
 from collections.abc import Iterable
-from typing import Union
+from typing import Union, Optional
 
 
 cdef class PyStreamingIQR:
@@ -21,23 +21,29 @@ cdef class PyStreamingIQR:
     Streaming IQR wrapper for the C++ StreamingIQR class. This code contains
     the public interface usage for the streaming IQR statistic.
 
+    Note:
+        If window_size is set to None, or not specified, the IQR calculation
+        will behave similar to a batch IQR calcuation.
+
     Args:
-        low (float): Low range (defaults to 25% quartile).
-        high (float): High range (defaults to 75% quartile).
-        window_size (int): Desired window size.
+        low (float, optional): Low range (defaults to 25% quartile). Defaults to None.
+        high (float, optional): High range (defaults to 75% quartile). Defaults to None.
+        window_size (int, optional): Desired window size. Defaults to None.
 
     Attributes:
         c_IQR (StreamingIqR*): Pointer to the C++ StreamingIQR implementation.
-        low (float): Low range (defaults to 25% quartile).
-        high (float): High range (defaults to 75% quartile).
-        window_size (int): Desired window size.
+        low (float, optional): Low range (defaults to 25% quartile). Defaults to None.
+        high (float, optional): High range (defaults to 75% quartile). Defaults to None.
+        window_size (int, optional): Desired window size. Defaults to None.
     """
     cdef StreamingIQR* c_IQR
 
-    def __init__(self, low=None, high=None, window_size=None) -> None:
+    def __init__(self, low: Optional[float]=None, high: Optional[float]=None,
+                 window_size: Optional[int]=None) -> None:
         pass
 
-    def __cinit__(self, low=None, high=None, window_size=None) -> None:
+    def __cinit__(self, low: Optional[float]=None, high: Optional[float]=None,
+                 window_size: Optional[int]=None) -> None:
         if low is None or high is None:
            self.c_IQR = new StreamingIQR(window_size)
         else:

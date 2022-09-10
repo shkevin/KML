@@ -26,6 +26,9 @@ nitpicky = True
 release = __version__
 version = release
 
+# Doxygen - Use this only if not using exhale.
+# subprocess.call("doxygen Doxyfile.in", shell=True)
+
 # -- General configuration ---------------------------------------------------
 
 # Tell Sphinx to use both the `breathe` and `exhale` extensions
@@ -37,16 +40,13 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.ifconfig",
     "sphinx.ext.viewcode",
-    "sphinx_sitemap",
     "sphinx.ext.inheritance_diagram",
     "sphinx.ext.napoleon",
     "sphinx.ext.autosummary",
+    "sphinx_sitemap",
     "sphinx_rtd_theme",
-    "sphinx_gallery.load_style",
     "breathe",
     "exhale",
-    "myst_parser",
-    "sphinx_design",
 ]
 
 # Setup the `exhale` extension
@@ -201,6 +201,10 @@ man_pages = [
 ]
 
 # -- Plugin Settings ---------------------------------------------------------
+# Todo Extension
+# If true, `todo` and `todoList` produce output, else they produce nothing.
+todo_include_todos = True
+
 # Intersphinx
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
@@ -210,7 +214,7 @@ intersphinx_mapping = {
 # Napolean
 napoleon_google_docstring = True
 napoleon_numpy_docstring = False
-napoleon_include_init_with_doc = True
+napoleon_include_init_with_doc = False
 napoleon_include_private_with_doc = False
 napoleon_include_special_with_doc = True
 napoleon_use_admonition_for_examples = False
@@ -219,16 +223,20 @@ napoleon_use_admonition_for_references = False
 napoleon_use_ivar = False
 napoleon_use_param = True
 napoleon_use_rtype = True
-napoleon_type_aliases = None
+napoleon_type_aliases = False
+napoleon_attr_annotations = True
 
 # Autodoc
+autoclass_content = "both"
 autodoc_default_flags = ["members", "inherited-members", "show-inheritance"]
 autodoc_default_options = {
     "members": True,
     "inherited-members": False,
     "show-inheritance": False,
+    "undoc-member": True,
     "member-order": "bysource",
 }
+autodoc_typehints = "description"
 
 # -- Breathe configuration -------------------------------------------------
 breathe_default_project = "KML"

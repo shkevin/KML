@@ -98,7 +98,7 @@ class my_build(_build):
             self.distribution.ext_modules = cythonize(
                 self.distribution.ext_modules,
                 # Don't build in source tree (this leaves behind .c files)
-                # build_dir=get_buildlib(),
+                build_dir=get_buildlib(),
                 # Don't generate an .html output file. This will contain source.
                 annotate=False,
                 # Parallelize our build

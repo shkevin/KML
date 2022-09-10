@@ -12,7 +12,7 @@ Example:
     >>> print(p2.evaluate())
 """
 from collections.abc import Iterable
-from typing import Union
+from typing import Union, Optional
 
 
 cdef class PyWindowedP2Quantile:
@@ -23,19 +23,19 @@ cdef class PyWindowedP2Quantile:
 
     Args:
         quantile (float): Quantile to calculate.
-        window_size (int): Desired window size.
+        window_size (int, optional): Desired window size. Defaults to None.
 
     Attributes:
         c_WP2 (WindowedP2Quantile*) : Pointer to the C++ WindowedP2Quantile implementation.
         quantile (float): Quantile to calculate.
-        window_size (int): Desired window size.
+        window_size (int, optional): Desired window size. Defaults to None.
     """
     cdef WindowedP2Quantile* c_WP2
 
-    def __init__(self, quantile, window_size=None) -> None:
+    def __init__(self, quantile, window_size: Optional[int]=None) -> None:
         pass
 
-    def __cinit__(self, quantile, window_size=None) -> None:
+    def __cinit__(self, quantile, window_size: Optional[int]=None) -> None:
         self.c_WP2 = new WindowedP2Quantile(quantile, window_size)
 
     def update(self, observation: Union[float, Iterable]) -> None:

@@ -12,7 +12,7 @@ Example:
     >>> print(sv.evaluate())
 """
 from collections.abc import Iterable
-from typing import Union
+from typing import Union, Optional
 
 
 cdef class PyStreamingVariance:
@@ -21,19 +21,23 @@ cdef class PyStreamingVariance:
     Streaming variance wrapper for the C++ StreamingVariance class. This code contains
     the public interface usage for the streaming variance statistic.
 
+    Note:
+        If window_size is set to None, or not specified, the variance calculation
+        will behave similar to a batch setting.
+
     Args:
-        window_size (int): Desired window size.
+        window_size (int, optional): Desired window size. Defaults to None.
 
     Attributes:
         c_SM (StreamingVariance*) : Pointer to the C++ StreamingVariance implementation.
-        window_size (int): Desired window size.
+        window_size (int, optional): Desired window size.
     """
     cdef StreamingVariance* c_SV
 
-    def __init__(self, window_size=None) -> None:
+    def __init__(self, window_size: Optional[int]=None) -> None:
         pass
 
-    def __cinit__(self, window_size=None) -> None:
+    def __cinit__(self, window_size: Optional[int]=None) -> None:
         self.c_SV = new StreamingVariance(window_size)
 
     def update(self, observation: Union[float, Iterable]) -> None:
@@ -43,7 +47,7 @@ cdef class PyStreamingVariance:
         parameter helps adjust for data drift within the variance calculation.
 
         Args:
-            item (float, Iterable): Item to update iqr.
+            observation: Item to update iqr.
         """
         if isinstance(observation, Iterable):
             for o in observation:

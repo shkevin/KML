@@ -14,7 +14,7 @@ Example:
     >>> assert RB.size() == 5
 """
 from collections.abc import Iterable
-from typing import Union
+from typing import Union, Optional
 
 
 cdef class PyRingBuffer:
@@ -23,19 +23,23 @@ cdef class PyRingBuffer:
     RingBuffer wrapper for the C++ RingBuffer class. This code contains
     the public interface usage for the RingBuffer data structure.
 
+    Note:
+        If window_size is set to None, the RingBuffer will behave similar to a
+        window less LinkedList.
+
     Args:
-        window_size (int): Desired window size for ring buffer.
+        window_size (int, optional): Desired window size for ring buffer. Defaults to None.
 
     Attributes:
         c_RB (RingBuffer[float]*): Pointer to the C++ RingBuffer implementation.
-        window_size (int): Desired window size for ring buffer.
+        window_size (int, optional): Desired window size for ring buffer. Defaults to None.
     """
     cdef RingBuffer[float] *c_RB
 
-    def __init__(self, window_size=None) -> None:
+    def __init__(self, window_size: Optional[int]=None) -> None:
         pass
 
-    def __cinit__(self, window_size=None) -> None:
+    def __cinit__(self, window_size: Optional[int]=None) -> None:
         self.c_RB = new RingBuffer[float](window_size)
 
     def update(self, item: Union[float, Iterable]) -> None:

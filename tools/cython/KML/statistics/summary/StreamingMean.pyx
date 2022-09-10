@@ -12,7 +12,7 @@ Example:
     >>> print(sm.evaluate())
 """
 from collections.abc import Iterable
-from typing import Union
+from typing import Union, Optional
 
 
 cdef class PyStreamingMean:
@@ -21,19 +21,23 @@ cdef class PyStreamingMean:
     Streaming mean wrapper for the C++ StreamingMean class. This code contains
     the public interface usage for the streaming mean statistic.
 
+    Note:
+        If window_size is set to None, or not specified, the mean calculation
+        will behave similar to the batch mean.
+
     Args:
-        window_size (int): Desired window size.
+        window_size (int, optional): Desired window size. Defaults to None.
 
     Attributes:
         c_SM (StreamingMean*) : Pointer to the C++ StreamingMean implementation.
-        window_size (int): Desired window size.
+        window_size (int, optional): Desired window size. Defaults to None.
     """
     cdef StreamingMean *c_SM
 
-    def __init__(self, window_size=None) -> None:
+    def __init__(self, window_size: Optional[int]=None) -> None:
         pass
 
-    def __cinit__(self, window_size=None) -> None:
+    def __cinit__(self, window_size: Optional[int]=None) -> None:
         self.c_SM = new StreamingMean(window_size)
 
     def update(self, observation: Union[float, Iterable]) -> None:

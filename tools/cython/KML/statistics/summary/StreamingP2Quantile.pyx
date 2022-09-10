@@ -15,7 +15,7 @@ Reference:
     https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf
 """
 from collections.abc import Iterable
-from typing import Union
+from typing import Union, Optional
 
 
 cdef class PyStreamingP2Quantile:
@@ -26,17 +26,17 @@ cdef class PyStreamingP2Quantile:
     statistic.
 
     Args:
-        quantile (float): Quantile to calculate.
+        quantile (float): Quantile to calculate. Defaults to 0.5.
 
     Attributes:
-        quantile (float): Quantile to calculate.
+        quantile (float): Quantile to calculate. Defaults to 0.5.
     """
     cdef StreamingP2Quantile* c_P2
 
-    def __init__(self, quantile=0.5) -> None:
+    def __init__(self, quantile: Optional[float]=0.5) -> None:
         pass
 
-    def __cinit__(self, quantile=0.5) -> None:
+    def __cinit__(self, quantile: Optional[float]=0.5) -> None:
         self.c_P2 = new StreamingP2Quantile(quantile)
 
     def update(self, observation: Union[float, Iterable]) -> None:

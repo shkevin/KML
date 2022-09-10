@@ -1,7 +1,6 @@
 .. Adapted from https://github.com/othneildrew/Best-README-Template/blob/master/README.md
 
 .. raw:: html
-
    <a name="readme-top"></a>
 
 .. PROJECT LOGO

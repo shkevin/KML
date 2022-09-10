@@ -14,7 +14,7 @@ Example:
     >>> assert LL.size() == 5
 """
 from collections.abc import Iterable
-from typing import Union
+from typing import Union, Optional
 
 
 cdef class PyLinkedList:
@@ -23,27 +23,31 @@ cdef class PyLinkedList:
     LinkedList wrapper for the C++ LinkedList class. This code contains
     the public interface usage for the LinkedList data structure.
 
+    Note:
+        If window_size is set to None, the LinkedList will behave similar to a
+        window less LinkedList.
+
     Args:
-        window_size (int): Desired window size for LinkedList.
+        window_size (int, optional): Desired window size for LinkedList. Defaults to None.
 
     Attributes:
         c_LL (LinkedList[float]*): Pointer to the C++ LinkedList implementation.
-        window_size (int): Desired window size for LinkedList.
+        window_size (int, optional): Desired window size for LinkedList.
     """
     cdef LinkedList[float] *c_LL
 
-    def __init__(self, window_size=None) -> None:
+    def __init__(self, window_size: Optional[int]=None) -> None:
         pass
 
-    def __cinit__(self, window_size=None) -> None:
+    def __cinit__(self, window_size: Optional[int]=None) -> None:
         self.c_LL = new LinkedList[float](window_size)
 
     def update(self, item: Union[float, Iterable]) -> None:
         """Update the LinkedList with the given item.
 
         Update the streaming LinkedList with the given item. If the item the
-        number of items inside the LinkedList is more the the specified window_size, remove the
-        oldest element and update.
+        number of items inside the LinkedList is more the the specified window_size,
+        remove the oldest element and update.
 
         Args:
             item (float, Iterable): Item to push to LinkedList.
@@ -87,6 +91,9 @@ cdef class PyLinkedList:
 
         Determine if this LinkedList is full based off of the specified
         user input window_size.
+
+        Note:
+            This function will always evaluate to false if window_size is None.
 
         Returns:
             bool: If LinkedList is full (window_size).

@@ -14,6 +14,6 @@ API
    _build/modules
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    _build/cpp_api/library_root

@@ -1,6 +1,7 @@
 .. Adapted from https://github.com/othneildrew/Best-README-Template/blob/master/README.md
 
 .. raw:: html
+
    <a name="readme-top"></a>
 
 .. PROJECT LOGO
@@ -35,7 +36,9 @@
    </div>
 
 .. inclusion-marker-do-not-remove
+
 .. Shields
+
 |CI| |Issues| |MIT License| |LinkedIn|
 
 .. Table of Contents

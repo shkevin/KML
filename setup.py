@@ -29,7 +29,12 @@ except ImportError:
     USE_CYTHON = False
 
 
-def get_version():
+def get_readme() -> str:
+    with open("README.rst", "r", encoding="utf8") as f:
+        return f.read()
+
+
+def get_version() -> str:
     """Load the version from version.py
 
     Load the version from version.py without importing it.
@@ -50,7 +55,7 @@ def get_version():
         return "0.0.1"
 
 
-def get_buildlib():
+def get_buildlib() -> str:
     """Attempt to parse build lib from user input.
 
     Try to get the build directory from the cmake arguments. If the
@@ -60,17 +65,17 @@ def get_buildlib():
         Path: Path to build directory.
     """
     build_lib = "./build"
-    # for i, a in enumerate(argv):
-    #     # Handle python setup.py call
-    #     if a == "build_ext":
-    #         for build_arg in argv[i:]:
-    #             if build_arg.startswith("--build-lib"):
-    #                 build_lib = build_arg.split("=")[-1]
-    #                 break
-    #     # Handle pip wheel call
-    #     elif a.startswith("-w"):
-    #         build_lib = argv[i + 1]
-    #         break
+    for i, a in enumerate(argv):
+        # Handle python setup.py call
+        if a == "build_ext":
+            for build_arg in argv[i:]:
+                if build_arg.startswith("--build-lib"):
+                    build_lib = build_arg.split("=")[-1]
+                    break
+        # Handle pip wheel call
+        elif a.startswith("-w"):
+            build_lib = argv[i + 1]
+            break
 
     # build_lib = PurePath(build_lib)
     build_lib = os.path.relpath(build_lib)
@@ -79,14 +84,14 @@ def get_buildlib():
 
 class my_build_ext(_build_ext):
     # Avoid a gcc warning below: -Wstrict-prototypes
-    def build_extensions(self):
+    def build_extensions(self) -> None:
         if "-Wstrict-prototypes" in self.compiler.compiler_so:
             self.compiler.compiler_so.remove("-Wstrict-prototypes")
         super().build_extensions()
 
 
 class my_build(_build):
-    def finalize_options(self):
+    def finalize_options(self) -> None:
         super().finalize_options()
         # __builtins__.__NUMPY_SETUP__ = False
         # import numpy
@@ -110,7 +115,10 @@ class my_build(_build):
             )
 
 
-def scandir(_dir, files=[]):
+def scandir(_dir, files=None) -> List[str]:
+    if files is None:
+        files = []
+
     for file in os.listdir(_dir):
         path = os.path.join(_dir, file)
         if os.path.isfile(path) and path.endswith(".pyx"):
@@ -121,7 +129,7 @@ def scandir(_dir, files=[]):
     return files
 
 
-def get_extensions():
+def get_extensions() -> List[Extension]:
     ext_names = scandir(CYTHON_DIR)
     ext_modules = []
     for name in ext_names:
@@ -143,6 +151,8 @@ def get_extensions():
 setup(
     name="KML",
     url="https://github.com/shkevin/KML",
+    long_description=get_readme(),
+    long_description_content_type="text/x-rst",
     version=get_version(),
     cmdclass={"build_ext": my_build_ext, "build": my_build},
     packages=find_packages("tools/cython"),

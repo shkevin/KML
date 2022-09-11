@@ -8,7 +8,9 @@ PROJECT_NAME           = KML
 PROJECT_NUMBER         =
 PROJECT_BRIEF          =
 PROJECT_LOGO           =
-OUTPUT_DIRECTORY       = @CMAKE_BINARY_DIR/docs@
+# OUTPUT_DIRECTORY       = @DOXYGEN_OUTPUT_DIR@
+# OUTPUT_DIRECTORY       = @CMAKE_BINARY_DIR@/docs/_build
+OUTPUT_DIRECTORY       = "_build"
 CREATE_SUBDIRS         = NO
 ALLOW_UNICODE_NAMES    = NO
 OUTPUT_LANGUAGE        = English
@@ -54,8 +56,8 @@ LOOKUP_CACHE_SIZE      = 0
 #---------------------------------------------------------------------------
 # Build related configuration options
 #---------------------------------------------------------------------------
-EXTRACT_ALL            = NO
-EXTRACT_PRIVATE        = NO
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
 EXTRACT_PRIV_VIRTUAL   = NO
 EXTRACT_PACKAGE        = NO
 EXTRACT_STATIC         = NO
@@ -106,7 +108,8 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/tools/cpp/KML/src
+# INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/tools/cpp/KML/include
+INPUT                  = "../tools/cpp/KML/include"
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.cc \
@@ -180,7 +183,7 @@ REFERENCES_RELATION    = NO
 REFERENCES_LINK_SOURCE = YES
 SOURCE_TOOLTIPS        = YES
 USE_HTAGS              = NO
-VERBATIM_HEADERS       = YES
+VERBATIM_HEADERS       = NO
 CLANG_ASSISTED_PARSING = NO
 CLANG_OPTIONS          =
 CLANG_DATABASE_PATH    =
@@ -253,7 +256,7 @@ EXTRA_SEARCH_MAPPINGS  =
 #---------------------------------------------------------------------------
 # Configuration options related to the LaTeX output
 #---------------------------------------------------------------------------
-GENERATE_LATEX         = YES
+GENERATE_LATEX         = NO
 LATEX_OUTPUT           = latex
 LATEX_CMD_NAME         =
 MAKEINDEX_CMD_NAME     = makeindex
@@ -294,7 +297,7 @@ MAN_LINKS              = NO
 #---------------------------------------------------------------------------
 # Configuration options related to the XML output
 #---------------------------------------------------------------------------
-GENERATE_XML           = NO
+GENERATE_XML           = YES
 XML_OUTPUT             = xml
 XML_PROGRAMLISTING     = YES
 XML_NS_MEMB_FILE_SCOPE = NO

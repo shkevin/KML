@@ -16,8 +16,64 @@ endif()
 SET(CMAKE_CXX_STANDARD 11)
 
 ################################
+# Global Variables
+################################
+if(NOT WIN32)
+  STRING(ASCII 27 Esc)
+  SET(ColourReset "${Esc}[m")
+  SET(ColourBold  "${Esc}[1m")
+  SET(Red         "${Esc}[31m")
+  SET(Green       "${Esc}[32m")
+  SET(Yellow      "${Esc}[33m")
+  SET(Blue        "${Esc}[34m")
+  SET(Magenta     "${Esc}[35m")
+  SET(Cyan        "${Esc}[36m")
+  SET(White       "${Esc}[37m")
+  SET(BoldRed     "${Esc}[1;31m")
+  SET(BoldGreen   "${Esc}[1;32m")
+  SET(BoldYellow  "${Esc}[1;33m")
+  SET(BoldBlue    "${Esc}[1;34m")
+  SET(BoldMagenta "${Esc}[1;35m")
+  SET(BoldCyan    "${Esc}[1;36m")
+  SET(BoldWhite   "${Esc}[1;37m")
+endif()
+
+# Replace built in message system for color output.
+function(message)
+  LIST(GET ARGV 0 MessageType)
+  if(MessageType STREQUAL FATAL_ERROR OR MessageType STREQUAL SEND_ERROR)
+    LIST(REMOVE_AT ARGV 0)
+    _message(${MessageType} "${BoldRed}${ARGV}${ColourReset}")
+  elseif(MessageType STREQUAL WARNING)
+    LIST(REMOVE_AT ARGV 0)
+    _message(${MessageType} "${BoldYellow}${ARGV}${ColourReset}")
+  elseif(MessageType STREQUAL AUTHOR_WARNING)
+    LIST(REMOVE_AT ARGV 0)
+    _message(${MessageType} "${BoldCyan}${ARGV}${ColourReset}")
+  elseif(MessageType STREQUAL STATUS)
+    LIST(REMOVE_AT ARGV 0)
+    _message(${MessageType} "${BoldGreen}${ARGV}${ColourReset}")
+  else()
+    _message("${ARGV}")
+  endif()
+endfunction()
+
+################################
 # Macros
 ################################
+
+# Copy python from given source to binary KML directory.
+MACRO(CopyPython src)
+    FILE(GLOB_RECURSE py_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/${src} ${src}/*.py)
+    FOREACH(py ${py_files})
+        ADD_CUSTOM_COMMAND(TARGET python_package
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_CURRENT_SOURCE_DIR}/${src}/${py}"
+            "${CMAKE_BINARY_DIR}/KML/${py}"
+        )
+    ENDFOREACH(py)
+ENDMACRO(CopyPython)
 
 ################################
 # Compiler Flags
@@ -71,8 +127,6 @@ endif()
 
 # Create a sources variable with a link to all cpp files to compile
 SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp")
-# FILE(GLOB_RECURSE SOURCES "${CPP_DIR}/KML/src/*.cc" "${CPP_DIR}/KML/src/*.tcc")
-# FILE(GLOB_RECURSE APP_SOURCES "${CPP_DIR}/apps/*.cc")
 
 # Add the directories needed for main files.
 ADD_SUBDIRECTORY("${CPP_DIR}/KML")
@@ -100,13 +154,11 @@ if(BUILD_PYTHON)
     SET(NUM_THREADS 10) # Default to building with 10 threads.
     SET(BUILD_DIR ${CMAKE_BINARY_DIR})
     SET(PACK_DIR ${CMAKE_BINARY_DIR}/tools/packages)
-    SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
-    FILE(MAKE_DIRECTORY ${BUILD_DIR}/KML)
+    SET(OUTPUT "${BUILD_DIR}/tools/python_timestamp")
 
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py
             sdist --dist-dir=${PACK_DIR}
-            egg_info --egg-base=${BUILD_DIR}/KML
             build --build-base=${BUILD_DIR}/build --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/KML
             build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}
             bdist_wheel --bdist-dir=${BUILD_DIR}/build --dist-dir=${PACK_DIR}
@@ -117,6 +169,9 @@ if(BUILD_PYTHON)
         )
 
     ADD_CUSTOM_TARGET(python_package ALL DEPENDS ${OUTPUT})
+
+    CopyPython("tools/python/KML")
+    CopyPython("tools/cython/KML")
 
     if(BUILD_TESTING)
         SET(PYTHON_DIR "${CMAKE_SOURCE_DIR}/tools/python/KML")
@@ -170,44 +225,5 @@ endif(BUILD_TESTING)
 ################################################################################
 OPTION(BUILD_DOCUMENTATION "Build Documentation" OFF)
 if(BUILD_DOCUMENTATION)
-    MESSAGE(STATUS "Building Documentation")
-    # Doxygen documentation of main library
-    FIND_PACKAGE(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
-    if(DOXYGEN_DOT_EXECUTABLE)
-      SET(DOXYGEN_HAVE_DOT YES)
-    else()
-      SET(DOXYGEN_HAVE_DOT NO)
-    endif(DOXYGEN_DOT_EXECUTABLE)
-
-    CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile)
-    ADD_CUSTOM_COMMAND(
-      OUTPUT ${CMAKE_BINARY_DIR}/docs/html/index.html
-      COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/docs
-      DEPENDS
-        ${CMAKE_CURRENT_SOURCE_DIR}/README.md
-        ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
-        ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
-      COMMENT "Building doxygen documentation for 'KML' library")
-    ADD_CUSTOM_TARGET(documentation ALL
-      DEPENDS
-        ${CMAKE_CURRENT_BINARY_DIR}/docs/html/index.html)
-
-    # Sphinx documentation of Python bindings
-    # if(BUILD_PYTHON_BINDINGS)
-    #   add_custom_command(
-    #     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html
-    #     COMMAND ${PYTHON_EXECUTABLE}
-    #       setup.py
-    #         build_sphinx
-    #     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings
-    #     DEPENDS
-    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/README.md
-    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/conf.py
-    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/index.rst
-    #       foo-python-bindings
-    #     COMMENT "Building sphinx Python documentation for 'foo' library")
-    #   add_custom_target(foo-python-documentation DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html)
-    #   add_dependencies(documentation foo-python-documentation)
-    # endif(BUILD_PYTHON_BINDINGS)
+    ADD_SUBDIRECTORY("docs")
 endif(BUILD_DOCUMENTATION)

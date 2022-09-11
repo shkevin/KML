@@ -1,6 +1,7 @@
 #distutils: language = c++
 from libc.stdint cimport uint64_t
 
+
 cdef extern from "StreamingMean.cc":
     pass
 

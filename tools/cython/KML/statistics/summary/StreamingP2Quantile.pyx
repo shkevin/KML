@@ -6,18 +6,16 @@ This module is used to wrap the C++ Streaming P2 Quantile implemtation.
 
 Example:
 
-	```python
-    from KML.statistics.summary.StreamingP2Quantile import PyStreamingP2Quantile
-
-    quant = PyStreamingP2Quantile(quantile=0.5)
-    quant.update(list(range(1, 10)))
-    print(quant.evaluate())
-	```
+    >>> from KML.statistics.summary.StreamingP2Quantile import PyStreamingP2Quantile
+    >>> quant = PyStreamingP2Quantile(quantile=0.5)
+    >>> quant.update(list(range(1, 10)))
+    >>> print(quant.evaluate())
 
 Reference:
     https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf
 """
 from collections.abc import Iterable
+from typing import Optional, Union
 
 
 cdef class PyStreamingP2Quantile:
@@ -28,20 +26,20 @@ cdef class PyStreamingP2Quantile:
     statistic.
 
     Args:
-        quantile (float): Quantile to calculate.
+        quantile (float): Quantile to calculate. Defaults to 0.5.
 
     Attributes:
-        quantile (float): Quantile to calculate.
+        quantile (float): Quantile to calculate. Defaults to 0.5.
     """
     cdef StreamingP2Quantile* c_P2
 
-    def __init__(self, quantile=0.5):
+    def __init__(self, quantile: Optional[float]=0.5) -> None:
         pass
 
-    def __cinit__(self, quantile=0.5):
+    def __cinit__(self, quantile: Optional[float]=0.5) -> None:
         self.c_P2 = new StreamingP2Quantile(quantile)
 
-    def update(self, observation):
+    def update(self, observation: Union[float, Iterable]) -> None:
         """Update the Streaming P2 Quantile with the given item.
 
         Update the streaming quantile with the given item.
@@ -55,7 +53,7 @@ cdef class PyStreamingP2Quantile:
         else:
             self.c_P2.update(observation)
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         """Retrieve the current Streaming P2 Quantile statistic.
 
         Retrieve the current streaming quantile statisic from the previous items
@@ -66,5 +64,5 @@ cdef class PyStreamingP2Quantile:
         """
         return self.c_P2.evaluate()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         del self.c_P2

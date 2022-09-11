@@ -4,7 +4,6 @@ import os
 from distutils.command.build import build as _build
 from os import walk
 from pathlib import Path, PurePath
-from sys import argv
 from typing import List
 
 from setuptools import Extension, find_packages, setup
@@ -12,7 +11,7 @@ from setuptools.command.build_ext import build_ext as _build_ext
 
 # Get Cython sources with their C++ files.
 PARENT_DIR = Path(os.path.abspath(__file__))
-CYTHON_DIR = Path("tools/cython/KML")
+CYTHON_DIR = Path("./tools/cython/KML")
 SRC_DIR = Path("tools/cpp/KML/src")
 HEADERS_DIR = Path("tools/cpp/KML/include")
 CPPFLAGS = ["-Wall", "-O3", "-std=c++11"]
@@ -29,7 +28,12 @@ except ImportError:
     USE_CYTHON = False
 
 
-def get_version():
+def get_readme() -> str:
+    with open("README.rst", "r", encoding="utf8") as f:
+        return f.read()
+
+
+def get_version() -> str:
     """Load the version from version.py
 
     Load the version from version.py without importing it.
@@ -50,7 +54,7 @@ def get_version():
         return "0.0.1"
 
 
-def get_buildlib():
+def get_buildlib() -> str:
     """Attempt to parse build lib from user input.
 
     Try to get the build directory from the cmake arguments. If the
@@ -60,17 +64,17 @@ def get_buildlib():
         Path: Path to build directory.
     """
     build_lib = "./build"
-    for i, a in enumerate(argv):
-        # Handle python setup.py call
-        if a == "build_ext":
-            for build_arg in argv[i:]:
-                if build_arg.startswith("--build-lib"):
-                    build_lib = build_arg.split("=")[-1]
-                    break
-        # Handle pip wheel call
-        elif a.startswith("-w"):
-            build_lib = argv[i + 1]
-            break
+    # for i, a in enumerate(argv):
+    #     # Handle python setup.py call
+    #     if a == "build_ext":
+    #         for build_arg in argv[i:]:
+    #             if build_arg.startswith("--build-lib"):
+    #                 build_lib = build_arg.split("=")[-1]
+    #                 break
+    #     # Handle pip wheel call
+    #     elif a.startswith("-w"):
+    #         build_lib = argv[i + 1]
+    #         break
 
     # build_lib = PurePath(build_lib)
     build_lib = os.path.relpath(build_lib)
@@ -79,14 +83,14 @@ def get_buildlib():
 
 class my_build_ext(_build_ext):
     # Avoid a gcc warning below: -Wstrict-prototypes
-    def build_extensions(self):
+    def build_extensions(self) -> None:
         if "-Wstrict-prototypes" in self.compiler.compiler_so:
             self.compiler.compiler_so.remove("-Wstrict-prototypes")
         super().build_extensions()
 
 
 class my_build(_build):
-    def finalize_options(self):
+    def finalize_options(self) -> None:
         super().finalize_options()
         # __builtins__.__NUMPY_SETUP__ = False
         # import numpy
@@ -110,34 +114,10 @@ class my_build(_build):
             )
 
 
-# def get_extensions() -> List[Extension]:
-#     """Get Cython extensions from project.
+def scandir(_dir, files=None) -> List[str]:
+    if files is None:
+        files = []
 
-#     Build the Cython extensions with the cpp headers and sources.
-
-#     Returns:
-#         List[Extension]: List of Cython Extensions.
-#     """
-#     ext_modules = []
-#     to_strip = str(CYTHON_DIR) + sep
-#     pyx_to_strip = str(PARENT_DIR) + sep
-#     sources = []
-#     for pyx in pyx_sources:
-#         name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
-#         # pyx = pyx.replace(pyx_to_strip, "")
-#         ext_modules.append(
-#             Extension(
-#                 name=name,
-#                 sources=[pyx],
-#                 include_dirs=include_all,  # Path to .h files
-#                 language="c++",
-#                 extra_compile_args=CPPFLAGS,
-#             )
-#         )
-#     return ext_modules
-
-
-def scandir(_dir, files=[]):
     for file in os.listdir(_dir):
         path = os.path.join(_dir, file)
         if os.path.isfile(path) and path.endswith(".pyx"):
@@ -148,7 +128,7 @@ def scandir(_dir, files=[]):
     return files
 
 
-def get_extensions():
+def get_extensions() -> List[Extension]:
     ext_names = scandir(CYTHON_DIR)
     ext_modules = []
     for name in ext_names:
@@ -170,11 +150,15 @@ def get_extensions():
 setup(
     name="KML",
     url="https://github.com/shkevin/KML",
+    author="Kevin Cox",
+    author_email="shk3vin7@gmail.com",
+    long_description=get_readme(),
+    long_description_content_type="text/x-rst",
     version=get_version(),
     cmdclass={"build_ext": my_build_ext, "build": my_build},
     packages=find_packages("tools/cython"),
     package_dir={"": "tools/cython"},
     ext_modules=get_extensions(),
     zip_safe=False,
-    include_package_data=False,
+    include_package_data=True,
 )

@@ -2,6 +2,7 @@
 from libc.stdint cimport uint64_t
 from libcpp cimport bool
 
+
 cdef extern from "LinkedList.h" namespace "KML::DataStructures":
     cdef cppclass LinkedList[T]:
         LinkedList(uint64_t) except +

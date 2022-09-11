@@ -2,6 +2,7 @@
 from libc.stdint cimport uint64_t
 from libcpp cimport bool
 
+
 cdef extern from "RingBuffer.h" namespace "KML::DataStructures":
     cdef cppclass RingBuffer[T]:
         RingBuffer(uint64_t) except +

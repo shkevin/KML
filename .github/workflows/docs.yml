@@ -1,0 +1,41 @@
+---
+name: Docs
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    branches: [main]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Requirements
+        run: |
+          sudo apt-get install doxygen ninja-build cmake gcovr ccache
+          pip3 install -U cython wheel setuptools>=61.0.0 setuptools_scm
+          pip3 install -U sphinx sphinx-rtd-theme sphinx-sitemap breathe exhale
+
+      - name: Checkout repo
+        uses: actions/checkout@3
+
+      - name: Build docs
+        run: |
+            cmake -S . -B ${{github.workspace}}/build \
+              -DBUILD_TESTING=OFF \
+              -DBUILD_PYTHON=ON \
+              -DBUILD_COVERAGE=OFF \
+              -DBUILD_DOCUMENTATION=ON \
+              -DCMAKE_BUILD_TYPE=release
+            cmake --build ${{github.workspace}}/build -j
+            cd ${{github.workspace}}/build/docs/source/_build/html
+            touch .nojekyll
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: cd ${{github.workspace}}/build/docs/source/_build/html

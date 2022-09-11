@@ -6,15 +6,15 @@ This module is used to wrap the C++ StreamingMAD implemtation.
 
 Example:
 
-	```python
-    from KML.metrics.StreamingMAD import PyStreamingMAD
+    >>> from KML.metrics.StreamingMAD import PyStreamingMAD
+    >>> MAD = PyStreamingMAD()
+    >>> MAD.update(list(range(1, 5)))
+    >>> print(MAD.evaluate())
 
-    MAD = PyStreamingMAD()
-    MAD.update(list(range(1, 5)))
-    print(MAD.evaluate())
-	```
+TODO: Add arguments for windowed fame in streaming mad init.
 """
 from collections.abc import Iterable
+from typing import Union
 
 
 cdef class PyStreamingMAD:
@@ -30,13 +30,13 @@ cdef class PyStreamingMAD:
     """
     cdef StreamingMAD *c_MAD
 
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
-    def __cinit__(self):
+    def __cinit__(self) -> None:
         self.c_MAD = new StreamingMAD()
 
-    def update(self, observation):
+    def update(self, observation: Union[float, Iterable]) -> None:
         """Update the StreamingMAD with the given item.
 
         Update the StreamingMAD with the given item.
@@ -50,7 +50,7 @@ cdef class PyStreamingMAD:
         else:
             self.c_MAD.update(observation)
 
-    def evaluate(self):
+    def evaluate(self) -> float:
         """Retrieve the current Streaming MAD value.
 
         Retrieve the current streaming median absolute deviation
@@ -61,5 +61,5 @@ cdef class PyStreamingMAD:
         """
         return self.c_MAD.evaluate()
 
-    def __dealloc__(self):
+    def __dealloc__(self) -> None:
         del self.c_MAD

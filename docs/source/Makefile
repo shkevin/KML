@@ -24,4 +24,4 @@ html: sphinx
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 sphinx:
-	sphinx-apidoc -e -f -t _templates -H "Python API" -o _build ../../KML
+	sphinx-apidoc -M -f -t "_templates" -H "Python API" -o _build ../../KML

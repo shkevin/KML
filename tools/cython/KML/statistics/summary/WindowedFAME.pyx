@@ -15,7 +15,7 @@ Reference:
     https://ieeexplore.ieee.org/document/4261339
 """
 from collections.abc import Iterable
-from typing import Union, Optional
+from typing import Optional, Union
 
 
 cdef class PyWindowedFAME:

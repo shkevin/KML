@@ -66,9 +66,10 @@ exhale_args = {
     "exhaleExecutesDoxygen": True,
     "exhaleDoxygenStdin": dedent(
         """
-        INPUT       = ../../tools/cpp/KML/include
-    """
+       INPUT       = ../../tools/cpp/KML/include
+   """
     ),
+    "kindsWithContentsDirectives": ["class", "file", "namespace", "struct"],
     ############################################################################
     # HTML Theme specific configurations.                                      #
     ############################################################################
@@ -81,13 +82,13 @@ exhale_args = {
     ############################################################################
     "afterTitleDescription": dedent(
         """
-        Welcome to the developer reference to the KML library. This documentation
-        is specific only to the C++ library portion.
-    """
+       Welcome to the developer reference to the KML library. This documentation
+       is specific only to the C++ library portion.
+   """
     ),
     "afterHierarchyDescription": dedent(
         """
-    """
+   """
     ),
     # "fullApiSubSectionTitle": "Full API",
     # "afterBodySummary": dedent(
@@ -103,7 +104,7 @@ exhale_args = {
     # "includeTemplateParamOrderList": False,
     #############################################################################
     ## useful to see ;)
-    # "verboseBuild": True,
+    "verboseBuild": True,
 }
 
 # Tell sphinx what the primary language being documented is.
@@ -119,6 +120,7 @@ highlight_language = "cpp"
 #
 html_theme = "sphinx_rtd_theme"
 html_theme_options = {
+    "google_analytics": True,
     "canonical_url": "",
     "analytics_id": "",  # Provided by Google in your dashboard
     "display_version": True,
@@ -126,14 +128,17 @@ html_theme_options = {
     "style_external_links": False,
     "logo_only": False,
     # Toc options
-    "collapse_navigation": True,
+    "collapse_navigation": False,
     "sticky_navigation": True,
-    "navigation_depth": 4,
+    "navigation_depth": 2,
     "includehidden": False,
-    "titles_only": False,
+    "titles_only": True,
 }
+html_short_title = "KML"
 html_logo = "../images/HQ 01-03-resized.png"
 github_url = "https://github.com/shkevin/KML"
+html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "searchbox.html"]}
+
 pygments_style = "sphinx"
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -142,6 +147,8 @@ pygments_style = "sphinx"
 html_static_path = ["_static"]
 templates_path = ["_templates"]
 html_css_files = ["custom.css"]
+
+source_suffix = [".rst"]
 
 
 def warn_undocumented_members(app, what, name, obj, options, lines):
@@ -153,8 +160,6 @@ def warn_undocumented_members(app, what, name, obj, options, lines):
 def setup(app):
     app.connect("autodoc-process-docstring", warn_undocumented_members)
 
-
-source_suffix = [".rst"]
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -214,7 +219,7 @@ intersphinx_mapping = {
 # Napolean
 napoleon_google_docstring = True
 napoleon_numpy_docstring = False
-napoleon_include_init_with_doc = False
+napoleon_include_init_with_doc = True
 napoleon_include_private_with_doc = False
 napoleon_include_special_with_doc = True
 napoleon_use_admonition_for_examples = False
@@ -231,8 +236,8 @@ autoclass_content = "both"
 autodoc_default_flags = ["members", "inherited-members", "show-inheritance"]
 autodoc_default_options = {
     "members": True,
-    "inherited-members": False,
-    "show-inheritance": False,
+    "inherited-members": True,
+    "show-inheritance": True,
     "undoc-member": True,
     "member-order": "bysource",
 }

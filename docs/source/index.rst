@@ -1,7 +1,7 @@
 .. KML documentation master file.
 
 .. image:: _static/r_KMLSimple.png
-   :width: 200px
+   :width: 100px
    :align: right
    :target: https://github.com/shkevin/KML
 

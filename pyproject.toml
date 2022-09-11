@@ -31,7 +31,8 @@ Source = "https://github.com/shkevin/KML"
 Homepage = "https://github.com/shkevin/KML"
 
 [project.optional-dependencies]
-test = ["pytest>=6.2.3,<6.3.0",
+test = ["tox>=3.23.1",
+        "pytest>=6.2.3,<6.3.0",
         "pytest-xdist>=2.5.0,<2.6.0",
         "pytest-clarity==1.0.1",
         "pytest-cov==3.0.0"]
@@ -40,14 +41,26 @@ dev = ["black>=22.0.0,<23.0.0",
        "mypy==0.812",
        "isort==5.8.0",
        "yapf>=0.32.0",
-       "pyproject-flake8"]
+       "pyproject-flake8",
+       "pydocstyle>=6.1.1"]
 docs = ["sphinx", "sphinx_rtd_theme", "breathe", "exhale"]
 
-[tool.pytest.ini_options]
-addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 95"
+[tool.setuptools.package-data]
+KML = ["*.rst"]
+
+[tool.setuptools.exclude-package-data]
+KML = [".gitattributes", "build"]
+
+[tool.setuptools_scm]
+write_to = "tools/cython/KML/_version.py"
+version_scheme = "release-branch-semver"
 
 [tool.coverage.run]
 source = ["tools/python/KML"]
+
+[tool.flake8]
+filename = ["*.py", "*.pyx"]
+max-line-length = 100
 
 [tool.pylint]
 max-line-length = 88
@@ -63,12 +76,45 @@ disable = [
     "E0611", # (No name)
 ]
 
-[tool.setuptools.package-data]
-KML = ["*.rst"]
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 95"
+minversion = "2.0"
+# addopts = "-rfEX -p pytester --strict-markers"
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test", "Acceptance"]
+python_functions = ["test"]
+testpaths = ["tests"]
+xfail_strict = true
+filterwarnings = [
+    "error",
+    "default:Using or importing the ABCs:DeprecationWarning:unittest2.*",
+    # produced by older pyparsing<=2.2.0.
+    "default:Using or importing the ABCs:DeprecationWarning:pyparsing.*",
+    "default:the imp module is deprecated in favour of importlib:DeprecationWarning:nose.*",
+    # distutils is deprecated in 3.10, scheduled for removal in 3.12
+    "ignore:The distutils package is deprecated:DeprecationWarning",
+    # produced by python3.6/site.py itself (3.6.7 on Travis, could not trigger it with 3.6.8)."
+    "ignore:.*U.*mode is deprecated:DeprecationWarning:(?!(pytest|_pytest))",
+    # produced by pytest-xdist
+    "ignore:.*type argument to addoption.*:DeprecationWarning",
+    # produced on execnet (pytest-xdist)
+    "ignore:.*inspect.getargspec.*deprecated, use inspect.signature.*:DeprecationWarning",
+    # pytest's own futurewarnings
+    "ignore::pytest.PytestExperimentalApiWarning",
+    # Do not cause SyntaxError for invalid escape sequences in py37.
+    # Those are caught/handled by pyupgrade, and not easy to filter with the
+    # module being the filename (with .py removed).
+    "default:invalid escape sequence:DeprecationWarning",
+    # ignore use of unregistered marks, because we use many to test the implementation
+    "ignore::_pytest.warning_types.PytestUnknownMarkWarning",
+]
 
-[tool.setuptools.exclude-package-data]
-KML = [".gitattributes", "build"]
+[tool.black]
+target-version = ['py36'] # Test the minimum version supported.
 
-[tool.setuptools_scm]
-write_to = "tools/cython/KML/_version.py"
-version_scheme = "release-branch-semver"
+[tool.isort]
+profile = "black"
+line_length = 100
+lines_between_sections = 1
+known_first_party = "tox"
+skip = "migrations"

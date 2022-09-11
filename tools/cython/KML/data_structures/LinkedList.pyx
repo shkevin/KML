@@ -2,8 +2,8 @@
 #distutils: language = c++
 """LinkedList Cython wrapper module for C++.
 
-This module is used to wrap the C++ LinkedList implemtation. This module
-specifally uses the float generic template.
+This module is used to wrap the C++ LinkedList implemtation.
+This module specifally uses the float generic template.
 
 Example:
 
@@ -14,7 +14,7 @@ Example:
     >>> assert LL.size() == 5
 """
 from collections.abc import Iterable
-from typing import Union, Optional
+from typing import Optional, Union
 
 
 cdef class PyLinkedList:

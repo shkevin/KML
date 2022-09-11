@@ -12,7 +12,7 @@ Example:
     >>> print(iqr.evaluate())
 """
 from collections.abc import Iterable
-from typing import Union, Optional
+from typing import Optional, Union
 
 
 cdef class PyStreamingIQR:

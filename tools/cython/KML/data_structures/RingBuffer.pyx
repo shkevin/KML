@@ -42,7 +42,7 @@ cdef class PyRingBuffer:
     def __cinit__(self, window_size: Optional[int]=None) -> None:
         self.c_RB = new RingBuffer[float](window_size)
 
-    def update(self, item: Union[float, Iterable]) -> None:
+    def update(self, item: Union[float, Iterable[float]]) -> None:
         """Update the RingBuffer with the given item.
 
         Update the streaming RingBuffer with the given item. If the item the

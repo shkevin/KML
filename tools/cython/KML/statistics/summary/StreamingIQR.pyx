@@ -49,7 +49,7 @@ cdef class PyStreamingIQR:
         else:
            self.c_IQR = new StreamingIQR(low, high, window_size)
 
-    def update(self, observation: Union[float, Iterable]) -> None:
+    def update(self, observation: Union[float, Iterable[float]]) -> None:
         """Update the Streaming IQR with the given item.
 
         Update the streaming IQR with the given item. The window_size

@@ -40,7 +40,7 @@ cdef class PyStreamingVariance:
     def __cinit__(self, window_size: Optional[int]=None) -> None:
         self.c_SV = new StreamingVariance(window_size)
 
-    def update(self, observation: Union[float, Iterable]) -> None:
+    def update(self, observation: Union[float, Iterable[float]]) -> None:
         """Update the Streaming Variance with the given item.
 
         Update the streaming Variance with the given item. The window_size

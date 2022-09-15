@@ -38,7 +38,7 @@ cdef class PyWindowedP2Quantile:
     def __cinit__(self, quantile, window_size: Optional[int]=None) -> None:
         self.c_WP2 = new WindowedP2Quantile(quantile, window_size)
 
-    def update(self, observation: Union[float, Iterable]) -> None:
+    def update(self, observation: Union[float, Iterable[float]]) -> None:
         """Update the Windowed P2 Quantile with the given item.
 
         Update the streaming quantile with the given item.

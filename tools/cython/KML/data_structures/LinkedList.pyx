@@ -42,7 +42,7 @@ cdef class PyLinkedList:
     def __cinit__(self, window_size: Optional[int]=None) -> None:
         self.c_LL = new LinkedList[float](window_size)
 
-    def update(self, item: Union[float, Iterable]) -> None:
+    def update(self, item: Union[float, Iterable[float]]) -> None:
         """Update the LinkedList with the given item.
 
         Update the streaming LinkedList with the given item. If the item the

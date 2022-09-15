@@ -40,7 +40,7 @@ cdef class PyStreamingMean:
     def __cinit__(self, window_size: Optional[int]=None) -> None:
         self.c_SM = new StreamingMean(window_size)
 
-    def update(self, observation: Union[float, Iterable]) -> None:
+    def update(self, observation: Union[float, Iterable[float]]) -> None:
         """Update the Streaming Mean with the given item.
 
         Update the streaming Mean with the given item. The window_size

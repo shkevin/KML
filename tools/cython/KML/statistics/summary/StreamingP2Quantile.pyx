@@ -39,7 +39,7 @@ cdef class PyStreamingP2Quantile:
     def __cinit__(self, quantile: Optional[float]=0.5) -> None:
         self.c_P2 = new StreamingP2Quantile(quantile)
 
-    def update(self, observation: Union[float, Iterable]) -> None:
+    def update(self, observation: Union[float, Iterable[float]]) -> None:
         """Update the Streaming P2 Quantile with the given item.
 
         Update the streaming quantile with the given item.

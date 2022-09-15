@@ -46,7 +46,7 @@ cdef class PyWindowedFAME:
                   epsilon: Optional[float]=0.0) -> None:
         self.c_FM = new WindowedFAME(step_size, epsilon)
 
-    def update(self, observation: Union[float, Iterable]) -> None:
+    def update(self, observation: Union[float, Iterable[float]]) -> None:
         """Update the Median with the given item.
 
         Update the Windowed FAME median calculation with the given item.

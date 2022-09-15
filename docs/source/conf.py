@@ -43,6 +43,7 @@ extensions = [
     "sphinx.ext.inheritance_diagram",
     "sphinx.ext.napoleon",
     "sphinx.ext.autosummary",
+    "sphinx.ext.autodoc.typehints",
     "sphinx_sitemap",
     "sphinx_rtd_theme",
     "breathe",
@@ -241,7 +242,7 @@ autodoc_default_options = {
     "undoc-member": True,
     "member-order": "bysource",
 }
-autodoc_typehints = "description"
+autodoc_typehints = "signature"
 
 # -- Breathe configuration -------------------------------------------------
 breathe_default_project = "KML"

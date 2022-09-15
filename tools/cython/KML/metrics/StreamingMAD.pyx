@@ -36,7 +36,7 @@ cdef class PyStreamingMAD:
     def __cinit__(self) -> None:
         self.c_MAD = new StreamingMAD()
 
-    def update(self, observation: Union[float, Iterable]) -> None:
+    def update(self, observation: Union[float, Iterable[float]]) -> None:
         """Update the StreamingMAD with the given item.
 
         Update the StreamingMAD with the given item.

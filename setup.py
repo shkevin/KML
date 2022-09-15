@@ -99,18 +99,26 @@ class my_build(_build):
         #     extension.include_dirs.append(numpy.get_include())
 
         if USE_CYTHON:
+            from Cython.Compiler import Options
+
+            Options.fail_fast = True
+
             self.distribution.ext_modules = cythonize(
                 self.distribution.ext_modules,
-                # Don't build in source tree (this leaves behind .c files)
+                # Don't build in source tree (this leaves behind .cpp files).
                 build_dir=get_buildlib(),
                 # Don't generate an .html output file. This will contain source.
                 annotate=False,
-                # Parallelize our build
+                # Parallelize our build.
                 nthreads=multiprocessing.cpu_count() * 2,
-                # Tell Cython we're using Python 3
+                # Tell Cython we're using Python 3.
                 language_level=3,
-                # (Optional) Always rebuild, even if files untouched
+                # (Optional) Always rebuild, even if files untouched.
                 force=False,
+                # (Optional) Specify compiler directives.
+                compiler_directives={
+                    "embedsignature": True,  # Will give types in docs.
+                },
             )
 
 

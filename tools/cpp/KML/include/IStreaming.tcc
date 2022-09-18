@@ -1,4 +1,4 @@
-/**
+/*!
  * @file IStreaming.tcc
  * @brief Contains the templated implementation for the abstract streaming class.
  */

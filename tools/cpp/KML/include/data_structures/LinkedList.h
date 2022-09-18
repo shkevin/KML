@@ -45,15 +45,15 @@ namespace KML
                  */
                 virtual void update(const T& item) override;
 
-                /**
+                /*!
                  * @copydoc IDataStructure::update()
                  */
-                virtual void update(const std::vector<T>& items) override;
+                using IDataStructure<T>::update;
 
                 /*!
-                 * @copydoc IDataStructure::pop()
+                 * @brief Return the head value of the LinkedList.
                  */
-                virtual T pop() override;
+                T pop();
 
                 /*!
                  * @copydoc IDataStructure::full()

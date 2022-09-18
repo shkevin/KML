@@ -1,4 +1,4 @@
-/**
+/*!
  * @file IOptimizer.tcc
  * @brief Contains the templated implementation for the abstract optimizer class.
  */

@@ -3,6 +3,7 @@
  * @brief
  */
 #include <iostream>
+
 namespace KML
 {
     namespace DataStructures
@@ -43,15 +44,6 @@ namespace KML
 
             m_size++;
             this->m_historyCount++;
-        }
-
-        template<typename T>
-        void LinkedList<T>::update(const std::vector<T>& items) 
-        {
-            for(auto it = items.begin(); it != items.end(); it++)
-            {
-                this->update(*it);
-            }
         }
 
         template<typename T>

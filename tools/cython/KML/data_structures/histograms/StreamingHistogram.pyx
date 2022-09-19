@@ -126,17 +126,6 @@ cdef class PyStreamingHistogram:
         """
         return self.c_SH.binCounts();
 
-    def bin_widths(self) -> vector[double]:
-        """Retrieve the current bin widths in the Histogram.
-
-        Retrieve the current bin widths for each bin the current histogram.
-
-        Returns:
-            vectr[uint64_t]: The widths for each bin.
-        """
-        return self.c_SH.binWidths();
-
-
     def reset(self) -> None:
         """Reset this StreamingHistogram to empty.
 

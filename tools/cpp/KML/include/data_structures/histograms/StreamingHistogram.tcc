@@ -1,19 +1,22 @@
 /*!
  * @file StreamingHistogram.tcc
  * @brief Contains the templated implementation for the abstract Histogram class.
+ *
+ * This histogram is based off of the Ben-Haim and Tom-Tov histogram in the provided reference.
  * 
  * @ Reference: https://jmlr.csail.mit.edu/papers/volume11/ben-haim10a/ben-haim10a.pdf
  */
 #include <float.h>      // DBL_MAX
 #include <limits>       // numeric_limits
+#include <algorithm>    // std::replace
 
 namespace KML
 {
     namespace DataStructures
     {
         template<typename T>
-        StreamingHistogram<T>::StreamingHistogram(const size_t& numBins, const size_t& windowSize):
-            IStreamingHistogram<T>(numBins, windowSize)
+        StreamingHistogram<T>::StreamingHistogram(const size_t& numBins, const size_t& windowSize, 
+                const DecayType decay): IStreamingHistogram<T>(numBins, windowSize, decay)
         {
             // Do nothing.
         }
@@ -21,58 +24,63 @@ namespace KML
         template<typename T>
         StreamingHistogram<T>::~StreamingHistogram() 
         {
-            reset();
+            this->reset();
         }
 
         template<typename T>
         void StreamingHistogram<T>::update(const T& item)
         {
             IBin<T> *l_bin = new IBin<T>(item, item, 1);
+            size_t l_index = 0;
 
             // Histogram is empty, just insert.
-            if(0 == this->m_historyCount)
-            {
-                std::cout << "First item = " << item << std::endl;
-                this->m_bins.push_back(l_bin);
-                this->m_historyCount++;
-                return;
-            }
-
-            // Binary search to find insert index.
-            size_t l_low = 0;
-            size_t l_high = this->m_bins.size();
-            size_t l_index = (l_low + l_high) / 2;
-
-            while(l_low < l_high)
-            {
-                if(*this->m_bins[l_index] < *l_bin) l_low = l_index + 1;
-                else l_high = l_index;
-                l_index = (l_low + l_high) / 2;
-            }
-
-            // Item is past right-most bin.
-            if(l_index == this->m_bins.size()) this->m_bins.push_back(l_bin);
+            if(0 == this->m_historyCount) this->m_bins.push_back(l_bin);
             else
             {
-                // Increment the bin counter if item is at index bin.
-                if(item >= this->m_bins[l_index]->m_left)
-                {
-                    this->m_bins[l_index]->m_count++;
-                }
+                // Get the bin index where the new bin should go.
+                l_index = this->binSearch(*l_bin);
+
+                // Item is past right-most bin.
+                if(l_index == this->m_bins.size()) this->m_bins.push_back(l_bin);
                 else
                 {
-                    this->m_bins.insert(this->m_bins.begin() + l_index, l_bin);
+                    // Increment the bin counter if item is at index bin.
+                    if(item >= this->m_bins[l_index]->m_left)
+                    {
+                        this->m_bins[l_index]->m_count++;
+                    }
+                    else
+                    {
+                        this->m_bins.insert(this->m_bins.begin() + l_index, l_bin);
+                    }
                 }
             }
 
-            // Need to ensure that the number of bins is always at m_numBins.
-            if (this->m_bins.size() > this->m_numBins) this->merge();
-
+            // Update window index and count normalizations.
+            this->m_window->push_back(l_index);
+            this->updateNormalizer();
             this->m_historyCount++;
+            this->decayCounts(); // Call decay before merging.
+
+            // Need to ensure that the number of bins is always at m_numBins.
+            if (this->m_bins.size() > this->m_numBins) 
+            {
+                size_t l_mergedIndex = this->merge();
+
+                // Need to re-update the window of indices with the merged index.
+                // This will keep the window aligned with indices that have been merged.
+                if(DecayType::WINDOW == this->m_decay)
+                {
+                    for(auto it = this->m_window->begin(); it < this->m_window->end(); it++)
+                    {
+                        if(*it == (l_mergedIndex + 1)) *it = l_mergedIndex;
+                    }
+                }
+            }
         }
 
         template<typename T>
-        void StreamingHistogram<T>::merge()
+        size_t StreamingHistogram<T>::merge()
         {
             double l_minDiff = std::numeric_limits<double>::max();
             double l_minIndex = this->m_bins.size();
@@ -97,31 +105,8 @@ namespace KML
             IBin<T> l_toMerge = *this->m_bins[l_minIndex + 1];
             this->m_bins.erase(this->m_bins.begin() + l_minIndex + 1);
             *this->m_bins[l_minIndex] += l_toMerge;
-        }
 
-        template<typename T>
-        void StreamingHistogram<T>::reset()
-        {
-            this->m_bins.clear();
-            this->m_historyCount = 0;
-        }
-
-        template<typename T>
-        bool StreamingHistogram<T>::empty() const
-        {
-            return this->m_bins.size() == 0;
-        }
-
-        template<typename T>
-        bool StreamingHistogram<T>::full() const
-        {
-            return !this->empty();
-        }
-
-        template<typename T>
-        size_t StreamingHistogram<T>::size() const
-        {
-            return this->m_bins.size();
+            return l_minIndex;
         }
     } // DataStructures
 } // KML

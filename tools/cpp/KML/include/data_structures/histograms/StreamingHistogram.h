@@ -22,10 +22,12 @@ namespace KML
                  * Default Default Constructor.
                  * @param  numBins Number of bins to use in histogram.
                  * @param  windowSize Number of items to maintain in history.
+                 * @param  decay Which decay type to use. Defaults to window.
                  */
                 explicit StreamingHistogram(
                         const size_t& numBins, 
-                        const size_t& windowSize);
+                        const size_t& windowSize,
+                        const DecayType decay=DecayType::WINDOW);
 
                 /*!
                  * @brief Destructor.
@@ -39,34 +41,16 @@ namespace KML
                 virtual void update(const T& item) override;
 
                 /*!
-                 * @brief Merge the two closest bins based off of bin width.
-                 */
-                void merge();
-
-                /*!
                  * @copydoc IDataStructure::update()
                  */
                 using IDataStructure<T>::update;
 
+            private:
                 /*!
-                 * @brief Determine if the Linked List is full.
+                 * @brief Merge the two closest bins based off of bin width. This
+                 *        function will return the index of the merged item.
                  */
-                virtual bool full() const override;
-
-                /*!
-                 * @brief Determine if the Linked List is empty.
-                 */
-                virtual bool empty() const override;
-
-                /*!
-                 * @brief Retrieve the current number of nodes in the list.
-                 */
-                virtual size_t size() const override;
-
-                /*!
-                 * @brief Completely reset the linked list.
-                 */
-                virtual void reset() override;
+                size_t merge();
         }; // StreamingHistogram
     } // DataStructures
 } // KML

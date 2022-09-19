@@ -94,7 +94,7 @@ namespace KML
         template<typename T>
         std::ostream& operator<<(std::ostream& os, const IBin<T>& bin)
         {
-             os << "[" << bin.m_left << ", " << bin.m_right << "]: " << bin.m_count;
+             os << "[" << bin.m_left << ", " << bin.m_right << "] -> " << bin.m_count;
              return os;
         }
 

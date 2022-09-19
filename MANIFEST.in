@@ -4,5 +4,5 @@ recursive-include tools/cpp/KML/src *.cc *.tcc
 recursive-include tools/cpp/KML/include *.h
 recursive-include tools/python/KML/tests/
 include *.rst
-global-exclude *.github
+global-exclude .github
 global-exclude *build*

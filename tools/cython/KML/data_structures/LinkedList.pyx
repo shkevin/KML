@@ -3,7 +3,7 @@
 """LinkedList Cython wrapper module for C++.
 
 This module is used to wrap the C++ LinkedList implemtation.
-This module specifally uses the float generic template.
+This module specifically uses the float generic template.
 
 Example:
 
@@ -45,7 +45,7 @@ cdef class PyLinkedList:
     def update(self, item: Union[float, Iterable[float]]) -> None:
         """Update the LinkedList with the given item.
 
-        Update the streaming LinkedList with the given item. If the item the
+        Update the streaming LinkedList with the given item. If the
         number of items inside the LinkedList is more the the specified window_size,
         remove the oldest element and update.
 

@@ -1,4 +1,4 @@
-.. image:: _static/r_KMLSimple.png
+.. image:: ../_static/r_KMLSimple.png
    :width: 100px
    :align: right
    :target: https://github.com/shkevin/KML
@@ -8,5 +8,5 @@
 README
 =======
 
-.. include:: ../../README.rst
+.. include:: ../../../README.rst
    :start-after: inclusion-marker-do-not-remove

@@ -4,6 +4,8 @@ import os
 import sys
 from textwrap import dedent
 
+from sphinx_gallery.sorting import FileNameSortKey
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -48,7 +50,12 @@ extensions = [
     "sphinx_rtd_theme",
     "breathe",
     "exhale",
+    "nbsphinx",
+    "IPython.sphinxext.ipython_console_highlighting",
+    "sphinx_gallery.gen_gallery",
 ]
+
+exclude_patterns = ["**/.ipynb_checkpoints"]
 
 # Setup the `exhale` extension
 exhale_args = {
@@ -70,7 +77,7 @@ exhale_args = {
        INPUT       = ../../tools/cpp/KML/include
    """
     ),
-    "kindsWithContentsDirectives": ["class", "file", "namespace", "struct"],
+    "kindsWithContentsDirectives": ["class", "file", "namespace", "struct", "enum"],
     ############################################################################
     # HTML Theme specific configurations.                                      #
     ############################################################################
@@ -99,12 +106,12 @@ exhale_args = {
     #############################################################################
     ## Individual page layout example configuration.                            #
     #############################################################################
-    ## Example of adding contents directives on custom kinds with custom title
+    # Example of adding contents directives on custom kinds with custom title
     # "contentsTitle": "Page Contents",
     # "kindsWithContentsDirectives": ["class", "file", "namespace", "struct"],
     # "includeTemplateParamOrderList": False,
     #############################################################################
-    ## useful to see ;)
+    # useful to see ;)
     "verboseBuild": True,
 }
 
@@ -123,7 +130,6 @@ html_theme = "sphinx_rtd_theme"
 html_theme_options = {
     "google_analytics": True,
     "canonical_url": "",
-    "analytics_id": "",  # Provided by Google in your dashboard
     "display_version": True,
     "prev_next_buttons_location": "bottom",
     "style_external_links": False,
@@ -134,6 +140,8 @@ html_theme_options = {
     "navigation_depth": 2,
     "includehidden": False,
     "titles_only": True,
+    # Set the color and the accent color
+    "style_nav_header_background": "#8d37d7"
 }
 html_short_title = "KML"
 html_logo = "../images/HQ 01-03-resized.png"
@@ -149,7 +157,7 @@ html_static_path = ["_static"]
 templates_path = ["_templates"]
 html_css_files = ["custom.css"]
 
-source_suffix = [".rst"]
+source_suffix = [".rst", ".md"]
 
 
 def warn_undocumented_members(app, what, name, obj, options, lines):
@@ -189,7 +197,7 @@ latex_documents = [
         "KML Python/C++ Project Documentation",
         "Kevin Cox",
         "manual",
-    ),
+    )
 ]
 
 # -- Options for manual page output ---------------------------------------
@@ -215,6 +223,19 @@ todo_include_todos = True
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
     "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
+    "ipython": ("https://ipython.readthedocs.io/en/latest/", None),
+    "pytest": ("https://docs.pytest.org/en/latest/", None),
+    "jupyter-notebook": ("https://jupyter-notebook.readthedocs.io/en/stable/", None),
+    "jupyterhub": ("https://jupyterhub.readthedocs.io/en/stable/", None),
+    "nbconvert": ("https://nbconvert.readthedocs.io/en/latest/", None),
+    "jupyter-contrib-nbextensions": (
+        "https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/",
+        None,
+    ),
+    "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
+    "nbsphinx": ("https://nbsphinx.readthedocs.io/en/0.4.2/", None),
+    "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
+    "python-basics": ("https://python-basics-tutorial.readthedocs.io/en/latest/", None),
 }
 
 # Napolean
@@ -243,6 +264,23 @@ autodoc_default_options = {
     "member-order": "bysource",
 }
 autodoc_typehints = "signature"
+autosummary_generate = True
+
+# Sphinx Gallery
+sphinx_gallery_conf = {
+    "examples_dirs": [f"{PROJECT_DIR}/KML/notebooks"],
+    "gallery_dirs": ["sphinx_gallery_output", "sphinx_gallery_animations"],
+    "within_subsection_order": FileNameSortKey,
+    "matplotlib_animations": True,
+    "binder": {},
+    "inspect_global_variables": False,
+    "remove_config_comments": True,
+    "plot_gallery": True,
+    "download_all_examples": False,
+}
+
+# Nbsphinx
+nbsphinx_allow_errors = True
 
 # -- Breathe configuration -------------------------------------------------
 breathe_default_project = "KML"

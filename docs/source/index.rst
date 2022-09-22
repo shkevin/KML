@@ -23,29 +23,29 @@ performance as well as the community that desires ease of use and flexibility.
 .. toctree::
    :maxdepth: 2
 
-   about
-   install
-   modules
-   roadmap
-   contributing
-   release
-   changelog
-   license
-   readme
+   pages/about
+   pages/install
+   pages/modules
+   pages/roadmap
+   pages/contributing
+   pages/release
+   pages/changelog
+   pages/license
+   pages/readme
 
 Documentation
 =============
 
-* `About <about.html>`_ - why you should use KML.
-* `Install <install.html>`_ - how to install for users and developers.
-* `Changelog <changelog.html>`_ - a record of every change made to KML for each release.
+* `About <pages/about.html>`_ - why you should use KML.
+* `Install <pages/install.html>`_ - how to install for users and developers.
+* `Changelog <pages/changelog.html>`_ - a record of every change made to KML for each release.
 
 Join KML
 ========
 
-* `Contributing <contributing.html>`_ - guidance for developers who want to contribute to KML.
-* `Release process <release.html>`_ - the process for maintainers to publish new releases.
-* `License <license.html>`_ - a copy of the MIT open source license covering KML.
+* `Contributing <pages/contributing.html>`_ - guidance for developers who want to contribute to KML.
+* `Release process <pages/release.html>`_ - the process for maintainers to publish new releases.
+* `License <pages/license.html>`_ - a copy of the MIT open source license covering KML.
 
 Indices and tables
 ========================

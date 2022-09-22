@@ -1,4 +1,4 @@
-.. image:: _static/r_KMLSimple.png
+.. image:: ../_static/r_KMLSimple.png
    :width: 100px
    :align: right
    :target: https://github.com/shkevin/KML
@@ -18,15 +18,6 @@ Using a Package Manager
 A package manager (conda, apt, yum, MacPorts, etc) should generally be your
 first stop for installing KML - it will make it easy to install KML and
 its dependencies, keep them up-to-date, and uninstall them cleanly.
-
-If you're new to Python or unsure where to start, we strongly recommend taking
-a look at :ref:`Anaconda <anaconda-installation>`, which the KML developers
-use during their day-to-day work.
-
-.. toctree::
-  :maxdepth: 2
-
-  anaconda-installation.rst
 
 Using Pip
 ---------

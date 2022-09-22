@@ -1,4 +1,4 @@
-.. image:: _static/r_KMLSimple.png
+.. image:: ../_static/r_KMLSimple.png
    :width: 100px
    :align: right
    :target: https://github.com/shkevin/KML
@@ -9,4 +9,4 @@
 License
 =======
 
-.. include:: ../../LICENSE.rst
+.. include:: ../../../LICENSE.rst

@@ -11,10 +11,10 @@ from setuptools import Extension, find_packages, setup
 from setuptools.command.build_ext import build_ext as _build_ext
 
 # Get Cython sources with their C++ files.
-PARENT_DIR = Path(os.path.abspath(__file__))
-CYTHON_DIR = Path("./tools/cython/KML")
-SRC_DIR = Path("tools/cpp/KML/src")
-HEADERS_DIR = Path("tools/cpp/KML/include")
+PARENT_DIR = Path(os.path.abspath(__file__)).parent
+CYTHON_DIR = Path(PARENT_DIR, "tools/cython/KML")
+SRC_DIR = Path(PARENT_DIR, "tools/cpp/KML/src")
+HEADERS_DIR = Path(PARENT_DIR, "tools/cpp/KML/include")
 CPPFLAGS = ["-Wall", "-O3", "-std=c++11"]
 pyx_sources = CYTHON_DIR.rglob("**/*.py")
 include_dirs = [x[0] for x in walk(HEADERS_DIR)]
@@ -30,7 +30,7 @@ except ImportError:
 
 
 def get_readme() -> str:
-    with open("README.rst", "r", encoding="utf8") as f:
+    with open(Path(PARENT_DIR, "README.rst"), "r", encoding="utf8") as f:
         return f.read()
 
 
@@ -127,10 +127,11 @@ def scandir(_dir, files=None) -> List[str]:
     if files is None:
         files = []
 
+    to_replace = str(Path(CYTHON_DIR.parent, os.path.sep))
     for file in os.listdir(_dir):
         path = os.path.join(_dir, file)
         if os.path.isfile(path) and path.endswith(".pyx"):
-            path = path.replace("tools/cython/", "")
+            path = path.replace(str(CYTHON_DIR.parent) + os.path.sep, "")
             files.append(path.replace(os.path.sep, ".")[:-4])
         elif os.path.isdir(path):
             scandir(path, files)
@@ -142,6 +143,7 @@ def get_extensions() -> List[Extension]:
     ext_modules = []
     for name in ext_names:
         extPath = name.replace(".", os.path.sep) + ".pyx"
+        # extPath = PurePath("tools/cython", extPath)
         extPath = PurePath("tools/cython", extPath)
         print(name, extPath)
         extension = Extension(

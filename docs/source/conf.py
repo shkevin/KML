@@ -14,22 +14,22 @@ from sphinx_gallery.sorting import FileNameSortKey
 PROJECT_DIR = os.path.abspath("../../")
 sys.path.insert(0, os.path.abspath(PROJECT_DIR))
 sys.path.insert(0, os.path.abspath("../../tools/cpp"))
-
-from KML import __version__
+sys.path.insert(0, os.path.abspath("_ext"))
 
 # -- Project information -----------------------------------------------------
+from KML import __version__
 
 project = "KML"
 copyright = "2022, Kevin Cox"
 author = "Kevin Cox"
 master_doc = "index"
-nitpicky = True
+nitpicky = False
 
 release = __version__
 version = release
 
 # Doxygen - Use this only if not using exhale.
-# subprocess.call("doxygen Doxyfile.in", shell=True)
+# subprocess.call("doxygen ../Doxyfile.in", shell=True)
 
 # -- General configuration ---------------------------------------------------
 
@@ -52,7 +52,8 @@ extensions = [
     "exhale",
     "nbsphinx",
     "IPython.sphinxext.ipython_console_highlighting",
-    "sphinx_gallery.gen_gallery",
+    "sphinx_gallery.load_style",
+    "sphinx_copybutton",
 ]
 
 exclude_patterns = ["**/.ipynb_checkpoints"]
@@ -71,13 +72,23 @@ exhale_args = {
     ############################################################################
     "createTreeView": True,
     "includeTemplateParamOrderList": True,
+    # "exhaleUseDoxyfile": True,
     "exhaleExecutesDoxygen": True,
     "exhaleDoxygenStdin": dedent(
         """
-       INPUT       = ../../tools/cpp/KML/include
-   """
+     INPUT       = ../../tools/cpp/KML/
+     FULL_PATH_NAMES        = NO
+     XML_PROGRAMLISTING     = YES
+     CREATE_SUBDIRS         = NO
+     AUTOLINK_SUPPORT       = NO
+     INLINE_INHERITED_MEMB  = YES
+     ENABLE_PREPROCESSING   = YES
+     MACRO_EXPANSION        = YES
+     EXPAND_ONLY_PREDEF     = NO
+     SKIP_FUNCTION_MACROS   = NO
+     FILE_PATTERNS          = *.h *.tcc *.cc
+    """
     ),
-    "kindsWithContentsDirectives": ["class", "file", "namespace", "struct", "enum"],
     ############################################################################
     # HTML Theme specific configurations.                                      #
     ############################################################################
@@ -90,13 +101,13 @@ exhale_args = {
     ############################################################################
     "afterTitleDescription": dedent(
         """
-       Welcome to the developer reference to the KML library. This documentation
-       is specific only to the C++ library portion.
-   """
+     Welcome to the developer reference to the KML library. This documentation
+     is specific only to the C++ library portion.
+    """
     ),
     "afterHierarchyDescription": dedent(
         """
-   """
+    """
     ),
     # "fullApiSubSectionTitle": "Full API",
     # "afterBodySummary": dedent(
@@ -125,10 +136,8 @@ highlight_language = "cpp"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
 html_theme = "sphinx_rtd_theme"
 html_theme_options = {
-    "google_analytics": True,
     "canonical_url": "",
     "display_version": True,
     "prev_next_buttons_location": "bottom",
@@ -139,14 +148,20 @@ html_theme_options = {
     "sticky_navigation": True,
     "navigation_depth": 2,
     "includehidden": False,
-    "titles_only": True,
+    "titles_only": False,
     # Set the color and the accent color
-    "style_nav_header_background": "#8d37d7"
+    "style_nav_header_background": "#8d37d7",
 }
 html_short_title = "KML"
 html_logo = "../images/HQ 01-03-resized.png"
 github_url = "https://github.com/shkevin/KML"
 html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "searchbox.html"]}
+
+html_context = {
+    # "display_github": True,  # Add 'Edit on Github' link instead of 'View page source'
+    # "last_updated": True,
+    "commit": False,
+}
 
 pygments_style = "sphinx"
 
@@ -157,7 +172,7 @@ html_static_path = ["_static"]
 templates_path = ["_templates"]
 html_css_files = ["custom.css"]
 
-source_suffix = [".rst", ".md"]
+source_suffix = [".rst", ".md", ".ipynb"]
 
 
 def warn_undocumented_members(app, what, name, obj, options, lines):
@@ -265,11 +280,14 @@ autodoc_default_options = {
 }
 autodoc_typehints = "signature"
 autosummary_generate = True
+set_type_checking_flag = False
 
 # Sphinx Gallery
 sphinx_gallery_conf = {
-    "examples_dirs": [f"{PROJECT_DIR}/KML/notebooks"],
-    "gallery_dirs": ["sphinx_gallery_output", "sphinx_gallery_animations"],
+    "doc_module": "kml",
+    "show_memory": False,
+    "examples_dirs": [f"notebooks/"],
+    "gallery_dirs": ["auto_examples"],
     "within_subsection_order": FileNameSortKey,
     "matplotlib_animations": True,
     "binder": {},
@@ -277,13 +295,22 @@ sphinx_gallery_conf = {
     "remove_config_comments": True,
     "plot_gallery": True,
     "download_all_examples": False,
+    # avoid generating too many cross links
+    "inspect_global_variables": False,
+    "remove_config_comments": True,
+    "plot_gallery": "True",
 }
 
 # Nbsphinx
 nbsphinx_allow_errors = True
 
+# Copybutton
+# Setup the copybutton extension
+copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
+copybutton_prompt_is_regexp = True
+
 # -- Breathe configuration -------------------------------------------------
-breathe_default_project = "KML"
-breathe_projects = {"KML": "_build/_doxygen/xml"}
+breathe_default_project = "kml"
+breathe_projects = {"kml": "_build/doxygen/xml"}
 breathe_default_members = tuple(autodoc_default_flags)
 breathe_domain_by_extension = {"hpp": "cpp"}

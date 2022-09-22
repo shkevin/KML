@@ -44,7 +44,8 @@ dev = ["black>=22.0.0,<23.0.0",
        "pyproject-flake8",
        "pydocstyle>=6.1.1"]
 docs = ["sphinx", "sphinx_rtd_theme", "breathe",
-        "exhale", "sphinx_gallery", "nbsphinx", "nbconvert"]
+        "exhale", "sphinx_gallery", "nbsphinx",
+        "nbconvert", "pandoc"]
 
 [tool.setuptools.package-data]
 KML = ["*.rst"]

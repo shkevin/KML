@@ -26,7 +26,6 @@ performance as well as the community that desires ease of use and flexibility.
    pages/about
    pages/install
    pages/modules
-   pages/examples
    pages/roadmap
    pages/contributing
    pages/release

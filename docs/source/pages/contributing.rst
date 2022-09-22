@@ -26,10 +26,16 @@ Versioning
 
 KML version numbers follow the `Semantic Versioning <http://semver.org>`_ standard.
 
-Coding Style
-^^^^^^^^^^^^
+Coding Styles
+^^^^^^^^^^^^^
 
-The KML source code follows the `PEP-8 Style Guide for Python Code <http://legacy.python.org/dev/peps/pep-0008>`_.
+C++ and Python have their own coding styles. Please follow the below guides for more information.
+
+.. toctree::
+   :maxdepth: 2
+
+   python_guidelines
+   cpp_guidelines
 
 Building the Documentation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -45,4 +51,5 @@ Once the documentation is built, you can view it by opening
 Licensing
 ^^^^^^^^^
 
-Contributors should keep in mind that the source of KML and therefore of any contributions are licensed under the permissive `MIT license <license.html>`_. By contributing to KML, you are agreeing to release your code under this license.
+Contributors should keep in mind that the source of KML and therefore of any contributions are licensed under the permissive `MIT license <license.html>`_.
+By contributing to KML, you are agreeing to release your code under this license.

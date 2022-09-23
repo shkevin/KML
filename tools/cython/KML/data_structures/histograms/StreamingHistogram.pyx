@@ -21,8 +21,7 @@ References:
     * Exponential Histogram - https://randorithms.com/2022/01/31/streaming-histograms.html
 """
 from collections.abc import Iterable
-from typing import Optional, Union
-import cython
+from typing import Optional
 
 
 cdef class PyStreamingHistogram:

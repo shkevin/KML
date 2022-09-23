@@ -74,6 +74,7 @@ Cython         0.29.24+               Cython version required to compile
 Python3        3.7-3.11.0             Python version supported
 Doxygen        1.8.17+ (optional)     For building C++ documentation
 gcovr          4.2+ (optional)        For creating C++ coverage
+cppcheck       1.90+ (optional)       For creating static code analysis
 ============== ====================== ==================================
 
 Building
@@ -84,15 +85,16 @@ Common make commands are located in the Makefile.
 Building KML can be accomplished by using cmake. See below for cmake
 options.
 
-=================== ======= ==================================
-Option              Default Description
-=================== ======= ==================================
-CMAKE_BUILD_TYPE    Debug   Which build type to use
-BUILD_PYTHON        OFF     Compile Cython modules into Python
-BUILD_COVERAGE      OFF     Create C++ code coverage report
-BUILD_DOCUMENTATION OFF     Build C++ documentation repot
-BUILD_TESTING       OFF     Build and run C++ unit tests
-=================== ======= ==================================
+==================== ======= ==================================
+Option               Default Description
+==================== ======= ==================================
+CMAKE_BUILD_TYPE     Debug   Which build type to use
+BUILD_PYTHON         OFF     Compile Cython modules into Python
+BUILD_COVERAGE       OFF     Create C++ code coverage report
+BUILD_DOCUMENTATION  OFF     Build C++ documentation repot
+BUILD_TESTING        OFF     Build and run C++ unit tests
+BUILD_STATIC_ANLYSIS OFF     Build Static Code Analysis
+==================== ======= ==================================
 
 Example common build usage:
 
@@ -104,7 +106,8 @@ Example common build usage:
        -DBUILD_TESTING=ON \
        -DBUILD_PYTHON=ON \
        -DBUILD_COVERAGE=OFF \
-       -DBUILD_DOCUMENTATION=OFF
+       -DBUILD_DOCUMENTATION=OFF \
+       -DBUILD_STATIC_ANALYSIS=OFF
 
    make -j
 

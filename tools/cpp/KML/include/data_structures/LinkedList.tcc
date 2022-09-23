@@ -18,7 +18,14 @@ namespace KML
         template<typename T>
         LinkedList<T>::~LinkedList() 
         {
-            reset();
+            std::lock_guard<std::mutex> lock(m_mutex);
+            Node<T> *l_next = m_head->m_next;
+            while(l_next)
+            {
+                /* l_next->m_previous = nullptr; */
+                if(!l_next->m_previous) delete l_next->m_previous;
+                l_next = l_next->m_next;
+            }
         }
 
         template<typename T>

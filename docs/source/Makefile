@@ -7,6 +7,7 @@ SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
 BUILDDIR      = _build
+KMLSOURCE     = ../../KML
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -24,4 +25,4 @@ html: sphinx
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 sphinx:
-	sphinx-apidoc -M -f -t "_templates" -H "Python API" -o _build ../../KML
+	sphinx-apidoc -M -t "_templates" -H "Python API" -o ${BUILDDIR} ${KMLSOURCE} $(O)

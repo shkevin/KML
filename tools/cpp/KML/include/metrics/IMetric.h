@@ -18,7 +18,7 @@ namespace KML
                 /*!
                  * @brief
                  */
-                IMetric(const size_t& windowSize);
+                explicit IMetric(const size_t& windowSize);
         };
     } // Metrics
 } // KML

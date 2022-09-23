@@ -11,10 +11,7 @@ namespace KML
         template<typename T>
         IDataStructure<T>::IDataStructure(const size_t& windowSize) : m_windowSize(windowSize)
         {
-            if(m_windowSize <= 0)
-            {
-                throw std::runtime_error("Expected window size needs to be positive!");
-            }
+            // Do nothing.
         }
 
         template<typename T>

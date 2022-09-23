@@ -176,7 +176,7 @@ if(BUILD_PYTHON)
 
     if(BUILD_TESTING)
         SET(PYTHON_DIR "${CMAKE_SOURCE_DIR}/tools/python/KML")
-        ADD_SUBDIRECTORY("${PYTHON_DIR}/tests")
+        ADD_SUBDIRECTORY("${PYTHON_DIR}/../tests")
     endif(BUILD_TESTING)
 
 endif(BUILD_PYTHON)
@@ -228,3 +228,39 @@ OPTION(BUILD_DOCUMENTATION "Build Documentation" OFF)
 if(BUILD_DOCUMENTATION)
     ADD_SUBDIRECTORY("docs")
 endif(BUILD_DOCUMENTATION)
+
+################################################################################
+# CPPCHECK
+################################################################################
+OPTION(BUILD_STATIC_ANALYSIS "Build CPPCHECK Static Analysis" OFF)
+if(BUILD_STATIC_ANALYSIS)
+    if(${CMAKE_VERSION} VERSION_LESS "3.10.0")
+        MESSAGE(SEND_ERROR "Can't run CPPCHECK with CMAKE < 3.10.0")
+    else()
+        FIND_PROGRAM(cppcheck cppcheck)
+        MESSAGE(STATUS "Configuring CPPCHECK: " ${cppcheck})
+        FILE(GLOB_RECURSE CPP_SOURCES LIST_DIRECTORIES true
+            ${CPP_DIR}/KML/*.h ${CPP_DIR}/KML/*.cc ${CPP_DIR}/KML/*.tcc)
+        if(NOT (cppcheck MATCHES "NOTFOUND"))
+            FILE(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/code_analysis)
+            SET(CPPCHECK_TEMPLATE "cppcheck:{file}:{line}: {severity}:{message}")
+            SET(CMAKE_CXX_CPPCHECK "${cppcheck}"
+                "--enable=all"
+                "--inconclusive"
+                "inline-suppr"
+                "--suppress=unmatchedSuppression"
+                "--suppress=missingInclude"
+                "--template=${CPPCHECK_TEMPLATE}"                           # How to print warnings.
+                "--language=c++"                                            # Language
+                "--std=c++11"                                               # Language standard
+                "--cppcheck-build-dir=${CMAKE_BINARY_DIR}/code_analysis"    # Build directory
+                "--quiet"                                                   # Only show found errors
+                ${CPP_SOURCES}
+            )
+            add_custom_target(ANALYZE_CPPCHECK ALL DEPENDS ${BINARY}
+                COMMAND ${CMAKE_CXX_CPPCHECK}
+                COMMENT "Static code analysis using"
+            )
+        endif()
+    endif()
+endif()

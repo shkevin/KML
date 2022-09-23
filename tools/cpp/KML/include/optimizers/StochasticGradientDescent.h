@@ -20,7 +20,7 @@ namespace KML
                  * @brief  Takes a single observation and updates the gradient.
                  * @param  observation The observation used to update gradient.
                  */
-                virtual void update(const T& observation) = 0;
+                virtual void update(const T& observation) override;
         };
     }
 }

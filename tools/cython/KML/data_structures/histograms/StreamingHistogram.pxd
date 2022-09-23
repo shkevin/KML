@@ -1,7 +1,8 @@
 #distutils: language = c++
-from libcpp.vector cimport vector
 from libc.stdint cimport uint64_t
 from libcpp cimport bool
+from libcpp.vector cimport vector
+
 
 cdef extern from "IStreamingHistogram.h" namespace "KML::DataStructures":
     cpdef enum DecayType:

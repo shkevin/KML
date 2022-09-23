@@ -7,7 +7,6 @@ namespace KML
 {
     namespace Optimizers
     {
-
         template<typename T = double>
         class IOptimizer
         {
@@ -38,10 +37,6 @@ namespace KML
                  * @param  observation The observation used to update deriving class.
                  */
                 virtual void update(const T& observation) = 0;
-
-            protected:
-
-            private:
         };
     } // Optimizers
 } // KML

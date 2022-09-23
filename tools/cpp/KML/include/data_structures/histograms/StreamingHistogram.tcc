@@ -84,14 +84,13 @@ namespace KML
         {
             double l_minDiff = std::numeric_limits<double>::max();
             double l_minIndex = this->m_bins.size();
-            double l_diff = 0.0;
             size_t l_index = 0;
 
             // Get pair of bins that have the smallest bin width difference.
             // This assumes bins are sorted. This is O(m_numBins).
             for(auto it = this->m_bins.begin(); it < this->m_bins.end() - 1; it++)
             {
-                l_diff = (*it++)->m_right - (*it)->m_right;
+                double l_diff = (*it++)->m_right - (*it)->m_right;
                 if(l_diff < l_minDiff)	
                 {
                     l_minDiff = l_diff;

@@ -63,7 +63,7 @@ namespace KML
                         m_bins[l_delete]->m_count--;
 
                         // Remove the bin when it's no longer needed.
-                        if(m_bins[l_delete]->m_count <= 0) 
+                        if(m_bins[l_delete]->m_count == 0) 
                         {
                             m_bins.erase(m_bins.begin() + l_delete);
                         }
@@ -80,11 +80,10 @@ namespace KML
             double l_normalizer = m_normalizer;
             if(density)
             {
-                double l_width = 0.0;
                 double l_min = 1.0 / (double)m_numBins;
                 for(size_t i = 0; i < m_numBins; i++)
                 {
-                    l_width = m_bins[i]->m_left - m_bins[i]->m_right;
+                    double l_width = m_bins[i]->m_left - m_bins[i]->m_right;
                     if(l_width == 0) l_width = l_min;
                     l_normalized[i] = (l_normalizer / this->m_windowSize) * (m_bins[i]->m_count * l_width) ;
                 }

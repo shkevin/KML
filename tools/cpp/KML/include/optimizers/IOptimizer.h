@@ -1,3 +1,7 @@
+/*!
+ * @file  IOptimizer.h
+ * @brief Provides interface for gradient descent optimizers.
+ */
 #ifndef __IOPTIMIZER_H__
 #define __IOPTIMIZER_H__
 
@@ -7,7 +11,6 @@ namespace KML
 {
     namespace Optimizers
     {
-
         template<typename T = double>
         class IOptimizer
         {
@@ -38,12 +41,8 @@ namespace KML
                  * @param  observation The observation used to update deriving class.
                  */
                 virtual void update(const T& observation) = 0;
-
-            protected:
-
-            private:
         };
-    } // Optimizers
-} // KML
+    }  // namespace Optimizers
+}  // namespace KML
 
-#endif // __IOPTIMIZER_H__
+#endif  // __IOPTIMIZER_H__

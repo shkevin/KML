@@ -1,6 +1,6 @@
-"""
+"""KML Streaming Histograms.
 
-The histograms module attempts to define common histograms used in
+The KML streaming histograms module attempts to define common histograms used in
 streaming analyltics.
 """
 

@@ -90,7 +90,7 @@ jobs:
         if: startsWith(matrix.config.name, 'Ubuntu')
         run: |
           sudo apt-get update
-          sudo apt-get install ninja-build cmake gcovr doxygen ccache
+          sudo apt-get install ninja-build cmake gcovr doxygen ccache clang-tidy cppcheck
           pip install -U cython wheel setuptools>=61.0.0 setuptools_scm
           ninja --version
           cmake --version
@@ -112,6 +112,7 @@ jobs:
             -DBUILD_PYTHON=ON \
             -DBUILD_COVERAGE=ON \
             -DBUILD_DOCUMENTATION=OFF \
+            -DBUILD_STATIC_ANALYSIS=OFF\
             -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
 
       - name: Build package
@@ -133,14 +134,14 @@ jobs:
         run: |
           ls packages
           pip3 install packages/KML*.whl --force-reinstall
-          python3 -m pytest -p no:cacheprovider -n auto ./python/KML/tests
+          python3 -m pytest -p no:cacheprovider -n auto ./python/tests
 
       - name: Pytest sdist
         working-directory: ${{github.workspace}}/build/tools/
         run: |
           ls packages
           pip3 install packages/KML*.tar.gz --force-reinstall
-          python3 -m pytest -p no:cacheprovider -n auto ./python/KML/tests
+          python3 -m pytest -p no:cacheprovider -n auto ./python/tests
 
   # lint:
   #   name: Lint code

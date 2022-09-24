@@ -12,7 +12,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace KML 
+namespace KML
 {
     namespace DataStructures
     {
@@ -72,9 +72,9 @@ namespace KML
                  */
                 size_t m_historyCount = 0;
         };
-    } // DataStructure
-} // KML
+    }  // namespace DataStructures
+}  // namespace KML
 
 #include "IDataStructure.tcc"
 
-#endif // __DATA_STRUCTURE_H__
+#endif  // __DATA_STRUCTURE_H__

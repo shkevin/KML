@@ -6,10 +6,10 @@
 #define __RING_BUFFER_H__
 
 #include <cstdint>
-#include <vector>
+#include <functional>
 #include <memory>
 #include <mutex>
-#include <functional>
+#include <vector>
 
 #include "IDataStructure.h"
 
@@ -46,7 +46,7 @@ namespace KML
                 using IDataStructure<T>::update;
 
                 /*!
-                 * @brief Retrieve the head value of the RingBuffer..
+                 * @brief Retrieve the last value in the RingBuffer.
                  */
                 T pop();
 
@@ -98,9 +98,9 @@ namespace KML
                  */
                 bool m_full = false;
         };
-    } // DataStructures
-} // KML
+    }  // namespace DataStructures
+}  // namespace KML
 
 #include "RingBuffer.tcc"
 
-#endif // __RING_BUFFER_H__
+#endif  // __RING_BUFFER_H__

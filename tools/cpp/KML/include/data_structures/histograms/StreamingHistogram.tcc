@@ -6,23 +6,26 @@
  * 
  * @ Reference: https://jmlr.csail.mit.edu/papers/volume11/ben-haim10a/ben-haim10a.pdf
  */
-#include <float.h>      // DBL_MAX
-#include <limits>       // numeric_limits
-#include <algorithm>    // std::replace
+#include <float.h>  // DBL_MAX
+
+#include <algorithm>  // std::replace
+#include <limits>     // numeric_limits
 
 namespace KML
 {
     namespace DataStructures
     {
         template<typename T>
-        StreamingHistogram<T>::StreamingHistogram(const size_t& numBins, const size_t& windowSize, 
-                const DecayType decay): IStreamingHistogram<T>(numBins, windowSize, decay)
+        StreamingHistogram<T>::StreamingHistogram(const size_t& numBins,
+                                                  const size_t& windowSize,
+                                                  const DecayType decay)
+            : IStreamingHistogram<T>(numBins, windowSize, decay)
         {
             // Do nothing.
         }
 
         template<typename T>
-        StreamingHistogram<T>::~StreamingHistogram() 
+        StreamingHistogram<T>::~StreamingHistogram()
         {
             this->reset();
         }
@@ -30,22 +33,24 @@ namespace KML
         template<typename T>
         void StreamingHistogram<T>::update(const T& item)
         {
-            IBin<T> *l_bin = new IBin<T>(item, item, 1);
+            IBin<T>* l_bin = new IBin<T>(item, item, 1);
             size_t l_index = 0;
 
             // Histogram is empty, just insert.
-            if(0 == this->m_historyCount) this->m_bins.push_back(l_bin);
+            if (0 == this->m_historyCount)
+                this->m_bins.push_back(l_bin);
             else
             {
                 // Get the bin index where the new bin should go.
                 l_index = this->binSearch(*l_bin);
 
                 // Item is past right-most bin.
-                if(l_index == this->m_bins.size()) this->m_bins.push_back(l_bin);
+                if (l_index == this->m_bins.size())
+                    this->m_bins.push_back(l_bin);
                 else
                 {
                     // Increment the bin counter if item is at index bin.
-                    if(item >= this->m_bins[l_index]->m_left)
+                    if (item >= this->m_bins[l_index]->m_left)
                     {
                         this->m_bins[l_index]->m_count++;
                     }
@@ -60,20 +65,21 @@ namespace KML
             this->m_window->push_back(l_index);
             this->updateNormalizer();
             this->m_historyCount++;
-            this->decayCounts(); // Call decay before merging.
+            this->decayCounts();  // Call decay before merging.
 
             // Need to ensure that the number of bins is always at m_numBins.
-            if (this->m_bins.size() > this->m_numBins) 
+            if (this->m_bins.size() > this->m_numBins)
             {
                 size_t l_mergedIndex = this->merge();
 
                 // Need to re-update the window of indices with the merged index.
                 // This will keep the window aligned with indices that have been merged.
-                if(DecayType::WINDOW == this->m_decay)
+                if (DecayType::WINDOW == this->m_decay)
                 {
-                    for(auto it = this->m_window->begin(); it < this->m_window->end(); it++)
+                    for (auto it = this->m_window->begin(); it < this->m_window->end();
+                         it++)
                     {
-                        if(*it == (l_mergedIndex + 1)) *it = l_mergedIndex;
+                        if (*it == (l_mergedIndex + 1)) *it = l_mergedIndex;
                     }
                 }
             }
@@ -84,15 +90,14 @@ namespace KML
         {
             double l_minDiff = std::numeric_limits<double>::max();
             double l_minIndex = this->m_bins.size();
-            double l_diff = 0.0;
             size_t l_index = 0;
 
             // Get pair of bins that have the smallest bin width difference.
             // This assumes bins are sorted. This is O(m_numBins).
-            for(auto it = this->m_bins.begin(); it < this->m_bins.end() - 1; it++)
+            for (auto it = this->m_bins.begin(); it < this->m_bins.end() - 1; it++)
             {
-                l_diff = (*it++)->m_right - (*it)->m_right;
-                if(l_diff < l_minDiff)	
+                double l_diff = (*it++)->m_right - (*it)->m_right;
+                if (l_diff < l_minDiff)
                 {
                     l_minDiff = l_diff;
                     l_minIndex = l_index;
@@ -108,5 +113,5 @@ namespace KML
 
             return l_minIndex;
         }
-    } // DataStructures
-} // KML
+    }  // namespace DataStructures
+}  // namespace KML

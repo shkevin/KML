@@ -1,6 +1,7 @@
-"""
+"""KML Summary Statistics Module.
 
-Summary Statistics
+The Streaming Summary Statistics module attempts to define summary
+statistics on data streams.
 """
 
 from .StreamingIQR import PyStreamingIQR

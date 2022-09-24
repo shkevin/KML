@@ -5,28 +5,30 @@
 namespace KML
 {
     template<typename T>
-    IStreaming<T>::IStreaming(const size_t& windowSize): 
-        m_window(nullptr), m_windowSize(windowSize), m_historyCount(0)
+    IStreaming<T>::IStreaming(const size_t& windowSize)
+        : m_window(nullptr), m_windowSize(windowSize), m_historyCount(0)
     {
-        if(m_windowSize > 0) 
+        if (m_windowSize > 0)
         {
             m_window = new std::deque<T>(m_windowSize);
         }
     }
 
     template<typename T>
-    IStreaming<T>::~IStreaming() 
+    IStreaming<T>::~IStreaming()
     {
         delete m_window;
     }
 
     template<typename T>
-    void IStreaming<T>::update(const T& observation) {}
+    void IStreaming<T>::update(const T& observation)
+    {
+    }
 
     template<typename T>
-    void IStreaming<T>::update(const std::vector<T>& observations) 
+    void IStreaming<T>::update(const std::vector<T>& observations)
     {
-        for(auto it = observations.begin(); it != observations.end(); it++)
+        for (auto it = observations.begin(); it != observations.end(); it++)
         {
             this->update(*it);
         }
@@ -37,4 +39,4 @@ namespace KML
     {
         return m_window;
     }
-}
+}  // namespace KML

@@ -5,11 +5,11 @@
 #ifndef __ABSTRACT_HISTOGRAM_H__
 #define __ABSTRACT_HISTOGRAM_H__
 
+#include <deque>
 #include <vector>
 
-#include "IDataStructure.h"
 #include "IBin.h"
-#include <deque>
+#include "IDataStructure.h"
 
 namespace KML
 {
@@ -18,8 +18,9 @@ namespace KML
         /*!
          * @brief Enum containing the histogram count decay types.
          */
-        enum DecayType {
-            WINDOW=1,   /*! Decay type to decrease counts out of window.  */
+        enum DecayType
+        {
+            WINDOW = 1, /*! Decay type to decrease counts out of window.  */
         };
 
         /*! @brief An Abstract Histogram interface for streaming histograms.*/
@@ -32,9 +33,8 @@ namespace KML
                  * @param  numBins Number of bins the Histogram should maintain.
                  */
                 explicit IStreamingHistogram(
-                        const size_t& numBins, 
-                        const size_t& windowSize=100,
-                        const DecayType decay=DecayType::WINDOW);
+                    const size_t& numBins, const size_t& windowSize = 100,
+                    const DecayType decay = DecayType::WINDOW);
 
                 /*!
                  * @copydoc IDataStructure::update()
@@ -72,14 +72,14 @@ namespace KML
                  * @param normalize Get the window normalized counts.
                  * @param density Calculate the density of the histogram.
                  */
-                std::vector<double> pdf(const bool normalize=true, 
-                        const bool density=true) const;
+                std::vector<double> pdf(const bool normalize = true,
+                                        const bool density = true) const;
 
                 /*!
                  * @brief Calcualte the approximate cdf of bin counts.
                  * @param normalize Normalize the counts by the window.
                  */
-                std::vector<double> cdf(const bool normalize=true) const;
+                std::vector<double> cdf(const bool normalize = true) const;
 
                 /*!
                  * @brief Get the bin edge corresponding to the pth percentile.
@@ -96,8 +96,8 @@ namespace KML
                  * @brief Print Operator.
                  */
                 template<typename F>
-                friend std::ostream& operator<<(std::ostream& os, 
-                        const IStreamingHistogram<F>& hist);
+                friend std::ostream& operator<<(
+                    std::ostream& os, const IStreamingHistogram<F>& hist);
 
             protected:
                 /*!
@@ -118,27 +118,27 @@ namespace KML
                 /*!
                  * @brief Vector of Bins in the Histogram.
                  */
-                std::vector<IBin<T> *> m_bins;
- 
+                std::vector<IBin<T>*> m_bins;
+
                 /*!
                  * @brief Window buffer containing m_windowSize indices of bins. This
                  *        is only used if the decay type is set to WINDOW.
                  */
-                std::deque<size_t> *m_window = nullptr;
+                std::deque<size_t>* m_window = nullptr;
 
                 /*!
                  * @brief Number of bins maintained by this Histogram.
                  */
-                const size_t m_numBins; 
+                const size_t m_numBins;
 
                 /*!
                  * @brief Decay type to decrease histogram counts.
                  */
                 const DecayType m_decay;
-        }; // IStreamingHistogram
-    } // DataStructures
-} // KML
+        };
+    }  // namespace DataStructures
+}  // namespace KML
 
 #include "IStreamingHistogram.tcc"
 
-#endif // __ABSTRACT_HISTOGRAM_H__
+#endif  // __ABSTRACT_HISTOGRAM_H__

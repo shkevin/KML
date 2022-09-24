@@ -1,5 +1,8 @@
 /*!
- * https://arxiv.org/ftp/arxiv/papers/1910/1910.07696.pdf
+ * @file  AdaptiveNormalizer.h
+ * @brief Provides declarations for adaptive normalization.
+ *
+ * @reference https://arxiv.org/ftp/arxiv/papers/1910/1910.07696.pdf
  */
 #ifndef __ADAPTIVE_TRANSFORMER_H__
 #define __ADAPTIVE_TRANSFORMER_H__
@@ -10,26 +13,26 @@ namespace KML
 {
     namespace Transformers
     {
+        /*! @brief Declarations for the AdaptiveNormalizer class. */
         class AdaptiveNormalizer : public ITransformer<double>
         {
             public:
                 /*!
-                 * @brief
+                 * @brief Default Constructor.
                  */
                 AdaptiveNormalizer();
 
                 /*!
-                 * @brief
+                 * @copydoc ITransformer::fit()
                  */
-                virtual void fit(const double& observation) override;
+                void fit(const double& observation) override;
 
                 /*!
-                 * @brief
+                 * @copydoc ITransformer::transform()
                  */
-                virtual double transform(const double& observation) override;
+                double transform(const double& observation) override;
         };
-    } // Transformer
-} // KML
+    }  // namespace Transformers
+}  // namespace KML
 
-
-#endif // __ADAPTIVE_TRANSFORMER_H__
+#endif  // __ADAPTIVE_TRANSFORMER_H__

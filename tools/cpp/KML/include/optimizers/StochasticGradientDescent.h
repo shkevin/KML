@@ -1,3 +1,7 @@
+/*!
+ * @file  StochasticGradientDescent.h
+ * @brief Provides interface for the stocashtic gradient descent class.
+ */
 #ifndef __STOCHASTIC_GRADIENT_DESCENT_H__
 #define __STOCHASTIC_GRADIENT_DESCENT_H__
 
@@ -20,10 +24,9 @@ namespace KML
                  * @brief  Takes a single observation and updates the gradient.
                  * @param  observation The observation used to update gradient.
                  */
-                virtual void update(const T& observation) = 0;
+                virtual void update(const T& observation) override;
         };
-    }
-}
+    }  // namespace Optimizers
+}  // namespace KML
 
-
-#endif //__STOCHASTIC_GRADIENT_DESCENT_H__
+#endif  //__STOCHASTIC_GRADIENT_DESCENT_H__

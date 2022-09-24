@@ -1,6 +1,6 @@
-"""
+"""KML Streaming Statistics Module.
 
-Streaming statistics Python module for describing data streams.
+The KML Streaming statistics Python module for describing data streams.
 """
 
 __all__ = ["summary"]

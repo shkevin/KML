@@ -59,7 +59,8 @@ compile-all: directories
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=ON \
 		-DBUILD_COVERAGE=ON \
-		-DBUILD_DOCUMENTATION=ON && \
+		-DBUILD_DOCUMENTATION=OFF \
+		-DBUILD_STATIC_ANALYSIS=ON && \
 	make -j
 
 ## Mount the docker image and run.
@@ -79,15 +80,15 @@ test_wheel:
 	[ -d $(BUILDDIR) ] && \
 	cd $(BUILDDIR)/tools/packages && \
 	python3 -m pip install KML*.whl --force-reinstall && \
-	python3 -m pytest -p no:cacheprovider ../python/KML/tests && \
-	pip uninstall KML -y
+	python3 -m pytest -p no:cacheprovider ../python/tests && \
+	pip uninstall KML
 
 ## Call Unittests for C++/Python for sdist. Requires prior build.
 test_source:
 	[ -d $(BUILDDIR) ] && \
 	cd $(BUILDDIR)/tools/packages && \
 	pip3 install KML*.tar.gz --force-reinstall && \
-	python3 -m pytest -p no:cacheprovider ../python/KML/tests && \
+	python3 -m pytest -p no:cacheprovider ../python/tests && \
 	pip uninstall KML
 
 ## Test Docker image

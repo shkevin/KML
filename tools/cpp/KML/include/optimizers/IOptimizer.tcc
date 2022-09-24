@@ -7,10 +7,10 @@ namespace KML
     namespace Optimizers
     {
         template<typename T>
-        IOptimizer<T>::IOptimizer(const size_t& windowSize): 
+        IOptimizer<T>::IOptimizer(const size_t& windowSize) :
         {
             // Do nothing
         }
 
-    } // Optimizers
-} // KML
+    }  // namespace Optimizers
+}  // namespace KML

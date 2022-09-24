@@ -5,10 +5,10 @@
 #ifndef __HISTOGRAM_H__
 #define __HISTOGRAM_H__
 
-#include <iostream> // For printing
+#include <iostream>  // For printing
 
-#include "IDataStructure.h"
 #include "IBin.h"
+#include "IDataStructure.h"
 
 namespace KML
 {
@@ -76,7 +76,8 @@ namespace KML
                  * @brief Print Operator.
                  */
                 template<typename F>
-                friend std::ostream& operator<<(std::ostream& os, const IBin<F>& bin);
+                friend std::ostream& operator<<(std::ostream& os,
+                                                const IBin<F>& bin);
 
                 /*!
                  * @brief Get the bin count.
@@ -97,10 +98,10 @@ namespace KML
                  * @brief The count of items in this Bin.
                  */
                 size_t m_count;
-        }; // IBin
-    } // DataStructures
-} // KML
+        };  // IBin
+    }       // namespace DataStructures
+}  // namespace KML
 
 #include "IBin.tcc"
 
-#endif // __HISTOGRAM_H__
+#endif  // __HISTOGRAM_H__

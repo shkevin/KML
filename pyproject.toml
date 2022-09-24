@@ -41,8 +41,9 @@ dev = ["black>=22.0.0,<23.0.0",
        "mypy==0.812",
        "isort==5.8.0",
        "yapf>=0.32.0",
-       "pyproject-flake8",
-       "pydocstyle>=6.1.1"]
+       "pyproject-flake8>=5.0.0",
+       "pydocstyle>=6.1.1",
+       "toml==0.10.1"]
 docs = ["sphinx", "sphinx_rtd_theme", "breathe",
         "exhale", "sphinx_gallery", "nbsphinx",
         "nbconvert", "pandoc"]
@@ -61,11 +62,15 @@ version_scheme = "release-branch-semver"
 source = ["tools/python/KML"]
 
 [tool.flake8]
-filename = ["*.py", "*.pyx"]
+filename = ["*.py", "*.pxd", "*.pyx"]
 max-line-length = 100
+extend-ignore = ["E999"]
+per-file-ignores = """
+        __init__.py: F401
+    """
 
 [tool.pylint]
-max-line-length = 88
+max-line-length = 100
 disable = [
     # "C0103", # (invalid-name)
     # "C0114", # (missing-module-docstring)

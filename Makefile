@@ -81,7 +81,7 @@ test_wheel:
 	cd $(BUILDDIR)/tools/packages && \
 	python3 -m pip install KML*.whl --force-reinstall && \
 	python3 -m pytest -p no:cacheprovider ../python/tests && \
-	pip uninstall KML -y
+	pip uninstall KML
 
 ## Call Unittests for C++/Python for sdist. Requires prior build.
 test_source:

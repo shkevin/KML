@@ -22,7 +22,9 @@ big, important things.
 
 If this guide doesn't include a rule, the best practices would be to follow the
 Google C++ Style Guide `Google C++ Style Guide <https://google.github.io/styleguide/cppguide.html>`_
-Note, however, KML may deviate from the Google C++ coding style over time.
+Note, however, KML may deviate from the Google C++ coding style over time. This deviation is
+listed in the parent directory .clang-format. Standards are enforced via the clang-format and
+clang-tidy format files.
 
 Folder Structure and File Naming
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -25,9 +25,8 @@ namespace KML
                  * @param  decay Which decay type to use. Defaults to window.
                  */
                 explicit StreamingHistogram(
-                        const size_t& numBins, 
-                        const size_t& windowSize,
-                        const DecayType decay=DecayType::WINDOW);
+                    const size_t& numBins, const size_t& windowSize,
+                    const DecayType decay = DecayType::WINDOW);
 
                 /*!
                  * @brief Destructor.
@@ -51,10 +50,10 @@ namespace KML
                  *        function will return the index of the merged item.
                  */
                 size_t merge();
-        }; // StreamingHistogram
-    } // DataStructures
-} // KML
+        };
+    }  // namespace DataStructures
+}  // namespace KML
 
 #include "StreamingHistogram.tcc"
 
-#endif // __STREAMING_HISTOGRAM_H__
+#endif  // __STREAMING_HISTOGRAM_H__

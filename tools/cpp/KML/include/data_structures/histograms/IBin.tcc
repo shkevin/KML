@@ -7,8 +7,8 @@ namespace KML
     namespace DataStructures
     {
         template<typename T>
-        IBin<T>::IBin(T left, T right, size_t count) : m_left(left),
-            m_right(right), m_count(count)
+        IBin<T>::IBin(T left, T right, size_t count)
+            : m_left(left), m_right(right), m_count(count)
         {
             // Do nothing.
         }
@@ -30,7 +30,7 @@ namespace KML
         template<typename T>
         IBin<T>& IBin<T>::operator=(const IBin& rhs)
         {
-            if(this != &rhs)
+            if (this != &rhs)
             {
                 this->m_left = rhs.m_left;
                 this->m_right = rhs.m_right;
@@ -51,7 +51,7 @@ namespace KML
         template<typename T>
         IBin<T>& IBin<T>::operator=(IBin&& rhs)
         {
-            if(this != &rhs)
+            if (this != &rhs)
             {
                 this->m_left = rhs.m_left;
                 this->m_right = rhs.m_right;
@@ -65,8 +65,8 @@ namespace KML
         IBin<T> IBin<T>::operator+(const IBin& rhs) const
         {
             IBin l_bin = *this;
-            if(rhs.m_left < l_bin.m_left) l_bin.m_left = rhs.m_left;
-            if(rhs.m_right > l_bin.m_right) l_bin.m_right = rhs.m_right;
+            if (rhs.m_left < l_bin.m_left) l_bin.m_left = rhs.m_left;
+            if (rhs.m_right > l_bin.m_right) l_bin.m_right = rhs.m_right;
             l_bin.m_count += rhs.m_count;
 
             return l_bin;
@@ -94,8 +94,9 @@ namespace KML
         template<typename T>
         std::ostream& operator<<(std::ostream& os, const IBin<T>& bin)
         {
-             os << "[" << bin.m_left << ", " << bin.m_right << "] -> " << bin.m_count;
-             return os;
+            os << "[" << bin.m_left << ", " << bin.m_right << "] -> "
+               << bin.m_count;
+            return os;
         }
 
         template<typename T>
@@ -103,5 +104,5 @@ namespace KML
         {
             return this->m_count;
         }
-    } // DataStructures
-} // KML
+    }  // namespace DataStructures
+}  // namespace KML

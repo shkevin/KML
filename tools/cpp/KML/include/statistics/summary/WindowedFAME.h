@@ -22,43 +22,37 @@ namespace KML
                  * @param epsilon The exponential growth factor. This gives the 
                  *        median calculation a "windowing flavor".
                  */
-                WindowedFAME(const double& stepSize = 0.1, 
-                             const double& epsilon = 0.0);
-
-                /*!
-                 * @brief Destructor.
-                 */
-                ~WindowedFAME();
+                explicit WindowedFAME(const double& stepSize = 0.1, const double& epsilon = 0.0);
 
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
                 using IStreamingStatistic<double>::update;
-                virtual void update(const double& observation) override;
+                void update(const double& observation) override;
 
                 /*!
                  * @copydoc IStreamingStatistic::evaluate()
                  */
                 using IStreamingStatistic<double>::evaluate;
-                virtual double evaluate() const override;
+                double evaluate() const override;
 
             private:
                 /*!
                  * @brief Calculated median value.
                  */
-                double m_median;
+                double m_median = 0.0;
 
                 /*!
                  * @brief Step size to take.
                  */
-                double m_stepSize;
+                double m_stepSize = 0.0;
 
                 /*!
                  * @brief Exponential growth factor.
                  */
-                double m_epsilon;
+                double m_epsilon = 0.0;
         };
-    }
-}
+    }  // namespace Statistics
+}  // namespace KML
 
-#endif // __WINDOWED_FAME_H__
+#endif  // __WINDOWED_FAME_H__

@@ -5,7 +5,7 @@
 #ifndef __LINKED_LIST_H__
 #define __LINKED_LIST_H__
 
-#include <mutex> // Lock
+#include <mutex>  // Lock
 
 #include "IDataStructure.h"
 #include "Node.h"
@@ -20,91 +20,91 @@ namespace KML
         {
             public:
                 /*!
-                 * @brief Default Constructor.
-                 * @param windowSize the Number of nodes to hold in linked list.
-                 */
-                explicit LinkedList(const size_t& windowSize);
+				 * @brief Default Constructor.
+				 * @param windowSize the Number of nodes to hold in linked list.
+				 */
+                explicit LinkedList(const size_t &windowSize);
 
                 /*!
-                 * @brief Destructor.
-                 */
+				 * @brief Destructor.
+				 */
                 virtual ~LinkedList();
 
                 /*!
-                 * Copy Constructor.
-                 */
-                LinkedList(const LinkedList&) = delete; // No copy
+				 * Copy Constructor.
+				 */
+                LinkedList(const LinkedList &) = delete;  // No copy
 
                 /*!
-                 * Copy Assignment Operator.
-                 */
-                LinkedList& operator=(const LinkedList&) = delete; // No copy
+				 * Copy Assignment Operator.
+				 */
+                LinkedList &operator=(const LinkedList &) = delete;  // No copy
 
                 /*!
-                 * @copydoc IDataStructure::update()
-                 */
-                virtual void update(const T& item) override;
+				 * @copydoc IDataStructure::update()
+				 */
+                virtual void update(const T &item) override;
 
                 /*!
-                 * @copydoc IDataStructure::update()
-                 */
+				 * @copydoc IDataStructure::update()
+				 */
                 using IDataStructure<T>::update;
 
                 /*!
-                 * @brief Return the head value of the LinkedList.
-                 */
+				 * @brief Return the head value of the LinkedList.
+				 */
                 T pop();
 
                 /*!
-                 * @copydoc IDataStructure::full()
-                 */
+				 * @copydoc IDataStructure::full()
+				 */
                 virtual bool full() const override;
 
                 /*!
-                 * @copydoc IDataStructure::empty()
-                 */
+				 * @copydoc IDataStructure::empty()
+				 */
                 virtual bool empty() const override;
 
                 /*!
-                 * @copydoc IDataStructure::size()
-                 */
+				 * @copydoc IDataStructure::size()
+				 */
                 virtual size_t size() const override;
 
                 /*!
-                 * @copydoc IDataStructure::reset()
-                 */
+				 * @copydoc IDataStructure::reset()
+				 */
                 virtual void reset() override;
 
                 /*!
-                 * @brief Print out the node values to standard out.
-                 */
+				 * @brief Print out the node values to standard out.
+				 */
                 void display() const;
 
             private:
                 /*!
-                 * @brief Lock used to lock operations. This allows for threading the 
-                 *        ring buffer.
-                 */
+				 * @brief Lock used to lock operations. This allows for
+				 * threading the ring buffer.
+				 */
                 std::mutex m_mutex;
 
                 /*!
-                 * @brief Pointer to the current head of the linked list.
-                 */
+				 * @brief Pointer to the current head of the linked list.
+				 */
                 Node<T> *m_head = nullptr;
 
                 /*!
-                 * @brief Pointer to the current tail of the linked list.
-                 */
+				 * @brief Pointer to the current tail of the linked list.
+				 */
                 Node<T> *m_tail = nullptr;
 
                 /*!
-                 * @brief Number of nodes in linked list.
-                 */
+				 * @brief Number of nodes in linked list.
+				 */
                 size_t m_size = 0;
         };
-    } // DataStructures
-} // KML
+    }  // namespace DataStructures
+}  // namespace KML
 
 #include "LinkedList.tcc"
 
-#endif // __LINKED_LIST_H__
+#endif  // __LINKED_LIST_H__

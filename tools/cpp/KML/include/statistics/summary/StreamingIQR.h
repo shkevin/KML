@@ -4,7 +4,6 @@
  *
  * The StreamingIQR computes the interquartile range of a data stream. 
  */
-
 #ifndef __STREAMING_IQR_H__
 #define __STREAMING_IQR_H__
 
@@ -28,7 +27,7 @@ namespace KML
                  *        This window size defaults to a window size of 0, meaning
                  *        the IQR is over the entire data stream.
                  */
-                StreamingIQR(const uint64_t windowSize = 0);
+                explicit StreamingIQR(const uint64_t& windowSize = 0);
 
                 /*!
                  * @brief Constructor for setting quantile values.
@@ -38,36 +37,45 @@ namespace KML
                  *        This window size defaults to a window size of 0, meaning
                  *        the IQR is over the entire data stream.
                  */
-                StreamingIQR(const double low = 0.5, 
-                             const double high = 0.75, 
-                             const uint64_t windowSize = 0);
+                explicit StreamingIQR(const double& low = 0.5, const double& high = 0.75,
+                                      const uint64_t& windowSize = 0);
 
                 /*!
                  * Copy Constructor.
                  */
-                StreamingIQR(const StreamingIQR&) = delete; // No copy
+                StreamingIQR(const StreamingIQR&) = delete;  // No copy
 
                 /*!
                  * Copy Assignment Operator.
                  */
-                StreamingIQR& operator=(const StreamingIQR&) = delete; // No copy
+                StreamingIQR& operator=(const StreamingIQR&) = delete;  // No copy
+
+                /*!
+                 * @brief Move Constructor.
+                 */
+                StreamingIQR(StreamingIQR&& other);
+
+                /*!
+                 * @brief Move Assignment.
+                 */
+                StreamingIQR& operator=(StreamingIQR&& rhs);
 
                 /*!
                  * @brief Destructor.
                  */
-                ~StreamingIQR();
+                ~StreamingIQR() override;
 
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
                 using IStreamingStatistic<double>::update;
-                virtual void update(const double& observation) override;
+                void update(const double& observation) override;
 
                 /*!
                  * @copydoc IStreamingStatistic::evaluate()
                  */
                 using IStreamingStatistic<double>::evaluate;
-                virtual double evaluate() const override;
+                double evaluate() const override;
 
             private:
                 /*!
@@ -78,9 +86,9 @@ namespace KML
                 /*!
                  * @brief Q3 quantile to estimate.
                  */
-                WindowedP2Quantile* m_high; // Q3
+                WindowedP2Quantile* m_high;  // Q3
         };
-    }
-}
+    }  // namespace Statistics
+}  // namespace KML
 
-#endif // __STREAMING_IQR_H__
+#endif  // __STREAMING_IQR_H__

@@ -62,6 +62,17 @@ endfunction()
 # Macros
 ################################
 
+MACRO(HEADER_DIRECTORIES return_list include_dir)
+    FILE(GLOB_RECURSE new_list ${include_dir}/*.h)
+    SET(dir_list "")
+    FOREACH(FILE_path ${new_list})
+        GET_FILENAME_COMPONENT(dir_path ${FILE_path} PATH)
+        SET(dir_list ${dir_list} ${dir_path})
+    ENDFOREACH()
+    LIST(REMOVE_DUPLICATES dir_list)
+    SET(${return_list} ${dir_list})
+ENDMACRO()
+
 # Copy python from given source to binary KML directory.
 MACRO(CopyPython src)
     FILE(GLOB_RECURSE py_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/${src} ${src}/*.py)
@@ -230,17 +241,40 @@ if(BUILD_DOCUMENTATION)
 endif(BUILD_DOCUMENTATION)
 
 ################################################################################
-# CPPCHECK
+# Static Anlysis
 ################################################################################
-OPTION(BUILD_STATIC_ANALYSIS "Build CPPCHECK Static Analysis" OFF)
+OPTION(BUILD_STATIC_ANALYSIS "Build Static Code Analysis" OFF)
 if(BUILD_STATIC_ANALYSIS)
+    MESSAGE(STATUS "Building Static Code Analysis")
+    FILE(GLOB_RECURSE CPP_SOURCES LIST_DIRECTORIES false ${CPP_DIR}/KML/src/*.cc)
+    FILE(GLOB_RECURSE CPP_HEADERS LIST_DIRECTORIES false ${CPP_DIR}/KML/include/*.h ${CPP_DIR} ${CPP_DIR}/KML/include/*.tcc)
+    SET(CPP_ALL ${CPP_SOURCES} ${CPP_HEADERS})
+    HEADER_DIRECTORIES(HEADERS ${CPP_DIR}/KML/include)
+
+    # CLANG-TIDY
+    FIND_PROGRAM(CLANG_TIDY "clang-tidy")
+	if(CLANG_TIDY)
+        # Need to add each header directory with -I separately.
+        foreach(h_dir IN LISTS HEADERS)
+            set(TIDY_INCLUDE_DIRS "${TIDY_INCLUDE_DIRS}" "-I${h_dir}")
+        endforeach()
+
+        add_custom_target(CMAKE_CXX_CLANG_TIDY ALL DEPENDS ${BINARY}
+            COMMAND clang-tidy
+                ${CPP_SOURCES}
+                --
+                -x c++
+                -std=c++${CMAKE_CXX_STANDARD}
+                ${TIDY_INCLUDE_DIRS}
+            COMMENT "   Clang-Tidy"
+        )
+	endif()
+
+    # CPPCHECK
     if(${CMAKE_VERSION} VERSION_LESS "3.10.0")
         MESSAGE(SEND_ERROR "Can't run CPPCHECK with CMAKE < 3.10.0")
     else()
         FIND_PROGRAM(cppcheck cppcheck)
-        MESSAGE(STATUS "Configuring CPPCHECK: " ${cppcheck})
-        FILE(GLOB_RECURSE CPP_SOURCES LIST_DIRECTORIES true
-            ${CPP_DIR}/KML/*.h ${CPP_DIR}/KML/*.cc ${CPP_DIR}/KML/*.tcc)
         if(NOT (cppcheck MATCHES "NOTFOUND"))
             FILE(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/code_analysis)
             SET(CPPCHECK_TEMPLATE "cppcheck:{file}:{line}: {severity}:{message}")
@@ -255,11 +289,11 @@ if(BUILD_STATIC_ANALYSIS)
                 "--std=c++11"                                               # Language standard
                 "--cppcheck-build-dir=${CMAKE_BINARY_DIR}/code_analysis"    # Build directory
                 "--quiet"                                                   # Only show found errors
-                ${CPP_SOURCES}
+                ${CPP_ALL}
             )
-            add_custom_target(ANALYZE_CPPCHECK ALL DEPENDS ${BINARY}
+            ADD_CUSTOM_TARGET(ANALYZE_CPPCHECK ALL DEPENDS ${BINARY}
                 COMMAND ${CMAKE_CXX_CPPCHECK}
-                COMMENT "Static code analysis using"
+                COMMENT "   CPPCHECK"
             )
         endif()
     endif()

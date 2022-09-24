@@ -1,6 +1,6 @@
 /*!
- * @file IMetric.h
- * @brief
+ * @file  IMetric.h
+ * @brief Provides interface for streaming metrics.
  */
 #ifndef __METRIC_H__
 #define __METRIC_H__
@@ -20,9 +20,9 @@ namespace KML
                  */
                 explicit IMetric(const size_t& windowSize);
         };
-    } // Metrics
-} // KML
+    }  // namespace Metrics
+}  // namespace KML
 
 #include "IMetric.tcc"
 
-#endif // __METRIC_H__
+#endif  // __METRIC_H__

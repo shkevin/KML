@@ -1,6 +1,7 @@
 /*!
  * @file IMetric.tcc
- * @brief
+ * @brief Contains the templated implementation for the abstract streaming 
+ *        metric class.
  */
 namespace KML
 {
@@ -11,5 +12,5 @@ namespace KML
         {
             // Do nothing.
         }
-    } // Metrics
-} // KML
+    }  // namespace Metrics
+}  // namespace KML

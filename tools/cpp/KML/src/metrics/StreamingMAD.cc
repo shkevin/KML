@@ -1,10 +1,10 @@
 /*!
  * @file StreamingMAD.cc
- * @brief
+ * @brief Contains the implementation of the StreamingMAD calculation.
  */
-#include <cmath>
-
 #include "StreamingMAD.h"
+
+#include <cmath>
 
 namespace KML
 {
@@ -29,9 +29,6 @@ namespace KML
             m_historyCount += 1;
         }
 
-        double StreamingMAD::evaluate() const
-        {
-            return m_errorMedian->evaluate();
-        }
-    } // Metrics
-} // KML
+        double StreamingMAD::evaluate() const { return m_errorMedian->evaluate(); }
+    }  // namespace Metrics
+}  // namespace KML

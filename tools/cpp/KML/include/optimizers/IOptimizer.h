@@ -1,3 +1,7 @@
+/*!
+ * @file  IOptimizer.h
+ * @brief Provides interface for gradient descent optimizers.
+ */
 #ifndef __IOPTIMIZER_H__
 #define __IOPTIMIZER_H__
 
@@ -38,7 +42,7 @@ namespace KML
                  */
                 virtual void update(const T& observation) = 0;
         };
-    } // Optimizers
-} // KML
+    }  // namespace Optimizers
+}  // namespace KML
 
-#endif // __IOPTIMIZER_H__
+#endif  // __IOPTIMIZER_H__

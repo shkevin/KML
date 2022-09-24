@@ -2,26 +2,22 @@
  * @file  StreamingMean.cc
  * @brief Contains the implementation of the StreamingMean calculation.
  */
-
 #include "StreamingMean.h"
 
 namespace KML
 {
     namespace Statistics
     {
-        StreamingMean::StreamingMean(const uint64_t windowSize): 
-            IStreamingStatistic(windowSize), m_sum(0.0) {}
-
-        StreamingMean::~StreamingMean() 
+        StreamingMean::StreamingMean(const uint64_t& windowSize) : IStreamingStatistic(windowSize)
         {
             // Do nothing.
         }
 
         void StreamingMean::update(const double& observation)
         {
-            if(m_window != nullptr)
+            if (m_window != nullptr)
             {
-                if(m_window->size() + 1 > m_windowSize)
+                if (m_window->size() + 1 > m_windowSize)
                 {
                     m_sum -= m_window->front();
                     m_window->pop_front();
@@ -35,16 +31,15 @@ namespace KML
 
         double StreamingMean::evaluate() const
         {
-            if(m_historyCount == 0) return 0.0;
-            if(m_window != nullptr)
+            if (m_historyCount == 0) return 0.0;
+            if (m_window != nullptr)
             {
-                return m_sum / (double)m_window->size();
+                return m_sum / static_cast<double>(m_window->size());
             }
             else
             {
-                return m_sum / (double)m_historyCount;
+                return m_sum / static_cast<double>(m_historyCount);
             }
-
         }
-    }
-}
+    }  // namespace Statistics
+}  // namespace KML

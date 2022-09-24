@@ -8,12 +8,11 @@
 #include "IMetric.h"
 #include "WindowedFAME.h"
 
-using KML::Statistics::WindowedFAME;
-
 namespace KML
 {
     namespace Metrics
     {
+        using KML::Statistics::WindowedFAME;
         class StreamingMAD : public IMetric<double>
         {
             public:
@@ -23,44 +22,54 @@ namespace KML
                 StreamingMAD();
 
                 /*!
-                 * @brief
-                 */
-                ~StreamingMAD();
-
-                /*!
                  * Copy Constructor.
                  */
-                StreamingMAD(const StreamingMAD&) = delete; // No copy
+                StreamingMAD(const StreamingMAD&) = delete;
 
                 /*!
                  * Copy Assignment Operator.
                  */
-                StreamingMAD& operator=(const StreamingMAD&) = delete; // No copy
+                StreamingMAD& operator=(const StreamingMAD&) = delete;
+
+                /*!
+                 * @brief Move Constructor.
+                 */
+                StreamingMAD(StreamingMAD&& other);
+
+                /*!
+                 * @brief Move Assignment.
+                 */
+                StreamingMAD& operator=(StreamingMAD&& rhs);
+
+                /*!
+                 * @brief
+                 */
+                ~StreamingMAD() override;
 
                 /*!
                  * @copydoc IMetric::update()
                  */
                 using IMetric<double>::update;
-                virtual void update(const double& observation) override;
+                void update(const double& observation) override;
 
                 /*!
                  * @copydoc IMetric::evaluate()
                  */
                 using IMetric<double>::evaluate;
-                virtual double evaluate() const override;
+                double evaluate() const override;
 
             private:
                 /*!
                  * @brief
                  */
-                WindowedFAME *m_scoreMedian = nullptr;
+                WindowedFAME* m_scoreMedian = nullptr;
 
                 /*!
                  * @brief
                  */
-                WindowedFAME *m_errorMedian = nullptr;
+                WindowedFAME* m_errorMedian = nullptr;
         };
-    }
-}
+    }  // namespace Metrics
+}  // namespace KML
 
-#endif // __STREAMING_MAD_H__
+#endif  // __STREAMING_MAD_H__

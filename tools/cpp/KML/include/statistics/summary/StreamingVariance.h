@@ -6,7 +6,6 @@
  * can work on all the data or a window of the data. Each update is
  * O(1), with at most O(window size) memory.
  */
-
 #ifndef __STREAMING_VARIANCE_H__
 #define __STREAMING_VARIANCE_H__
 
@@ -29,36 +28,46 @@ namespace KML
                  *        This window size defaults to a window size of 0, meaning
                  *        the variance is over the entire data stream.
                  */
-                StreamingVariance(const uint64_t windowSize = 0);
+                explicit StreamingVariance(const uint64_t& windowSize = 0);
 
                 /*!
                  * Copy Constructor.
                  */
-                StreamingVariance(const StreamingVariance&) = delete; // No copy
+                StreamingVariance(const StreamingVariance&) = delete;
 
                 /*!
                  * Copy Assignment Operator.
                  */
-                StreamingVariance& operator=(const StreamingVariance&) = delete; // No copy
+                StreamingVariance& operator=(const StreamingVariance&) = delete;
+
+                /*!
+                 * @brief Move Constructor.
+                 */
+                StreamingVariance(StreamingVariance&& other);
+
+                /*!
+                 * @brief Move Assignment.
+                 */
+                StreamingVariance& operator=(StreamingVariance&& rhs);
 
                 /*!
                  * @brief Destructor.
                  */
-                ~StreamingVariance();
+                ~StreamingVariance() override;
 
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
                 using IStreamingStatistic<double>::update;
-                virtual void update(const double& observation) override;
+                void update(const double& observation) override;
 
                 /*!
                  * @copydoc IStreamingStatistic::evaluate()
                  */
                 using IStreamingStatistic<double>::evaluate;
-                virtual double evaluate() const override;
+                double evaluate() const override;
 
-            protected:
+            private:
                 /*!
                  * @brief Mean of all elements within the window.
                  */
@@ -69,7 +78,7 @@ namespace KML
                  */
                 StreamingMean* m_sumSquared;
         };
-    }
-}
+    }  // namespace Statistics
+}  // namespace KML
 
-#endif // __STREAMING_VARIANCE_H__
+#endif  // __STREAMING_VARIANCE_H__

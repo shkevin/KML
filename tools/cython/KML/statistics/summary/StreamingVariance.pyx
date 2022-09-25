@@ -28,7 +28,7 @@ cdef class PyStreamingVariance:
     Args:
         window_size (int, optional): Desired window size. Defaults to None.
 
-    Attributes:
+    Parameters:
         c_SM (StreamingVariance*) : Pointer to the C++ StreamingVariance implementation.
         window_size (int, optional): Desired window size.
     """

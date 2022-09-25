@@ -250,6 +250,7 @@ if(BUILD_STATIC_ANALYSIS)
     FILE(GLOB_RECURSE CPP_HEADERS LIST_DIRECTORIES false ${CPP_DIR}/KML/include/*.h ${CPP_DIR} ${CPP_DIR}/KML/include/*.tcc)
     SET(CPP_ALL ${CPP_SOURCES} ${CPP_HEADERS})
     HEADER_DIRECTORIES(HEADERS ${CPP_DIR}/KML/include)
+    message("${HEADERS}")
 
     # CLANG-TIDY
     FIND_PROGRAM(CLANG_TIDY "clang-tidy")
@@ -266,7 +267,7 @@ if(BUILD_STATIC_ANALYSIS)
                 -x c++
                 -std=c++${CMAKE_CXX_STANDARD}
                 ${TIDY_INCLUDE_DIRS}
-            COMMENT "   Clang-Tidy"
+            COMMENT "Clang-Tidy"
         )
 	endif()
 
@@ -293,7 +294,7 @@ if(BUILD_STATIC_ANALYSIS)
             )
             ADD_CUSTOM_TARGET(ANALYZE_CPPCHECK ALL DEPENDS ${BINARY}
                 COMMAND ${CMAKE_CXX_CPPCHECK}
-                COMMENT "   CPPCHECK"
+                COMMENT "CPPCHECK"
             )
         endif()
     endif()

@@ -66,7 +66,7 @@ exhale_args = {
     "containmentFolder": "_build/cpp_api",
     "rootFileName": "library_root.rst",
     "rootFileTitle": "C++ API",
-    "doxygenStripFromPath": f"{PROJECT_DIR}/tools/cpp",
+    "doxygenStripFromPath": f"{PROJECT_DIR}/tools/cpp/",
     ############################################################################
     # Suggested optional arguments.                                            #
     ############################################################################
@@ -77,15 +77,6 @@ exhale_args = {
     "exhaleDoxygenStdin": dedent(
         """
      INPUT       = ../../tools/cpp/KML/
-     FULL_PATH_NAMES        = NO
-     XML_PROGRAMLISTING     = YES
-     CREATE_SUBDIRS         = NO
-     AUTOLINK_SUPPORT       = NO
-     INLINE_INHERITED_MEMB  = YES
-     ENABLE_PREPROCESSING   = YES
-     MACRO_EXPANSION        = YES
-     EXPAND_ONLY_PREDEF     = NO
-     SKIP_FUNCTION_MACROS   = NO
      FILE_PATTERNS          = *.h *.tcc *.cc
     """
     ),
@@ -109,18 +100,17 @@ exhale_args = {
         """
     """
     ),
-    # "fullApiSubSectionTitle": "Full API",
-    # "afterBodySummary": dedent(
-    #    """
-    # """
-    # ),
-    #############################################################################
-    ## Individual page layout example configuration.                            #
-    #############################################################################
+    "fullApiSubSectionTitle": "Full API",
+    "afterBodySummary": dedent(
+        """
+     """
+    ),
+    ############################################################################
+    # Individual page layout example configuration.                            #
+    ############################################################################
     # Example of adding contents directives on custom kinds with custom title
-    # "contentsTitle": "Page Contents",
-    # "kindsWithContentsDirectives": ["class", "file", "namespace", "struct"],
-    # "includeTemplateParamOrderList": False,
+    "contentsTitle": "Page Contents",
+    "kindsWithContentsDirectives": ["dir", "class", "file", "namespace", "struct"],
     #############################################################################
     # useful to see ;)
     "verboseBuild": True,
@@ -160,7 +150,7 @@ html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "searchbox.html"]}
 html_context = {
     # "display_github": True,  # Add 'Edit on Github' link instead of 'View page source'
     # "last_updated": True,
-    "commit": False,
+    "commit": False
 }
 
 pygments_style = "sphinx"

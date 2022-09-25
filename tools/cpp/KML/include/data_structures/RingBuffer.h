@@ -17,6 +17,9 @@ namespace KML
 {
     namespace DataStructures
     {
+        /*!
+         * @brief Streaming RingBuffer class declaration.
+         */
         template<typename T = double>
         class RingBuffer : public IDataStructure<T>
         {

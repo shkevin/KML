@@ -2,7 +2,7 @@
  * @file  AdaptiveNormalizer.h
  * @brief Provides declarations for adaptive normalization.
  *
- * @reference https://arxiv.org/ftp/arxiv/papers/1910/1910.07696.pdf
+ * Reference: https://arxiv.org/ftp/arxiv/papers/1910/1910.07696.pdf
  */
 #ifndef __ADAPTIVE_TRANSFORMER_H__
 #define __ADAPTIVE_TRANSFORMER_H__

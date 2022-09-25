@@ -3,7 +3,7 @@
    :align: right
    :target: https://github.com/shkevin/KML
 
-.. _cpp_guidelines:
+.. _python_guidelines:
 
 ========================
 Cython/Python Guidelines

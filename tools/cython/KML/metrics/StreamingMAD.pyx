@@ -25,7 +25,7 @@ cdef class PyStreamingMAD:
     The mad value is calculated using the WindowedFame code, and inherently adjusts
     for data drift.
 
-    Attributes:
+    Parameters:
         c_MAD (StreamingMAD*): Pointer to the C++ StreamingMAD implementation.
     """
     cdef StreamingMAD *c_MAD

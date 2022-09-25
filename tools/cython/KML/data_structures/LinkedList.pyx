@@ -30,7 +30,7 @@ cdef class PyLinkedList:
     Args:
         window_size (int, optional): Desired window size for LinkedList. Defaults to None.
 
-    Attributes:
+    Parameters:
         c_LL (LinkedList[float]*): Pointer to the C++ LinkedList implementation.
         window_size (int, optional): Desired window size for LinkedList.
     """

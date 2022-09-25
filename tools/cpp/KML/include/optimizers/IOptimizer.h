@@ -11,6 +11,9 @@ namespace KML
 {
     namespace Optimizers
     {
+        /*!
+         * @brief Optimizer Interface class declaration.
+         */
         template<typename T = double>
         class IOptimizer
         {
@@ -20,21 +23,6 @@ namespace KML
                  * @details Constructor for every optimizer.
                  */
                 IOptimizer();
-
-                /*!
-                 * @brief Default Copy Constructor.
-                 */
-                IOptimizer(const IOptimizer& a_rhs) = delete;
-
-                /*!
-                 * @brief Default Assignment Constructor.
-                 */
-                IOptimizer& operator=(const IOptimizer& a_rhs) = delete;
-
-                /*!
-                 * @brief Destructor.
-                 */
-                virtual ~IOptimizer();
 
                 /*!
                  * @brief  Takes a single observation and updates the deriving class.

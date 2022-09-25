@@ -11,12 +11,15 @@ namespace KML
 {
     namespace Optimizers
     {
+        /*!
+         * @brief Stochastic Gradient Descent class.
+         */
         template<typename T = double>
         class StochasticGradientDescent : public IOptimizer<T>
         {
             public:
                 /*!
-                 * @brief   Default Constructor.
+                 * @brief Default Constructor.
                  */
                 StochasticGradientDescent();
 
@@ -24,7 +27,7 @@ namespace KML
                  * @brief  Takes a single observation and updates the gradient.
                  * @param  observation The observation used to update gradient.
                  */
-                virtual void update(const T& observation) override;
+                void update(const T& observation) override;
         };
     }  // namespace Optimizers
 }  // namespace KML

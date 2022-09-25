@@ -25,7 +25,7 @@ cdef class PyWindowedP2Quantile:
         quantile (float): Quantile to calculate.
         window_size (int, optional): Desired window size. Defaults to None.
 
-    Attributes:
+    Parameters:
         c_WP2 (WindowedP2Quantile*) : Pointer to the C++ WindowedP2Quantile implementation.
         quantile (float): Quantile to calculate.
         window_size (int, optional): Desired window size. Defaults to None.

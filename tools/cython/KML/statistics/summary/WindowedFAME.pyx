@@ -30,7 +30,7 @@ cdef class PyWindowedFAME:
         epsilon (float, optional): epsilon The exponential growth factor. This gives the
                          median calculation a "windowing flavor". Defaults to 0.0.
 
-    Attributes:
+    Parameters:
         c_FM (WindowedFAME*) : Pointer to the C++ WindowedFAME implementation.
         step_size (int, optional): The step size to take when calculating median. Defaults to 0.1.
         epsilon (float, optional): epsilon The exponential growth factor. This gives the

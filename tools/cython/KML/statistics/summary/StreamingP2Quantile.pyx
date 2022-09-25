@@ -28,7 +28,7 @@ cdef class PyStreamingP2Quantile:
     Args:
         quantile (float): Quantile to calculate. Defaults to 0.5.
 
-    Attributes:
+    Parameters:
         quantile (float): Quantile to calculate. Defaults to 0.5.
     """
     cdef StreamingP2Quantile* c_P2

@@ -30,7 +30,7 @@ cdef class PyRingBuffer:
     Args:
         window_size (int, optional): Desired window size for ring buffer. Defaults to None.
 
-    Attributes:
+    Parameters:
         c_RB (RingBuffer[float]*): Pointer to the C++ RingBuffer implementation.
         window_size (int, optional): Desired window size for ring buffer. Defaults to None.
     """

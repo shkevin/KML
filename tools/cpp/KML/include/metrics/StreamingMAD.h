@@ -13,11 +13,15 @@ namespace KML
     namespace Metrics
     {
         using KML::Statistics::WindowedFAME;
+
+        /*!
+         * @brief Streaming Median Absolute Deviation (MAD) declarations.
+         */
         class StreamingMAD : public IMetric<double>
         {
             public:
                 /*!
-                 * @brief
+                 * @brief Default Constructor.
                  */
                 StreamingMAD();
 
@@ -42,21 +46,21 @@ namespace KML
                 StreamingMAD& operator=(StreamingMAD&& rhs);
 
                 /*!
-                 * @brief
+                 * @brief Default Destructor.
                  */
                 ~StreamingMAD() override;
 
                 /*!
                  * @copydoc IMetric::update()
                  */
-                using IMetric<double>::update;
                 void update(const double& observation) override;
+                using IMetric<double>::update;
 
                 /*!
                  * @copydoc IMetric::evaluate()
                  */
-                using IMetric<double>::evaluate;
                 double evaluate() const override;
+                using IMetric<double>::evaluate;
 
             private:
                 /*!

@@ -14,12 +14,15 @@ namespace KML
 {
     namespace Statistics
     {
+        /*!
+         * @brief Windowed implemented of the StreamingP2Quantile class.
+         */
         class WindowedP2Quantile : IStreamingStatistic<double>
         {
             public:
                 /*!
                  * @brief Default Constructor.
-                 * @param Desired quantile to calculate.
+                 * @param quantile Desired quantile to calculate.
                  * @param windowSize The window size to calculate the streaming quantile.
                  *        This window size defaults to a window size of 0, meaning
                  *        the quantile is over the entire data stream.
@@ -55,14 +58,14 @@ namespace KML
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
-                using IStreamingStatistic<double>::update;
                 void update(const double& observation) override;
+                using IStreamingStatistic<double>::update;
 
                 /*!
                  * @copydoc IStreamingStatistic::evaluate()
                  */
-                using IStreamingStatistic<double>::evaluate;
                 double evaluate() const override;
+                using IStreamingStatistic<double>::evaluate;
 
             private:
                 /*!

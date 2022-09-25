@@ -27,7 +27,7 @@ namespace KML
                  *        This window size defaults to a window size of 0, meaning
                  *        the IQR is over the entire data stream.
                  */
-                explicit StreamingIQR(const uint64_t& windowSize = 0);
+                explicit StreamingIQR(const size_t& windowSize = 0);
 
                 /*!
                  * @brief Constructor for setting quantile values.
@@ -38,7 +38,7 @@ namespace KML
                  *        the IQR is over the entire data stream.
                  */
                 explicit StreamingIQR(const double& low = 0.5, const double& high = 0.75,
-                                      const uint64_t& windowSize = 0);
+                                      const size_t& windowSize = 0);
 
                 /*!
                  * Copy Constructor.
@@ -68,14 +68,14 @@ namespace KML
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
-                using IStreamingStatistic<double>::update;
                 void update(const double& observation) override;
+                using IStreamingStatistic<double>::update;
 
                 /*!
                  * @copydoc IStreamingStatistic::evaluate()
                  */
-                using IStreamingStatistic<double>::evaluate;
                 double evaluate() const override;
+                using IStreamingStatistic<double>::evaluate;
 
             private:
                 /*!

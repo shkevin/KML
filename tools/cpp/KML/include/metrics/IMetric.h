@@ -11,12 +11,16 @@ namespace KML
 {
     namespace Metrics
     {
+        /*!
+         * @brief Streaming Metric class.
+         */
         template<typename T = double>
         class IMetric : public IStreaming<T>
         {
             public:
                 /*!
-                 * @brief
+                 * @brief Default Constructor.
+                 * @param windowSize The desired window size streaming metric.
                  */
                 explicit IMetric(const size_t& windowSize);
         };

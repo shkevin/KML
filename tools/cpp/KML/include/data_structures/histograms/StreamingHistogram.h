@@ -24,20 +24,39 @@ namespace KML
                  * @param  windowSize Number of items to maintain in history.
                  * @param  decay Which decay type to use. Defaults to window.
                  */
-                explicit StreamingHistogram(
-                    const size_t& numBins, const size_t& windowSize,
-                    const DecayType decay = DecayType::WINDOW);
+                explicit StreamingHistogram(const size_t& numBins, const size_t& windowSize,
+                                            const DecayType& decay = DecayType::WINDOW);
+
+                /*!
+                 * @brief Default Copy Constructor.
+                 */
+                StreamingHistogram(const StreamingHistogram& a_rhs) = delete;
+
+                /*!
+                 * @brief Default Assignment Constructor.
+                 */
+                StreamingHistogram& operator=(const StreamingHistogram& a_rhs) = delete;
+
+                /*!
+                 * @brief Move Constructor.
+                 */
+                StreamingHistogram(StreamingHistogram<T>&& other);
+
+                /*!
+                 * @brief Move Assignment.
+                 */
+                StreamingHistogram<T>& operator=(StreamingHistogram<T>&& rhs);
 
                 /*!
                  * @brief Destructor.
                  */
-                virtual ~StreamingHistogram();
+                ~StreamingHistogram();
 
                 /*!
                  * @brief  Takes a single item and updates the deriving class.
                  * @param  item The item used to update deriving class.
                  */
-                virtual void update(const T& item) override;
+                void update(const T& item) override;
 
                 /*!
                  * @copydoc IDataStructure::update()

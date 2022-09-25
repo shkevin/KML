@@ -36,7 +36,7 @@ cdef class PyStreamingHistogram:
         window_size (int, optional): Desired window size for StreamingHistogram. Defaults to 100.
         decay_type (DecayType, optional): How to decay the counts when outside of scope.
 
-    Attributes:
+    Parameters:
         c_SH (StreamingHistogram[double]*): Pointer to the C++ StreamingHistogram implementation.
         num_bins (int): Number of bins the histogram should have.
         window_size (int, optional): Desired window size for StreamingHistogram. Defaults to 100.

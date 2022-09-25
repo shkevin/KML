@@ -33,14 +33,14 @@ namespace KML
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
-                using IStreamingStatistic<double>::update;
                 void update(const double& observation) override;
+                using IStreamingStatistic<double>::update;
 
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
-                using IStreamingStatistic<double>::evaluate;
                 double evaluate() const override;
+                using IStreamingStatistic<double>::evaluate;
 
                 /*!
                  * @brief Clear the current history counter.
@@ -57,14 +57,14 @@ namespace KML
                 /*!
                  * @brief Parabolic quantile interpolation.
                  * @param i Position to interpolate.
-                 * @param desired_pos Sign of desired position (-1, 0, 1);
+                 * @param d_pos Sign of desired position (-1, 0, 1);
                  */
                 double parabolic(int i, double d_pos);
 
                 /*!
                  * @brief Linear quantile interpolation.
-                 * @param pos Position to interpolate.
-                 * @param desired_pos Sign of desired position (-1, 0, 1);
+                 * @param i Position to interpolate.
+                 * @param d_pos Sign of desired position (-1, 0, 1);
                  */
                 double linear(int i, double d_pos);
 

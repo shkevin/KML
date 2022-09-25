@@ -1,5 +1,5 @@
 /*!
- * @file  Bin.h
+ * @file  IBin.h
  * @brief Provides an interface for bins used in Histograms.
  */
 #ifndef __HISTOGRAM_H__
@@ -55,7 +55,7 @@ namespace KML
                 /*!
                  * @brief Addition Operator.
                  */
-                IBin<T> operator+(const IBin<T>& other) const;
+                IBin<T> operator+(const IBin<T>& rhs) const;
 
                 /*!
                  * @brief Addition Assignmnet Operator.
@@ -76,8 +76,7 @@ namespace KML
                  * @brief Print Operator.
                  */
                 template<typename F>
-                friend std::ostream& operator<<(std::ostream& os,
-                                                const IBin<F>& bin);
+                friend std::ostream& operator<<(std::ostream& os, const IBin<F>& bin);
 
                 /*!
                  * @brief Get the bin count.

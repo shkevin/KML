@@ -1,6 +1,6 @@
 /*!
- * @file LinkedList.h
- * @brief Provides the declarations for the Doubly Linked List data structure.
+ * @file  LinkedList.h
+ * @brief Provides the declarations for the Linked List data structure.
  */
 #ifndef __LINKED_LIST_H__
 #define __LINKED_LIST_H__
@@ -14,7 +14,9 @@ namespace KML
 {
     namespace DataStructures
     {
-
+        /*!
+         * @brief Windowed LinkedList class.
+         */
         template<typename T = double>
         class LinkedList : public IDataStructure<T>
         {
@@ -41,9 +43,19 @@ namespace KML
                 LinkedList &operator=(const LinkedList &) = delete;  // No copy
 
                 /*!
+                 * @brief Move Constructor.
+                 */
+                LinkedList(LinkedList<T>&& other);
+    
+                /*!
+                 * @brief Move Assignment.
+                 */
+                LinkedList<T>& operator=(LinkedList<T>&& rhs);
+
+                /*!
 				 * @copydoc IDataStructure::update()
 				 */
-                virtual void update(const T &item) override;
+                void update(const T &item) override;
 
                 /*!
 				 * @copydoc IDataStructure::update()
@@ -58,22 +70,22 @@ namespace KML
                 /*!
 				 * @copydoc IDataStructure::full()
 				 */
-                virtual bool full() const override;
+                bool full() const override;
 
                 /*!
 				 * @copydoc IDataStructure::empty()
 				 */
-                virtual bool empty() const override;
+                bool empty() const override;
 
                 /*!
 				 * @copydoc IDataStructure::size()
 				 */
-                virtual size_t size() const override;
+                size_t size() const override;
 
                 /*!
 				 * @copydoc IDataStructure::reset()
 				 */
-                virtual void reset() override;
+                void reset() override;
 
                 /*!
 				 * @brief Print out the node values to standard out.

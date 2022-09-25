@@ -1,8 +1,6 @@
 /*!
  * @file  WindowedP2Quantile.cc
  * @brief Implemenation of the windowed quantile estimation.
- *
- * @reference https://aakinshin.net/tags/research-p2qe/
  */
 #include "WindowedP2Quantile.h"
 

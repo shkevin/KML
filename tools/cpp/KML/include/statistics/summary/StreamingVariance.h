@@ -58,14 +58,14 @@ namespace KML
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
-                using IStreamingStatistic<double>::update;
                 void update(const double& observation) override;
+                using IStreamingStatistic<double>::update;
 
                 /*!
                  * @copydoc IStreamingStatistic::evaluate()
                  */
-                using IStreamingStatistic<double>::evaluate;
                 double evaluate() const override;
+                using IStreamingStatistic<double>::evaluate;
 
             private:
                 /*!

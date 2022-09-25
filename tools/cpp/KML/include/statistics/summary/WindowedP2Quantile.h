@@ -25,36 +25,46 @@ namespace KML
                  *        the quantile is over the entire data stream.
  
                  */
-                explicit WindowedP2Quantile(const double quantile, const uint64_t windowSize = 0); 
+                explicit WindowedP2Quantile(const double& quantile, const size_t& windowSize = 0);
 
                 /*!
                  * Copy Constructor.
                  */
-                WindowedP2Quantile(const WindowedP2Quantile&) = delete; // No copy
+                WindowedP2Quantile(const WindowedP2Quantile&) = delete;
 
                 /*!
                  * Copy Assignment Operator.
                  */
-                WindowedP2Quantile& operator=(const WindowedP2Quantile&) = delete; // No copy
+                WindowedP2Quantile& operator=(const WindowedP2Quantile&) = delete;
+
+                /*!
+                 * @brief Move Constructor.
+                 */
+                WindowedP2Quantile(WindowedP2Quantile&& other);
+
+                /*!
+                 * @brief Move Assignment.
+                 */
+                WindowedP2Quantile& operator=(WindowedP2Quantile&& rhs);
 
                 /*!
                  * @brief Destructor. 
                  */
-                ~WindowedP2Quantile(); 
+                ~WindowedP2Quantile() override;
 
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
                 using IStreamingStatistic<double>::update;
-                virtual void update(const double& observation) override;
+                void update(const double& observation) override;
 
                 /*!
                  * @copydoc IStreamingStatistic::evaluate()
                  */
                 using IStreamingStatistic<double>::evaluate;
-                virtual double evaluate() const override;
+                double evaluate() const override;
 
-            protected: 
+            private:
                 /*!
                  * @brief Quantile estimator used to keep track of statistics.
                  */
@@ -65,8 +75,8 @@ namespace KML
                  */
                 double m_previous;
         };
-    }
-}
+    }  // namespace Statistics
+}  // namespace KML
 
-#endif // __WINDOWED_P2_QUANTILE_H__
+#endif  // __WINDOWED_P2_QUANTILE_H__
 

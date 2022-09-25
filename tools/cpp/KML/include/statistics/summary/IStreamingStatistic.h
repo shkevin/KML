@@ -1,6 +1,6 @@
 /*!
- * @file    IStreamingStatistic.h
- * @brief   Provides interface for streaming statistics.
+ * @file  IStreamingStatistic.h
+ * @brief Provides interface for streaming statistics.
  *
  * The streaming statistic interface is supposed to represent any
  * KML streaming statitic. Every statistic should inherit from this
@@ -14,7 +14,7 @@
 
 #include "IStreaming.h"
 
-namespace KML 
+namespace KML
 {
     namespace Statistics
     {
@@ -28,25 +28,10 @@ namespace KML
                  * @details Constructor for every Streaming Statistic.
                  * @param   windowSize Window size of number of items held in memory (range [0,..)).
                  */
-                IStreamingStatistic(const uint64_t& windowSize = 0);
-
-                /*!
-                 * @brief Default Copy Constructor.
-                 */
-                IStreamingStatistic(const IStreamingStatistic& a_rhs) = delete;
-
-                /*!
-                 * @brief Default Assignment Constructor.
-                 */
-                IStreamingStatistic& operator=(const IStreamingStatistic& a_rhs) = delete;
-
-                /*!
-                 * @brief Destructor.
-                 */
-                virtual ~IStreamingStatistic();
+                explicit IStreamingStatistic(const size_t& windowSize = 0);
         };
-    } // Statistics
-} // KML
+    }  // namespace Statistics
+}  // namespace KML
 
 #include "IStreamingStatistic.tcc"
 

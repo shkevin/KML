@@ -8,6 +8,7 @@
 #include "Sequential.h"
 #include "Dense.h"
 #include "Tanh.h"
+#include "ReLU.h"
 #include "ILayer.h"
 #include "MSE.h"
 #include "ILoss.h"
@@ -15,6 +16,7 @@
 using KML::NeuralNetworks::Models::IModel;
 using KML::NeuralNetworks::Models::Sequential;
 using KML::NeuralNetworks::Activations::Tanh;
+using KML::NeuralNetworks::Activations::ReLU;
 using KML::NeuralNetworks::ILayer;
 using KML::NeuralNetworks::Dense;
 using KML::NeuralNetworks::Losses::ILoss;
@@ -30,8 +32,12 @@ class SequentialTest : public ::testing::Test
         {
             // Define data
             X = KMatrix(4, 2);
-            X << 0, 0, 1, 1,
-                 0, 1, 1, 0;
+            /* X << 0, 0, 1, 1, */
+            /*      0, 1, 1, 0; */
+            X << 0, 0,
+                 1, 0,
+                 1, 1,
+                 0, 1;
         }
 };
 
@@ -41,7 +47,7 @@ TEST_F(SequentialTest, TestXOR)
     std::vector<ILayer *> layers = {
         new Dense(2, 3), // Input Layer
         new Tanh(),      // Activation
-        new Dense(3, 1), // Hidden Layer
+        new Dense(3, 1),  // Hidden Layer
         new Tanh()       // Output Layer
     };
     /* std::vector<ILayer *> layers = { */
@@ -56,12 +62,16 @@ TEST_F(SequentialTest, TestXOR)
 
     // Create the XOR target
     KMatrix y(4, 1);
-    y << 0, 1, 1, 0;
+    /* y << 0, 1, 1, 0; */
+    y << 0,
+         1,
+         1,
+         0;
 
     // Fit XOR model.
-    /* model->fit(X, y); */
+    model->fit(X, y);
 
-    /* KMatrix predictions = model->predict(X); */
+    KMatrix predictions = model->predict(X);
 
-    /* std::cout << predictions << std::endl; */
+    std::cout << predictions << std::endl;
 }

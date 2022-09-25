@@ -6,10 +6,10 @@
 #define __RING_BUFFER_H__
 
 #include <cstdint>
-#include <vector>
+#include <functional>
 #include <memory>
 #include <mutex>
-#include <functional>
+#include <vector>
 
 #include "IDataStructure.h"
 
@@ -40,15 +40,15 @@ namespace KML
                  */
                 virtual void update(const T& item) override;
 
-                /**
+                /*!
                  * @copydoc IDataStructure::update()
                  */
-                virtual void update(const std::vector<T>& items);
+                using IDataStructure<T>::update;
 
                 /*!
-                 * @copydoc IDataStructure::pop()
+                 * @brief Retrieve the last value in the RingBuffer.
                  */
-                virtual T pop();
+                T pop();
 
                 /*!
                  * @copydoc IDataStructure::full()
@@ -98,9 +98,9 @@ namespace KML
                  */
                 bool m_full = false;
         };
-    } // DataStructures
-} // KML
+    }  // namespace DataStructures
+}  // namespace KML
 
 #include "RingBuffer.tcc"
 
-#endif // __RING_BUFFER_H__
+#endif  // __RING_BUFFER_H__

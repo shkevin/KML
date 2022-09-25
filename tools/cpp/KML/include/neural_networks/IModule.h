@@ -15,6 +15,9 @@ namespace KML
     {
         class IModule
         {
+            /*!
+             * @brief Abstract interface for Neural Network Modules.
+             */
             public:
                 IModule() = default;
 

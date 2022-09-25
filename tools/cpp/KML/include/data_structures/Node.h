@@ -19,7 +19,7 @@ namespace KML
                  * @brief Default Constructor.
                  * @param value The value the node holds.
                  */
-                explicit Node(const T& value);
+                explicit Node(const T &value);
 
                 /*!
                  * @brief The value of this node.
@@ -36,9 +36,9 @@ namespace KML
                  */
                 Node *m_previous = nullptr;
         };
-    } // DataStructures
-} // KML
+    }  // namespace DataStructures
+}  // namespace KML
 
 #include "Node.tcc"
 
-#endif // __NODE_H__
+#endif  // __NODE_H__

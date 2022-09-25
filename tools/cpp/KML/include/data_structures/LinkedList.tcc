@@ -3,29 +3,37 @@
  * @brief
  */
 #include <iostream>
+
 namespace KML
 {
     namespace DataStructures
     {
         template<typename T>
-        LinkedList<T>::LinkedList(const size_t& windowSize) : IDataStructure<T>(windowSize),
-            m_head(nullptr), m_tail(nullptr)
+        LinkedList<T>::LinkedList(const size_t &windowSize)
+            : IDataStructure<T>(windowSize), m_head(nullptr), m_tail(nullptr)
         {
             // Do nothing
         }
 
         template<typename T>
-        LinkedList<T>::~LinkedList() 
+        LinkedList<T>::~LinkedList()
         {
-            reset();
+            std::lock_guard<std::mutex> lock(m_mutex);
+            Node<T> *l_next = m_head->m_next;
+            while (l_next)
+            {
+                /* l_next->m_previous = nullptr; */
+                if (!l_next->m_previous) delete l_next->m_previous;
+                l_next = l_next->m_next;
+            }
         }
 
         template<typename T>
-        void LinkedList<T>::update(const T& item)
+        void LinkedList<T>::update(const T &item)
         {
             Node<T> *l_node = new Node<T>(item);
 
-            if(empty())
+            if (empty())
             {
                 m_head = l_node;
                 m_tail = l_node;
@@ -38,7 +46,7 @@ namespace KML
                 m_tail = l_node;
 
                 // Need to ensure window doesn't overflow.
-                if(m_size == this->m_windowSize) pop();
+                if (m_size == this->m_windowSize) pop();
             }
 
             m_size++;
@@ -46,23 +54,14 @@ namespace KML
         }
 
         template<typename T>
-        void LinkedList<T>::update(const std::vector<T>& items) 
-        {
-            for(auto it = items.begin(); it != items.end(); it++)
-            {
-                this->update(*it);
-            }
-        }
-
-        template<typename T>
         void LinkedList<T>::reset()
         {
             std::lock_guard<std::mutex> lock(m_mutex);
             Node<T> *l_next = m_head->m_next;
-            while(l_next)
+            while (l_next)
             {
                 /* l_next->m_previous = nullptr; */
-                if(!l_next->m_previous) delete l_next->m_previous;
+                if (!l_next->m_previous) delete l_next->m_previous;
                 l_next = l_next->m_next;
             }
 
@@ -93,7 +92,7 @@ namespace KML
         void LinkedList<T>::display() const
         {
             Node<T> *l_next = m_head;
-            while(l_next)
+            while (l_next)
             {
                 std::cout << l_next->m_value << " ";
                 l_next = l_next->m_next;
@@ -105,8 +104,8 @@ namespace KML
         T LinkedList<T>::pop()
         {
             // If empty return data type.
-            if(empty()) return T();
-            
+            if (empty()) return T();
+
             // Pop head and update reference.
             Node<T> *l_next = m_head->m_next;
             T l_value = m_head->m_value;
@@ -116,5 +115,5 @@ namespace KML
             m_size--;
             return l_value;
         }
-    } // DataStructures
-} // KML
+    }  // namespace DataStructures
+}  // namespace KML

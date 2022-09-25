@@ -13,5 +13,5 @@ namespace KML
         {
             // Do nothing
         }
-    }
-}
+    }  // namespace DataStructures
+}  // namespace KML

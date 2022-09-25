@@ -1,6 +1,6 @@
 /*!
- * @file ITransformer.h
- * @brief Provides the interface for the Transformers.
+ * @file  ITransformer.h
+ * @brief Provides interface for Streaming Transformers.
  */
 #ifndef __STREAMING_TRANSFORMER_H__
 #define __STREAMING_TRANSFORMER_H__
@@ -12,7 +12,7 @@ namespace KML
     namespace Transformers
     {
 
-        /*! @brief An Abstract interface for transformers*/
+        /*! @brief An Abstract interface for streaming transformers. */
         template<typename T = double>
         class ITransformer
         {
@@ -30,20 +30,39 @@ namespace KML
                 /*!
                  * @brief Default Assignment Constructor.
                  */
-                ITransformer& operator=(const ITransformer& a_rhs) = delete;
+                ITransformer<T>& operator=(const ITransformer& a_rhs) = delete;
 
                 /*!
                  * @brief Fit transformer on a single observation.
+                 * @brief Move Constructor.
+                 */
+                ITransformer(ITransformer<T>&& other);
+
+                /*!
+                 * @brief Move Assignment.
+                 */
+                ITransformer<T>& operator=(ITransformer<T>&& rhs);
+
+                /*!
+                 * @brief Destructor.
+                 */
+                virtual ~ITransformer();
+
+                /*!
+                 * @brief Fit the transformer on a single observation.
+                 * @param observation Observation to fit transformer on.
                  */
                 virtual void fit(const T& observation) = 0;
 
                 /*!
-                 * @brief Fit transformer on observations.
+                 * @brief Fit the transformer on a vector of observations.
+                 * @param observations Vector of observations to fit transformer on.
                  */
                 virtual void fit(const std::vector<T>& observations);
 
                 /*!
-                 * @brief Transform the given observation.
+                 * @brief Transform the given observation based on previous fitted points.
+                 * @param observation Single observation to transform.
                  */
                 virtual T transform(const T& observation) = 0;
 
@@ -52,7 +71,7 @@ namespace KML
                  */
                 virtual std::vector<T>& transform(const std::vector<T>& observations);
         };
-    } // Transformers
-} // KML
+    }  // namespace Transformers
+}  // namespace KML
 
-#endif // __STREAMING_TRANSFORMER_H__
+#endif  // __STREAMING_TRANSFORMER_H__

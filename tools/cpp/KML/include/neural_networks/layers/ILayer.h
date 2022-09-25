@@ -56,17 +56,12 @@ namespace KML
                 /*!
                  * @brief
                  */
-                KMatrix m_output;
-
-                /*!
-                 * @brief
-                 */
                 std::string m_name = "Not Set";
 
                 /*!
                  * @brief
                  */
-                const KMatrix* m_input = nullptr; 
+                KMatrix m_input;
 
                 /*!
                  * @brief

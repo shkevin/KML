@@ -12,7 +12,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace KML 
+namespace KML
 {
     namespace DataStructures
     {
@@ -21,30 +21,25 @@ namespace KML
         class IDataStructure
         {
             public:
-                /**
+                /*!
                  * @brief   IDataStructure Constructor.
                  * @details Constructor for every data structure.
                  * @param   windowSize Window size of number of items held in memory (range [0,..)).
                  */
                 explicit IDataStructure(const size_t& windowSize);
 
-                /**
+                /*!
                  * @brief  Takes a single item and updates the deriving class.
                  * @param  item The item used to update deriving class.
                  */
                 virtual void update(const T& item) = 0;
 
-                /**
+                /*!
                  * @brief  Takes in a list of one or more items to update 
                  *         the deriving class.
                  * @param  items List of items to update deriving class.
                  */
                 virtual void update(const std::vector<T>& items);
-
-                /*!
-                 * @brief Remove the head and return the value of head.
-                 */
-                virtual T pop() = 0;
 
                 /*!
                  * @brief Determine if the Linked List is full.
@@ -67,19 +62,19 @@ namespace KML
                 virtual void reset() = 0;
 
             protected:
-                /**
+                /*!
                  * @brief The current window size.
                  */
                 size_t m_windowSize;
 
-                /**
+                /*!
                  * @brief The number of items seen by deriving class.
                  */
                 size_t m_historyCount = 0;
         };
-    } // DataStructure
-} // KML
+    }  // namespace DataStructures
+}  // namespace KML
 
 #include "IDataStructure.tcc"
 
-#endif // __DATA_STRUCTURE_H__
+#endif  // __DATA_STRUCTURE_H__

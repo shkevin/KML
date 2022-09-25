@@ -1,62 +1,69 @@
 #!/usr/bin/env python
-from glob import glob
-from os import scandir, walk
-from os.path import relpath, sep
+import multiprocessing
+import os
+from distutils.command.build import build as _build
+from os import walk
 from pathlib import Path, PurePath
 from sys import argv
+from typing import List
 
-from setuptools import Extension, setup
+from setuptools import Extension, find_packages, setup
 from setuptools.command.build_ext import build_ext as _build_ext
 
-# check if cython is installed.
-try:
-    from Cython.Build import cythonize
-except ImportError:
-    print("Cython could not be found!")
-    use_cython = False
-else:
-    use_cython = True
-
 # Get Cython sources with their C++ files.
-PACKAGE_NAME = "KML"
-PARENT_DIR = Path(__file__).resolve().parent
-CYTHON_DIR = PurePath(PARENT_DIR, "tools/cython")
-SRC_DIR = PurePath(PARENT_DIR, "tools/cpp/KML/src")
-HEADERS_DIR = PurePath(PARENT_DIR, "tools/cpp/KML/include")
-CPPFLAGS = ["-O3", "-std=c++11"]
-REQUIREMENTS_DIR = "./tools/python/KML/requirements/"
-pyx_location = str(PurePath("/KML/**/*.pyx"))
-pyx_sources = glob(f"{CYTHON_DIR}{pyx_location}", recursive=True)
+PARENT_DIR = Path(os.path.abspath(__file__)).parent
+CYTHON_DIR = Path(PARENT_DIR, "tools/cython/KML")
+SRC_DIR = Path(PARENT_DIR, "tools/cpp/KML/src")
+HEADERS_DIR = Path(PARENT_DIR, "tools/cpp/KML/include")
+CPPFLAGS = ["-Wall", "-O3", "-std=c++11"]
+pyx_sources = CYTHON_DIR.rglob("**/*.py")
 include_dirs = [x[0] for x in walk(HEADERS_DIR)]
 src_dirs = [x[0] for x in walk(SRC_DIR)]
 include_all = include_dirs + src_dirs
 
+try:
+    from Cython.Build import cythonize
 
-def get_version():
-    """Load the version from version.py, without importing it.
+    USE_CYTHON = True
+except ImportError:
+    USE_CYTHON = False
+
+
+def get_readme() -> str:
+    with open(Path(PARENT_DIR, "README.rst"), "r", encoding="utf8") as f:
+        return f.read()
+
+
+def get_version() -> str:
+    """Load the version from version.py
+
+    Load the version from version.py without importing it.
     This function assumes that the last line in the file contains a
     variable defining the version string with single quotes.
+
+    Returns:
+        str: Version number
     """
     try:
-        with open(f"{CYTHON_DIR}/version.py", "r") as f:
-            return f.read().split("=")[-1].replace('"', "").strip()
+        with open(Path(CYTHON_DIR, "_version.py"), "r") as f:
+            version_tuple = f.read().splitlines()[-1]
+            version = ".".join(
+                str(x) for x in eval(version_tuple.split("version_tuple =")[-1])[:3]
+            )
+            return version
     except IOError:
         return "0.0.1"
 
 
-def get_readme():
-    """Load README.md for display on PyPI."""
-    with open("README.md") as f:
-        return f.read()
+def get_buildlib() -> str:
+    """Attempt to parse build lib from user input.
 
+    Try to get the build directory from the cmake arguments. If the
+    build_lib not specified, default to ./build.
 
-def get_reqs(fname="requirements.txt"):
-    with open(PurePath(REQUIREMENTS_DIR, fname)) as fd:
-        reqs = fd.read().splitlines()
-        return list(filter(lambda x: not x.startswith("#"), reqs))
-
-
-def get_buildlib():
+    Returns:
+        Path: Path to build directory.
+    """
     build_lib = "./build"
     for i, a in enumerate(argv):
         # Handle python setup.py call
@@ -70,67 +77,99 @@ def get_buildlib():
             build_lib = argv[i + 1]
             break
 
-    build_lib = PurePath(build_lib)
+    # build_lib = PurePath(build_lib)
+    build_lib = os.path.relpath(build_lib)
     return build_lib
 
 
-# Avoid a gcc warning below: -Wstrict-prototypes
 class my_build_ext(_build_ext):
-    def build_extensions(self):
+    # Avoid a gcc warning below: -Wstrict-prototypes
+    def build_extensions(self) -> None:
         if "-Wstrict-prototypes" in self.compiler.compiler_so:
             self.compiler.compiler_so.remove("-Wstrict-prototypes")
         super().build_extensions()
 
 
-# Build the Cython extensions.
-ext_modules = []
-to_strip = str(CYTHON_DIR) + sep
-pyx_to_strip = str(PARENT_DIR) + sep
-for pyx in pyx_sources:
-    print(pyx)
-    name = pyx.replace(to_strip, "").split(".")[0].replace(sep, ".")
-    pyx = pyx.replace(pyx_to_strip, "")
-    ext_modules.append(
-        Extension(
-            name=name,
-            sources=[pyx],
-            library_dirs=include_all,  # Path to .a or .so file(s)
-            include_dirs=include_all,  # Path to .h files
-            language="c++",
+class my_build(_build):
+    def finalize_options(self) -> None:
+        super().finalize_options()
+        # __builtins__.__NUMPY_SETUP__ = False
+        # import numpy
+
+        # for extension in self.distribution.ext_modules:
+        #     extension.include_dirs.append(numpy.get_include())
+
+        if USE_CYTHON:
+            from Cython.Compiler import Options
+
+            Options.fail_fast = True
+
+            self.distribution.ext_modules = cythonize(
+                self.distribution.ext_modules,
+                # Don't build in source tree (this leaves behind .cpp files).
+                build_dir=get_buildlib(),
+                # Don't generate an .html output file. This will contain source.
+                annotate=False,
+                # Parallelize our build.
+                nthreads=multiprocessing.cpu_count() * 2,
+                # Tell Cython we're using Python 3.
+                language_level=3,
+                # (Optional) Always rebuild, even if files untouched.
+                force=False,
+                # (Optional) Specify compiler directives.
+                compiler_directives={
+                    "embedsignature": True,  # Will give types in docs.
+                },
+            )
+
+
+def scandir(_dir, files=None) -> List[str]:
+    if files is None:
+        files = []
+
+    to_replace = str(Path(CYTHON_DIR.parent, os.path.sep))
+    for file in os.listdir(_dir):
+        path = os.path.join(_dir, file)
+        if os.path.isfile(path) and path.endswith(".pyx"):
+            path = path.replace(str(CYTHON_DIR.parent) + os.path.sep, "")
+            files.append(path.replace(os.path.sep, ".")[:-4])
+        elif os.path.isdir(path):
+            scandir(path, files)
+    return files
+
+
+def get_extensions() -> List[Extension]:
+    ext_names = scandir(CYTHON_DIR)
+    ext_modules = []
+    for name in ext_names:
+        extPath = name.replace(".", os.path.sep) + ".pyx"
+        # extPath = PurePath("tools/cython", extPath)
+        extPath = PurePath("tools/cython", extPath)
+        print(name, extPath)
+        extension = Extension(
+            name,
+            [str(extPath)],
+            include_dirs=["."] + include_all,
             extra_compile_args=CPPFLAGS,
+            extra_link_args=["-g"],
+            # include_path=[str(Path(PARENT_DIR, CYTHON_DIR))],
         )
-    )
+        ext_modules.append(extension)
+    return ext_modules
+
 
 setup(
-    name=PACKAGE_NAME,
-    version=get_version(),
-    description="Streaming Machine Learning in C++/Cython.",
-    long_description=get_readme(),
-    long_description_content_type="text/markdown",
-    author="Kevin Cox",
-    author_email="shkevin@yahoo.com",
+    name="KML",
     url="https://github.com/shkevin/KML",
-    cmdclass={"build_ext": my_build_ext},
-    ext_modules=cythonize(
-        ext_modules,
-        compiler_directives={"language_level": "3"},
-        build_dir=get_buildlib(),
-    ),
-    classifiers=[
-        "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: Implementation :: CPython",
-        "Programming Language :: Python :: Implementation :: PyPy",
-        "Operating System :: MacOS",
-        "Operating System :: Unix",
-    ],
-    python_requires=">=3.6",
-    setup_requires=["wheel", "cython>=0.24.1"],
-    install_requires=get_reqs("requirements.txt"),
-    extras_require={"test": get_reqs("test_requirements.txt")},
+    author="Kevin Cox",
+    author_email="shk3vin7@gmail.com",
+    long_description=get_readme(),
+    long_description_content_type="text/x-rst",
+    version=get_version(),
+    cmdclass={"build_ext": my_build_ext, "build": my_build},
+    packages=find_packages("tools/cython"),
+    package_dir={"": "tools/cython"},
+    ext_modules=get_extensions(),
+    zip_safe=False,
+    include_package_data=True,
 )

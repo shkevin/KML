@@ -5,7 +5,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.14 FATAL_ERROR)
 # Project
 ################################
 PROJECT(KML
-    VERSION 0.0.1
     DESCRIPTION "Streaming Machine Learning in C++/Cython"
     LANGUAGES CXX)
 
@@ -17,14 +16,81 @@ endif()
 SET(CMAKE_CXX_STANDARD 11)
 
 ################################
+# Global Variables
+################################
+if(NOT WIN32)
+  STRING(ASCII 27 Esc)
+  SET(ColourReset "${Esc}[m")
+  SET(ColourBold  "${Esc}[1m")
+  SET(Red         "${Esc}[31m")
+  SET(Green       "${Esc}[32m")
+  SET(Yellow      "${Esc}[33m")
+  SET(Blue        "${Esc}[34m")
+  SET(Magenta     "${Esc}[35m")
+  SET(Cyan        "${Esc}[36m")
+  SET(White       "${Esc}[37m")
+  SET(BoldRed     "${Esc}[1;31m")
+  SET(BoldGreen   "${Esc}[1;32m")
+  SET(BoldYellow  "${Esc}[1;33m")
+  SET(BoldBlue    "${Esc}[1;34m")
+  SET(BoldMagenta "${Esc}[1;35m")
+  SET(BoldCyan    "${Esc}[1;36m")
+  SET(BoldWhite   "${Esc}[1;37m")
+endif()
+
+# Replace built in message system for color output.
+function(message)
+  LIST(GET ARGV 0 MessageType)
+  if(MessageType STREQUAL FATAL_ERROR OR MessageType STREQUAL SEND_ERROR)
+    LIST(REMOVE_AT ARGV 0)
+    _message(${MessageType} "${BoldRed}${ARGV}${ColourReset}")
+  elseif(MessageType STREQUAL WARNING)
+    LIST(REMOVE_AT ARGV 0)
+    _message(${MessageType} "${BoldYellow}${ARGV}${ColourReset}")
+  elseif(MessageType STREQUAL AUTHOR_WARNING)
+    LIST(REMOVE_AT ARGV 0)
+    _message(${MessageType} "${BoldCyan}${ARGV}${ColourReset}")
+  elseif(MessageType STREQUAL STATUS)
+    LIST(REMOVE_AT ARGV 0)
+    _message(${MessageType} "${BoldGreen}${ARGV}${ColourReset}")
+  else()
+    _message("${ARGV}")
+  endif()
+endfunction()
+
+################################
 # Macros
 ################################
+
+MACRO(HEADER_DIRECTORIES return_list include_dir)
+    FILE(GLOB_RECURSE new_list ${include_dir}/*.h)
+    SET(dir_list "")
+    FOREACH(FILE_path ${new_list})
+        GET_FILENAME_COMPONENT(dir_path ${FILE_path} PATH)
+        SET(dir_list ${dir_list} ${dir_path})
+    ENDFOREACH()
+    LIST(REMOVE_DUPLICATES dir_list)
+    SET(${return_list} ${dir_list})
+ENDMACRO()
+
+# Copy python from given source to binary KML directory.
+MACRO(CopyPython src)
+    FILE(GLOB_RECURSE py_files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/${src} ${src}/*.py)
+    FOREACH(py ${py_files})
+        ADD_CUSTOM_COMMAND(TARGET python_package
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_CURRENT_SOURCE_DIR}/${src}/${py}"
+            "${CMAKE_BINARY_DIR}/KML/${py}"
+        )
+    ENDFOREACH(py)
+ENDMACRO(CopyPython)
 
 ################################
 # Compiler Flags
 ################################
 SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-builtin -Wall -Wshadow -fno-strict-aliasing -fno-strength-reduce -fomit-frame-pointer -Os")
-SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-exceptions -fcheck-new -fno-rtti -Wpedantic")
+SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-exceptions -fcheck-new -fno-rtti -Wpedantic -Wreorder")
 SET(CMAKE_CXX_FLAGS "${AC_COMMON_FLAGS}")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g") # For debugging
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions") # Add exception handling
@@ -72,8 +138,6 @@ endif()
 
 # Create a sources variable with a link to all cpp files to compile
 SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp")
-# FILE(GLOB_RECURSE SOURCES "${CPP_DIR}/KML/src/*.cc" "${CPP_DIR}/KML/src/*.tcc")
-# FILE(GLOB_RECURSE APP_SOURCES "${CPP_DIR}/apps/*.cc")
 
 # Add the directories needed for main files.
 ADD_SUBDIRECTORY("${CPP_DIR}/KML")
@@ -114,27 +178,29 @@ if(BUILD_PYTHON)
     SET(NUM_THREADS 10) # Default to building with 10 threads.
     SET(BUILD_DIR ${CMAKE_BINARY_DIR})
     SET(PACK_DIR ${CMAKE_BINARY_DIR}/tools/packages)
-    SET(OUTPUT "${BUILD_DIR}/KML/python_timestamp")
-    file(MAKE_DIRECTORY ${BUILD_DIR}/KML)
+    SET(OUTPUT "${BUILD_DIR}/tools/python_timestamp")
 
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py
             sdist --dist-dir=${PACK_DIR}
-            egg_info --egg-base=${BUILD_DIR}/KML
-            build --build-base=${BUILD_DIR}/KML --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/KML
+            build --build-base=${BUILD_DIR}/build --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/KML
             build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}
             bdist_wheel --bdist-dir=${BUILD_DIR}/build --dist-dir=${PACK_DIR}
         COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/bin
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/tools/cython/KML.egg-info
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
         COMMENT "Building Python"
         )
 
     ADD_CUSTOM_TARGET(python_package ALL DEPENDS ${OUTPUT})
 
+    CopyPython("tools/python/KML")
+    CopyPython("tools/cython/KML")
+
     if(BUILD_TESTING)
         SET(PYTHON_DIR "${CMAKE_SOURCE_DIR}/tools/python/KML")
-        ADD_SUBDIRECTORY("${PYTHON_DIR}/tests")
+        ADD_SUBDIRECTORY("${PYTHON_DIR}/../tests")
     endif(BUILD_TESTING)
 
 endif(BUILD_PYTHON)
@@ -184,44 +250,64 @@ endif(BUILD_TESTING)
 ################################################################################
 OPTION(BUILD_DOCUMENTATION "Build Documentation" OFF)
 if(BUILD_DOCUMENTATION)
-    MESSAGE(STATUS "Building Documentation")
-    # Doxygen documentation of main library
-    FIND_PACKAGE(Doxygen REQUIRED OPTIONAL_COMPONENTS dot)
-    if(DOXYGEN_DOT_EXECUTABLE)
-      SET(DOXYGEN_HAVE_DOT YES)
-    else()
-      SET(DOXYGEN_HAVE_DOT NO)
-    endif(DOXYGEN_DOT_EXECUTABLE)
-
-    CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile)
-    ADD_CUSTOM_COMMAND(
-      OUTPUT ${CMAKE_BINARY_DIR}/docs/html/index.html
-      COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
-      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/docs
-      DEPENDS
-        ${CMAKE_CURRENT_SOURCE_DIR}/README.md
-        ${CMAKE_CURRENT_BINARY_DIR}/docs/Doxyfile
-        ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in
-      COMMENT "Building doxygen documentation for 'KML' library")
-    ADD_CUSTOM_TARGET(documentation ALL
-      DEPENDS
-        ${CMAKE_CURRENT_BINARY_DIR}/docs/html/index.html)
-
-    # Sphinx documentation of Python bindings
-    # if(BUILD_PYTHON_BINDINGS)
-    #   add_custom_command(
-    #     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html
-    #     COMMAND ${PYTHON_EXECUTABLE}
-    #       setup.py
-    #         build_sphinx
-    #     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings
-    #     DEPENDS
-    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/README.md
-    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/conf.py
-    #       ${CMAKE_CURRENT_SOURCE_DIR}/extras/python-bindings/docs/index.rst
-    #       foo-python-bindings
-    #     COMMENT "Building sphinx Python documentation for 'foo' library")
-    #   add_custom_target(foo-python-documentation DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/docs/python/html/index.html)
-    #   add_dependencies(documentation foo-python-documentation)
-    # endif(BUILD_PYTHON_BINDINGS)
+    ADD_SUBDIRECTORY("docs")
 endif(BUILD_DOCUMENTATION)
+
+################################################################################
+# Static Anlysis
+################################################################################
+OPTION(BUILD_STATIC_ANALYSIS "Build Static Code Analysis" OFF)
+if(BUILD_STATIC_ANALYSIS)
+    MESSAGE(STATUS "Building Static Code Analysis")
+    FILE(GLOB_RECURSE CPP_SOURCES LIST_DIRECTORIES false ${CPP_DIR}/KML/src/*.cc)
+    FILE(GLOB_RECURSE CPP_HEADERS LIST_DIRECTORIES false ${CPP_DIR}/KML/include/*.h ${CPP_DIR} ${CPP_DIR}/KML/include/*.tcc)
+    SET(CPP_ALL ${CPP_SOURCES} ${CPP_HEADERS})
+    HEADER_DIRECTORIES(HEADERS ${CPP_DIR}/KML/include)
+
+    # CLANG-TIDY
+    FIND_PROGRAM(CLANG_TIDY "clang-tidy")
+	if(CLANG_TIDY)
+        # Need to add each header directory with -I separately.
+        foreach(h_dir IN LISTS HEADERS)
+            set(TIDY_INCLUDE_DIRS "${TIDY_INCLUDE_DIRS}" "-I${h_dir}")
+        endforeach()
+
+        add_custom_target(CMAKE_CXX_CLANG_TIDY ALL DEPENDS ${BINARY}
+            COMMAND clang-tidy
+                ${CPP_SOURCES}
+                --
+                -x c++
+                -std=c++${CMAKE_CXX_STANDARD}
+                ${TIDY_INCLUDE_DIRS}
+            COMMENT "   Clang-Tidy"
+        )
+	endif()
+
+    # CPPCHECK
+    if(${CMAKE_VERSION} VERSION_LESS "3.10.0")
+        MESSAGE(SEND_ERROR "Can't run CPPCHECK with CMAKE < 3.10.0")
+    else()
+        FIND_PROGRAM(cppcheck cppcheck)
+        if(NOT (cppcheck MATCHES "NOTFOUND"))
+            FILE(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/code_analysis)
+            SET(CPPCHECK_TEMPLATE "cppcheck:{file}:{line}: {severity}:{message}")
+            SET(CMAKE_CXX_CPPCHECK "${cppcheck}"
+                "--enable=all"
+                "--inconclusive"
+                "inline-suppr"
+                "--suppress=unmatchedSuppression"
+                "--suppress=missingInclude"
+                "--template=${CPPCHECK_TEMPLATE}"                           # How to print warnings.
+                "--language=c++"                                            # Language
+                "--std=c++11"                                               # Language standard
+                "--cppcheck-build-dir=${CMAKE_BINARY_DIR}/code_analysis"    # Build directory
+                "--quiet"                                                   # Only show found errors
+                ${CPP_ALL}
+            )
+            ADD_CUSTOM_TARGET(ANALYZE_CPPCHECK ALL DEPENDS ${BINARY}
+                COMMAND ${CMAKE_CXX_CPPCHECK}
+                COMMENT "   CPPCHECK"
+            )
+        endif()
+    endif()
+endif()

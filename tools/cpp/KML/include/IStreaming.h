@@ -9,11 +9,12 @@
 #ifndef __STREAMING_H__
 #define __STREAMING_H__
 
+#include <cstddef>
 #include <cstdint>
-#include <vector>
 #include <deque>
+#include <vector>
 
-namespace KML 
+namespace KML
 {
     /*! @brief An Abstract interface for streaming algorithms. */
     template<typename T = double>
@@ -25,7 +26,7 @@ namespace KML
              * @details Constructor for every Streaming algorithms.
              * @param   windowSize Window size of number of items held in memory (range [0,..)).
              */
-            IStreaming(const size_t& windowSize = 0);
+            explicit IStreaming(const size_t& windowSize = 0);
 
             /*!
              * @brief Default Copy Constructor.
@@ -36,6 +37,16 @@ namespace KML
              * @brief Default Assignment Constructor.
              */
             IStreaming& operator=(const IStreaming& a_rhs) = delete;
+
+            /*!
+             * @brief Move Constructor.
+             */
+            IStreaming(IStreaming<T>&& other);
+
+            /*!
+             * @brief Move Assignment.
+             */
+            IStreaming<T>& operator=(IStreaming<T>&& rhs);
 
             /*!
              * @brief Destructor.
@@ -67,7 +78,6 @@ namespace KML
              */
             virtual std::deque<T>* getWindow();
 
-        protected:
             /*!
              * @brief Pointer to current window of observations.
              */
@@ -81,10 +91,10 @@ namespace KML
             /*!
              * @brief The number of observations seen by deriving class.
              */
-            size_t m_historyCount;
+            size_t m_historyCount = 0;
     };
-} // KML
+}  // namespace KML
 
 #include "IStreaming.tcc"
 
-#endif // __STREAMING_H__
+#endif  // __STREAMING_H__

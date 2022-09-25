@@ -7,12 +7,12 @@
  * can work on all the data or a window of the data. Each update is
  * O(1), with low memory complexity.
  */
-
 #ifndef __STREAMING_P2QUANTILE_H__
 #define __STREAMING_P2QUANTILE_H__
 
-#include "IStreamingStatistic.h"
 #include <vector>
+
+#include "IStreamingStatistic.h"
 
 namespace KML
 {
@@ -28,24 +28,19 @@ namespace KML
                  * @brief Default Constructor.
                  * @param quantile The desired quantile to compute.
                  */
-                StreamingP2Quantile(const double quantile = 0.5);
-
-                /*!
-                 * @brief Destructor.
-                 */
-                ~StreamingP2Quantile();
+                explicit StreamingP2Quantile(const double& quantile = 0.5);
 
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
                 using IStreamingStatistic<double>::update;
-                virtual void update(const double& observation) override;
+                void update(const double& observation) override;
 
                 /*!
                  * @copydoc IStreamingStatistic::update()
                  */
                 using IStreamingStatistic<double>::evaluate;
-                virtual double evaluate() const override;
+                double evaluate() const override;
 
                 /*!
                  * @brief Clear the current history counter.
@@ -61,10 +56,10 @@ namespace KML
 
                 /*!
                  * @brief Parabolic quantile interpolation.
-                 * @param pos Position to interpolate.
+                 * @param i Position to interpolate.
                  * @param desired_pos Sign of desired position (-1, 0, 1);
                  */
-                double parabolic(int pos, double d_pos);
+                double parabolic(int i, double d_pos);
 
                 /*!
                  * @brief Linear quantile interpolation.
@@ -75,17 +70,16 @@ namespace KML
 
                 /*!
                  * @brief Adjust the quantile height at the given position.
-                 * @param position Position of quantile to adjust.
+                 * @param i Position of quantile to adjust.
                  */
-                void adjustHeights(int position);
+                void adjustHeights(int i);
 
                 /*!
-                 * @brief
-                 * @param
+                 * @brief Retrieve the sign of the given number.
+                 * @param number Number to get sign from.
                  */
-                int copysign(const double number);
+                static int copysign(const double& number);
 
-            protected:
                 /*!
                  * @brief Integer valued marker locations.
                  */
@@ -106,8 +100,8 @@ namespace KML
                  */
                 const double m_quantile;
         };
-    }
-}
+    }  // namespace Statistics
+}  // namespace KML
 
-#endif // __STREAMING_P2QUANTILE_H__
+#endif  // __STREAMING_P2QUANTILE_H__
 

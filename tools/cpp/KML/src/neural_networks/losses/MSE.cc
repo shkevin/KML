@@ -4,6 +4,8 @@
  */
 #include "MSE.h"
 
+#include <iostream>
+
 namespace KML
 {
     namespace NeuralNetworks
@@ -16,6 +18,8 @@ namespace KML
 
             double MSE::forward(const KMatrix &y_true, const KMatrix &y_pred) const
             {
+                /* std::cout << "true = (" << y_true.rows() << "," << y_true.cols() << ")" << std::endl; */
+                /* std::cout << "pred = (" << y_pred.rows() << "," << y_pred.cols() << ")" << std::endl; */
                 return (y_pred - y_true).squaredNorm() / y_true.rows();
             }
 

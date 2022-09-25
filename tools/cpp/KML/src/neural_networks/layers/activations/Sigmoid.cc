@@ -12,7 +12,7 @@ namespace KML
         {
             KMatrix Sigmoid::forward(const KMatrix &x)
             {
-                m_input = &x;
+                m_input = x;
                 return x;
             }
 

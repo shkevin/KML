@@ -1,6 +1,7 @@
 #distutils: language = c++
-from libcpp.vector cimport vector
 from libc.stdint cimport uint64_t
+from libcpp.vector cimport vector
+
 
 cdef extern from "WindowedP2Quantile.cc":
     pass

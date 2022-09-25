@@ -11,6 +11,9 @@ namespace KML
 {
     namespace DataStructures
     {
+        /*!
+         * @brief Node delcaration for LinkedLists.
+         */
         template<typename T = double>
         class Node
         {

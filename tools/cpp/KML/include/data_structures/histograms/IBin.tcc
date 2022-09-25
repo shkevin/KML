@@ -7,8 +7,7 @@ namespace KML
     namespace DataStructures
     {
         template<typename T>
-        IBin<T>::IBin(T left, T right, size_t count)
-            : m_left(left), m_right(right), m_count(count)
+        IBin<T>::IBin(T left, T right, size_t count) : m_left(left), m_right(right), m_count(count)
         {
             // Do nothing.
         }
@@ -62,7 +61,7 @@ namespace KML
         }
 
         template<typename T>
-        IBin<T> IBin<T>::operator+(const IBin& rhs) const
+        IBin<T> IBin<T>::operator+(const IBin<T>& rhs) const
         {
             IBin l_bin = *this;
             if (rhs.m_left < l_bin.m_left) l_bin.m_left = rhs.m_left;
@@ -94,8 +93,7 @@ namespace KML
         template<typename T>
         std::ostream& operator<<(std::ostream& os, const IBin<T>& bin)
         {
-            os << "[" << bin.m_left << ", " << bin.m_right << "] -> "
-               << bin.m_count;
+            os << "[" << bin.m_left << ", " << bin.m_right << "] -> " << bin.m_count;
             return os;
         }
 

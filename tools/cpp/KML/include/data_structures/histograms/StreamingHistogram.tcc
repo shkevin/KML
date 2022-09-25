@@ -16,10 +16,8 @@ namespace KML
     namespace DataStructures
     {
         template<typename T>
-        StreamingHistogram<T>::StreamingHistogram(const size_t& numBins,
-                                                  const size_t& windowSize,
-                                                  const DecayType decay)
-            : IStreamingHistogram<T>(numBins, windowSize, decay)
+        StreamingHistogram<T>::StreamingHistogram(const size_t& numBins, const size_t& windowSize,
+            const DecayType& decay) : IStreamingHistogram<T>(numBins, windowSize, decay)
         {
             // Do nothing.
         }
@@ -76,8 +74,7 @@ namespace KML
                 // This will keep the window aligned with indices that have been merged.
                 if (DecayType::WINDOW == this->m_decay)
                 {
-                    for (auto it = this->m_window->begin(); it < this->m_window->end();
-                         it++)
+                    for (auto it = this->m_window->begin(); it < this->m_window->end(); it++)
                     {
                         if (*it == (l_mergedIndex + 1)) *it = l_mergedIndex;
                     }

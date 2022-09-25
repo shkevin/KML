@@ -30,7 +30,7 @@ cdef class PyStreamingIQR:
         high (float, optional): High range (defaults to 75% quartile). Defaults to None.
         window_size (int, optional): Desired window size. Defaults to None.
 
-    Attributes:
+    Parameters:
         c_IQR (StreamingIqR*): Pointer to the C++ StreamingIQR implementation.
         low (float, optional): Low range (defaults to 25% quartile). Defaults to None.
         high (float, optional): High range (defaults to 75% quartile). Defaults to None.

@@ -29,12 +29,13 @@ namespace KML
         {
             public:
                 /*!
-                 * Default Constructor.
-                 * @param  numBins Number of bins the Histogram should maintain.
+                 * @brief Default Constructor.
+                 * @param numBins Number of bins the Histogram should maintain.
+                 * @param windowSize Desired window size of Histogram. This helps with data drift.
+                 * @param decay How to decay the counts.
                  */
-                explicit IStreamingHistogram(
-                    const size_t& numBins, const size_t& windowSize = 100,
-                    const DecayType decay = DecayType::WINDOW);
+                explicit IStreamingHistogram(const size_t& numBins, const size_t& windowSize = 100,
+                                             const DecayType& decay = DecayType::WINDOW);
 
                 /*!
                  * @copydoc IDataStructure::update()
@@ -44,28 +45,28 @@ namespace KML
                 /*!
                  * @brief Determine if the Linked List is full.
                  */
-                virtual bool full() const override;
+                bool full() const override;
 
                 /*!
                  * @brief Determine if the Linked List is empty.
                  */
-                virtual bool empty() const override;
+                bool empty() const override;
 
                 /*!
                  * @brief Retrieve the current number of nodes in the list.
                  */
-                virtual size_t size() const override;
+                size_t size() const override;
 
                 /*!
                  * @brief Completely reset the linked list.
                  */
-                virtual void reset() override;
+                void reset() override;
 
                 /*!
                  * @brief Get the index where the given bin should be inserted.
                  * @param bin The bin to find where to place in histogram.
                  */
-                size_t binSearch(const IBin<T> bin) const;
+                size_t binSearch(const IBin<T>& bin) const;
 
                 /*!
                  * @brief Calculate the approximate pdf from the histogram.
@@ -85,7 +86,7 @@ namespace KML
                  * @brief Get the bin edge corresponding to the pth percentile.
                  * @param qtile Which quantile to estimate.
                  */
-                T quantile(const double qtile) const;
+                T quantile(const double& qtile) const;
 
                 /*!
                  * @brief Retrieve the counts for each bin.
@@ -96,10 +97,9 @@ namespace KML
                  * @brief Print Operator.
                  */
                 template<typename F>
-                friend std::ostream& operator<<(
-                    std::ostream& os, const IStreamingHistogram<F>& hist);
+                friend std::ostream& operator<<(std::ostream& os,
+                                                const IStreamingHistogram<F>& hist);
 
-            protected:
                 /*!
                  * @brief Update the value used in normalizing the counts.
                  */
@@ -109,11 +109,6 @@ namespace KML
                  * @brief Decrease the count of an item outside of window.
                  */
                 void decayCounts();
-
-                /*!
-                 * @brief The value to normalize the counts in the histogram.
-                 */
-                double m_normalizer = 0.0;
 
                 /*!
                  * @brief Vector of Bins in the Histogram.
@@ -135,6 +130,12 @@ namespace KML
                  * @brief Decay type to decrease histogram counts.
                  */
                 const DecayType m_decay;
+
+            private:
+                /*!
+                 * @brief The value to normalize the counts in the histogram.
+                 */
+                double m_normalizer = 0.0;
         };
     }  // namespace DataStructures
 }  // namespace KML

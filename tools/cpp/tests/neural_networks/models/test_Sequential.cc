@@ -47,7 +47,7 @@ TEST_F(SequentialTest, TestXOR)
     std::vector<ILayer *> layers = {
         new Dense(2, 3), // Input Layer
         new Tanh(),      // Activation
-        new Dense(3, 1),  // Hidden Layer
+        new Dense(3, 1), // Hidden Layer
         new Tanh()       // Output Layer
     };
     /* std::vector<ILayer *> layers = { */
@@ -68,6 +68,8 @@ TEST_F(SequentialTest, TestXOR)
          1,
          0;
 
+    std::cout << "X = " << X << std::endl;
+    std::cout << "y = " << y << std::endl;
     // Fit XOR model.
     model->fit(X, y);
 

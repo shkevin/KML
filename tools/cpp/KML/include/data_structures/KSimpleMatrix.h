@@ -1,5 +1,5 @@
 /*!
- * @file KSimpleMatrix.h
+ * @file  KSimpleMatrix.h
  * @brief
  */
 #ifndef __KSIMPLE_MATRIX_H__
@@ -17,41 +17,36 @@ namespace KML
                 /*!
                  * @brief Default Constructor.
                  */
-                KSimpleMatrix() = default;
+                KSimpleMatrix();
 
                 /*!
                  * @brief THIS CONSTRUCTOR NEEDS TO MIMIC EIGEN MATRIXXD CONSTRUCTOR!
                  * This class is simply a place holder for now.
                  */
-                KSimpleMatrix(const size_t numRows, const size_t numCols);
+                KSimpleMatrix(const size_t& numRows, const size_t& numCols);
 
                 /*!
-                 * @brief Default Destructor.
-                 */
-                ~KSimpleMatrix();
-
-                /*!
-                 * @brief
+                 * @brief Retrieve the number of rows in KMatrix.
                  */
                 size_t rows() const;
 
                 /*!
-                 * @brief
+                 * @brief Retrieve the number of columns in KMatrix.
                  */
                 size_t cols() const;
 
             private:
                 /*!
-                 * @brief
+                 * @brief Internal variable to keep track of number of rows.
                  */
                 const size_t m_numRows;
 
                 /*!
-                 * @brief
+                 * @brief Internal variable to keep track of number of columns.
                  */
                 const size_t m_numCols;
         };
-    }
-}
+    }  // namespace DataStructures
+}  // namespace KML
 
-#endif // __KSIMPLE_MATRIX_H__
+#endif  // __KSIMPLE_MATRIX_H__

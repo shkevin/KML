@@ -7,9 +7,9 @@
 
 #include <vector>
 
-#include "IModule.h"
-#include "ILoss.h"
 #include "ILayer.h"
+#include "ILoss.h"
+#include "IModule.h"
 
 using KML::NeuralNetworks::IModule;
 using KML::NeuralNetworks::Losses::ILoss;
@@ -29,9 +29,28 @@ namespace KML
                     /*!
                      * @brief
                      */
-                    IModel(std::vector<ILayer *> &layers, 
-                           const ILoss *loss, 
+                    IModel(const std::vector<ILayer *> &layers, const ILoss *loss,
                            const size_t &epochs);
+
+                    /*!
+                     * @brief Default Copy Constructor.
+                     */
+                    IModel(const IModel &a_rhs) = delete;
+
+                    /*!
+                     * @brief Default Assignment Constructor.
+                     */
+                    IModel &operator=(const IModel &a_rhs) = delete;
+
+                    /*!
+                     * @brief Move Constructor.
+                     */
+                    IModel(IModel &&other);
+
+                    /*!
+                     * @brief Move Assignment.
+                     */
+                    IModel &operator=(IModel &&rhs);
 
                     /*!
                      * @brief
@@ -51,12 +70,6 @@ namespace KML
                     /*!
                      * @brief
                      */
-                    void add(ILayer &layer);
-
-                protected:
-                    /*!
-                     * @brief
-                     */
                     KMatrix m_output;
 
                     /*!
@@ -68,7 +81,7 @@ namespace KML
                      * @brief
                      */
                     std::vector<ILayer *> m_layers;
-                    
+
                     /*!
                      * @brief
                      */
@@ -84,8 +97,8 @@ namespace KML
                      */
                     size_t m_batchSize;
             };
-        }
-    }
-}
+        }  // namespace Models
+    }      // namespace NeuralNetworks
+}  // namespace KML
 
-#endif // __IMODEL_H__
+#endif  // __IMODEL_H__

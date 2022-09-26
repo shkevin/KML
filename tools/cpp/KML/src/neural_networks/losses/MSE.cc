@@ -18,8 +18,10 @@ namespace KML
 
             double MSE::forward(const KMatrix &y_true, const KMatrix &y_pred) const
             {
-                /* std::cout << "true = (" << y_true.rows() << "," << y_true.cols() << ")" << std::endl; */
-                /* std::cout << "pred = (" << y_pred.rows() << "," << y_pred.cols() << ")" << std::endl; */
+                std::cout << "true = " << y_true << std::endl;
+                std::cout << "pred = " << y_pred << std::endl;
+                std::cout << "error = " << (y_pred - y_true).squaredNorm() / y_true.rows()
+                          << std::endl;
                 return (y_pred - y_true).squaredNorm() / y_true.rows();
             }
 
@@ -27,6 +29,6 @@ namespace KML
             {
                 return 2.0 * (y_pred - y_true) / y_true.rows();
             }
-        } // Losses
-    } // NeuralNetworks
-} // KML
+        }  // namespace Losses
+    }      // namespace NeuralNetworks
+}  // namespace KML

@@ -23,7 +23,6 @@ endef
 export ANNOUNCE_BODY
 
 # Default Make
-all: directories compile-all test coverage
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PPATH=$(PYTHONPATH)
 TARGET_MAX_CHAR_NUM=20

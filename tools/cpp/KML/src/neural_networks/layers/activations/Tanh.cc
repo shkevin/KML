@@ -2,10 +2,10 @@
  * @file
  * @brief
  */
-#include <math.h>
-#include <iostream>
-
 #include "Tanh.h"
+
+#include <cmath>
+#include <iostream>
 
 namespace KML
 {
@@ -13,14 +13,11 @@ namespace KML
     {
         namespace Activations
         {
-            Tanh::Tanh() 
-            {
-                m_name = "Tanh";
-            }
+            Tanh::Tanh() { m_name = "Tanh"; }
 
             Tanh::~Tanh() {}
 
-            KMatrix Tanh::forward(const KMatrix &x)
+            KMatrix Tanh::forward(const KMatrix& x)
             {
                 m_input = x;
                 /* return 0.5 * (1 + (0.5 * x).array().tanh()); */
@@ -30,9 +27,9 @@ namespace KML
             KMatrix Tanh::backward(const KMatrix& out)
             {
                 // Derivative of tanh is sec^2. Can make this more efficient.
-                /* return 1 - out.array().tanh().pow(2); */
-                return (1 - m_input.array().tanh().pow(2)) * out.array();
+                KMatrix t = out.array().tanh();
+                return 1 - t.array().pow(2);
             }
-        } // Activations
-    } // NeuralNetworks
-} // KML
+        }  // namespace Activations
+    }      // namespace NeuralNetworks
+}  // namespace KML

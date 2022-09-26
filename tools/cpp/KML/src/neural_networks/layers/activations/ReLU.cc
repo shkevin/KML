@@ -2,9 +2,9 @@
  * @file
  * @brief
  */
-#include <math.h>
-
 #include "ReLU.h"
+
+#include <cmath>
 #include <iostream>
 
 namespace KML
@@ -13,14 +13,11 @@ namespace KML
     {
         namespace Activations
         {
-            ReLU::ReLU() 
-            {
-                m_name = "ReLU";
-            }
+            ReLU::ReLU() { m_name = "ReLU"; }
 
             ReLU::~ReLU() {}
 
-            KMatrix ReLU::forward(const KMatrix &x)
+            KMatrix ReLU::forward(const KMatrix& x)
             {
                 m_input = x;
                 return (x.array() < 0.f).select(0.f, x);
@@ -31,9 +28,9 @@ namespace KML
                 KMatrix blah = (m_input.array() < 0.f).select(0.f, out);
                 std::cout << "(" << m_input.rows() << ", " << m_input.cols() << ")";
                 std::cout << " (" << out.rows() << ", " << out.cols() << ")";
-                std::cout << " (" << blah.rows() << ", " << blah.cols() << ")" << std::endl;;
+                std::cout << " (" << blah.rows() << ", " << blah.cols() << ")" << std::endl;
                 return (m_input.array() < 0.f).select(0.f, out);
             }
-        } // Activations
-    } // NeuralNetworks
-} // KML
+        }  // namespace Activations
+    }      // namespace NeuralNetworks
+}  // namespace KML

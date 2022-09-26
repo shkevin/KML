@@ -48,7 +48,7 @@ namespace KML
                 /*!
                  * @brief
                  */
-                double m_learningRate = 1e-4;
+                double m_learningRate = 1e-2;
         };
     } // NeuralNetworks
 } // KML

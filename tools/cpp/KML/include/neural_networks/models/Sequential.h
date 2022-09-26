@@ -5,8 +5,8 @@
 #ifndef __SEQUENTIAL_H__
 #define __SEQUENTIAL_H__
 
-#include "IModel.h"
 #include "ILayer.h"
+#include "IModel.h"
 
 namespace KML
 {
@@ -20,32 +20,31 @@ namespace KML
                     /*!
                      * @brief
                      */
-                    Sequential(std::vector<ILayer *> &layers, 
-                               const ILoss *loss,
+                    Sequential(const std::vector<ILayer *> &layers, const ILoss *loss,
                                const size_t &epochs);
 
                     /*!
                      * @brief
                      */
-                    virtual KMatrix fit(const KMatrix &X, const KMatrix &y) override; 
+                    virtual KMatrix fit(const KMatrix &X, const KMatrix &y) override;
 
                     /*!
                      * @brief
                      */
-                    virtual KMatrix predict(const KMatrix &X) override; 
+                    virtual KMatrix predict(const KMatrix &X) override;
 
                     /*!
                      * @brief
                      */
-                    virtual KMatrix forward(const KMatrix& x) override;
+                    virtual KMatrix forward(const KMatrix &x) override;
 
                     /*!
                      * @brief
                      */
-                    virtual KMatrix backward(const KMatrix& out) override;
+                    virtual KMatrix backward(const KMatrix &out) override;
             };
-        } // Models
-    } // NeuralNetworks
-} // KML
+        }  // namespace Models
+    }      // namespace NeuralNetworks
+}  // namespace KML
 
-#endif // __SEQUENTIAL_H__
+#endif  // __SEQUENTIAL_H__

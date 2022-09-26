@@ -59,8 +59,8 @@ compile-all: directories
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=ON \
 		-DBUILD_COVERAGE=ON \
-		-DBUILD_DOCUMENTATION=ON \
-		-DBUILD_STATIC_ANALYSIS=ON && \
+		-DBUILD_DOCUMENTATION=OFF \
+		-DBUILD_STATIC_ANALYSIS=OFF && \
 	make -j
 
 analyze: directories

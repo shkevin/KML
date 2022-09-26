@@ -17,7 +17,8 @@ namespace KML
     {
         template<typename T>
         StreamingHistogram<T>::StreamingHistogram(const size_t& numBins, const size_t& windowSize,
-            const DecayType& decay) : IStreamingHistogram<T>(numBins, windowSize, decay)
+                                                  const DecayType& decay)
+            : IStreamingHistogram<T>(numBins, windowSize, decay)
         {
             // Do nothing.
         }
@@ -36,7 +37,9 @@ namespace KML
 
             // Histogram is empty, just insert.
             if (0 == this->m_historyCount)
+            {
                 this->m_bins.push_back(l_bin);
+            }
             else
             {
                 // Get the bin index where the new bin should go.

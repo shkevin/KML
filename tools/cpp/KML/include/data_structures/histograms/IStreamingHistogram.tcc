@@ -177,6 +177,18 @@ namespace KML
         }
 
         template<typename T>
+        std::map<std::pair<double, double>, size_t> IStreamingHistogram<T>::report()
+        {
+            std::map<std::pair<double, double>, size_t> l_report;
+            for (size_t i = 0; i < m_bins.size(); i++)
+            {
+                l_report[std::make_pair(m_bins[i]->m_left, m_bins[i]->m_right)] = m_bins[i]->m_count;
+            }
+
+            return l_report;
+        }
+
+        template<typename T>
         void IStreamingHistogram<T>::reset()
         {
             m_bins.clear();

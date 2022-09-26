@@ -6,6 +6,8 @@
 #define __ABSTRACT_HISTOGRAM_H__
 
 #include <deque>
+#include <map>
+#include <utility>
 #include <vector>
 
 #include "IBin.h"
@@ -92,6 +94,11 @@ namespace KML
                  * @brief Retrieve the counts for each bin.
                  */
                 std::vector<size_t> binCounts() const;
+
+                /*!
+                 * @brief Retrieve the bin boundaries and bin counts of the histogram.
+                 */
+                std::map<std::pair<double, double>, size_t> report();
 
                 /*!
                  * @brief Print Operator.

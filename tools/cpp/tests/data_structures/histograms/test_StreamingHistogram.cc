@@ -1,25 +1,25 @@
 // unittest_streaming_histogram
 
-#include <vector>
 #include <gtest/gtest.h>
-#include "StreamingHistogram.h"
-#include "IBin.h"
 
 #include <iostream>
+#include <map>
+#include <utility>
+#include <vector>
+
+#include "IBin.h"
+#include "StreamingHistogram.h"
 
 using KML::DataStructures::StreamingHistogram;
 
-class StreamingHistogramTest : public::testing::Test
+class StreamingHistogramTest : public ::testing::Test
 {
     public:
         StreamingHistogram<double> *sh;
         size_t m_numBins = 5;
         size_t m_windowSize = 5;
 
-        StreamingHistogramTest()
-        {
-            sh = new StreamingHistogram<double>(m_numBins, m_windowSize);
-        }
+        StreamingHistogramTest() { sh = new StreamingHistogram<double>(m_numBins, m_windowSize); }
 };
 
 TEST_F(StreamingHistogramTest, TestSize)
@@ -44,7 +44,7 @@ TEST_F(StreamingHistogramTest, TestPDF)
 
     std::vector<double> l_pdf = sh->pdf(true, true);
     double l_evenWidth = 1.0 / (double)m_numBins;
-    for(auto it = l_pdf.begin(); it < l_pdf.end(); it++)
+    for (auto it = l_pdf.begin(); it < l_pdf.end(); it++)
     {
         EXPECT_FLOAT_EQ(*it, l_evenWidth);
     }
@@ -57,7 +57,7 @@ TEST_F(StreamingHistogramTest, TestCDF)
 
     std::vector<double> l_cdf = sh->cdf();
     double l_evenWidth = 1.0 / (double)m_numBins;
-    for(size_t i = 0; i < l_cdf.size(); i++)
+    for (size_t i = 0; i < l_cdf.size(); i++)
     {
         EXPECT_FLOAT_EQ(l_cdf[i], (i + 1) * l_evenWidth);
     }
@@ -79,8 +79,22 @@ TEST_F(StreamingHistogramTest, TestCounts)
     sh->update(l_data);
 
     std::vector<size_t> l_counts = sh->binCounts();
-    for(size_t i = 0; i < l_counts.size(); i++)
+    for (size_t i = 0; i < l_counts.size(); i++)
     {
         EXPECT_EQ(1, l_counts[i]);
+    }
+}
+
+TEST_F(StreamingHistogramTest, TestReport)
+{
+    std::vector<double> l_data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    sh->update(l_data);
+
+    std::map<std::pair<double, double>, size_t> l_report = sh->report();
+    std::map<std::pair<double, double>, size_t>::iterator i;
+    for (i = l_report.begin(); i != l_report.end(); i++)
+    {
+        EXPECT_EQ(1, (*i).second);
+        /* std::cout << "(" << (*i).first.first << ", " << (*i).first.second << ") = " << (*i).second << std::endl; */
     }
 }

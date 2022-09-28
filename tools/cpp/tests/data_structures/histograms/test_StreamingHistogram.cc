@@ -56,26 +56,26 @@ TEST_F(StreamingHistogramTest, TestCoverageYofX)
     EXPECT_FLOAT_EQ(0.5, l_cov);
 }
 
-/* TEST_F(StreamingHistogramTest, TestDensity) */
-/* { */
-/*     std::vector<double> l_data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; */
-/*     sh->update(l_data); */
+TEST_F(StreamingHistogramTest, TestDensity)
+{
+    std::vector<double> l_data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::vector<double> l_density = {0.12, 0.1, 0.1, 0.1, 0.1};
+    sh->update(l_data);
 
-/*     std::vector<double> l_pdf = sh->pdf(true, true); */
-/*     double l_evenWidth = 1.0 / (double)m_numBins; */
-/*     for (auto it = l_pdf.begin(); it < l_pdf.end(); it++) */
-/*     { */
-/*         EXPECT_FLOAT_EQ(*it, l_evenWidth); */
-/*     } */
-/* } */
+    size_t i = 0;
+    std::vector<double> l_pdf = sh->pdf(true, true);
+    for (auto it = l_pdf.begin(); it < l_pdf.end(); it++)
+    {
+        EXPECT_FLOAT_EQ(*it, l_density[i]);
+        i++;
+    }
+}
 
 TEST_F(StreamingHistogramTest, TestNorm)
 {
     std::vector<double> l_data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::vector<double> l_norms = {0.6, 0.1, 0.1, 0.1, 0.1};
     sh->update(l_data);
-
-    std::cout << *sh;
 
     std::vector<double> l_pdf = sh->pdf(true, false);
     for (size_t i = 0; i < l_pdf.size(); i++)
@@ -114,7 +114,6 @@ TEST_F(StreamingHistogramTest, TestHalfWindowedQuantile)
     sh = new StreamingHistogram<double>(m_numBins, l_data.size() / 2);
     sh->update(l_data);
 
-    std::cout << *sh;
     double l_quantile = sh->quantile(0.8);
     EXPECT_FLOAT_EQ(l_quantile, 9.0);
 }
@@ -150,7 +149,6 @@ TEST_F(StreamingHistogramTest, TestZeroCenteredCounts)
     std::vector<double> l_data = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
     sh = new StreamingHistogram<double>(l_data.size(), l_data.size());
     sh->update(l_data);
-    std::cout << *sh;
 
     std::vector<size_t> l_counts = sh->binCounts();
     for (size_t i = 0; i < l_counts.size(); i++)

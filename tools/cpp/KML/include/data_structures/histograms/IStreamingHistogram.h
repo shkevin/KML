@@ -147,7 +147,7 @@ namespace KML
                 const DecayType m_decay;
 
                 /*!
-                 * @brief
+                 * @brief Total count of items inside all current bins.
                  */
                 size_t m_totalCount = 0;
 

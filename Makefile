@@ -20,7 +20,7 @@ YELLOW := $(shell tput -Txterm setaf 3)
 WHITE  := $(shell tput -Txterm setaf 7)
 RESET  := $(shell tput -Txterm sgr0)
 
-all: directories compile-all test test_wheel coverage
+all: directories compile-all test coverage
 	@echo '*******************Compiled*********************'
 
 ## Build the docker image for KML.
@@ -71,7 +71,7 @@ analyze: directories
 	    -DBUILD_TESTING=OFF \
 		-DBUILD_PYTHON=OFF \
 		-DBUILD_COVERAGE=OFF \
-		-DBUILD_DOCUMENTATION=OFF \
+		-DBUILD_DOCUMENTATION=ON \
 		-DBUILD_STATIC_ANALYSIS=ON && \
 	make -j
 
@@ -85,7 +85,8 @@ develop:
 
 ## Call Unittests for C++/Python.
 test:
-	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V
+	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
+	python3 -m pytest -p no:cacheprovider tools/python/tests
 
 ## Call Unittests for C++/Python for built wheel. Requires prior build.
 test_wheel:
@@ -112,7 +113,7 @@ docker_test: build
 
 ## Create the C++ Coverage.
 coverage:
-	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) make coverage
+	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && make coverage
 
 ## Remake entire project.
 remake: clean all

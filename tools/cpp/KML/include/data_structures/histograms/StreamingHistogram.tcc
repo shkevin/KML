@@ -36,7 +36,7 @@ namespace KML
             size_t l_index = 0;
 
             // Histogram is empty, just insert.
-            if (0 == this->m_historyCount)
+            if (0 == this->m_totalCount)
             {
                 this->m_bins.push_back(l_bin);
             }
@@ -45,9 +45,11 @@ namespace KML
                 // Get the bin index where the new bin should go.
                 l_index = this->binSearch(*l_bin);
 
-                // Item is past right-most bin.
+                // Item is past right-most bin. just push to end.
                 if (l_index == this->m_bins.size())
+                {
                     this->m_bins.push_back(l_bin);
+                }
                 else
                 {
                     // Increment the bin counter if item is at index bin.
@@ -57,21 +59,23 @@ namespace KML
                     }
                     else
                     {
+                        // Found where to insert, insert at index.
                         this->m_bins.insert(this->m_bins.begin() + l_index, l_bin);
                     }
                 }
             }
 
-            // Update window index and count normalizations.
+            // Update window index and counts.
+            this->m_historyCount++;
+            this->m_totalCount++;
             this->m_window->push_back(l_index);
             this->updateNormalizer();
-            this->m_historyCount++;
             this->decayCounts();  // Call decay before merging.
 
-            // Need to ensure that the number of bins is always at m_numBins.
+            // Need to ensure that the number of bins is always <= m_numBins.
             if (this->m_bins.size() > this->m_numBins)
             {
-                size_t l_mergedIndex = this->merge();
+                size_t l_mergedIndex = merge();
 
                 // Need to re-update the window of indices with the merged index.
                 // This will keep the window aligned with indices that have been merged.
@@ -92,12 +96,12 @@ namespace KML
             double l_minIndex = this->m_bins.size();
             size_t l_index = 0;
 
-            // Get pair of bins that have the smallest bin width difference.
+            // Get pair of bins that have the smallest between bin width difference.
             // This assumes bins are sorted. This is O(m_numBins).
-            for (auto it = this->m_bins.begin(); it < this->m_bins.end() - 1; it++)
+            for (size_t i = 0; i < this->m_bins.size() - 1; i++)
             {
-                double l_diff = (*it++)->m_right - (*it)->m_right;
-                if (l_diff < l_minDiff)
+                double l_diff = this->m_bins[i + 1]->m_right - this->m_bins[i]->m_right;
+                if (Utils::definitelyLessThan(l_diff, l_minDiff))
                 {
                     l_minDiff = l_diff;
                     l_minIndex = l_index;

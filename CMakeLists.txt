@@ -206,7 +206,7 @@ if(BUILD_COVERAGE)
 	SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
     setup_target_for_coverage_gcovr_html(
         NAME coverage EXECUTABLE ctest
-        --schedule-random -j 4 --test-dir tools/cpp/tests
+        --schedule-random -j ${PROCESSOR_COUNT} --test-dir ${CMAKE_BINARY_DIR}/tools/cpp/tests
         EXCLUDE "build/*" "*main.cc*"
         )
     # setup_target_for_coverage_gcovr_xml(${PROJECT_NAME}_coverage NAME coverage)

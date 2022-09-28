@@ -11,6 +11,8 @@
 #include <numeric>    // std::partial_sum
 #include <stdexcept>  // Throwing errors
 
+#include "Utils.h"  // Float comparison
+
 namespace KML
 {
     namespace DataStructures
@@ -47,7 +49,9 @@ namespace KML
                 if (m_normalizer < this->m_windowSize) m_normalizer++;
             }
             else
-                m_normalizer++;  // Option for none.
+            {
+                m_normalizer++;
+            }
         }
 
         template<typename T>
@@ -55,20 +59,22 @@ namespace KML
         {
             if (DecayType::WINDOW == m_decay)
             {
-                if (this->m_historyCount > this->m_windowSize)
+                if (this->m_totalCount > this->m_windowSize)
                 {
                     size_t l_delete = m_window->front();
                     m_window->pop_front();
                     if (m_bins[l_delete]->m_count > 0)
                     {
                         m_bins[l_delete]->m_count--;
-
-                        // Remove the bin when it's no longer needed.
-                        if (m_bins[l_delete]->m_count == 0)
-                        {
-                            m_bins.erase(m_bins.begin() + l_delete);
-                        }
                     }
+
+                    // Remove the bin when it's no longer needed.
+                    if (m_bins[l_delete]->m_count == 0)
+                    {
+                        m_bins.erase(m_bins.begin() + l_delete);
+                    }
+
+                    m_totalCount--;
                 }
             }
         }
@@ -81,18 +87,16 @@ namespace KML
             double l_normalizer = m_normalizer;
             if (density)
             {
-                double l_min = 1.0 / (double)m_numBins;
                 for (size_t i = 0; i < m_numBins; i++)
                 {
-                    double l_width = m_bins[i]->m_left - m_bins[i]->m_right;
-                    if (l_width == 0) l_width = l_min;
-                    l_normalized[i] =
-                        (l_normalizer / this->m_windowSize) * (m_bins[i]->m_count * l_width);
+                    double l_width = m_bins[i]->m_right - m_bins[i]->m_left;
+                    if (l_width == 0) l_width = 1.0;  // Single item in bin.
+                    l_normalized[i] = (m_bins[i]->m_count / (m_normalizer * l_width));
                 }
             }
             else
             {
-                if (!normalize) l_normalizer = 1.0;
+                if (!normalize) l_normalizer = 1.0;  // Just get counts.
                 for (size_t i = 0; i < m_bins.size(); i++)
                 {
                     l_normalized[i] = m_bins[i]->m_count / l_normalizer;
@@ -108,6 +112,7 @@ namespace KML
             std::vector<T> l_counts = pdf(normalize, false);
             std::vector<T> l_cdf(l_counts.size());
             std::partial_sum(l_counts.begin(), l_counts.end(), l_cdf.begin());
+
             return l_cdf;
         }
 
@@ -140,39 +145,65 @@ namespace KML
             }
 
             std::vector<double> l_cdf = cdf();
-            std::vector<double>::iterator l_lower;
-            l_lower = std::lower_bound(l_cdf.begin(), l_cdf.end(), qtile);
 
-            size_t l_index = (l_lower - l_cdf.begin());
-            double l_p = 0.0;
-            if (l_index >= l_cdf.size())
+            // Find the first bin smaller than the quantile in the cdf values.
+            auto it = std::lower_bound(l_cdf.begin(), l_cdf.end(), qtile);
+            if (it == l_cdf.end())
             {
-                l_index = l_cdf.size() - 1;
-                l_p = 1.0;
+                it = (l_cdf.rbegin() + 1).base();
+            }
+            else if (it != l_cdf.begin() && *it > qtile)
+            {
+                --it;
+            }
+            size_t l_index = (it - l_cdf.begin());
+
+            // If exactly equal to left bin, return that quantile.
+            if (Utils::essentiallyEqual(qtile, l_cdf[l_index]))
+            {
+                return this->m_bins[l_index]->m_left;
             }
             else
-                l_p = l_cdf[l_index + 1] - l_cdf[l_index];
-
-            double l_totalCount = 0.0;
-            for (auto it = m_bins.begin(); it != m_bins.end(); it++)
             {
-                l_totalCount += (*it)->m_count;
-            }
+                double l_p = 0.0;
+                double l_width = 0.0;
+                if (l_index >= l_cdf.size())
+                {
+                    l_index = l_cdf.size() - 1;
+                    l_p = 1.0;
+                }
+                else
+                {
+                    l_p = l_cdf[l_index + 1] - l_cdf[l_index];
+                    l_width = m_bins[l_index]->m_right - m_bins[l_index]->m_left;
+                }
 
-            double l_width = m_bins[l_index]->m_right - m_bins[l_index]->m_left;
-            if (l_width == 0) l_width = 1.0 / (double)m_numBins;
-            double l_quantile = m_bins[l_index]->m_left;
-            return l_quantile + ((l_width * l_p * l_totalCount) / m_bins[l_index]->m_count);
+                // Otherwise, attempt to interpolate and approximate quantile.
+                double l_totalCount = m_normalizer;
+                if (l_width == 0) l_width = 1.0 / static_cast<double>(m_numBins);
+                double l_quantile = m_bins[l_index]->m_left;
+
+                return l_quantile + ((l_width * l_p * l_totalCount) / m_bins[l_index]->m_count);
+            }
         }
 
         template<typename T>
         std::vector<size_t> IStreamingHistogram<T>::binCounts() const
         {
+            size_t l_total = 0;
             std::vector<size_t> l_counts(m_bins.size(), 0);
             for (size_t i = 0; i < m_bins.size(); i++)
             {
                 l_counts[i] = m_bins[i]->m_count;
+                l_total += l_counts[i];
             }
+
+            // Just a sanity check.
+            if (l_total != m_totalCount)
+            {
+                throw std::runtime_error("Counts are somehow out of sync!");
+            }
+
             return l_counts;
         }
 
@@ -182,10 +213,24 @@ namespace KML
             std::map<std::pair<double, double>, size_t> l_report;
             for (size_t i = 0; i < m_bins.size(); i++)
             {
-                l_report[std::make_pair(m_bins[i]->m_left, m_bins[i]->m_right)] = m_bins[i]->m_count;
+                l_report[std::make_pair(m_bins[i]->m_left, m_bins[i]->m_right)] =
+                    m_bins[i]->m_count;
             }
 
             return l_report;
+        }
+
+        template<typename T>
+        double IStreamingHistogram<T>::coverage(IBin<T> lhs, IBin<T> rhs)
+        {
+            if (lhs.m_left == rhs.m_left)
+            {
+                return static_cast<double>(lhs.m_left <= rhs.m_left <= lhs.m_right);
+            }
+
+            double l_largest = std::min(lhs.m_right, rhs.m_right);
+            double l_smallest = std::max(lhs.m_left, rhs.m_left);
+            return std::max(0.0, l_largest - l_smallest) / (rhs.m_right - rhs.m_left);
         }
 
         template<typename T>

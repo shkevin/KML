@@ -101,6 +101,14 @@ namespace KML
                 std::map<std::pair<double, double>, size_t> report();
 
                 /*!
+                 * @brief Calculate the coverage between two bins. This will calculate
+                 *        how much of the rhs Bin can be covered by the lhs Bin.
+                 * @param lhs Left Bin
+                 * @param rhs Right Bin
+                 */
+                double coverage(IBin<T> lhs, IBin<T> rhs);
+
+                /*!
                  * @brief Print Operator.
                  */
                 template<typename F>
@@ -137,6 +145,11 @@ namespace KML
                  * @brief Decay type to decrease histogram counts.
                  */
                 const DecayType m_decay;
+
+                /*!
+                 * @brief
+                 */
+                size_t m_totalCount = 0;
 
             private:
                 /*!

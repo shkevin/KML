@@ -5,6 +5,8 @@ from libcpp.vector cimport vector
 from libcpp.map cimport map
 from libcpp.pair cimport pair
 
+cdef extern from "Utils.cc":
+    pass
 
 cdef extern from "IStreamingHistogram.h" namespace "KML::DataStructures":
     cpdef enum DecayType:

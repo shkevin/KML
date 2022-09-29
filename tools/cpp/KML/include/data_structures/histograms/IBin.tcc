@@ -66,11 +66,11 @@ namespace KML
         IBin<T> IBin<T>::operator+(const IBin<T>& rhs) const
         {
             IBin l_bin = *this;
-            if (Utils::definitelyLessThan(rhs.m_left, l_bin.m_left))
+            if (Utils::definitelyLessThan(rhs.m_left, l_bin.m_left, 0.000001))
             {
                 l_bin.m_left = rhs.m_left;
             }
-            if (Utils::definitelyGreaterThan(rhs.m_right, l_bin.m_right))
+            if (Utils::definitelyGreaterThan(rhs.m_right, l_bin.m_right, 0.000001))
             {
                 l_bin.m_right = rhs.m_right;
             }

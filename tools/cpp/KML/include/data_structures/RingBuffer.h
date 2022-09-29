@@ -34,14 +34,9 @@ namespace KML
                 explicit RingBuffer(const size_t& windowSize);
 
                 /*!
-                 * @brief Default Destructor.
-                 */
-                virtual ~RingBuffer() = delete;
-
-                /*!
                  * @copydoc IDataStructure::update()
                  */
-                virtual void update(const T& item) override;
+                void update(const T& item) override;
 
                 /*!
                  * @copydoc IDataStructure::update()
@@ -56,24 +51,24 @@ namespace KML
                 /*!
                  * @copydoc IDataStructure::full()
                  */
-                virtual bool full() const override;
+                bool full() const override;
 
                 /*!
                  * @copydoc IDataStructure::empty()
                  */
-                virtual bool empty() const override;
+                bool empty() const override;
 
                 /*!
                  * @copydoc IDataStructure::size()
                  */
-                virtual size_t size() const override;
+                size_t size() const override;
 
                 /*!
                  * @copydoc IDataStructure::reset()
                  */
-                virtual void reset() override;
+                void reset() override;
 
-            protected:
+            private:
                 /*!
                  * @brief Underlying data structure to maintain.
                  */

@@ -17,6 +17,9 @@ google-*,
 -cppcoreguidelines-avoid-magic-numbers,
 -readability-else-after-return,
 -cppcoreguidelines-owning-memory,
+-cppcoreguidelines-avoid-c-arrays,
+-clang-diagnostic-error,
+-modernize-avoid-c-arrays,
 '
 WarningsAsErrors: '*'
 HeaderFilterRegex: '(tools/cpp/KML/include/).*\.h$'
@@ -72,7 +75,7 @@ CheckOptions:
   - key:             bugprone-string-constructor.WarnOnLargeLength
     value:           '1'
   - key:             bugprone-suspicious-enum-usage.StrictMode
-    value:           '0'
+    value:           '1'
   - key:             bugprone-suspicious-missing-comma.MaxConcatenatedTokens
     value:           '5'
   - key:             bugprone-suspicious-missing-comma.RatioThreshold
@@ -154,9 +157,9 @@ CheckOptions:
   - key:             readability-identifier-naming.ConstexprVariableSuffix
     value:           ''
   - key:             readability-identifier-naming.EnumConstantCase
-    value:           CamelCase
+    value:           UPPER_CASE
   - key:             readability-identifier-naming.EnumConstantPrefix
-    value:           k
+    value:           ''
   - key:             readability-identifier-naming.EnumConstantSuffix
     value:           ''
   - key:             readability-identifier-naming.FunctionCase

@@ -42,19 +42,6 @@ namespace KML
         }
 
         template<typename T>
-        void IStreamingHistogram<T>::updateNormalizer()
-        {
-            if (DecayType::WINDOW == m_decay)
-            {
-                if (m_normalizer < this->m_windowSize) m_normalizer++;
-            }
-            else
-            {
-                m_normalizer++;
-            }
-        }
-
-        template<typename T>
         void IStreamingHistogram<T>::decayCounts()
         {
             if (DecayType::WINDOW == m_decay)
@@ -69,9 +56,12 @@ namespace KML
                     }
 
                     // Remove the bin when it's no longer needed.
-                    if (m_bins[l_delete]->m_count == 0)
+                    if (size() > getNumBins())
                     {
-                        m_bins.erase(m_bins.begin() + l_delete);
+                        if (m_bins[l_delete]->m_count == 0)
+                        {
+                            m_bins.erase(m_bins.begin() + l_delete);
+                        }
                     }
 
                     m_totalCount--;
@@ -80,18 +70,18 @@ namespace KML
         }
 
         template<typename T>
-        std::vector<double> IStreamingHistogram<T>::pdf(const bool normalize,
-                                                        const bool density) const
+        std::vector<double> IStreamingHistogram<T>::pdf(const bool& normalize,
+                                                        const bool& density) const
         {
-            std::vector<double> l_normalized(m_numBins, 0.0);
-            double l_normalizer = m_normalizer;
+            std::vector<double> l_normalized(size(), 0.0);
+            double l_normalizer = getTotalCount();
             if (density)
             {
-                for (size_t i = 0; i < m_numBins; i++)
+                for (size_t i = 0; i < m_bins.size(); i++)
                 {
                     double l_width = m_bins[i]->m_right - m_bins[i]->m_left;
-                    if (l_width == 0) l_width = 1.0;  // Single item in bin.
-                    l_normalized[i] = (m_bins[i]->m_count / (m_normalizer * l_width));
+                    if (l_width <= 0) l_width = 1.0;  // Single item in bin.
+                    l_normalized[i] = (m_bins[i]->m_count / (l_normalizer * l_width));
                 }
             }
             else
@@ -107,7 +97,7 @@ namespace KML
         }
 
         template<typename T>
-        std::vector<double> IStreamingHistogram<T>::cdf(const bool normalize) const
+        std::vector<double> IStreamingHistogram<T>::cdf(const bool& normalize) const
         {
             std::vector<T> l_counts = pdf(normalize, false);
             std::vector<T> l_cdf(l_counts.size());
@@ -179,12 +169,53 @@ namespace KML
                 }
 
                 // Otherwise, attempt to interpolate and approximate quantile.
-                double l_totalCount = m_normalizer;
+                double l_totalCount = getTotalCount();
                 if (l_width == 0) l_width = 1.0 / static_cast<double>(m_numBins);
                 double l_quantile = m_bins[l_index]->m_left;
 
                 return l_quantile + ((l_width * l_p * l_totalCount) / m_bins[l_index]->m_count);
             }
+        }
+
+        template<typename T>
+        void IStreamingHistogram<T>::add(const T& item)
+        {
+            IBin<T>* l_bin = new IBin<T>(item, item, 1);
+            // Get the bin index where the new bin should go.
+            size_t l_index = binSearch(*l_bin);
+
+            // Histogram is empty, just insert.
+            if (0 == getTotalCount())
+            {
+                this->m_bins.push_back(l_bin);
+            }
+            else
+            {
+                // Item is past right-most bin. just push to end.
+                if (l_index == getCurrentNumBins())
+                {
+                    m_bins.push_back(l_bin);
+                }
+                else
+                {
+                    // Increment the bin counter if item is at index bin.
+                    if (item >= m_bins[l_index]->m_left)
+                    {
+                        m_bins[l_index]->m_count++;
+                    }
+                    else
+                    {
+                        // Found where to insert, insert at index.
+                        m_bins.insert(m_bins.begin() + l_index, l_bin);
+                    }
+                }
+            }
+
+            // Update window index and counts.
+            this->m_historyCount++;
+            m_totalCount++;
+            m_window->push_back(l_index);
+            decayCounts();  // Call decay before potentially merging.
         }
 
         template<typename T>
@@ -211,10 +242,9 @@ namespace KML
         std::map<std::pair<double, double>, size_t> IStreamingHistogram<T>::report()
         {
             std::map<std::pair<double, double>, size_t> l_report;
-            for (size_t i = 0; i < m_bins.size(); i++)
+            for (auto i = m_bins.begin(); i < m_bins.end(); i++)
             {
-                l_report[std::make_pair(m_bins[i]->m_left, m_bins[i]->m_right)] =
-                    m_bins[i]->m_count;
+                l_report[std::make_pair((*i)->m_left, (*i)->m_right)] = (*i)->m_count;
             }
 
             return l_report;
@@ -237,7 +267,6 @@ namespace KML
         void IStreamingHistogram<T>::reset()
         {
             m_bins.clear();
-            m_normalizer = 0;
             this->m_historyCount = 0;
             if (nullptr != m_window) m_window->clear();
         }
@@ -251,13 +280,64 @@ namespace KML
         template<typename T>
         bool IStreamingHistogram<T>::full() const
         {
-            return !this->empty();
+            return !empty();
         }
 
         template<typename T>
         size_t IStreamingHistogram<T>::size() const
         {
             return m_bins.size();
+        }
+
+        template<typename T>
+        size_t IStreamingHistogram<T>::getTotalCount() const
+        {
+            return m_totalCount;
+        }
+
+        template<typename T>
+        std::deque<size_t>* IStreamingHistogram<T>::getWindow() const
+        {
+            return m_window;
+        }
+
+        template<typename T>
+        size_t IStreamingHistogram<T>::getCurrentNumBins() const
+        {
+            return m_bins.size();
+        }
+
+        template<typename T>
+        IBin<T>* IStreamingHistogram<T>::getBin(size_t index) const
+        {
+            size_t currentBinCount = getCurrentNumBins();
+            if (index > currentBinCount)
+            {
+                throw std::runtime_error("Can't get bin outside of histogram!");
+            }
+
+            return m_bins[index];
+        }
+
+        template<typename T>
+        void IStreamingHistogram<T>::mergeBins(const size_t& lhs, const size_t& rhs)
+        {
+            // Get next right bin to merge into left.
+            IBin<T> l_toMerge = *m_bins[rhs];
+            m_bins.erase(m_bins.begin() + rhs);
+            *m_bins[lhs] += l_toMerge;
+        }
+
+        template<typename T>
+        size_t IStreamingHistogram<T>::getNumBins() const
+        {
+            return m_numBins;
+        }
+
+        template<typename T>
+        DecayType IStreamingHistogram<T>::getDecayType() const
+        {
+            return m_decay;
         }
     }  // namespace DataStructures
 }  // namespace KML

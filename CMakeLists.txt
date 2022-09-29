@@ -247,13 +247,13 @@ OPTION(BUILD_STATIC_ANALYSIS "Build Static Code Analysis" OFF)
 if(BUILD_STATIC_ANALYSIS)
     MESSAGE(STATUS "Building Static Code Analysis")
     FILE(GLOB_RECURSE CPP_SOURCES LIST_DIRECTORIES false ${CPP_DIR}/KML/src/*.cc)
-    FILE(GLOB_RECURSE CPP_HEADERS LIST_DIRECTORIES false ${CPP_DIR}/KML/include/*.h ${CPP_DIR} ${CPP_DIR}/KML/include/*.tcc)
-    SET(CPP_ALL ${CPP_SOURCES} ${CPP_HEADERS})
+    FILE(GLOB_RECURSE CPP_HEADERS LIST_DIRECTORIES false ${CPP_DIR}/KML/include/*.h)
+    FILE(GLOB_RECURSE TCC_HEADERS LIST_DIRECTORIES false ${CPP_DIR}/KML/include/*.tcc)
+    SET(CPP_ALL ${CPP_SOURCES} ${CPP_HEADERS} ${TCC_HEADERS}})
     HEADER_DIRECTORIES(HEADERS ${CPP_DIR}/KML/include)
-    message("${HEADERS}")
 
     # CLANG-TIDY
-    FIND_PROGRAM(CLANG_TIDY "clang-tidy")
+    FIND_PROGRAM(CLANG_TIDY "clang-tidy-12")
 	if(CLANG_TIDY)
         # Need to add each header directory with -I separately.
         foreach(h_dir IN LISTS HEADERS)
@@ -263,6 +263,7 @@ if(BUILD_STATIC_ANALYSIS)
         add_custom_target(CMAKE_CXX_CLANG_TIDY ALL DEPENDS ${BINARY}
             COMMAND clang-tidy
                 ${CPP_SOURCES}
+                -header-filter=${CPP_HEADERS}
                 --
                 -x c++
                 -std=c++${CMAKE_CXX_STANDARD}
@@ -285,6 +286,7 @@ if(BUILD_STATIC_ANALYSIS)
                 "inline-suppr"
                 "--suppress=unmatchedSuppression"
                 "--suppress=missingInclude"
+                "--suppress=*:${CMAKE_SOURCE_DIR}/tools/cpp/KML/src/utils/*"
                 "--template=${CPPCHECK_TEMPLATE}"                           # How to print warnings.
                 "--language=c++"                                            # Language
                 "--std=c++11"                                               # Language standard

@@ -61,7 +61,6 @@ namespace KML
                  */
                 virtual void reset() = 0;
 
-            protected:
                 /*!
                  * @brief The current window size.
                  */

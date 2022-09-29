@@ -145,7 +145,6 @@ def get_extensions() -> List[Extension]:
         extPath = name.replace(".", os.path.sep) + ".pyx"
         # extPath = PurePath("tools/cython", extPath)
         extPath = PurePath("tools/cython", extPath)
-        print(name, extPath)
         extension = Extension(
             name,
             [str(extPath)],

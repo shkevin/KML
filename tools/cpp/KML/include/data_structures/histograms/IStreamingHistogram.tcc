@@ -29,10 +29,70 @@ namespace KML
         }
 
         template<typename T>
+        IStreamingHistogram<T>::IStreamingHistogram(const IStreamingHistogram& other)
+        {
+            this->m_bins = other.m_bins;
+            this->m_window = other.m_window;
+            this->m_numBins = other.m_numBins;
+            this->m_decay = other.m_decay;
+            this->m_totalCount = other.m_totalCount;
+        }
+
+        template<typename T>
+        IStreamingHistogram<T>& IStreamingHistogram<T>::operator=(const IStreamingHistogram& rhs)
+        {
+            if (this != &rhs)
+            {
+                this->m_bins = rhs.m_bins;
+                this->m_window = rhs.m_window;
+                this->m_numBins = rhs.m_numBins;
+                this->m_decay = rhs.m_decay;
+                this->m_totalCount = rhs.m_totalCount;
+            }
+
+            return *this;
+        }
+
+        template<typename T>
+        IStreamingHistogram<T>::IStreamingHistogram(IStreamingHistogram&& other)
+        {
+            this->m_bins = other.m_bins;
+            this->m_window = other.m_window;
+            this->m_numBins = other.m_numBins;
+            this->m_decay = other.m_decay;
+            this->m_totalCount = other.m_totalCount;
+        }
+
+        template<typename T>
+        IStreamingHistogram<T>& IStreamingHistogram<T>::operator=(IStreamingHistogram&& rhs)
+        {
+            if (this != &rhs)
+            {
+                this->m_bins = rhs.m_bins;
+                this->m_window = rhs.m_window;
+                this->m_numBins = rhs.m_numBins;
+                this->m_decay = rhs.m_decay;
+                this->m_totalCount = rhs.m_totalCount;
+            }
+
+            return *this;
+        }
+
+        template<typename T>
+        IStreamingHistogram<T>::~IStreamingHistogram()
+        {
+            for (auto it = m_bins.begin(); it < m_bins.end(); it++)
+            {
+                delete *it;
+            }
+            delete m_window;
+        }
+
+        template<typename T>
         std::ostream& operator<<(std::ostream& os, const IStreamingHistogram<T>& hist)
         {
             os << "(";
-            for (int i = 0; i < hist.m_bins.size(); ++i)
+            for (size_t i = 0; i < hist.m_bins.size(); ++i)
             {
                 os << *hist.m_bins[i];
                 if (i != hist.m_bins.size() - 1) os << ", ";
@@ -127,6 +187,12 @@ namespace KML
         }
 
         template<typename T>
+        size_t IStreamingHistogram<T>::binSearch(const T& item) const
+        {
+            return binSearch(IBin<T>(item, item, 1));
+        }
+
+        template<typename T>
         T IStreamingHistogram<T>::quantile(const double& qtile) const
         {
             if ((qtile < 0) || (qtile > 1))
@@ -202,6 +268,7 @@ namespace KML
                     if (item >= m_bins[l_index]->m_left)
                     {
                         m_bins[l_index]->m_count++;
+                        delete l_bin;
                     }
                     else
                     {
@@ -248,19 +315,6 @@ namespace KML
             }
 
             return l_report;
-        }
-
-        template<typename T>
-        double IStreamingHistogram<T>::coverage(IBin<T> lhs, IBin<T> rhs)
-        {
-            if (lhs.m_left == rhs.m_left)
-            {
-                return static_cast<double>(lhs.m_left <= rhs.m_left <= lhs.m_right);
-            }
-
-            double l_largest = std::min(lhs.m_right, rhs.m_right);
-            double l_smallest = std::max(lhs.m_left, rhs.m_left);
-            return std::max(0.0, l_largest - l_smallest) / (rhs.m_right - rhs.m_left);
         }
 
         template<typename T>

@@ -1,7 +1,11 @@
-
+/*!
+ * @file Utils.cc
+ * @brief Utility functions used across project.
+ */
 #include "Utils.h"
 
 #include <cmath>  // fabs
+#include <stdexcept>
 
 namespace KML
 {
@@ -28,6 +32,20 @@ namespace KML
         bool definitelyLessThan(const double& a, const double& b, const double& epsilon)
         {
             return (b - a) > ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+        }
+
+        double xlogx(const double& item)
+        {
+            if (item < 0)
+            {
+                throw std::runtime_error("Input item must be >= 0!");
+            }
+            if (0 == item)
+            {
+                return 0.0;
+            }
+
+            return item * std::log2(item);
         }
 
     }  // namespace Utils

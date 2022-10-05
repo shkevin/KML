@@ -47,7 +47,7 @@ cdef class PyStreamingMean:
         parameter helps adjust for data drift within the mean calculation.
 
         Args:
-            item (float, Iterable): Item to update iqr.
+            item (float, Iterable): Item to update mean.
         """
         if isinstance(observation, Iterable):
             for o in observation:

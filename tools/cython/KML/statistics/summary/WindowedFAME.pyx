@@ -52,7 +52,7 @@ cdef class PyWindowedFAME:
         Update the Windowed FAME median calculation with the given item.
 
         Args:
-            observation (float, Iterable): Item to update iqr.
+            observation (float, Iterable): Item to update median.
         """
         if isinstance(observation, Iterable):
             for o in observation:

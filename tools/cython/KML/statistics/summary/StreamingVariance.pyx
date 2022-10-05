@@ -47,7 +47,7 @@ cdef class PyStreamingVariance:
         parameter helps adjust for data drift within the variance calculation.
 
         Args:
-            observation: Item to update iqr.
+            observation: Item to update variance.
         """
         if isinstance(observation, Iterable):
             for o in observation:

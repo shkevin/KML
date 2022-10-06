@@ -7,6 +7,8 @@
 #include <cmath>  // fabs
 #include <stdexcept>
 
+#include <iostream>
+
 namespace KML
 {
     namespace Utils
@@ -38,6 +40,7 @@ namespace KML
         {
             if (item < 0)
             {
+                std::cout << item << std::endl;
                 throw std::runtime_error("Input item must be >= 0!");
             }
             if (0 == item)

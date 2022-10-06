@@ -53,7 +53,8 @@ namespace KML
             auto l_n = static_cast<double>(m_histogram->getTotalCount());
             auto l_count = static_cast<double>(m_histogram->getBin(index)->m_count);
 
-            double l_rhs = -Utils::xlogx(l_count / l_n) + Utils::xlogx(((l_count - 1.0) / l_n));
+            double l_rhs =
+                -Utils::xlogx(l_count / l_n) + Utils::xlogx(std::max(0.0, l_count - 1.0) / l_n);
             if (1 == l_n)
             {
                 m_entropy = l_rhs;
@@ -68,7 +69,8 @@ namespace KML
         void StreamingEntropy::decrement(const size_t& index)
         {
             double l_n = static_cast<double>(m_histogram->getTotalCount()) - 1.0;
-            double l_count = static_cast<double>(m_histogram->getBin(index)->m_count) - 1.0;
+            double l_count =
+                std::max(0.0, static_cast<double>(m_histogram->getBin(index)->m_count) - 1.0);
 
             m_entropy = (l_n + 1.0) / l_n *
                             (m_entropy + Utils::xlogx((l_count + 1.0) / (l_n + 1.0)) -

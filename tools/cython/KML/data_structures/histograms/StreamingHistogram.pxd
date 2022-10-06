@@ -1,9 +1,10 @@
 #distutils: language = c++
 from libc.stdint cimport uint64_t
 from libcpp cimport bool
-from libcpp.vector cimport vector
 from libcpp.map cimport map
 from libcpp.pair cimport pair
+from libcpp.vector cimport vector
+
 
 cdef extern from "Utils.cc":
     pass

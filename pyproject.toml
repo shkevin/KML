@@ -61,6 +61,21 @@ version_scheme = "release-branch-semver"
 [tool.coverage.run]
 source = ["tools/python/KML"]
 
+[tool.mypy]
+warn_unreachable = true
+warn_unused_ignores = true
+follow_imports = "skip"
+show_error_context = true
+warn_incomplete_stub = true
+ignore_missing_imports = true
+check_untyped_defs = true
+cache_dir = "/dev/null"
+warn_redundant_casts = true
+warn_unused_configs = true
+strict_optional = true
+plugins = ["pydantic.mypy"]
+
+# Flake8 doesn't use pyproject yet. This is just here for reference.
 [tool.flake8]
 filename = ["*.py", "*.pxd", "*.pyx"]
 max-line-length = 100
@@ -86,11 +101,10 @@ disable = [
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 95"
 minversion = "2.0"
-# addopts = "-rfEX -p pytester --strict-markers"
 python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test", "Acceptance"]
 python_functions = ["test"]
-testpaths = ["tests"]
+testpaths = ["./tools/python/"]
 xfail_strict = true
 filterwarnings = [
     "error",

@@ -7,7 +7,7 @@ specifally uses the float generic template.
 
 Example:
 
-    >>> from KML.data_structures.RingBuffer import PyRingBuffer
+    >>> from kml.data_structures.RingBuffer import PyRingBuffer
     >>> RB = PyRingBuffer(window_size=5)
     >>> for i in range(5):
     >>>     RB.update(i)

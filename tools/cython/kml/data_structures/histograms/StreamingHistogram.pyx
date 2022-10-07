@@ -9,7 +9,7 @@ implementation.
 
 Example:
 
-    >>> from KML.data_structures.histograms.StreamingHistogram import PyStreamingHistogram
+    >>> from kml.data_structures.histograms.StreamingHistogram import PyStreamingHistogram
     >>> SH = PyStreamingHistogram(num_bins=5,window_size=5)
     >>> for i in range(5):
     >>>     SH.update(i)

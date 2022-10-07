@@ -1,7 +1,7 @@
 import math
 import unittest
 
-from KML.statistics.summary.StreamingEntropy import PyStreamingEntropy
+from kml.statistics.summary.StreamingEntropy import PyStreamingEntropy
 
 
 class TestStreamingEntropy(unittest.TestCase):

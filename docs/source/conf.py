@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath("../../tools/cpp"))
 sys.path.insert(0, os.path.abspath("_ext"))
 
 # -- Project information -----------------------------------------------------
-from KML import __version__
+from kml import __version__
 
 project = "KML"
 copyright = "2022, Kevin Cox"

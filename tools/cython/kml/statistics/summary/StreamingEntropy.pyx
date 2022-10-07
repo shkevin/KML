@@ -6,7 +6,7 @@ This module is used to wrap the C++ Streaming entropy implemtation.
 
 Example:
 
-    >>> from KML.statistics.summary.StreamingEntropy import PyStreamingEntropy
+    >>> from kml.statistics.summary.StreamingEntropy import PyStreamingEntropy
     >>> sm = PyStreamingEntropy(10, 10)
     >>> sm.update(list(range(1, 11)))
     >>> print(sm.evaluate())

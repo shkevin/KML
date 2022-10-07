@@ -6,7 +6,7 @@ This module is used to wrap the C++ Windowed FAME implemtation.
 
 Example:
 
-    >>> from KML.statistics.summary.WindowedFAME import PyWindowedFAME
+    >>> from kml.statistics.summary.WindowedFAME import PyWindowedFAME
     >>> fame = PyWindowedFAME()
     >>> fame.update(list(range(1, 11)))
     >>> print(fame.evaluate())

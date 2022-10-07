@@ -28,7 +28,7 @@ FILE(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in DESTINATION ${CMAKE_CURRENT_BI
 FILE(COPY "images/HQ 01-03-resized.png" DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/images)
 
 # Would a symbolic link be better than just copying?
-FILE(COPY ${CMAKE_SOURCE_DIR}/tools/python/KML/notebooks DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/source)
+FILE(COPY ${CMAKE_SOURCE_DIR}/tools/python/kml/notebooks DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/source)
 
 # Create doxygen output directory.
 FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/source/_build/doxygen)

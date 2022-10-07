@@ -170,23 +170,23 @@ if(BUILD_PYTHON)
     ADD_CUSTOM_COMMAND(OUTPUT ${OUTPUT}
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/setup.py
             sdist --dist-dir=${PACK_DIR}
-            build --build-base=${BUILD_DIR}/build --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/KML
-            build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/KML -j${NUM_THREADS}
+            build --build-base=${BUILD_DIR}/build --build-lib=${BUILD_DIR}/build --build-temp=${BUILD_DIR}/kml
+            build_ext --build-lib=${BUILD_DIR} --build-temp=${BUILD_DIR}/kml -j${NUM_THREADS}
             bdist_wheel --bdist-dir=${BUILD_DIR}/build --dist-dir=${PACK_DIR}
         COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/bin
-        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/tools/cython/KML.egg-info
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/tools/cython/kml.egg-info
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
         COMMENT "Building Python"
         )
 
     ADD_CUSTOM_TARGET(python_package ALL DEPENDS ${OUTPUT})
 
-    CopyPython("tools/python/KML")
-    CopyPython("tools/cython/KML")
+    CopyPython("tools/python/kml")
+    CopyPython("tools/cython/kml")
 
     if(BUILD_TESTING)
-        SET(PYTHON_DIR "${CMAKE_SOURCE_DIR}/tools/python/KML")
+        SET(PYTHON_DIR "${CMAKE_SOURCE_DIR}/tools/python/kml")
         ADD_SUBDIRECTORY("${PYTHON_DIR}/../tests")
     endif(BUILD_TESTING)
 

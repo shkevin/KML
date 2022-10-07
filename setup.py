@@ -12,7 +12,7 @@ from setuptools.command.build_ext import build_ext as _build_ext
 
 # Get Cython sources with their C++ files.
 PARENT_DIR = Path(os.path.abspath(__file__)).parent
-CYTHON_DIR = Path(PARENT_DIR, "tools/cython/KML")
+CYTHON_DIR = Path(PARENT_DIR, "tools/cython/kml")
 SRC_DIR = Path(PARENT_DIR, "tools/cpp/KML/src")
 HEADERS_DIR = Path(PARENT_DIR, "tools/cpp/KML/include")
 CPPFLAGS = ["-Wall", "-O3", "-std=c++11"]
@@ -158,7 +158,7 @@ def get_extensions() -> List[Extension]:
 
 
 setup(
-    name="KML",
+    name="kml",
     url="https://github.com/shkevin/KML",
     author="Kevin Cox",
     author_email="shk3vin7@gmail.com",

@@ -1,6 +1,6 @@
 import unittest
 
-from KML.statistics.summary.WindowedFAME import PyWindowedFAME
+from kml.statistics.summary.WindowedFAME import PyWindowedFAME
 
 
 class TestWindowedFAME(unittest.TestCase):

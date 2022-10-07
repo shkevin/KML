@@ -6,7 +6,7 @@ This module is used to wrap the C++ Streaming mean implemtation.
 
 Example:
 
-    >>> from KML.statistics.summary.StreamingMean import PyStreamingMean
+    >>> from kml.statistics.summary.StreamingMean import PyStreamingMean
     >>> sm = PyStreamingMean(5)
     >>> sm.update(list(range(1, 11)))
     >>> print(sm.evaluate())

@@ -1,6 +1,6 @@
 import unittest
 
-from KML.data_structures.histograms.StreamingHistogram import PyStreamingHistogram
+from kml.data_structures.histograms.StreamingHistogram import PyStreamingHistogram
 
 
 class TestStreamingHistogram(unittest.TestCase):

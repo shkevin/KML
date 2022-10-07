@@ -133,14 +133,14 @@ jobs:
         working-directory: ${{github.workspace}}/build/tools/
         run: |
           ls packages
-          pip3 install packages/KML*.whl --force-reinstall
+          pip3 install packages/kml*.whl --force-reinstall
           python3 -m pytest -p no:cacheprovider -n auto ./python/tests
 
       - name: Pytest sdist
         working-directory: ${{github.workspace}}/build/tools/
         run: |
           ls packages
-          pip3 install packages/KML*.tar.gz --force-reinstall
+          pip3 install packages/kml*.tar.gz --force-reinstall
           python3 -m pytest -p no:cacheprovider -n auto ./python/tests
 
   # lint:

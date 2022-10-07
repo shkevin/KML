@@ -20,8 +20,7 @@ classifiers=[
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Operating System :: MacOS",
-    "Operating System :: Unix",
-]
+    "Operating System :: Unix"]
 requires-python = ">=3.7,<=3.11"
 dependencies = []
 dynamic = ["version"]
@@ -43,7 +42,8 @@ dev = ["black>=22.0.0,<23.0.0",
        "yapf>=0.32.0",
        "pyproject-flake8>=5.0.0",
        "pydocstyle>=6.1.1",
-       "toml==0.10.1"]
+       "toml==0.10.1",
+       "pylint>=2.0.0"]
 docs = ["sphinx", "sphinx_rtd_theme", "breathe",
         "exhale", "sphinx_gallery", "nbsphinx",
         "nbconvert", "pandoc"]
@@ -94,9 +94,10 @@ disable = [
     # "R0903", # (too-few-public-methods)
     # "R0913", # (too-many-arguments)
     # "W0105", # (pointless-string-statement)
-    "E0401", # (Unable to import)
-    "E0611", # (No name)
-]
+    "E0401",   # (Unable to import)
+    "E0611",   # (No name)
+    "W0406",   # (Module import self)
+    ]
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 95"
@@ -127,11 +128,10 @@ filterwarnings = [
     # module being the filename (with .py removed).
     "default:invalid escape sequence:DeprecationWarning",
     # ignore use of unregistered marks, because we use many to test the implementation
-    "ignore::_pytest.warning_types.PytestUnknownMarkWarning",
-]
+    "ignore::_pytest.warning_types.PytestUnknownMarkWarning",]
 
 [tool.black]
-target-version = ['py36'] # Test the minimum version supported.
+target-version = ['py37', 'py38', 'py39', 'py310']
 
 [tool.isort]
 profile = "black"

@@ -6,7 +6,7 @@ This module is used to wrap the C++ StreamingMAD implemtation.
 
 Example:
 
-    >>> from KML.metrics.StreamingMAD import PyStreamingMAD
+    >>> from kml.metrics.StreamingMAD import PyStreamingMAD
     >>> MAD = PyStreamingMAD()
     >>> MAD.update(list(range(1, 5)))
     >>> print(MAD.evaluate())

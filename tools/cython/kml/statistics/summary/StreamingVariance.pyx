@@ -6,7 +6,7 @@ This module is used to wrap the C++ Streaming variance implemtation.
 
 Example:
 
-    >>> from KML.statistics.summary.StreamingVariance import PyStreamingVariance
+    >>> from kml.statistics.summary.StreamingVariance import PyStreamingVariance
     >>> sv = PyStreamingVariance(5)
     >>> sv.update(list(range(1, 11)))
     >>> print(sv.evaluate())

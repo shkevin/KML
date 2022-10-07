@@ -1,6 +1,6 @@
 import unittest
 
-from KML.data_structures.LinkedList import PyLinkedList
+from kml.data_structures.LinkedList import PyLinkedList
 
 
 class TestLinkedList(unittest.TestCase):

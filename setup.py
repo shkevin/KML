@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import multiprocessing
 import os
+from ast import literal_eval
 from distutils.command.build import build as _build
 from os import walk
 from pathlib import Path, PurePath
@@ -30,6 +31,14 @@ except ImportError:
 
 
 def get_readme() -> str:
+    """Retrieve the readme as a string.
+
+    Retrieve the current readme in the parent directory. This
+    is returned as a string and used in the long description.
+
+    Returns:
+        str: String representation of readme.
+    """
     with open(Path(PARENT_DIR, "README.rst"), "r", encoding="utf8") as f:
         return f.read()
 
@@ -47,9 +56,8 @@ def get_version() -> str:
     try:
         with open(Path(CYTHON_DIR, "_version.py"), "r") as f:
             version_tuple = f.read().splitlines()[-1]
-            version = ".".join(
-                str(x) for x in eval(version_tuple.split("version_tuple =")[-1])[:3]
-            )
+            version = literal_eval(version_tuple.split("=")[-1].lstrip())[:3]
+            version = ".".join(str(x) for x in version)
             return version
     except IOError:
         return "0.0.1"
@@ -85,6 +93,11 @@ def get_buildlib() -> str:
 class my_build_ext(_build_ext):
     # Avoid a gcc warning below: -Wstrict-prototypes
     def build_extensions(self) -> None:
+        """Build the Cython extensions.
+
+        Build the cython extensions. This is currently used to remove
+        the strict-prototypes flag that is irrelevant to C++.
+        """
         if "-Wstrict-prototypes" in self.compiler.compiler_so:
             self.compiler.compiler_so.remove("-Wstrict-prototypes")
         super().build_extensions()
@@ -92,13 +105,12 @@ class my_build_ext(_build_ext):
 
 class my_build(_build):
     def finalize_options(self) -> None:
+        """Finalize the build options for Cython.
+
+        This is overriden from the origina Cython build in order
+        to finalize custom build options for kml.
+        """
         super().finalize_options()
-        # __builtins__.__NUMPY_SETUP__ = False
-        # import numpy
-
-        # for extension in self.distribution.ext_modules:
-        #     extension.include_dirs.append(numpy.get_include())
-
         if USE_CYTHON:
             from Cython.Compiler import Options
 
@@ -123,7 +135,19 @@ class my_build(_build):
             )
 
 
-def scandir(_dir, files=None) -> List[str]:
+def scandir(_dir, files: List[str] = None) -> List[str]:
+    """Scan the Cython directory for pyx files.
+
+    Scan the Cython directory in order to get a list of
+    files to convert to extensions.
+
+    Args:
+        _dir: Directory to search.
+        files: Cython files found.
+
+    Returns:
+        List[str]: Cython files found.
+    """
     if files is None:
         files = []
 
@@ -139,6 +163,13 @@ def scandir(_dir, files=None) -> List[str]:
 
 
 def get_extensions() -> List[Extension]:
+    """Retrieve the Cython extensions.
+
+    Retrieve the Cython extensions used for the kml project.
+
+    Returns:
+        List[Extension]: List of Cython extensions.
+    """
     ext_names = scandir(CYTHON_DIR)
     ext_modules = []
     for name in ext_names:

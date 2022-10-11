@@ -6,5 +6,3 @@ that can deal with streaming data.
 
 from .LinkedList import PyLinkedList
 from .RingBuffer import PyRingBuffer
-
-__all__ = ["histograms"]

@@ -124,7 +124,7 @@ directories:
 
 ## Clean build folder.
 clean:
-	@$(RM) -rf $(BUILDDIR) ./tox
+	@$(RM) -rf $(BUILDDIR) .tox
 
 ## Full Clean of entire project. This project formats c++ as .cc
 cleaner: clean

@@ -17,7 +17,10 @@ sys.path.insert(0, os.path.abspath("../../tools/cpp"))
 sys.path.insert(0, os.path.abspath("_ext"))
 
 # -- Project information -----------------------------------------------------
-from kml import __version__
+try:
+    from kml import __version__
+except ImportError:
+    __version__ = "unknown version"
 
 project = "KML"
 copyright = "2022, Kevin Cox"
@@ -288,7 +291,6 @@ sphinx_gallery_conf = {
     # avoid generating too many cross links
     "inspect_global_variables": False,
     "remove_config_comments": True,
-    "plot_gallery": "True",
 }
 
 # Nbsphinx

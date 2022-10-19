@@ -17,5 +17,3 @@ try:
 except ImportError:
     __version__ = "unknown version"
     version_tuple = (0, 0, 0, "unknown version", "unknown")
-
-__all__ = ["data_structures", "metrics", "statistics"]

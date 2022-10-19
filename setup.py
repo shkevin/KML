@@ -6,10 +6,12 @@ from distutils.command.build import build as _build
 from os import walk
 from pathlib import Path, PurePath
 from sys import argv
-from typing import List
+from typing import List, Optional
 
 from setuptools import Extension, find_packages, setup
 from setuptools.command.build_ext import build_ext as _build_ext
+
+import toml
 
 # Get Cython sources with their C++ files.
 PARENT_DIR = Path(os.path.abspath(__file__)).parent
@@ -151,7 +153,6 @@ def scandir(_dir, files: List[str] = None) -> List[str]:
     if files is None:
         files = []
 
-    to_replace = str(Path(CYTHON_DIR.parent, os.path.sep))
     for file in os.listdir(_dir):
         path = os.path.join(_dir, file)
         if os.path.isfile(path) and path.endswith(".pyx"):

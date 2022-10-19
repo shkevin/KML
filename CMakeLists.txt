@@ -81,7 +81,7 @@ MACRO(CopyPython src)
             POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${CMAKE_CURRENT_SOURCE_DIR}/${src}/${py}"
-            "${CMAKE_BINARY_DIR}/KML/${py}"
+            "${CMAKE_BINARY_DIR}/kml/${py}"
         )
     ENDFOREACH(py)
 ENDMACRO(CopyPython)

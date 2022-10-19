@@ -1,7 +1,7 @@
 /*!
  * @file  StreamingP2Quantile.h
  * @brief Provides the declarations for the P2 quantile calculation.
- *        Reference: https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf 
+ *        Reference: https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf
  *
  * The StreamingP2Quantile computes quantile statistics of a data stream. This class
  * can work on all the data or a window of the data. Each update is
@@ -37,7 +37,7 @@ namespace KML
                 using IStreamingStatistic<double>::update;
 
                 /*!
-                 * @copydoc IStreamingStatistic::update()
+                 * @copydoc IStreamingStatistic::evaluate()
                  */
                 double evaluate() const override;
                 using IStreamingStatistic<double>::evaluate;
@@ -104,4 +104,3 @@ namespace KML
 }  // namespace KML
 
 #endif  // __STREAMING_P2QUANTILE_H__
-

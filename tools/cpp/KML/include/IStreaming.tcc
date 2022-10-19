@@ -10,7 +10,7 @@ namespace KML
     {
         if (m_windowSize > 0)
         {
-            m_window = new std::deque<T>(m_windowSize);
+            m_window = new std::deque<T>();
         }
     }
 
@@ -18,11 +18,6 @@ namespace KML
     IStreaming<T>::~IStreaming()
     {
         delete m_window;
-    }
-
-    template<typename T>
-    void IStreaming<T>::update(const T& observation)
-    {
     }
 
     template<typename T>

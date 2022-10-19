@@ -6,7 +6,7 @@ This module is used to wrap the C++ Streaming mean implemtation.
 
 Example:
 
-    >>> from KML.statistics.summary.StreamingMean import PyStreamingMean
+    >>> from kml.statistics.summary.StreamingMean import PyStreamingMean
     >>> sm = PyStreamingMean(5)
     >>> sm.update(list(range(1, 11)))
     >>> print(sm.evaluate())
@@ -47,7 +47,7 @@ cdef class PyStreamingMean:
         parameter helps adjust for data drift within the mean calculation.
 
         Args:
-            item (float, Iterable): Item to update iqr.
+            item (float, Iterable): Item to update mean.
         """
         if isinstance(observation, Iterable):
             for o in observation:

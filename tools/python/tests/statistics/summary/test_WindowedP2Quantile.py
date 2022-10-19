@@ -1,6 +1,6 @@
 import unittest
 
-from KML.statistics.summary.WindowedP2Quantile import PyWindowedP2Quantile
+from kml.statistics.summary.WindowedP2Quantile import PyWindowedP2Quantile
 
 
 class TestWindowedP2Quantile(unittest.TestCase):

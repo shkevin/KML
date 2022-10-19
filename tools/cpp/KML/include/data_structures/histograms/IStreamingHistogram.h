@@ -40,6 +40,31 @@ namespace KML
                                              const DecayType& decay = DecayType::WINDOW);
 
                 /*!
+                 * @brief Copy Constructor.
+                 */
+                IStreamingHistogram(const IStreamingHistogram<T>& other);
+
+                /*!
+                 * @brief Copy Assignment.
+                 */
+                IStreamingHistogram<T>& operator=(const IStreamingHistogram<T>& rhs);
+
+                /*!
+                 * @brief Move Constructor.
+                 */
+                IStreamingHistogram(IStreamingHistogram<T>&& other);
+
+                /*!
+                 * @brief Move Assignment.
+                 */
+                IStreamingHistogram<T>& operator=(IStreamingHistogram<T>&& rhs);
+
+                /*!
+                 * @brief Default Destructor.
+                 */
+                ~IStreamingHistogram();
+
+                /*!
                  * @copydoc IDataStructure::update()
                  */
                 using IDataStructure<T>::update;
@@ -69,6 +94,12 @@ namespace KML
                  * @param bin The bin to find where to place in histogram.
                  */
                 size_t binSearch(const IBin<T>& bin) const;
+
+                /*!
+                 * @brief Get the index where the given item should be inserted.
+                 * @param item The item to find where to place in histogram.
+                 */
+                size_t binSearch(const T& item) const;
 
                 /*!
                  * @brief Calculate the approximate pdf from the histogram.
@@ -107,14 +138,6 @@ namespace KML
                 std::map<std::pair<double, double>, size_t> report();
 
                 /*!
-                 * @brief Calculate the coverage between two bins. This will calculate
-                 *        how much of the rhs Bin can be covered by the lhs Bin.
-                 * @param lhs Left Bin
-                 * @param rhs Right Bin
-                 */
-                double coverage(IBin<T> lhs, IBin<T> rhs);
-
-                /*!
                  * @brief Print Operator.
                  */
                 template<typename F>
@@ -126,11 +149,10 @@ namespace KML
                  */
                 void decayCounts();
 
-            protected:
                 /*!
-                 * @brief Get the current window for the histogram.
+                 * @brief Get the total number of items across all bins.
                  */
-                std::deque<size_t>* getWindow() const;
+                size_t getTotalCount() const;
 
                 /*!
                  * @brief Get bin at the given index.
@@ -138,8 +160,16 @@ namespace KML
                  */
                 IBin<T>* getBin(size_t index) const;
 
+            protected:
                 /*!
-                 * @brief
+                 * @brief Get the current window for the histogram.
+                 */
+                std::deque<size_t>* getWindow() const;
+
+                /*!
+                 * @brief Merge the two bins by index.
+                 * @param lhs Left most bin, with left bin boundary.
+                 * @param rhs Right most bin, with right bin boundary.
                  */
                 void mergeBins(const size_t& lhs, const size_t& rhs);
 
@@ -157,11 +187,6 @@ namespace KML
                  * @brief Get the set decay type.
                  */
                 DecayType getDecayType() const;
-
-                /*!
-                 * @brief Get the total number of items across all bins.
-                 */
-                size_t getTotalCount() const;
 
             private:
                 /*!

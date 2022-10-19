@@ -6,7 +6,7 @@ This module is used to wrap the C++ Streaming variance implemtation.
 
 Example:
 
-    >>> from KML.statistics.summary.StreamingVariance import PyStreamingVariance
+    >>> from kml.statistics.summary.StreamingVariance import PyStreamingVariance
     >>> sv = PyStreamingVariance(5)
     >>> sv.update(list(range(1, 11)))
     >>> print(sv.evaluate())
@@ -47,7 +47,7 @@ cdef class PyStreamingVariance:
         parameter helps adjust for data drift within the variance calculation.
 
         Args:
-            observation: Item to update iqr.
+            observation: Item to update variance.
         """
         if isinstance(observation, Iterable):
             for o in observation:

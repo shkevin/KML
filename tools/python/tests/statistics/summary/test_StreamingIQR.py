@@ -1,6 +1,6 @@
 import unittest
 
-from KML.statistics.summary.StreamingIQR import PyStreamingIQR
+from kml.statistics.summary.StreamingIQR import PyStreamingIQR
 
 
 class TestStreamingIQR(unittest.TestCase):

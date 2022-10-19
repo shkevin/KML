@@ -27,6 +27,12 @@ namespace KML
          * @brief Compare two doubles and determine if the first input is less than the second.
          */
         bool definitelyLessThan(const double& a, const double& b, const double& epsilon = 0.0001);
+
+        /*!
+         * @brief Calculate the x * log(x) value safely. If the value of x is equal to 0,
+         *        safely output 0 instead.
+         */
+        double xlogx(const double& item);
     }  // namespace Utils
 }  // namespace KML
 

@@ -6,7 +6,7 @@ This module is used to wrap the C++ Windowed FAME implemtation.
 
 Example:
 
-    >>> from KML.statistics.summary.WindowedFAME import PyWindowedFAME
+    >>> from kml.statistics.summary.WindowedFAME import PyWindowedFAME
     >>> fame = PyWindowedFAME()
     >>> fame.update(list(range(1, 11)))
     >>> print(fame.evaluate())
@@ -52,7 +52,7 @@ cdef class PyWindowedFAME:
         Update the Windowed FAME median calculation with the given item.
 
         Args:
-            observation (float, Iterable): Item to update iqr.
+            observation (float, Iterable): Item to update median.
         """
         if isinstance(observation, Iterable):
             for o in observation:

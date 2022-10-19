@@ -20,7 +20,7 @@ YELLOW := $(shell tput -Txterm setaf 3)
 WHITE  := $(shell tput -Txterm setaf 7)
 RESET  := $(shell tput -Txterm sgr0)
 
-all: directories compile-all test coverage
+all: directories compile-all test_wheel coverage
 	@echo '*******************Compiled*********************'
 
 ## Build the docker image for KML.
@@ -86,13 +86,13 @@ develop:
 ## Call Unittests for C++/Python.
 test:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
-	python3 -m pytest -p no:cacheprovider tools/python/tests
+	PYTHONPATH=$(BUILDDIR) python3 -m pytest -p no:cacheprovider tools/python/tests
 
 ## Call Unittests for C++/Python for built wheel. Requires prior build.
 test_wheel:
 	[ -d $(BUILDDIR) ] && \
 	cd $(BUILDDIR)/tools/packages && \
-	python3 -m pip install KML*.whl --force-reinstall && \
+	python3 -m pip install *.whl --force-reinstall && \
 	python3 -m pytest -p no:cacheprovider ../python/tests && \
 	pip uninstall KML -y
 
@@ -100,7 +100,7 @@ test_wheel:
 test_source:
 	[ -d $(BUILDDIR) ] && \
 	cd $(BUILDDIR)/tools/packages && \
-	pip3 install KML*.tar.gz --force-reinstall && \
+	pip3 install *.tar.gz --force-reinstall && \
 	python3 -m pytest -p no:cacheprovider ../python/tests && \
 	pip uninstall KML -y
 
@@ -124,7 +124,7 @@ directories:
 
 ## Clean build folder.
 clean:
-	@$(RM) -rf $(BUILDDIR) ./tox
+	@$(RM) -rf $(BUILDDIR) .tox
 
 ## Full Clean of entire project. This project formats c++ as .cc
 cleaner: clean

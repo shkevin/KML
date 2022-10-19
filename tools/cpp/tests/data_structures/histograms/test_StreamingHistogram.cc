@@ -38,24 +38,6 @@ TEST_F(StreamingHistogramTest, TestReset)
     EXPECT_EQ(0, sh->size());
 }
 
-TEST_F(StreamingHistogramTest, TestCoverageXofY)
-{
-    IBin<double> l_lhs = IBin<double>(0, 4, 1);
-    IBin<double> l_rhs = IBin<double>(1, 3, 1);
-
-    double l_cov = sh->coverage(l_lhs, l_rhs);
-    EXPECT_FLOAT_EQ(1.0, l_cov);
-}
-
-TEST_F(StreamingHistogramTest, TestCoverageYofX)
-{
-    IBin<double> l_lhs = IBin<double>(1, 3, 1);
-    IBin<double> l_rhs = IBin<double>(0, 4, 1);
-
-    double l_cov = sh->coverage(l_lhs, l_rhs);
-    EXPECT_FLOAT_EQ(0.5, l_cov);
-}
-
 TEST_F(StreamingHistogramTest, TestDensity)
 {
     std::vector<double> l_data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};

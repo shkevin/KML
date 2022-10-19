@@ -7,7 +7,7 @@ This module specifically uses the float generic template.
 
 Example:
 
-    >>> from KML.data_structures.LinkedList import PyLinkedList
+    >>> from kml.data_structures.LinkedList import PyLinkedList
     >>> LL = PyLinkedList(window_size=5)
     >>> for i in range(5):
     >>>     LL.update(i)

@@ -153,7 +153,7 @@ CheckOptions:
   - key:             readability-identifier-naming.ConstexprVariableCase
     value:           CamelCase
   - key:             readability-identifier-naming.ConstexprVariablePrefix
-    value:           k
+    value:           l_
   - key:             readability-identifier-naming.ConstexprVariableSuffix
     value:           ''
   - key:             readability-identifier-naming.EnumConstantCase

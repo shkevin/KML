@@ -7,7 +7,7 @@ SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
 BUILDDIR      = _build
-KMLSOURCE     = ../../KML
+KMLSOURCE     = ../../kml
 
 # Put it first so that "make" without argument is like "make help".
 help:

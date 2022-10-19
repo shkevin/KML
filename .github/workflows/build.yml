@@ -91,7 +91,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache clang-tidy cppcheck
-          pip install -U cython wheel setuptools>=61.0.0 setuptools_scm
           ninja --version
           cmake --version
           gcc --version
@@ -100,7 +99,6 @@ jobs:
         if: startsWith(matrix.config.os, 'MacOS')
         run: |
           brew install p7zip cmake ninja gcovr doxygen ccache
-          pip install -U cython wheel setuptools>=61.0.0 setuptools_scm
           ninja --version
           cmake --version
           clang --version
@@ -121,7 +119,8 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip3 install pytest pytest-clarity pytest-cov pytest-xdist
+          pip3 install cython wheel setuptools>=61.0.0 setuptools_scm \
+            pytest pytest-clarity pytest-cov pytest-xdist toml
 
       - name: CPP Test
         working-directory: ${{github.workspace}}/build

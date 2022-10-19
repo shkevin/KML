@@ -167,7 +167,9 @@ namespace KML
                 std::deque<size_t>* getWindow() const;
 
                 /*!
-                 * @brief
+                 * @brief Merge the two bins by index.
+                 * @param lhs Left most bin, with left bin boundary.
+                 * @param rhs Right most bin, with right bin boundary.
                  */
                 void mergeBins(const size_t& lhs, const size_t& rhs);
 

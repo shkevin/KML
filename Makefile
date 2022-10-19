@@ -86,7 +86,7 @@ develop:
 ## Call Unittests for C++/Python.
 test:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
-	python3 -m pytest -p no:cacheprovider tools/python/tests
+	PYTHONPATH=$(BUILDDIR) python3 -m pytest -p no:cacheprovider tools/python/tests
 
 ## Call Unittests for C++/Python for built wheel. Requires prior build.
 test_wheel:

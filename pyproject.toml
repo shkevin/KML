@@ -63,7 +63,13 @@ write_to = "tools/cython/kml/_version.py"
 version_scheme = "release-branch-semver"
 
 [tool.coverage.run]
-source = ["tools/python/kml"]
+branch = true
+parallel = true
+omit = ["build/*", "tools/cython/kml/_version.py"]
+
+[tool.coverage.report]
+precision = 2
+omit = ["build/*", "tools/cython/kml/_version.py"]
 
 [tool.mypy]
 warn_unreachable = true

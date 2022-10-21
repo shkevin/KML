@@ -7,7 +7,6 @@ from textwrap import dedent
 from sphinx_gallery.sorting import FileNameSortKey
 
 # -- Path setup --------------------------------------------------------------
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -35,7 +34,6 @@ version = release
 # subprocess.call("doxygen ../Doxyfile.in", shell=True)
 
 # -- General configuration ---------------------------------------------------
-
 # Tell Sphinx to use both the `breathe` and `exhale` extensions
 extensions = [
     "sphinx.ext.autodoc",
@@ -56,6 +54,7 @@ extensions = [
     "nbsphinx",
     "IPython.sphinxext.ipython_console_highlighting",
     "sphinx_gallery.load_style",
+    "sphinx_gallery.gen_gallery",
     "sphinx_copybutton",
 ]
 
@@ -179,7 +178,6 @@ def setup(app):
 
 
 # -- Options for LaTeX output ---------------------------------------------
-
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
@@ -209,7 +207,6 @@ latex_documents = [
 ]
 
 # -- Options for manual page output ---------------------------------------
-
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
@@ -279,8 +276,10 @@ set_type_checking_flag = False
 sphinx_gallery_conf = {
     "doc_module": "kml",
     "show_memory": False,
-    "examples_dirs": [f"notebooks/"],
+    "filename_pattern": "*.ipynb",
+    "examples_dirs": ["notebooks"],
     "gallery_dirs": ["auto_examples"],
+    'compress_images': ('images', 'thumbnails'),
     "within_subsection_order": FileNameSortKey,
     "matplotlib_animations": True,
     "binder": {},
@@ -291,6 +290,7 @@ sphinx_gallery_conf = {
     # avoid generating too many cross links
     "inspect_global_variables": False,
     "remove_config_comments": True,
+    "show_api_usage": True,
 }
 
 # Nbsphinx

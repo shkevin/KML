@@ -70,6 +70,7 @@ Software       Version                Description
 ============== ====================== ==================================
 Cmake          3.14+                  Cmake for building project
 C++11 compiler e.g., gnu c++, clang++ KML uses C++11 for developed tools
+Eigen          ~3.4                   Eigen C++ matrix library
 Cython         0.29.24+               Cython version required to compile
 Python3        3.7-3.11.0             Python version supported
 Doxygen        1.8.17+ (optional)     For building C++ documentation
@@ -110,6 +111,26 @@ Example common build usage:
        -DBUILD_STATIC_ANALYSIS=OFF
 
    make -j
+
+Building Python Docker
+======================
+
+Building the Python Docker container can be done with any of the one methods listed below.
+
+Method 1: Using the Makefile command.
+.. code:: bash
+
+    make docker
+
+Method 2: Using Docker build directly.
+.. code:: bash
+
+    docker build -t kml:latest .
+
+Method 3: Using docker-compose.
+.. code:: bash
+
+    docker-compose up
 
 Installation
 ~~~~~~~~~~~~

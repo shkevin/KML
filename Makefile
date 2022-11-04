@@ -75,6 +75,12 @@ analyze: directories
 		-DBUILD_STATIC_ANALYSIS=ON && \
 	make -j
 
+## Build the docker image.
+docker:
+	docker build \
+		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
+		.
+
 ## Mount the docker image and run.
 develop:
 	docker run --rm -i \
@@ -105,11 +111,11 @@ test_source:
 	pip uninstall KML -y
 
 ## Test Docker image
-docker_test: build
+docker_test: docker
 	docker run \
+		-v "$$PWD":/app \
 		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
-		make test \
-		make test_wheel
+		tox -e test
 
 ## Create the C++ Coverage.
 coverage:

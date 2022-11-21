@@ -8,8 +8,19 @@ PROJECT(KML
     DESCRIPTION "Streaming Machine Learning in C++/Cython"
     LANGUAGES CXX)
 
+# Default to debug build type
 if(NOT DEFINED CMAKE_BUILD_TYPE)
     SET(CMAKE_BUILD_TYPE Debug)
+endif()
+
+# Avoid warning about "DOWNLOAD_EXTRACT_TIMESTAMP" in cmake 3.24.
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
+	cmake_policy(SET CMP0135 NEW)
+endif()
+
+# Escape variables in if.
+if(POLICY CMP0054)
+    cmake_policy(SET CMP0054 NEW)
 endif()
 
 # Minimum cpp standard
@@ -96,7 +107,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g") # For debugging
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions") # Add exception handling
 
 # if compiler is Clang, link libc++, otherwise, link default libstdc++
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -fsanitize=signed-integer-overflow")
     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
 endif()
@@ -221,10 +232,17 @@ if(BUILD_TESTING)
     ENABLE_TESTING()
 
     INCLUDE(FetchContent)
+    # FetchContent_Declare(
+    #     googletest
+    #         URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+    # )
     FetchContent_Declare(
         googletest
-            URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG        release-1.11.0
     )
+    FetchContent_MakeAvailable(googletest)
+    add_library(GTest::GTest INTERFACE IMPORTED)
     # For Windows: Prevent overriding project's compiler/linker settings
     SET(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
     SET(gmock OFF CACHE BOOL "" FORCE)

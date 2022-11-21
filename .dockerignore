@@ -1,91 +1,91 @@
-# # Modified from https://github.com/themattrix/python-pypi-template/blob/master/.dockerignore
-# # Git
+# Modified from https://github.com/themattrix/python-pypi-template/blob/master/.dockerignore
+# Git
 # .git
-# .gitignore
+.gitignore
 
-# # CI
-# .codeclimate.yml
-# .travis.yml
-# .taskcluster.yml
+# CI
+.codeclimate.yml
+.travis.yml
+.taskcluster.yml
 
-# # Docker
-# docker-compose.yml
-# .docker
+# Docker
+docker-compose.yml
+.docker
 
-# # Byte-compiled / optimized / DLL files
-# __pycache__/
-# */__pycache__/
-# */*/__pycache__/
-# */*/*/__pycache__/
-# *.py[cod]
-# */*.py[cod]
-# */*/*.py[cod]
-# */*/*/*.py[cod]
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
+*.py[cod]
+*/*.py[cod]
+*/*/*.py[cod]
+*/*/*/*.py[cod]
 
-# # C extensions
-# *.so
+# C extensions
+*.so
 
-# # Distribution / packaging
-# .Python
-# env/
-# build/
-# develop-eggs/
-# dist/
-# downloads/
-# eggs/
-# lib/
-# lib64/
-# parts/
-# sdist/
-# var/
-# *.egg-info/
-# .installed.cfg
-# *.egg
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# # PyInstaller
-# #  Usually these files are written by a python script from a template
-# #  before PyInstaller builds the exe, so as to inject date/other infos into it.
-# *.manifest
-# *.spec
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
 
-# # Installer logs
-# pip-log.txt
-# pip-delete-this-directory.txt
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
-# # Unit test / coverage reports
-# htmlcov/
-# .tox/
-# .coverage
-# .cache
-# nosetests.xml
-# coverage.xml
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
 
-# # Translations
-# *.mo
-# *.pot
+# Translations
+*.mo
+*.pot
 
-# # Sphinx documentation
-# docs/source/_build/
+# Sphinx documentation
+docs/source/_build/
 
-# # PyBuilder
-# target/
+# PyBuilder
+target/
 
-# # Virtual environment
-# .env/
-# .venv/
-# venv/
+# Virtual environment
+.env/
+.venv/
+venv/
 
-# # PyCharm
-# .idea
+# PyCharm
+.idea
 
-# # Python mode for VIM
-# .ropeproject
-# */.ropeproject
-# */*/.ropeproject
-# */*/*/.ropeproject
+# Python mode for VIM
+.ropeproject
+*/.ropeproject
+*/*/.ropeproject
+*/*/*/.ropeproject
 
-# # Vim swap files
-# *.swp
-# */*.swp
-# */*/*.swp
-# */*/*/*.swp
+# Vim swap files
+*.swp
+*/*.swp
+*/*/*.swp
+*/*/*/*.swp

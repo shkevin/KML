@@ -1,0 +1,22 @@
+---
+version: "3.9"
+
+services:
+  kml_test:
+    image: kml
+    container_name: kml_test
+    build:
+      context: ../../..
+      dockerfile: Dockerfile
+  integration_kml:
+    privileged: true
+    image: integration_kml
+    container_name: integration_kml
+    depends_on:
+      - kml_test
+    build:
+      context: ./integration
+      dockerfile: Dockerfile
+    volumes:
+      - ../../..:/app/KML
+      - ./integration:/app/integration

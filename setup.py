@@ -173,7 +173,6 @@ def get_extensions() -> List[Extension]:
     ext_modules = []
     for name in ext_names:
         extPath = name.replace(".", os.path.sep) + ".pyx"
-        # extPath = PurePath("tools/cython", extPath)
         extPath = PurePath("tools/cython", extPath)
         extension = Extension(
             name,
@@ -181,7 +180,6 @@ def get_extensions() -> List[Extension]:
             include_dirs=["."] + include_all,
             extra_compile_args=CPPFLAGS,
             extra_link_args=["-g"],
-            # include_path=[str(Path(PARENT_DIR, CYTHON_DIR))],
         )
         ext_modules.append(extension)
     return ext_modules

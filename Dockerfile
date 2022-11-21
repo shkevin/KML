@@ -14,6 +14,11 @@ ARG EIGEN_VERSION=3.4.0
 ARG NUM_THREADS=8
 ENV EIGEN_VERSION=$EIGEN_VERSION
 ENV NUM_THREADS=$NUM_THREADS
+
+# Python specific env settings
+ENV PIP_DISABLE_PIP_VERSION_CHECK 1
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 # ---------------------------------------------------------------- #
 
 # Proxy Settings ------------------------------------------------- #
@@ -34,11 +39,11 @@ ENV DEBIAN_FRONTEND="noninteractive"
 
 WORKDIR /app
 
-RUN apt-get -qy update  && \
+RUN apt-get -qy update && apt-get upgrade -qy && \
     python -m venv --copies /app/venv && \
     . /app/venv/bin/activate && \
     pip install --no-cache-dir -U pip && \
-    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # ---------------------------------------------------------------- #
 # ----------------------- BASE IMAGE END ------------------------- #
 
@@ -60,8 +65,9 @@ RUN apt-get -qy update && apt-get install -qy --no-install-recommends \
         cmake -DCMAKE_INSTALL_PREFIX=/usr ../eigen-$EIGEN_VERSION && \
         make -j$NUM_THREADS install && \
     cd /usr/src && ls | xargs rm -rf && \
-    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+COPY --from=base /app/venv venv/
 COPY . .
 
 RUN venv/bin/pip wheel --no-deps --no-cache-dir -w wheels .
@@ -72,15 +78,17 @@ FROM base AS runtime
 
 WORKDIR /app
 
+# Create non-root user.
+RUN adduser --system --no-create-home nonroot
+
 COPY --from=builder /app/venv venv/
 COPY --from=builder /app/wheels wheels/
-ENV PATH /app/venv/bin:$PATH
-ENV PYTHONPATH /app/venv/bin:$PATH
+ENV PATH="/app/venv/bin:$PATH"
 
-RUN pip install --no-cache-dir -U wheels/* tox
+RUN pip install --no-cache-dir -U wheels/*
+
+USER nonroot
 
 HEALTHCHECK CMD curl --fail http://localhost:3000 || exit 1
-
-ENV PATH="/opt/venv/bin:$PATH"
 # ------------------------- RUNTIME END -------------------------- #
 CMD ["/bin/bash"]

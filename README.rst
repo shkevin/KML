@@ -162,8 +162,8 @@ is the OS distribution used during build (e.g., linux).
 Usage
 =====
 
-Common Python usage examples can be found in the “View Examples” link
-above. See the documentation for a more detailed usage for C++.
+Common Python usage examples can be found in the "View Examples" link on
+GitHub. See the documentation for a more detailed usage for C++.
 
 Roadmap
 =======

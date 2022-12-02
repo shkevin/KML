@@ -1,6 +1,5 @@
 # Dockerfile
 # Refer to README for additional details.
-
 # -------------------------- BASE IMAGE -------------------------- #
 # Base docker image build ---------------------------------------- #
 ARG PYTHON_VERSION=3.8
@@ -78,15 +77,16 @@ FROM base AS runtime
 
 WORKDIR /app
 
-# Create non-root user.
-RUN adduser --system --no-create-home nonroot
-
 COPY --from=builder /app/venv venv/
 COPY --from=builder /app/wheels wheels/
 ENV PATH="/app/venv/bin:$PATH"
+ENV PYTHONPATH="/app/venv/$PYTHONPATH"
 
 RUN pip install --no-cache-dir -U wheels/*
 
+# Create non-root user and switch.
+RUN useradd -m -u 9005 nonroot && \
+    chown -R nonroot:nonroot .
 USER nonroot
 
 HEALTHCHECK CMD curl --fail http://localhost:3000 || exit 1

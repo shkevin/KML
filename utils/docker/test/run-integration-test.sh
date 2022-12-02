@@ -1,10 +1,10 @@
 #!/bin/bash
 : "
-    Script Name:
-    Description:
-    Args       :
-    Author     :
-    Email      :
+    Script Name: run-integration-test.sh
+    Description: Run the unittests/smoke tests and various other tests for the docker images.
+    Args       : None
+    Author     : Kevin Cox
+    Email      : shk3vin7@gmail.com
   "
 set -e -o pipefail
 

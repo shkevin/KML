@@ -110,13 +110,6 @@ test_source:
 	python3 -m pytest -p no:cacheprovider ../python/tests && \
 	pip uninstall KML -y
 
-## Test Docker image
-docker_test: docker
-	docker run \
-		-v "$$PWD":/app \
-		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
-		tox -e test
-
 ## Create the C++ Coverage.
 coverage:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && make coverage

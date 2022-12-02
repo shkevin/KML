@@ -87,7 +87,7 @@ jobs:
       - name: Install dependencies on MacOS
         if: startsWith(matrix.config.os, 'MacOS')
         run: |
-          brew install p7zip cmake ninja gcovr doxygen ccache clang-tidy cppcheck
+          brew install p7zip cmake ninja gcovr doxygen ccache
           ninja --version
           cmake --version
           clang --version

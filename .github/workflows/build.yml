@@ -71,9 +71,8 @@ jobs:
       - name: Install dependencies on Windows
         if: startsWith(matrix.config.os, 'windows')
         run: |
-          choco install ninja cmake gcovr doxygen ccache clang-tidy cppcheck
-          pip3 install cython wheel setuptools>=61.0.0 setuptools_scm \
-            pytest pytest-clarity pytest-cov pytest-xdist toml
+          choco install ninja cmake doxygen ccache
+          pip3 install cython wheel setuptools>=61.0.0 setuptools_scm pytest pytest-clarity pytest-cov pytest-xdist toml
           ninja --version
           cmake --version
 

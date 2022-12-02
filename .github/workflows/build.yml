@@ -60,7 +60,7 @@ jobs:
         #     archiver: "7za a",
         #     generators: "Ninja"
         #   }
-        python_version: ['3.7', '3.8', '3.9', '3.10', '3.11.0-alpha - 3.11.0']
+        python_version: ['3.7', '3.8', '3.9', '3.10', '3.11']
 
     name: ${{matrix.config.os}} - Python ${{matrix.python_version}}
     steps:
@@ -129,14 +129,14 @@ jobs:
         run: |
           ls packages
           pip3 install packages/kml*.whl --force-reinstall
-          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -n auto --cov-report html:html_cov python/tests
+          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -n auto --cov python --cov-report html:html_cov python/tests
 
       - name: Pytest sdist
         working-directory: ${{github.workspace}}/build/tools/
         run: |
           ls packages
           pip3 install packages/kml*.tar.gz --force-reinstall
-          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -n auto --cov-report html:html_cov python/tests
+          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -n auto --cov python --cov-report html:html_cov python/tests
 
   # lint:
   #   name: Lint code

@@ -72,7 +72,6 @@ jobs:
         if: startsWith(matrix.config.os, 'windows')
         run: |
           choco install ninja cmake doxygen ccache
-          pip3 install cython wheel setuptools>=61.0.0 setuptools_scm pytest pytest-clarity pytest-cov pytest-xdist toml
           ninja --version
           cmake --version
 
@@ -81,8 +80,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake gcovr doxygen ccache clang-tidy cppcheck
-          pip3 install cython wheel setuptools>=61.0.0 setuptools_scm \
-            pytest pytest-clarity pytest-cov pytest-xdist toml
           ninja --version
           cmake --version
           gcc --version
@@ -90,19 +87,31 @@ jobs:
       - name: Install dependencies on MacOS
         if: startsWith(matrix.config.os, 'MacOS')
         run: |
-          brew install p7zip cmake ninja gcovr doxygen ccache
+          brew install p7zip cmake ninja gcovr doxygen ccache clang-tidy cppcheck
           ninja --version
           cmake --version
           clang --version
 
+      - name: Install Python dependencies
+        run: >
+          pip3 install cython
+          wheel
+          setuptools>=61.0.0
+          setuptools_scm
+          pytest
+          pytest-clarity
+          pytest-cov
+          pytest-xdist
+          toml
+
       - name: Configure CMake
-        run: |
-          cmake -S . -B ${{github.workspace}}/build \
-            -DBUILD_TESTING=ON \
-            -DBUILD_PYTHON=ON \
-            -DBUILD_COVERAGE=ON \
-            -DBUILD_DOCUMENTATION=OFF \
-            -DBUILD_STATIC_ANALYSIS=OFF\
+        run: >
+          cmake -S . -B ${{github.workspace}}/build
+            -DBUILD_TESTING=ON
+            -DBUILD_PYTHON=ON
+            -DBUILD_COVERAGE=ON
+            -DBUILD_DOCUMENTATION=OFF
+            -DBUILD_STATIC_ANALYSIS=OFF
             -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
 
       - name: Build package

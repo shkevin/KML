@@ -50,12 +50,25 @@ python: directories
 		-DBUILD_DOCUMENTATION=ON && \
 	make -j
 
+## Build and compile with just C++/python and testing.
+dev: directories
+	cd $(BUILDDIR) && \
+	cmake \
+	    .. \
+	    -DCMAKE_BUILD_TYPE=Debug \
+	    -DBUILD_TESTING=ON \
+		-DBUILD_PYTHON=ON \
+		-DBUILD_COVERAGE=OFF \
+		-DBUILD_DOCUMENTATION=OFF \
+		-DBUILD_STATIC_ANALYSIS=OFF && \
+	make -j
+
 ## Build and compile with every option on.
 compile-all: directories
 	cd $(BUILDDIR) && \
 	cmake \
 	    .. \
-	    -DCMAKE_BUILD_TYPE=Debug \
+	    -DCMAKE_BUILD_TYPE=Release \
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=ON \
 		-DBUILD_COVERAGE=ON \

@@ -2,31 +2,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.14 FATAL_ERROR)
 
 ################################
-# Project
-################################
-PROJECT(KML
-    DESCRIPTION "Streaming Machine Learning in C++/Cython"
-    LANGUAGES CXX)
-
-# Default to debug build type
-if(NOT DEFINED CMAKE_BUILD_TYPE)
-    SET(CMAKE_BUILD_TYPE Debug)
-endif()
-
-# Avoid warning about "DOWNLOAD_EXTRACT_TIMESTAMP" in cmake 3.24.
-if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
-	cmake_policy(SET CMP0135 NEW)
-endif()
-
-# Escape variables in if.
-if(POLICY CMP0054)
-    cmake_policy(SET CMP0054 NEW)
-endif()
-
-# Minimum cpp standard
-SET(CMAKE_CXX_STANDARD 11)
-
-################################
 # Global Variables
 ################################
 if(NOT WIN32)
@@ -70,6 +45,38 @@ function(message)
 endfunction()
 
 ################################
+# Project
+################################
+# Build types and flags used:
+# 1. Release: `-O3 -DNDEBUG`
+# 2. Debug: `-O0 -g`
+# 3. RelWithDebInfo: `-O2 -g -DNDEBUG`
+# 4. MinSizeRel: `-Os -DNDEBUG`
+PROJECT(KML
+    DESCRIPTION "Streaming Machine Learning in C++/Cython."
+    LANGUAGES CXX)
+
+# Default to debug build type
+if(NOT DEFINED CMAKE_BUILD_TYPE)
+    SET(CMAKE_BUILD_TYPE Debug)
+endif()
+
+MESSAGE(STATUS "Using BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+
+# Avoid warning about "DOWNLOAD_EXTRACT_TIMESTAMP" in cmake 3.24.
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
+	cmake_policy(SET CMP0135 NEW)
+endif()
+
+# Escape variables in if.
+if(POLICY CMP0054)
+    cmake_policy(SET CMP0054 NEW)
+endif()
+
+# Minimum cpp standard
+SET(CMAKE_CXX_STANDARD 11)
+
+################################
 # Macros
 ################################
 
@@ -103,7 +110,6 @@ ENDMACRO(CopyPython)
 SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-builtin -Wall -Wshadow -fno-strict-aliasing -fno-strength-reduce -fomit-frame-pointer -Os")
 SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-exceptions -fcheck-new -fno-rtti -Wpedantic -Wreorder")
 SET(CMAKE_CXX_FLAGS "${AC_COMMON_FLAGS}")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g") # For debugging
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions") # Add exception handling
 
 # if compiler is Clang, link libc++, otherwise, link default libstdc++
@@ -114,7 +120,7 @@ endif()
 
 # UNIX, WIN32, WINRT, CYGWIN, APPLE are environment variables as flags SET by default system
 if(UNIX)
-    MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with ${CMAKE_CXX_STANDARD} CXX standard")
+    MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with CXX standard ${CMAKE_CXX_STANDARD}")
 elseif(WIN32)
     MESSAGE("This is a Windows System. Not currently supported!")
 endif()

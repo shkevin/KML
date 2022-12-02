@@ -75,6 +75,12 @@ analyze: directories
 		-DBUILD_STATIC_ANALYSIS=ON && \
 	make -j
 
+## Build the docker image.
+docker:
+	docker build \
+		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
+		.
+
 ## Mount the docker image and run.
 develop:
 	docker run --rm -i \
@@ -103,13 +109,6 @@ test_source:
 	pip3 install *.tar.gz --force-reinstall && \
 	python3 -m pytest -p no:cacheprovider ../python/tests && \
 	pip uninstall KML -y
-
-## Test Docker image
-docker_test: build
-	docker run \
-		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
-		make test \
-		make test_wheel
 
 ## Create the C++ Coverage.
 coverage:

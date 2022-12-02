@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  kml:
+    image: kml
+    container_name: kml
+    build:
+      context: .
+      dockerfile: Dockerfile

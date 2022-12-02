@@ -6,12 +6,10 @@ from distutils.command.build import build as _build
 from os import walk
 from pathlib import Path, PurePath
 from sys import argv
-from typing import List, Optional
+from typing import List
 
 from setuptools import Extension, find_packages, setup
 from setuptools.command.build_ext import build_ext as _build_ext
-
-import toml
 
 # Get Cython sources with their C++ files.
 PARENT_DIR = Path(os.path.abspath(__file__)).parent
@@ -175,7 +173,6 @@ def get_extensions() -> List[Extension]:
     ext_modules = []
     for name in ext_names:
         extPath = name.replace(".", os.path.sep) + ".pyx"
-        # extPath = PurePath("tools/cython", extPath)
         extPath = PurePath("tools/cython", extPath)
         extension = Extension(
             name,
@@ -183,7 +180,6 @@ def get_extensions() -> List[Extension]:
             include_dirs=["."] + include_all,
             extra_compile_args=CPPFLAGS,
             extra_link_args=["-g"],
-            # include_path=[str(Path(PARENT_DIR, CYTHON_DIR))],
         )
         ext_modules.append(extension)
     return ext_modules

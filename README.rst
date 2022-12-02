@@ -16,7 +16,7 @@
 |CI| |Issues| |MIT License| |LinkedIn|
 
 Table of Contents
------------------
+=================
 
 #. `About The Project <#about-the-project>`__
 
@@ -36,7 +36,7 @@ Table of Contents
 #. `Acknowledgments <#acknowledgments>`__
 
 About The Project
------------------
+=================
 
 The KML tool was developed for streaming machine/online learning (ML), and is
 implemented in C++11 and Python. The core framework was developed in C++
@@ -45,7 +45,7 @@ Cython compilation. Python was used in order to be easily adopted by
 other researchers, data scientists, or machine learning engineers.
 
 Built With
-~~~~~~~~~~
+----------
 
 KML was developed with these libraries and frameworks.
 
@@ -56,12 +56,12 @@ KML was developed with these libraries and frameworks.
 ============== ======================
 
 Getting Started
----------------
+===============
 
 Follow the guidelines for building and installing KML.
 
 Requirements
-~~~~~~~~~~~~
+------------
 
 Software used in building KML are listed below.
 
@@ -70,6 +70,7 @@ Software       Version                Description
 ============== ====================== ==================================
 Cmake          3.14+                  Cmake for building project
 C++11 compiler e.g., gnu c++, clang++ KML uses C++11 for developed tools
+Eigen          ~3.4                   Eigen C++ matrix library
 Cython         0.29.24+               Cython version required to compile
 Python3        3.7-3.11.0             Python version supported
 Doxygen        1.8.17+ (optional)     For building C++ documentation
@@ -78,7 +79,7 @@ cppcheck       1.90+ (optional)       For creating static code analysis
 ============== ====================== ==================================
 
 Building
-~~~~~~~~
+--------
 
 Common make commands are located in the Makefile.
 
@@ -111,8 +112,28 @@ Example common build usage:
 
    make -j
 
+Building Python Docker
+======================
+
+Building the Python Docker container can be done with any of the one methods listed below.
+
+Method 1: Using the Makefile command.
+.. code:: bash
+
+    make docker
+
+Method 2: Using Docker build directly.
+.. code:: bash
+
+    docker build -t kml:latest .
+
+Method 3: Using docker-compose.
+.. code:: bash
+
+    docker-compose up
+
 Installation
-~~~~~~~~~~~~
+============
 
 For installing the KML Python package:
 
@@ -139,13 +160,13 @@ where PYVERSION is the Python version used to build the wheel, and DIST
 is the OS distribution used during build (e.g., linux).
 
 Usage
-~~~~~
+=====
 
-Common Python usage examples can be found in the “View Examples” link
-above. See the documentation for a more detailed usage for C++.
+Common Python usage examples can be found in the "View Examples" link on
+GitHub. See the documentation for a more detailed usage for C++.
 
 Roadmap
--------
+=======
 
 -  [X] Basic summary statistics
 -  [X] Windowed data structures
@@ -157,7 +178,7 @@ See the `open issues <https://github.com/shkevin/KML/issues>`__ for a
 full list of proposed features (and known issues).
 
 Project leaders
----------------
+===============
 
 Maintainers:
 
@@ -172,7 +193,7 @@ Operations:
 ..    <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 Contributing
-------------
+============
 
 If you have a suggestion that would make this better, please fork the
 repo and create a pull request.
@@ -184,20 +205,20 @@ repo and create a pull request.
 5. Open a Pull Request
 
 License
--------
+=======
 
 Distributed under the MIT License. See ``LICENSE.rst`` for more
 information.
 
 Contact
--------
+=======
 
 Kevin Cox - shk3vin7@gmail.com
 
 Project Link: https://github.com/shkevin/KML
 
 Acknowledgments
----------------
+===============
 
 .. Languages/Frameworks
 .. |CI| image:: https://github.com/shkevin/KML/actions/workflows/build.yml/badge.svg

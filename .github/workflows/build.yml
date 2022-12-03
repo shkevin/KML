@@ -106,13 +106,7 @@ jobs:
 
       - name: Configure CMake
         run: >
-          cmake -S . -B ${{github.workspace}}/build /
-            -DBUILD_TESTING=ON /
-            -DBUILD_PYTHON=ON /
-            -DBUILD_COVERAGE=ON /
-            -DBUILD_DOCUMENTATION=OFF /
-            -DBUILD_STATIC_ANALYSIS=OFF /
-            -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
+          cmake -S . -B ${{github.workspace}}/build -DBUILD_TESTING=ON -DBUILD_PYTHON=ON -DBUILD_COVERAGE=ON -DBUILD_DOCUMENTATION=OFF -DBUILD_STATIC_ANALYSIS=OFF -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
 
       - name: Build package
         run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}} -j

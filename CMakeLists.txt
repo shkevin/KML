@@ -118,12 +118,8 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
 endif()
 
-# UNIX, WIN32, WINRT, CYGWIN, APPLE are environment variables as flags SET by default system
-if(UNIX)
-    MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with CXX standard ${CMAKE_CXX_STANDARD}")
-elseif(WIN32)
-    MESSAGE("This is a Windows System. Not currently supported!")
-endif()
+# UNIX, WIN32, WINRT, CYGWIN, APPLE are environment variables as flags SET by default system.
+MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with CXX standard ${CMAKE_CXX_STANDARD}")
 
 ################################
 # Find Main Packages
@@ -214,18 +210,22 @@ endif(BUILD_PYTHON)
 ################################
 OPTION(BUILD_COVERAGE "Create C++ Coverage" OFF)
 if(BUILD_COVERAGE)
-	# if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
-    MESSAGE(STATUS "Building Coverage")
-    SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-	INCLUDE(CodeCoverage)
-    append_coverage_compiler_flags()
-	SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
-	SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
-    setup_target_for_coverage_gcovr_html(
-        NAME coverage EXECUTABLE ctest
-        --schedule-random -j ${PROCESSOR_COUNT} --test-dir ${CMAKE_BINARY_DIR}/tools/cpp/tests
-        EXCLUDE "build/*" "*main.cc*"
-        )
+    if(UNIX)
+    	# if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+        MESSAGE(STATUS "Building Coverage")
+        SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+    	INCLUDE(CodeCoverage)
+        append_coverage_compiler_flags()
+    	SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+    	SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+        setup_target_for_coverage_gcovr_html(
+            NAME coverage EXECUTABLE ctest
+            --schedule-random -j ${PROCESSOR_COUNT} --test-dir ${CMAKE_BINARY_DIR}/tools/cpp/tests
+            EXCLUDE "build/*" "*main.cc*"
+            )
+    else()
+        MESSAGE(STATUS "gcovr hasn't been tested with toolchain: ${CMAKE_TOOLCHAIN_FILE}")
+    endif(UNIX)
     # setup_target_for_coverage_gcovr_xml(${PROJECT_NAME}_coverage NAME coverage)
 endif(BUILD_COVERAGE)
 

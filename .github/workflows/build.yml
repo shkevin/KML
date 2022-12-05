@@ -118,9 +118,10 @@ jobs:
           -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
 
       - name: Build package
-        run: >
-          cmake --build ${{github.workspace}}/build
-            --config ${{matrix.config.build_type}} -j
+        run: >-
+          cmake
+          --build ${{github.workspace}}/build
+          --config ${{matrix.config.build_type}} -j
 
       - name: CPP Test
         working-directory: ${{github.workspace}}/build

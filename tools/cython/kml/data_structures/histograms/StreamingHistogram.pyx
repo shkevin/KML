@@ -121,7 +121,7 @@ cdef class PyStreamingHistogram:
         Retrieve the current bin counts for each bin the current histogram.
 
         Returns:
-            vector[uint64_t]: The frequency counts for each bin.
+            vector[size_t]: The frequency counts for each bin.
         """
         return self.c_SH.binCounts();
 
@@ -132,7 +132,7 @@ cdef class PyStreamingHistogram:
         and the associated bin boundaries.
 
         Returns:
-            map[pair[double, double], uint64_t]: Histogram report.
+            map[pair[double, double], size_t]: Histogram report.
         """
         return self.c_SH.report();
 

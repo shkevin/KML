@@ -95,8 +95,9 @@ jobs:
           clang --version
 
       - name: Install Python dependencies
-        run: >
-          pip3 install cython
+        run: >-
+          pip3 install
+          cython
           wheel
           setuptools>=61.0.0
           setuptools_scm
@@ -107,14 +108,14 @@ jobs:
           toml
 
       - name: Configure CMake
-        run: >
+        run: >-
           cmake -S . -B ${{github.workspace}}/build
-            -DBUILD_TESTING=ON
-            -DBUILD_PYTHON=ON
-            -DBUILD_COVERAGE=ON
-            -DBUILD_DOCUMENTATION=OFF
-            -DBUILD_STATIC_ANALYSIS=OFF
-            -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
+          -DBUILD_TESTING=ON
+          -DBUILD_PYTHON=ON
+          -DBUILD_COVERAGE=ON
+          -DBUILD_DOCUMENTATION=OFF
+          -DBUILD_STATIC_ANALYSIS=OFF
+          -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
 
       - name: Build package
         run: >

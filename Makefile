@@ -20,7 +20,7 @@ YELLOW := $(shell tput -Txterm setaf 3)
 WHITE  := $(shell tput -Txterm setaf 7)
 RESET  := $(shell tput -Txterm sgr0)
 
-all: directories compile-all test_wheel coverage
+all: directories dev test_wheel coverage
 	@echo '*******************Compiled*********************'
 
 ## Build the docker image for KML.

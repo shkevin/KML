@@ -8,7 +8,7 @@ namespace KML
     namespace Statistics
     {
         template<typename T>
-        IStreamingStatistic<T>::IStreamingStatistic(const uint64_t& windowSize)
+        IStreamingStatistic<T>::IStreamingStatistic(const size_t& windowSize)
             : IStreaming<T>(windowSize)
         {
             // Do nothing.

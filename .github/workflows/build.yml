@@ -30,16 +30,16 @@ jobs:
           #   archiver: "7z a",
           #   generators: "Ninja"
           # }
-          # - {
-          #   name: "Ubuntu_Latest",
-          #   os: ubuntu-latest,
-          #   artifact: "ubuntu_gcc.7z",
-          #   build_type: "Debug",
-          #   cc: "gcc",
-          #   cxx: "g++",
-          #   archiver: "7z a",
-          #   generators: "Ninja"
-          # }
+          - {
+            name: "Ubuntu_Latest",
+            os: ubuntu-latest,
+            artifact: "ubuntu_gcc.7z",
+            build_type: "Debug",
+            cc: "gcc",
+            cxx: "g++",
+            archiver: "7z a",
+            generators: "Ninja"
+          }
           - {
             name: "MacOS_Latest",
             os: macos-latest,

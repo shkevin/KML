@@ -63,7 +63,9 @@ jobs:
         with:
           python-version: ${{matrix.python_version}}
           architecture: x64
-          cache: 'pip'  # Cache python deps
+          cache: 'pip'  # cache pip dependencies
+          cache-dependency-path: |
+            **/pyproject.toml
 
       - name: Print env
         run: |

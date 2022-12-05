@@ -121,15 +121,15 @@ jobs:
         working-directory: ${{github.workspace}}/build/tools/
         run: |
           ls packages
-          pip3 install packages/kml*.whl --force-reinstall
-          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -n auto --cov python --cov-report html:html_cov python/tests
+          pip3 install packages/*.whl --force-reinstall
+          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -doctest -n auto --cov-report term --cov-report html:./html_dir --cov python/tests python/tests
 
       - name: Pytest sdist
         working-directory: ${{github.workspace}}/build/tools/
         run: |
           ls packages
-          pip3 install packages/kml*.tar.gz --force-reinstall
-          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -n auto --cov python --cov-report html:html_cov python/tests
+          pip3 install packages/*.tar.gz --force-reinstall
+          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -doctest -n auto --cov-report term --cov-report html:./html_dir --cov python/tests python/tests
 
   # lint:
   #   name: Lint code

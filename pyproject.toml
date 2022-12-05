@@ -110,12 +110,12 @@ disable = [
     ]
 
 [tool.pytest.ini_options]
-addopts = "-doctest --cov=tools --cov-report term --cov-fail-under 95"
+addopts = "-doctest --cov-report term --cov-fail-under 95"
 minversion = "2.0"
 python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test", "Acceptance"]
 python_functions = ["test"]
-testpaths = ["./tools/python/"]
+# testpaths = ["./tools/python/"]
 xfail_strict = true
 filterwarnings = [
     "error",

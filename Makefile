@@ -110,17 +110,17 @@ test:
 ## Call Unittests for C++/Python for built wheel. Requires prior build.
 test_wheel:
 	[ -d $(BUILDDIR) ] && \
-	cd $(BUILDDIR)/tools/packages && \
-	python3 -m pip install *.whl --force-reinstall && \
-    python3 -m pytest -c $(ROOT_DIR)/pyproject.toml -doctest -n auto --cov-report term --cov-report=html:/html_dir --cov=tools ../python/tests
+	cd $(BUILDDIR)/tools && \
+	python3 -m pip install packages/*.whl --force-reinstall && \
+    python3 -m pytest -c $(ROOT_DIR)/pyproject.toml -doctest -n auto --cov-report term --cov-report html:./html_dir --cov python/tests python/tests
 	pip uninstall KML -y
 
 ## Call Unittests for C++/Python for sdist. Requires prior build.
 test_source:
 	[ -d $(BUILDDIR) ] && \
-	cd $(BUILDDIR)/tools/packages && \
-	pip3 install *.tar.gz --force-reinstall && \
-	python3 -m pytest -p no:cacheprovider ../python/tests && \
+	cd $(BUILDDIR)/tools/ && \
+	pip3 install packages/*.tar.gz --force-reinstall && \
+    python3 -m pytest -c $(ROOT_DIR)/pyproject.toml -doctest -n auto --cov-report term --cov-report html:./html_dir --cov python/tests python/tests
 	pip uninstall KML -y
 
 ## Create the C++ Coverage.

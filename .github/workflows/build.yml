@@ -20,36 +20,36 @@ jobs:
       fail-fast: true
       matrix:
         config:
-          - {
-            name: "Windows Latest MSVC",
-            os: windows-latest,
-            artifact: "windows_gcc.7z",
-            build_type: "Release",
-            cc: "gcc",
-            cxx: "g++",
-            archiver: "7z a",
-            cmake_generator: "Visual Studio 17 2022"
-          }
           # - {
-          #   name: "Ubuntu_Latest",
-          #   os: ubuntu-latest,
-          #   artifact: "ubuntu_gcc.7z",
-          #   build_type: "Debug",
+          #   name: "Windows Latest MSVC",
+          #   os: windows-latest,
+          #   artifact: "windows_gcc.7z",
+          #   build_type: "Release",
           #   cc: "gcc",
           #   cxx: "g++",
           #   archiver: "7z a",
-          #   cmake_generator: "Ninja"
+          #   cmake_generator: "Visual Studio 17 2022"
           # }
-          # - {
-          #   name: "MacOS_Latest",
-          #   os: macos-latest,
-          #   artifact: "macos_clang.7z",
-          #   build_type: "Debug",
-          #   cc: "clang",
-          #   cxx: "clang++",
-          #   archiver: "7za a",
-          #   cmake_generator: "Ninja"
-          # }
+          - {
+            name: "Ubuntu_Latest",
+            os: ubuntu-latest,
+            artifact: "ubuntu_gcc.7z",
+            build_type: "Debug",
+            cc: "gcc",
+            cxx: "g++",
+            archiver: "7z a",
+            cmake_generator: "Ninja"
+          }
+          - {
+            name: "MacOS_Latest",
+            os: macos-latest,
+            artifact: "macos_clang.7z",
+            build_type: "Debug",
+            cc: "clang",
+            cxx: "clang++",
+            archiver: "7za a",
+            cmake_generator: "Ninja"
+          }
         python_version: ['3.7', '3.8', '3.9', '3.10', '3.11']
 
     name: ${{matrix.config.os}} - Python ${{matrix.python_version}}

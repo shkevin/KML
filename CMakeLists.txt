@@ -107,6 +107,11 @@ ENDMACRO(CopyPython)
 ################################
 # Compiler Flags
 ################################
+# This is necessary for MSVC to create a symbol file (.lib).
+if (MSVC)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
+
 SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-builtin -Wall -Wshadow -fno-strict-aliasing -fno-strength-reduce -fomit-frame-pointer -Os")
 SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-exceptions -fcheck-new -fno-rtti -Wpedantic -Wreorder")
 SET(CMAKE_CXX_FLAGS "${AC_COMMON_FLAGS}")
@@ -119,7 +124,11 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 endif()
 
 # UNIX, WIN32, WINRT, CYGWIN, APPLE are environment variables as flags SET by default system.
-MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with CXX standard ${CMAKE_CXX_STANDARD}")
+if(UNIX)
+    MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with CXX standard ${CMAKE_CXX_STANDARD}")
+else()
+    MESSAGE(STATUS "Compiling on this system has not been tested!")
+endif()
 
 ################################
 # Find Main Packages

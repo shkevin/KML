@@ -20,7 +20,7 @@ YELLOW := $(shell tput -Txterm setaf 3)
 WHITE  := $(shell tput -Txterm setaf 7)
 RESET  := $(shell tput -Txterm sgr0)
 
-all: directories dev test_wheel coverage
+all: directories compile-all test_wheel coverage
 	@echo '*******************Compiled*********************'
 
 ## Build the docker image for KML.
@@ -112,7 +112,7 @@ test_wheel:
 	[ -d $(BUILDDIR) ] && \
 	cd $(BUILDDIR)/tools/packages && \
 	python3 -m pip install *.whl --force-reinstall && \
-	python3 -m pytest -p no:cacheprovider ../python/tests && \
+    python3 -m pytest -c $(ROOT_DIR)/pyproject.toml -doctest -n auto --cov-report term --cov-report=html:/html_dir --cov=tools ../python/tests
 	pip uninstall KML -y
 
 ## Call Unittests for C++/Python for sdist. Requires prior build.

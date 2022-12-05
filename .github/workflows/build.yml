@@ -38,7 +38,6 @@ jobs:
           #   cc: "gcc",
           #   cxx: "g++",
           #   archiver: "7z a",
-          #   generators: "Ninja"
           #   cmake_generator: "Ninja"
           # }
           # - {
@@ -113,14 +112,14 @@ jobs:
       - name: Configure CMake
         run: >-
           cmake
-          -G ${{matrix.cmake_generator}}
-          -S . -B ${{github.workspace}}/build
+          -G ${{matrix.config.cmake_generator}}
           -DBUILD_TESTING=ON
           -DBUILD_PYTHON=ON
           -DBUILD_COVERAGE=ON
           -DBUILD_DOCUMENTATION=OFF
           -DBUILD_STATIC_ANALYSIS=OFF
           -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
+          -S . -B ${{github.workspace}}/build
 
       - name: Build package
         run: >-
@@ -133,26 +132,6 @@ jobs:
         run: |
           ls ${{github.workspace}}
           ctest -V -C ${{matrix.config.build_type}}
-
-      - name: Pytest wheel
-        working-directory: ${{github.workspace}}/build/tools/
-        run: |
-          ls packages
-          pip3 install packages/*.whl --force-reinstall
-          python3 -m pytest -v -p no:cacheprovider \
-            -c ${{github.workspace}}/pyproject.toml -doctest -n auto \
-            --cov-report term --cov-report html:./html_dir \
-            --cov python/tests python/tests
-
-      - name: Pytest sdist
-        working-directory: ${{github.workspace}}/build/tools/
-        run: |
-          ls packages
-          pip3 install packages/*.tar.gz --force-reinstall
-          python3 -m pytest -v -p no:cacheprovider \
-            -c ${{github.workspace}}/pyproject.toml -doctest -n auto \
-            --cov-report term --cov-report html:./html_dir \
-            --cov python/tests python/tests
 
   # lint:
   #   name: Lint code
@@ -203,6 +182,26 @@ jobs:
         with:
           name: dist
           path: dist
+
+      - name: Pytest wheel
+        working-directory: ${{github.workspace}}
+        run: |
+          ls packages
+          pip3 install dist/*.whl --force-reinstall
+          python3 -m pytest -v -p no:cacheprovider \
+            -c ${{github.workspace}}/pyproject.toml -doctest -n auto \
+            --cov-report term --cov-report html:./html_dir \
+            --cov tools/python/tests tools/python/tests
+
+      - name: Pytest sdist
+        working-directory: ${{github.workspace}}
+        run: |
+          ls packages
+          pip3 install dist/*.tar.gz --force-reinstall
+          python3 -m pytest -v -p no:cacheprovider \
+            -c ${{github.workspace}}/pyproject.toml -doctest -n auto \
+            --cov-report term --cov-report html:./html_dir \
+            --cov tools/python/tests tools/python/tests
 
       - name: Check PyPI Format
         run: twine check --strict dist/*

@@ -21,14 +21,14 @@ jobs:
       matrix:
         config:
           - {
-            name: "Windows Latest",
+            name: "Windows Latest MSVC",
             os: windows-latest,
             artifact: "windows_gcc.7z",
             build_type: "Release",
             cc: "gcc",
             cxx: "g++",
             archiver: "7z a",
-            generators: "Ninja"
+            cmake_generator: "Visual Studio 17 2022"
           }
           # - {
           #   name: "Ubuntu_Latest",
@@ -39,6 +39,7 @@ jobs:
           #   cxx: "g++",
           #   archiver: "7z a",
           #   generators: "Ninja"
+          #   cmake_generator: "Ninja"
           # }
           # - {
           #   name: "MacOS_Latest",
@@ -48,7 +49,7 @@ jobs:
           #   cc: "clang",
           #   cxx: "clang++",
           #   archiver: "7za a",
-          #   generators: "Ninja"
+          #   cmake_generator: "Ninja"
           # }
         python_version: ['3.7', '3.8', '3.9', '3.10', '3.11']
 
@@ -72,11 +73,10 @@ jobs:
       - name: Install dependencies on Windows
         if: startsWith(matrix.config.os, 'windows')
         run: |
-          choco install ninja cmake doxygen ccache
+          choco install cmake doxygen ccache
           git clone https://github.com/Microsoft/vcpkg.git
           .\vcpkg\bootstrap-vcpkg.bat
           vcpkg install cppzmq:x64-windows
-          ninja --version
           cmake --version
 
       - name: Install dependencies on Ubuntu
@@ -112,7 +112,9 @@ jobs:
 
       - name: Configure CMake
         run: >-
-          cmake -S . -B ${{github.workspace}}/build
+          cmake
+          -G ${{matrix.cmake_generator}}
+          -S . -B ${{github.workspace}}/build
           -DBUILD_TESTING=ON
           -DBUILD_PYTHON=ON
           -DBUILD_COVERAGE=ON

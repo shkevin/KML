@@ -20,36 +20,36 @@ jobs:
       fail-fast: true
       matrix:
         config:
-          # - {
-          #   name: "Windows Latest",
-          #   os: windows-latest,
-          #   artifact: "windows_gcc.7z",
-          #   build_type: "Release",
-          #   cc: "gcc",
-          #   cxx: "g++",
-          #   archiver: "7z a",
-          #   generators: "Ninja"
-          # }
           - {
-            name: "Ubuntu_Latest",
-            os: ubuntu-latest,
-            artifact: "ubuntu_gcc.7z",
-            build_type: "Debug",
+            name: "Windows Latest",
+            os: windows-latest,
+            artifact: "windows_gcc.7z",
+            build_type: "Release",
             cc: "gcc",
             cxx: "g++",
             archiver: "7z a",
             generators: "Ninja"
           }
-          - {
-            name: "MacOS_Latest",
-            os: macos-latest,
-            artifact: "macos_clang.7z",
-            build_type: "Debug",
-            cc: "clang",
-            cxx: "clang++",
-            archiver: "7za a",
-            generators: "Ninja"
-          }
+          # - {
+          #   name: "Ubuntu_Latest",
+          #   os: ubuntu-latest,
+          #   artifact: "ubuntu_gcc.7z",
+          #   build_type: "Debug",
+          #   cc: "gcc",
+          #   cxx: "g++",
+          #   archiver: "7z a",
+          #   generators: "Ninja"
+          # }
+          # - {
+          #   name: "MacOS_Latest",
+          #   os: macos-latest,
+          #   artifact: "macos_clang.7z",
+          #   build_type: "Debug",
+          #   cc: "clang",
+          #   cxx: "clang++",
+          #   archiver: "7za a",
+          #   generators: "Ninja"
+          # }
         python_version: ['3.7', '3.8', '3.9', '3.10', '3.11']
 
     name: ${{matrix.config.os}} - Python ${{matrix.python_version}}
@@ -73,6 +73,9 @@ jobs:
         if: startsWith(matrix.config.os, 'windows')
         run: |
           choco install ninja cmake doxygen ccache
+          git clone https://github.com/Microsoft/vcpkg.git
+          .\vcpkg\bootstrap-vcpkg.bat
+          vcpkg install cppzmq:x64-windows
           ninja --version
           cmake --version
 

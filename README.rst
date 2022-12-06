@@ -4,7 +4,7 @@
 
 .. class:: center
 
-    | `Explore the docs <https://github.com/shkevin/KML>`__
+    | `Explore the docs <https://shkevin.github.io/KML/>`__
       ·`View Examples <https://github.com/shkevin/KML/tools/python/notebooks>`__
       · `Report Bug <https://github.com/shkevin/KML/issues>`__
       · `Request Feature <https://github.com/shkevin/KML/issues>`__

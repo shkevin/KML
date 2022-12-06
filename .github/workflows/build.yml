@@ -209,15 +209,10 @@ jobs:
             --cov-report term --cov-report xml \
             --cov tools/python/tests tools/python/tests
 
-      - name: Upload Coverage
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        if: ${{ env.CODECOV_TOKEN }}
-        uses: codecov/codecov-action@master
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ${{github.workspace}}/coverage.xml
-          name: KML Coverage
+          verbose: true
 
       - name: Check PyPI Format
         run: twine check --strict dist/*

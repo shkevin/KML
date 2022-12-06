@@ -52,6 +52,4 @@ jobs:
       - name: Deploy Docs
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: cd ${{github.workspace}}/build/docs/source/_build/html
+          folder: ${{github.workspace}}/build/docs/source/_build/html

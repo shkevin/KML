@@ -168,6 +168,7 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.8"
+          cache: "pip"
 
       - name: Install dependencies
         run: >-
@@ -205,8 +206,18 @@ jobs:
           pip3 install dist/*.tar.gz --force-reinstall
           python3 -m pytest -v -p no:cacheprovider \
             -c ${{github.workspace}}/pyproject.toml -doctest -n auto \
-            --cov-report term --cov-report html:./html_dir \
+            --cov-report term --cov-report xml \
             --cov tools/python/tests tools/python/tests
+
+      - name: Upload Coverage
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        if: ${{ env.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@master
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ${{github.workspace}}/coverage.xml
+          name: KML Coverage
 
       - name: Check PyPI Format
         run: twine check --strict dist/*

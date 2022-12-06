@@ -40,17 +40,18 @@ jobs:
             archiver: "7z a",
             cmake_generator: "Ninja"
           }
-          - {
-            name: "MacOS_Latest",
-            os: macos-latest,
-            artifact: "macos_clang.7z",
-            build_type: "Debug",
-            cc: "clang",
-            cxx: "clang++",
-            archiver: "7za a",
-            cmake_generator: "Ninja"
-          }
-        python_version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+          # - {
+          #   name: "MacOS_Latest",
+          #   os: macos-latest,
+          #   artifact: "macos_clang.7z",
+          #   build_type: "Debug",
+          #   cc: "clang",
+          #   cxx: "clang++",
+          #   archiver: "7za a",
+          #   cmake_generator: "Ninja"
+          # }
+        # python_version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+        python_version: ['3.7']
 
     name: ${{matrix.config.os}} - Python ${{matrix.python_version}}
     steps:
@@ -168,7 +169,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.8"
-          cache: "pip"
 
       - name: Install dependencies
         run: >-

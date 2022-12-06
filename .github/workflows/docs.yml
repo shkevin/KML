@@ -24,7 +24,7 @@ jobs:
             exhale sphinx_gallery nbsphinx nbconvert pandoc
 
       - name: Checkout Repo
-        uses: actions/checkout@3
+        uses: actions/checkout@v3
 
       - name: Build docs
         run: |

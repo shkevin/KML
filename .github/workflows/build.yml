@@ -189,7 +189,6 @@ jobs:
       - name: Pytest wheel
         working-directory: ${{github.workspace}}
         run: |
-          ls packages
           pip3 install dist/*.whl --force-reinstall
           python3 -m pytest -v -p no:cacheprovider \
             -c ${{github.workspace}}/pyproject.toml -doctest -n auto \
@@ -199,7 +198,6 @@ jobs:
       - name: Pytest sdist
         working-directory: ${{github.workspace}}
         run: |
-          ls packages
           pip3 install dist/*.tar.gz --force-reinstall
           python3 -m pytest -v -p no:cacheprovider \
             -c ${{github.workspace}}/pyproject.toml -doctest -n auto \

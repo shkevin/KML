@@ -1,5 +1,5 @@
-recursive-include tools/python/KML *.py
-recursive-include tools/cython/KML/ *.pyx *.pxd
+recursive-include tools/python/kml *.py
+recursive-include tools/cython/kml *.pyx *.pxd
 recursive-include tools/cpp/KML/src *.cc
 recursive-include tools/cpp/KML/include *.h *.tcc
 recursive-include tools/python/tests/ *.py

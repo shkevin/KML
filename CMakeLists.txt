@@ -2,31 +2,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.14 FATAL_ERROR)
 
 ################################
-# Project
-################################
-PROJECT(KML
-    DESCRIPTION "Streaming Machine Learning in C++/Cython"
-    LANGUAGES CXX)
-
-# Default to debug build type
-if(NOT DEFINED CMAKE_BUILD_TYPE)
-    SET(CMAKE_BUILD_TYPE Debug)
-endif()
-
-# Avoid warning about "DOWNLOAD_EXTRACT_TIMESTAMP" in cmake 3.24.
-if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
-	cmake_policy(SET CMP0135 NEW)
-endif()
-
-# Escape variables in if.
-if(POLICY CMP0054)
-    cmake_policy(SET CMP0054 NEW)
-endif()
-
-# Minimum cpp standard
-SET(CMAKE_CXX_STANDARD 11)
-
-################################
 # Global Variables
 ################################
 if(NOT WIN32)
@@ -70,6 +45,38 @@ function(message)
 endfunction()
 
 ################################
+# Project
+################################
+# Build types and flags used:
+# 1. Release: `-O3 -DNDEBUG`
+# 2. Debug: `-O0 -g`
+# 3. RelWithDebInfo: `-O2 -g -DNDEBUG`
+# 4. MinSizeRel: `-Os -DNDEBUG`
+PROJECT(KML
+    DESCRIPTION "Streaming Machine Learning in C++/Cython."
+    LANGUAGES CXX)
+
+# Default to debug build type
+if(NOT DEFINED CMAKE_BUILD_TYPE)
+    SET(CMAKE_BUILD_TYPE Debug)
+endif()
+
+MESSAGE(STATUS "Using BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+
+# Avoid warning about "DOWNLOAD_EXTRACT_TIMESTAMP" in cmake 3.24.
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
+	cmake_policy(SET CMP0135 NEW)
+endif()
+
+# Escape variables in if.
+if(POLICY CMP0054)
+    cmake_policy(SET CMP0054 NEW)
+endif()
+
+# Minimum cpp standard
+SET(CMAKE_CXX_STANDARD 11)
+
+################################
 # Macros
 ################################
 
@@ -100,10 +107,14 @@ ENDMACRO(CopyPython)
 ################################
 # Compiler Flags
 ################################
+# This is necessary for MSVC to create a symbol file (.lib).
+if (MSVC)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
+
 SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-builtin -Wall -Wshadow -fno-strict-aliasing -fno-strength-reduce -fomit-frame-pointer -Os")
 SET(AC_COMMON_FLAGS "${AC_COMMON_FLAGS} -fno-exceptions -fcheck-new -fno-rtti -Wpedantic -Wreorder")
 SET(CMAKE_CXX_FLAGS "${AC_COMMON_FLAGS}")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g") # For debugging
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions") # Add exception handling
 
 # if compiler is Clang, link libc++, otherwise, link default libstdc++
@@ -112,11 +123,11 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lc++abi")
 endif()
 
-# UNIX, WIN32, WINRT, CYGWIN, APPLE are environment variables as flags SET by default system
+# UNIX, WIN32, WINRT, CYGWIN, APPLE are environment variables as flags SET by default system.
 if(UNIX)
-    MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with ${CMAKE_CXX_STANDARD} CXX standard")
-elseif(WIN32)
-    MESSAGE("This is a Windows System. Not currently supported!")
+    MESSAGE(STATUS "Compiling on ${CMAKE_SYSTEM_NAME} with CXX standard ${CMAKE_CXX_STANDARD}")
+else()
+    MESSAGE(STATUS "Compiling on this system has not been tested!")
 endif()
 
 ################################
@@ -208,18 +219,22 @@ endif(BUILD_PYTHON)
 ################################
 OPTION(BUILD_COVERAGE "Create C++ Coverage" OFF)
 if(BUILD_COVERAGE)
-	# if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
-    MESSAGE(STATUS "Building Coverage")
-    SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-	INCLUDE(CodeCoverage)
-    append_coverage_compiler_flags()
-	SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
-	SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
-    setup_target_for_coverage_gcovr_html(
-        NAME coverage EXECUTABLE ctest
-        --schedule-random -j ${PROCESSOR_COUNT} --test-dir ${CMAKE_BINARY_DIR}/tools/cpp/tests
-        EXCLUDE "build/*" "*main.cc*"
-        )
+    if(UNIX)
+    	# if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+        MESSAGE(STATUS "Building Coverage")
+        SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+    	INCLUDE(CodeCoverage)
+        append_coverage_compiler_flags()
+    	SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+    	SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
+        setup_target_for_coverage_gcovr_html(
+            NAME coverage EXECUTABLE ctest
+            --schedule-random -j ${PROCESSOR_COUNT} --test-dir ${CMAKE_BINARY_DIR}/tools/cpp/tests
+            EXCLUDE "build/*" "*main.cc*"
+            )
+    else()
+        MESSAGE(STATUS "gcovr hasn't been tested with toolchain: ${CMAKE_TOOLCHAIN_FILE}")
+    endif(UNIX)
     # setup_target_for_coverage_gcovr_xml(${PROJECT_NAME}_coverage NAME coverage)
 endif(BUILD_COVERAGE)
 

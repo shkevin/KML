@@ -20,8 +20,8 @@ cdef extern from "StreamingHistogram.h" namespace "KML::DataStructures":
         vector[double] pdf(bool, bool) except +
         vector[double] cdf(bool) except +
         T quantile(double) except +
-        vector[uint64_t] binCounts() except +
-        map[pair[double, double], uint64_t] report() except +
+        vector[size_t] binCounts() except +
+        map[pair[double, double], size_t] report() except +
         void reset() except +
         bool empty() except +
         bool full() except +

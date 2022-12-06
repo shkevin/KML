@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -6,7 +7,7 @@ on:
   release:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  group: ${{github.workflow}}-${{github.event.pull_request.number || github.sha}}
   cancel-in-progress: true
 
 env:
@@ -19,28 +20,17 @@ jobs:
       fail-fast: true
       matrix:
         config:
-        # - {
-        #     name: "Windows Latest MSVC",
-        #     os: windows-latest,
-        #     artifact: "windows_msvc.7z",
-        #     build_type: "Release",
-        #     cc: "cl",
-        #     cxx: "cl",
-        #     environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
-        #     archiver: "7z a",
-        #     generators: "Visual Studio 16 2019"
-        #   }
-        # - {
-        #     name: "Windows Latest MinGW",
-        #     os: windows-latest,
-        #     artifact: "windows_mingw.7z",
-        #     build_type: "Release",
-        #     cc: "gcc",
-        #     cxx: "g++",
-        #     archiver: "7z a",
-        #     generators: "Ninja"
-        #   }
-        - {
+          # - {
+          #   name: "Windows Latest MSVC",
+          #   os: windows-latest,
+          #   artifact: "windows_gcc.7z",
+          #   build_type: "Release",
+          #   cc: "gcc",
+          #   cxx: "g++",
+          #   archiver: "7z a",
+          #   cmake_generator: "Visual Studio 17 2022"
+          # }
+          - {
             name: "Ubuntu_Latest",
             os: ubuntu-latest,
             artifact: "ubuntu_gcc.7z",
@@ -48,18 +38,18 @@ jobs:
             cc: "gcc",
             cxx: "g++",
             archiver: "7z a",
-            generators: "Ninja"
+            cmake_generator: "Ninja"
           }
-        # - {
-        #     name: "MacOS_Latest",
-        #     os: macos-latest,
-        #     artifact: "macos_clang.7z",
-        #     build_type: "Debug",
-        #     cc: "clang",
-        #     cxx: "clang++",
-        #     archiver: "7za a",
-        #     generators: "Ninja"
-        #   }
+          - {
+            name: "MacOS_Latest",
+            os: macos-latest,
+            artifact: "macos_clang.7z",
+            build_type: "Debug",
+            cc: "clang",
+            cxx: "clang++",
+            archiver: "7za a",
+            cmake_generator: "Ninja"
+          }
         python_version: ['3.7', '3.8', '3.9', '3.10', '3.11']
 
     name: ${{matrix.config.os}} - Python ${{matrix.python_version}}
@@ -73,6 +63,9 @@ jobs:
         with:
           python-version: ${{matrix.python_version}}
           architecture: x64
+          cache: 'pip'  # cache pip dependencies
+          cache-dependency-path: |
+            **/pyproject.toml
 
       - name: Print env
         run: |
@@ -82,17 +75,18 @@ jobs:
       - name: Install dependencies on Windows
         if: startsWith(matrix.config.os, 'windows')
         run: |
-          choco install ninja cmake gcovr doxygen
-          ninja --version
+          choco install cmake doxygen ccache
+          git clone https://github.com/Microsoft/vcpkg.git
+          .\vcpkg\bootstrap-vcpkg.bat
+          vcpkg install cppzmq:x64-windows
           cmake --version
 
       - name: Install dependencies on Ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu')
         run: |
           sudo apt-get update
-          sudo apt-get install ninja-build cmake gcovr doxygen ccache clang-tidy cppcheck
-          pip3 install cython wheel setuptools>=61.0.0 setuptools_scm \
-            pytest pytest-clarity pytest-cov pytest-xdist toml
+          sudo apt-get install ninja-build \
+            cmake gcovr doxygen ccache clang-tidy cppcheck
           ninja --version
           cmake --version
           gcc --version
@@ -105,38 +99,37 @@ jobs:
           cmake --version
           clang --version
 
+      - name: Install Python dependencies
+        run: >-
+          pip3 install
+          cython
+          wheel
+          setuptools>=61.0.0
+          setuptools_scm
+
       - name: Configure CMake
-        run: |
-          cmake -S . -B ${{github.workspace}}/build \
-            -DBUILD_TESTING=ON \
-            -DBUILD_PYTHON=ON \
-            -DBUILD_COVERAGE=ON \
-            -DBUILD_DOCUMENTATION=OFF \
-            -DBUILD_STATIC_ANALYSIS=OFF\
-            -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
+        run: >-
+          cmake
+          -G "${{matrix.config.cmake_generator}}"
+          -DBUILD_TESTING=ON
+          -DBUILD_PYTHON=ON
+          -DBUILD_COVERAGE=ON
+          -DBUILD_DOCUMENTATION=OFF
+          -DBUILD_STATIC_ANALYSIS=OFF
+          -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}}
+          -S . -B ${{github.workspace}}/build
 
       - name: Build package
-        run: cmake --build ${{github.workspace}}/build --config ${{matrix.config.build_type}} -j
+        run: >-
+          cmake
+          --build ${{github.workspace}}/build
+          --config ${{matrix.config.build_type}} -j
 
       - name: CPP Test
         working-directory: ${{github.workspace}}/build
         run: |
           ls ${{github.workspace}}
           ctest -V -C ${{matrix.config.build_type}}
-
-      - name: Pytest wheel
-        working-directory: ${{github.workspace}}/build/tools/
-        run: |
-          ls packages
-          pip3 install packages/kml*.whl --force-reinstall
-          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -n auto --cov python --cov-report html:html_cov python/tests
-
-      - name: Pytest sdist
-        working-directory: ${{github.workspace}}/build/tools/
-        run: |
-          ls packages
-          pip3 install packages/kml*.tar.gz --force-reinstall
-          python3 -m pytest -v -p no:cacheprovider -c ${{github.workspace}}/pyproject.toml -n auto --cov python --cov-report html:html_cov python/tests
 
   # lint:
   #   name: Lint code
@@ -169,39 +162,54 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
 
-    name: Python sdist/wheel
+    name: Verify Built Packages
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-      with:
-        python-version: "3.8"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install --upgrade wheel setuptools build
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
 
-    - name: Build package
-      run: python -m build -o dist/
-    - uses: actions/upload-artifact@v3
-      with:
-        name: dist
-        path: dist
+      - name: Install dependencies
+        run: >-
+          python -m pip install --upgrade
+          pip
+          wheel
+          setuptools
+          build
+          twine
+          pytest
+          pytest-clarity
+          pytest-cov
+          pytest-xdist
+          toml
 
-  dist_check:
-    runs-on: ubuntu-latest
-    needs: [dist]
-    steps:
-    - uses: actions/setup-python@v4
-      with:
-        python-version: "3.8"
+      - name: Build package
+        run: python -m build -o dist/
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
 
-    - name: Install dependencies
-      run: pip install twine
-    - uses: actions/download-artifact@v3
-      with:
-        name: dist
-        path: dist
-    - run: twine check --strict dist/*
+      - name: Pytest wheel
+        working-directory: ${{github.workspace}}
+        run: |
+          pip3 install dist/*.whl --force-reinstall
+          python3 -m pytest -v -p no:cacheprovider \
+            -c ${{github.workspace}}/pyproject.toml -doctest -n auto \
+            --cov-report term --cov-report html:./html_dir \
+            --cov tools/python/tests tools/python/tests
+
+      - name: Pytest sdist
+        working-directory: ${{github.workspace}}
+        run: |
+          pip3 install dist/*.tar.gz --force-reinstall
+          python3 -m pytest -v -p no:cacheprovider \
+            -c ${{github.workspace}}/pyproject.toml -doctest -n auto \
+            --cov-report term --cov-report html:./html_dir \
+            --cov tools/python/tests tools/python/tests
+
+      - name: Check PyPI Format
+        run: twine check --strict dist/*
 
   # dist_upload:
   #   runs-on: ubuntu-latest

@@ -29,6 +29,14 @@ try:
 except ImportError:
     USE_CYTHON = False
 
+# Multiprocessing changed start method for Mac in Python3.8. This is
+# used to enforce that the spawn method is fork, and should work across
+# all OS. Warnings may be observed due to this change.
+if os.uname().sysname == "Darwin":
+    from multiprocessing import set_start_method
+
+    set_start_method("fork", force=True)
+
 
 def get_readme() -> str:
     """Retrieve the readme as a string.

@@ -40,17 +40,18 @@ jobs:
             archiver: "7z a",
             cmake_generator: "Ninja"
           }
-          - {
-            name: "MacOS_Latest",
-            os: macos-latest,
-            artifact: "macos_clang.7z",
-            build_type: "Debug",
-            cc: "clang",
-            cxx: "clang++",
-            archiver: "7za a",
-            cmake_generator: "Ninja"
-          }
-        python_version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+          # - {
+          #   name: "MacOS_Latest",
+          #   os: macos-latest,
+          #   artifact: "macos_clang.7z",
+          #   build_type: "Debug",
+          #   cc: "clang",
+          #   cxx: "clang++",
+          #   archiver: "7za a",
+          #   cmake_generator: "Ninja"
+          # }
+        # python_version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+        python_version: ['3.7']
 
     name: ${{matrix.config.os}} - Python ${{matrix.python_version}}
     steps:
@@ -205,8 +206,13 @@ jobs:
           pip3 install dist/*.tar.gz --force-reinstall
           python3 -m pytest -v -p no:cacheprovider \
             -c ${{github.workspace}}/pyproject.toml -doctest -n auto \
-            --cov-report term --cov-report html:./html_dir \
+            --cov-report term --cov-report xml \
             --cov tools/python/tests tools/python/tests
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          verbose: true
 
       - name: Check PyPI Format
         run: twine check --strict dist/*

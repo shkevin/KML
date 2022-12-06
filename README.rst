@@ -4,16 +4,11 @@
 
 .. class:: center
 
-    | `Explore the docs <https://shkevin.github.io/KML/>`__
-      ·`View Examples <https://github.com/shkevin/KML/tools/python/notebooks>`__
-      · `Report Bug <https://github.com/shkevin/KML/issues>`__
-      · `Request Feature <https://github.com/shkevin/KML/issues>`__
-
 .. inclusion-marker-do-not-remove
 
 .. Shields
 
-|CI| |Issues| |MIT License| |LinkedIn|
+|Docs| |CI| |Coverage| |Issues| |MIT License| |LinkedIn|
 
 Table of Contents
 =================
@@ -238,6 +233,10 @@ Acknowledgments
 .. |Cython| image:: https://img.shields.io/badge/-Cython-3776AB?logo=python&logoColor=white&style=flat&labelColor=black&color=yellow
    :target: https://cython.org/
 
+.. |Docs| image:: https://img.shields.io/badge/docs-latest-brightgreen
+   :target: https://shkevin.github.io/KML/
+.. |Coverage| image:: https://codecov.io/github/shkevin/KML/branch/main/graph/badge.svg?token=QSS0KO8RR9
+   :target: https://codecov.io/github/shkevin/KML
 .. |Logo| image:: docs/images/HQ%2001-03-resized.png
    :width: 800px
    :height: 400px

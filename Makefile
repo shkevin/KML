@@ -105,7 +105,9 @@ develop:
 ## Call Unittests for C++/Python.
 test:
 	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
-	PYTHONPATH=$(BUILDDIR) python3 -m pytest -p no:cacheprovider tools/python/tests
+    PYTHONPATH=$(BUILDDIR) python3 -m pytest -c $(ROOT_DIR)/pyproject.toml \
+		-doctest -n auto --cov-report term --cov-report html:./html_dir \
+		--cov tools/python/tests tools/python/tests
 
 ## Call Unittests for C++/Python for built wheel. Requires prior build.
 test_wheel:

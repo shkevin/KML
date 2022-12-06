@@ -1,15 +1,12 @@
 ---
 name: Build and Deploy Docs
 
-# on:
-#   workflow_run:
-#     workflows: ["CI"]
-#     branches: [main]
-#     types:
-#       - completed
-
 on:
-  push:
+  workflow_run:
+    workflows: ["CI"]
+    branches: [main]
+    types:
+      - completed
 
 permissions:
   contents: write

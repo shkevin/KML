@@ -1,12 +1,15 @@
 ---
 name: Build and Deploy Docs
 
+# on:
+#   workflow_run:
+#     workflows: ["CI"]
+#     branches: [main]
+#     types:
+#       - completed
+
 on:
-  workflow_run:
-    workflows: ["CI"]
-    branches: [main]
-    types:
-      - completed
+  push:
 
 permissions:
   contents: write
@@ -25,18 +28,24 @@ jobs:
 
       - name: Checkout Repo
         uses: actions/checkout@3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
 
-      - name: Build docs
+      - name: Build Docs
         run: |
-            cmake -S . -B ${{github.workspace}}/build \
-              -DBUILD_TESTING=OFF \
-              -DBUILD_PYTHON=ON \
-              -DBUILD_COVERAGE=OFF \
-              -DBUILD_DOCUMENTATION=ON \
-              -DCMAKE_BUILD_TYPE=debug
-            cmake --build ${{github.workspace}}/build -j
-            cd ${{github.workspace}}/build/docs/source/_build/html
-            touch .nojekyll
+          ls
+          cmake
+            -DBUILD_TESTING=OFF \
+            -DBUILD_PYTHON=ON \
+            -DBUILD_COVERAGE=OFF \
+            -DBUILD_DOCUMENTATION=ON \
+            -DBUILD_STATIC_ANALYSIS=OFF \
+            -DCMAKE_BUILD_TYPE=Release \
+            -S . -B ${{github.workspace}}/build
+          cmake --build ${{github.workspace}}/build --config Release -j
+          cd ${{github.workspace}}/build/docs/source/_build/html
+          touch .nojekyll
 
       - name: Deploy Docs
         uses: JamesIves/github-pages-deploy-action@v4

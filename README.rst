@@ -8,7 +8,7 @@
 
 .. Shields
 
-|Docs| |CI| |Issues| |MIT License| |LinkedIn|
+|Docs| |CI| |Coverage| |Issues| |MIT License| |LinkedIn|
 
 Table of Contents
 =================
@@ -235,8 +235,8 @@ Acknowledgments
 
 .. |Docs| image:: https://img.shields.io/badge/docs-latest-brightgreen
    :target: https://shkevin.github.io/KML/
-.. |Coverage| image:: input image here
-   :target: coverage url
+.. |Coverage| image:: https://codecov.io/github/shkevin/KML/branch/main/graph/badge.svg?token=QSS0KO8RR9
+   :target: https://codecov.io/github/shkevin/KML
 .. |Logo| image:: docs/images/HQ%2001-03-resized.png
    :width: 800px
    :height: 400px

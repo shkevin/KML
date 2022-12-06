@@ -32,17 +32,19 @@ jobs:
           pip3 install -U sphinx sphinx-rtd-theme breathe \
             exhale sphinx_gallery nbsphinx nbconvert pandoc
 
+      - name: Configure CMake
+        run: >-
+          cmake
+          -DBUILD_TESTING=OFF
+          -DBUILD_PYTHON=ON
+          -DBUILD_COVERAGE=OFF
+          -DBUILD_DOCUMENTATION=ON
+          -DBUILD_STATIC_ANALYSIS=OFF
+          -DCMAKE_BUILD_TYPE=Release
+          -S . -B ${{github.workspace}}/build
+
       - name: Build Docs
         run: |
-          ls
-          cmake
-            -DBUILD_TESTING=OFF \
-            -DBUILD_PYTHON=ON \
-            -DBUILD_COVERAGE=OFF \
-            -DBUILD_DOCUMENTATION=ON \
-            -DBUILD_STATIC_ANALYSIS=OFF \
-            -DCMAKE_BUILD_TYPE=Release \
-            -S . -B ${{github.workspace}}/build
           cmake --build ${{github.workspace}}/build --config Release -j
           cd ${{github.workspace}}/build/docs/source/_build/html
           touch .nojekyll

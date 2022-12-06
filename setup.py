@@ -68,7 +68,7 @@ def get_version() -> str:
             version = ".".join(str(x) for x in version)
             return version
     except IOError:
-        return "0.0.1"
+        return ""
 
 
 def get_buildlib() -> str:
@@ -201,6 +201,7 @@ setup(
     long_description=get_readme(),
     long_description_content_type="text/x-rst",
     version=get_version(),
+    # use_scm_version=True,
     cmdclass={"build_ext": my_build_ext, "build": my_build},
     packages=find_packages("tools/cython"),
     package_dir={"": "tools/cython"},

@@ -27,7 +27,7 @@ jobs:
             exhale sphinx_gallery nbsphinx nbconvert pandoc
 
       - name: Checkout Repo
-        uses: actions/checkout@3
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: "3.8"

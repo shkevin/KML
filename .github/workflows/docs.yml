@@ -30,7 +30,7 @@ jobs:
           sudo apt-get install doxygen ninja-build cmake ccache
           pip3 install -U cython wheel setuptools>=61.0.0 setuptools_scm
           pip3 install -U sphinx sphinx-rtd-theme sphinx_sitemap breathe \
-            exhale sphinx_gallery nbsphinx nbconvert pandoc
+            exhale sphinx_gallery nbsphinx nbconvert pandoc IPython
 
       - name: Configure CMake
         run: >-

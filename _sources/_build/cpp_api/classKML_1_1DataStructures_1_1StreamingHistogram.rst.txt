@@ -1,0 +1,41 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_class_classKML_1_1DataStructures_1_1StreamingHistogram:
+
+Template Class StreamingHistogram
+=================================
+
+- Defined in :ref:`file_KML_include_data_structures_histograms_StreamingHistogram.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public KML::DataStructures::IStreamingHistogram< double >`` (:ref:`exhale_class_classKML_1_1DataStructures_1_1IStreamingHistogram`)
+
+
+Template Parameter Order
+------------------------
+
+#. ``typename T``
+
+
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: KML::DataStructures::StreamingHistogram
+   :project: kml
+   :members:
+   :protected-members:
+   :undoc-members:

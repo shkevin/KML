@@ -1,0 +1,16 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_function_Utils_8h_1adb3e751390ae418164308cdf62e7bf60:
+
+Function KML::Utils::approximatelyEqual
+=======================================
+
+- Defined in :ref:`file_KML_src_utils_Utils.cc`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: KML::Utils::approximatelyEqual(const double&, const double&, const double&)
+   :project: kml

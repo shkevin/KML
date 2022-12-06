@@ -1,0 +1,24 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _dir_KML_include_statistics:
+
+
+Directory statistics
+====================
+
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include>` (``KML/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+*Directory path:* ``KML/include/statistics``
+
+Subdirectories
+--------------
+
+- :ref:`dir_KML_include_statistics_summary`
+- :ref:`dir_KML_include_statistics_transformers`
+
+
+

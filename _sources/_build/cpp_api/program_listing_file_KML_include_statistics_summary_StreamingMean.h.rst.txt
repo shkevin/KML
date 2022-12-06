@@ -1,0 +1,42 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_summary_StreamingMean.h:
+
+Program Listing for File StreamingMean.h
+========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_summary_StreamingMean.h>` (``KML/include/statistics/summary/StreamingMean.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_MEAN_H__
+   #define __STREAMING_MEAN_H__
+   
+   #include "IStreamingStatistic.h"
+   
+   namespace KML
+   {
+       namespace Statistics
+       {
+           class StreamingMean : public IStreamingStatistic<double>
+           {
+               public:
+                   explicit StreamingMean(const uint64_t& windowSize = 0);
+   
+                   void update(const double& observation) override;
+                   using IStreamingStatistic<double>::update;
+   
+                   double evaluate() const override;
+                   using IStreamingStatistic<double>::evaluate;
+   
+               private:
+                   double m_sum = 0.0;
+           };
+       }  // namespace Statistics
+   }  // namespace KML
+   
+   #endif  // __STREAMING_MEAN_H__

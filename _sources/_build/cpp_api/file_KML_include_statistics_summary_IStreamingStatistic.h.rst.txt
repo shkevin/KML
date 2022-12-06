@@ -1,0 +1,91 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_statistics_summary_IStreamingStatistic.h:
+
+File IStreamingStatistic.h
+==========================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_statistics_summary>` (``KML/include/statistics/summary``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides interface for streaming statistics. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/statistics/summary/IStreamingStatistic.h``)
+---------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_statistics_summary_IStreamingStatistic.h.rst
+
+
+
+Detailed Description
+--------------------
+
+The streaming statistic interface is supposed to represent any KML streaming statitic. Every statistic should inherit from this interface. 
+
+
+
+
+Includes
+--------
+
+
+- ``IStreaming.h`` (:ref:`file_KML_include_IStreaming.h`)
+
+- ``IStreamingStatistic.tcc`` (:ref:`file_KML_include_statistics_summary_IStreamingStatistic.tcc`)
+
+- ``cstdint``
+
+- ``vector``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_include_statistics_summary_StreamingEntropy.h`
+
+- :ref:`file_KML_include_statistics_summary_StreamingIQR.h`
+
+- :ref:`file_KML_include_statistics_summary_StreamingMean.h`
+
+- :ref:`file_KML_include_statistics_summary_StreamingP2Quantile.h`
+
+- :ref:`file_KML_include_statistics_summary_StreamingVariance.h`
+
+- :ref:`file_KML_include_statistics_summary_WindowedFAME.h`
+
+- :ref:`file_KML_include_statistics_summary_WindowedP2Quantile.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Statistics`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1IStreamingStatistic`
+

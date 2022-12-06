@@ -1,0 +1,67 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_data_structures_LinkedList.h:
+
+File LinkedList.h
+=================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_data_structures>` (``KML/include/data_structures``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides the declarations for the Linked List data structure. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/data_structures/LinkedList.h``)
+---------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_data_structures_LinkedList.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``IDataStructure.h`` (:ref:`file_KML_include_data_structures_IDataStructure.h`)
+
+- ``LinkedList.tcc`` (:ref:`file_KML_include_data_structures_LinkedList.tcc`)
+
+- ``Node.h`` (:ref:`file_KML_include_data_structures_Node.h`)
+
+- ``mutex``
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__DataStructures`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1LinkedList`
+

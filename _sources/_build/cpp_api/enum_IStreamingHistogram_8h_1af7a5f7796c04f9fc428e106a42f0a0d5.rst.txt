@@ -1,0 +1,16 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5:
+
+Enum DecayType
+==============
+
+- Defined in :ref:`file_KML_include_data_structures_histograms_IStreamingHistogram.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: KML::DataStructures::DecayType
+   :project: kml

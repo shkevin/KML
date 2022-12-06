@@ -1,0 +1,69 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_metrics_IMetric.h:
+
+File IMetric.h
+==============
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_metrics>` (``KML/include/metrics``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides interface for streaming metrics. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/metrics/IMetric.h``)
+----------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_metrics_IMetric.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``IMetric.tcc`` (:ref:`file_KML_include_metrics_IMetric.tcc`)
+
+- ``IStreaming.h`` (:ref:`file_KML_include_IStreaming.h`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_include_metrics_StreamingMAD.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Metrics`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Metrics_1_1IMetric`
+

@@ -1,0 +1,75 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_data_structures_histograms_IBin.h:
+
+File IBin.h
+===========
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_data_structures_histograms>` (``KML/include/data_structures/histograms``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides an interface for bins used in Histograms. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/data_structures/histograms/IBin.h``)
+--------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_data_structures_histograms_IBin.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``IBin.h`` (:ref:`file_KML_include_data_structures_histograms_IBin.h`)
+
+- ``IBin.tcc`` (:ref:`file_KML_include_data_structures_histograms_IBin.tcc`)
+
+- ``IDataStructure.h`` (:ref:`file_KML_include_data_structures_IDataStructure.h`)
+
+- ``iostream``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_include_data_structures_histograms_IBin.h`
+
+- :ref:`file_KML_include_data_structures_histograms_IStreamingHistogram.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__DataStructures`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1IBin`
+

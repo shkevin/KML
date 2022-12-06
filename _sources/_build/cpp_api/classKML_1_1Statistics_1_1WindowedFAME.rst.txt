@@ -1,0 +1,33 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_class_classKML_1_1Statistics_1_1WindowedFAME:
+
+Class WindowedFAME
+==================
+
+- Defined in :ref:`file_KML_include_statistics_summary_WindowedFAME.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public KML::Statistics::IStreamingStatistic< double >`` (:ref:`exhale_class_classKML_1_1Statistics_1_1IStreamingStatistic`)
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: KML::Statistics::WindowedFAME
+   :project: kml
+   :members:
+   :protected-members:
+   :undoc-members:

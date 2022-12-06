@@ -1,0 +1,78 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_data_structures_histograms_StreamingHistogram.h:
+
+File StreamingHistogram.h
+=========================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_data_structures_histograms>` (``KML/include/data_structures/histograms``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides an implementation to the histogram interface. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/data_structures/histograms/StreamingHistogram.h``)
+----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_data_structures_histograms_StreamingHistogram.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``IStreamingHistogram.h`` (:ref:`file_KML_include_data_structures_histograms_IStreamingHistogram.h`)
+
+- ``StreamingHistogram.tcc`` (:ref:`file_KML_include_data_structures_histograms_IStreamingHistogram.tcc`)
+
+- ``vector``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_include_statistics_summary_StreamingEntropy.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__DataStructures`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1StreamingHistogram`
+
+
+Enums
+-----
+
+
+- :ref:`exhale_enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5`
+

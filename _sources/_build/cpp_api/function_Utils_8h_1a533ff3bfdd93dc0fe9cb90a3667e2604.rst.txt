@@ -1,0 +1,16 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_function_Utils_8h_1a533ff3bfdd93dc0fe9cb90a3667e2604:
+
+Function KML::Utils::essentiallyEqual
+=====================================
+
+- Defined in :ref:`file_KML_src_utils_Utils.cc`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: KML::Utils::essentiallyEqual(const double&, const double&, const double&)
+   :project: kml

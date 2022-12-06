@@ -1,0 +1,32 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_class_classKML_1_1IStreaming:
+
+Template Class IStreaming
+=========================
+
+- Defined in :ref:`file_KML_include_IStreaming.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Template Parameter Order
+------------------------
+
+#. ``typename T``
+
+
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: KML::IStreaming
+   :project: kml
+   :members:
+   :protected-members:
+   :undoc-members:

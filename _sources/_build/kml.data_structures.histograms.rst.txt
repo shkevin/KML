@@ -1,0 +1,18 @@
+kml.data\_structures.histograms package
+=======================================
+
+.. automodule:: kml.data_structures.histograms
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. Submodules
+.. ----------
+
+kml.data\_structures.histograms.StreamingHistogram module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: kml.data_structures.histograms.StreamingHistogram
+   :members:
+   :undoc-members:
+   :show-inheritance:

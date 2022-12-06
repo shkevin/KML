@@ -1,0 +1,41 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_class_classKML_1_1DataStructures_1_1RingBuffer:
+
+Template Class RingBuffer
+=========================
+
+- Defined in :ref:`file_KML_include_data_structures_RingBuffer.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public KML::DataStructures::IDataStructure< double >`` (:ref:`exhale_class_classKML_1_1DataStructures_1_1IDataStructure`)
+
+
+Template Parameter Order
+------------------------
+
+#. ``typename T``
+
+
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: KML::DataStructures::RingBuffer
+   :project: kml
+   :members:
+   :protected-members:
+   :undoc-members:

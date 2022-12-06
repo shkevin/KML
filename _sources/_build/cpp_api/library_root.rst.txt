@@ -1,0 +1,26 @@
+:github_url: https://github.com/shkevin/KML
+
+=======
+C++ API
+=======
+
+
+
+Welcome to the developer reference to the KML library. This documentation
+is specific only to the C++ library portion.
+
+
+.. include:: class_view_hierarchy.rst.include
+
+.. include:: file_view_hierarchy.rst.include
+
+
+
+
+
+.. include:: unabridged_api.rst.include
+
+
+
+
+

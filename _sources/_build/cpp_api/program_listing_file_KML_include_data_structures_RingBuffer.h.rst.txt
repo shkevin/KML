@@ -1,0 +1,70 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_data_structures_RingBuffer.h:
+
+Program Listing for File RingBuffer.h
+=====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_data_structures_RingBuffer.h>` (``KML/include/data_structures/RingBuffer.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __RING_BUFFER_H__
+   #define __RING_BUFFER_H__
+   
+   #include <cstdint>
+   #include <functional>
+   #include <memory>
+   #include <mutex>
+   #include <vector>
+   
+   #include "IDataStructure.h"
+   
+   namespace KML
+   {
+       namespace DataStructures
+       {
+           template<typename T = double>
+           class RingBuffer : public IDataStructure<T>
+           {
+               // Create alias for type of data container.
+               using Data = std::unique_ptr<T[], std::function<void(T*)>>;
+   
+               public:
+                   explicit RingBuffer(const size_t& windowSize);
+   
+                   void update(const T& item) override;
+   
+                   using IDataStructure<T>::update;
+   
+                   T pop();
+   
+                   bool full() const override;
+   
+                   bool empty() const override;
+   
+                   size_t size() const override;
+   
+                   void reset() override;
+   
+               private:
+                   Data m_buffer;
+   
+                   std::mutex m_mutex;
+   
+                   size_t m_head = 0;
+   
+                   size_t m_tail = 0;
+   
+                   bool m_full = false;
+           };
+       }  // namespace DataStructures
+   }  // namespace KML
+   
+   #include "RingBuffer.tcc"
+   
+   #endif  // __RING_BUFFER_H__

@@ -1,0 +1,56 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_summary_WindowedP2Quantile.h:
+
+Program Listing for File WindowedP2Quantile.h
+=============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_summary_WindowedP2Quantile.h>` (``KML/include/statistics/summary/WindowedP2Quantile.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __WINDOWED_P2_QUANTILE_H__
+   #define __WINDOWED_P2_QUANTILE_H__
+   
+   #include "IStreamingStatistic.h"
+   #include "StreamingP2Quantile.h"
+   
+   namespace KML
+   {
+       namespace Statistics
+       {
+           class WindowedP2Quantile : IStreamingStatistic<double>
+           {
+               public:
+                   explicit WindowedP2Quantile(const double& quantile, const size_t& windowSize = 0);
+   
+                   WindowedP2Quantile(const WindowedP2Quantile&) = delete;
+   
+                   WindowedP2Quantile& operator=(const WindowedP2Quantile&) = delete;
+   
+                   WindowedP2Quantile(WindowedP2Quantile&& other);
+   
+                   WindowedP2Quantile& operator=(WindowedP2Quantile&& rhs);
+   
+                   ~WindowedP2Quantile() override;
+   
+                   void update(const double& observation) override;
+                   using IStreamingStatistic<double>::update;
+   
+                   double evaluate() const override;
+                   using IStreamingStatistic<double>::evaluate;
+   
+               private:
+                   StreamingP2Quantile* m_p2;
+   
+                   double m_previous;
+           };
+       }  // namespace Statistics
+   }  // namespace KML
+   
+   #endif  // __WINDOWED_P2_QUANTILE_H__
+   

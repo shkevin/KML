@@ -1,0 +1,41 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _namespace_KML__DataStructures:
+
+Namespace KML::DataStructures
+=============================
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1IBin`
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1IDataStructure`
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1IStreamingHistogram`
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1LinkedList`
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1Node`
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1RingBuffer`
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1StreamingHistogram`
+
+
+Enums
+-----
+
+
+- :ref:`exhale_enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5`

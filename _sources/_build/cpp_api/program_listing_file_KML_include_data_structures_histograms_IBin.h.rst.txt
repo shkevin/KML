@@ -1,0 +1,68 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_data_structures_histograms_IBin.h:
+
+Program Listing for File IBin.h
+===============================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_data_structures_histograms_IBin.h>` (``KML/include/data_structures/histograms/IBin.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __HISTOGRAM_H__
+   #define __HISTOGRAM_H__
+   
+   #include <iostream>  // For printing
+   
+   #include "IBin.h"
+   #include "IDataStructure.h"
+   
+   namespace KML
+   {
+       namespace DataStructures
+       {
+           template<typename T = double>
+           class IBin
+           {
+               public:
+                   IBin(T left, T right, size_t count);
+   
+                   virtual ~IBin();
+   
+                   IBin(const IBin<T>& other);
+   
+                   IBin<T>& operator=(const IBin<T>& rhs);
+   
+                   IBin(IBin<T>&& other);
+   
+                   IBin<T>& operator=(IBin<T>&& rhs);
+   
+                   IBin<T> operator+(const IBin<T>& rhs) const;
+   
+                   IBin<T> operator+=(const IBin<T>& other);
+   
+                   bool operator<(const IBin<T>& rhs) const;
+   
+                   bool operator==(const IBin<T>& rhs) const;
+   
+                   template<typename F>
+                   friend std::ostream& operator<<(std::ostream& os, const IBin<F>& bin);
+   
+                   size_t getCount() const;
+   
+                   T m_left;
+   
+                   T m_right;
+   
+                   size_t m_count;
+           };  // IBin
+       }       // namespace DataStructures
+   }  // namespace KML
+   
+   #include "IBin.tcc"
+   
+   #endif  // __HISTOGRAM_H__

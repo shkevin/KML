@@ -1,0 +1,31 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_data_structures_Node.tcc:
+
+Program Listing for File Node.tcc
+=================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_data_structures_Node.tcc>` (``KML/include/data_structures/Node.tcc``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /*!
+    * @file Node.cc
+    * @brief Contains the templated implementation for the Node data structure class.
+    */
+   #include "Node.h"
+   
+   namespace KML
+   {
+       namespace DataStructures
+       {
+           template<typename T>
+           Node<T>::Node(const T& value) : m_value(value)
+           {
+               // Do nothing
+           }
+       }  // namespace DataStructures
+   }  // namespace KML

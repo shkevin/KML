@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class StreamingVariance &mdash; KML unknown version documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Class WindowedFAME" href="classKML_1_1Statistics_1_1WindowedFAME.html" />
+    <link rel="prev" title="Class StreamingP2Quantile" href="classKML_1_1Statistics_1_1StreamingP2Quantile.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #8d37d7" >
+            <a href="../../index.html" class="icon icon-home"> KML
+            <img src="../../_static/HQ 01-03-resized.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                unknown version
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../pages/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/about.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/about.html#why-kml">Why KML?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/install.html#python">Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../pages/modules.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../modules.html">Python API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html">C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/roadmap.html">Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/roadmap.html#long-term-objective">Long-term Objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/roadmap.html#new-functionality">New Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/roadmap.html#maintenance-related">Maintenance Related</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#process-for-contributing">Process for Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#coding-styles">Coding Styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#building-the-documentation">Building the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#licensing">Licensing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/release.html">Release Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/readme.html">README</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#building-python-docker">Building Python Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#roadmap">Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#project-leaders">Project leaders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#contact">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #8d37d7" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">KML</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../pages/modules.html">API</a></li>
+          <li class="breadcrumb-item"><a href="library_root.html">C++ API</a></li>
+      <li class="breadcrumb-item active">Class StreamingVariance</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/shkevin/KML" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="class-streamingvariance">
+<span id="exhale-class-classkml-1-1statistics-1-1streamingvariance"></span><h1>Class StreamingVariance<a class="headerlink" href="#class-streamingvariance" title="Permalink to this headline"></a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_KML_include_statistics_summary_StreamingVariance.h.html#file-kml-include-statistics-summary-streamingvariance-h"><span class="std std-ref">File StreamingVariance.h</span></a></p></li>
+</ul>
+<div class="contents local topic" id="page-contents">
+<p class="topic-title">Page Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#inheritance-relationships" id="id1">Inheritance Relationships</a></p>
+<ul>
+<li><p><a class="reference internal" href="#base-type" id="id2">Base Type</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#class-documentation" id="id3">Class Documentation</a></p></li>
+</ul>
+</div>
+<section id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline"></a></h2>
+<section id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">KML::Statistics::IStreamingStatistic&lt;</span> <span class="pre">double</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="classKML_1_1Statistics_1_1IStreamingStatistic.html#exhale-class-classkml-1-1statistics-1-1istreamingstatistic"><span class="std std-ref">Template Class IStreamingStatistic</span></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML10Statistics17StreamingVarianceE">
+<span class="target" id="classKML_1_1Statistics_1_1StreamingVariance"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StreamingVariance</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">KML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Statistics</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classKML_1_1Statistics_1_1IStreamingStatistic.html#_CPPv4I0EN3KML10Statistics19IStreamingStatisticE" title="KML::Statistics::IStreamingStatistic"><span class="n"><span class="pre">IStreamingStatistic</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N3KML10Statistics17StreamingVarianceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A <a class="reference internal" href="#classKML_1_1Statistics_1_1StreamingVariance"><span class="std std-ref">StreamingVariance</span></a> class for calculating the variance of a datastream. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML10Statistics17StreamingVariance17StreamingVarianceERK8uint64_t">
+<span class="target" id="classKML_1_1Statistics_1_1StreamingVariance_1ad2a4f57727c7870269dbc32e06592b86"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StreamingVariance</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">windowSize</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML10Statistics17StreamingVariance17StreamingVarianceERK8uint64_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Default Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>windowSize</strong> – The window size to calculate the streaming variance. This window size defaults to a window size of 0, meaning the variance is over the entire data stream. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML10Statistics17StreamingVariance17StreamingVarianceERK17StreamingVariance">
+<span class="target" id="classKML_1_1Statistics_1_1StreamingVariance_1a97eb761326fdab22ac25fac3691fa299"></span><span class="sig-name descname"><span class="n"><span class="pre">StreamingVariance</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N3KML10Statistics17StreamingVariance17StreamingVarianceERK17StreamingVariance" title="KML::Statistics::StreamingVariance::StreamingVariance"><span class="n"><span class="pre">StreamingVariance</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><a class="headerlink" href="#_CPPv4N3KML10Statistics17StreamingVariance17StreamingVarianceERK17StreamingVariance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Copy Constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML10Statistics17StreamingVarianceaSERK17StreamingVariance">
+<span class="target" id="classKML_1_1Statistics_1_1StreamingVariance_1a68c6fa5d1b578c0f64a20faea9f610c2"></span><a class="reference internal" href="#_CPPv4N3KML10Statistics17StreamingVarianceE" title="KML::Statistics::StreamingVariance"><span class="n"><span class="pre">StreamingVariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N3KML10Statistics17StreamingVarianceE" title="KML::Statistics::StreamingVariance"><span class="n"><span class="pre">StreamingVariance</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">delete</span></span><a class="headerlink" href="#_CPPv4N3KML10Statistics17StreamingVarianceaSERK17StreamingVariance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Copy Assignment Operator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML10Statistics17StreamingVariance17StreamingVarianceERR17StreamingVariance">
+<span class="target" id="classKML_1_1Statistics_1_1StreamingVariance_1a0feeff33ab5fbe017a08337e34c4a8fb"></span><span class="sig-name descname"><span class="n"><span class="pre">StreamingVariance</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3KML10Statistics17StreamingVariance17StreamingVarianceERR17StreamingVariance" title="KML::Statistics::StreamingVariance::StreamingVariance"><span class="n"><span class="pre">StreamingVariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML10Statistics17StreamingVariance17StreamingVarianceERR17StreamingVariance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Move Constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML10Statistics17StreamingVarianceaSERR17StreamingVariance">
+<span class="target" id="classKML_1_1Statistics_1_1StreamingVariance_1a81a924bb8983b604e4bf3ad2c98353ba"></span><a class="reference internal" href="#_CPPv4N3KML10Statistics17StreamingVarianceE" title="KML::Statistics::StreamingVariance"><span class="n"><span class="pre">StreamingVariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3KML10Statistics17StreamingVarianceE" title="KML::Statistics::StreamingVariance"><span class="n"><span class="pre">StreamingVariance</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML10Statistics17StreamingVarianceaSERR17StreamingVariance" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Move Assignment. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML10Statistics17StreamingVarianceD0Ev">
+<span class="target" id="classKML_1_1Statistics_1_1StreamingVariance_1a8e6c3415f1c1269f8afcf98b20867b71"></span><span class="sig-name descname"><span class="n"><span class="pre">~StreamingVariance</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N3KML10Statistics17StreamingVarianceD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML10Statistics17StreamingVariance6updateERKd">
+<span class="target" id="classKML_1_1Statistics_1_1StreamingVariance_1af0ebe9f430b06b89509980d0dd8c5946"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">observation</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N3KML10Statistics17StreamingVariance6updateERKd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Takes a single observation and updates the deriving class. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>observation</strong> – The observation used to update deriving class. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML10Statistics17StreamingVariance8evaluateEv">
+<span class="target" id="classKML_1_1Statistics_1_1StreamingVariance_1aaf0e861bf50fbbeee212177afd91d638"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">evaluate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK3KML10Statistics17StreamingVariance8evaluateEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Evaluate everything in the current window. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The deriving class evaluate. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classKML_1_1Statistics_1_1StreamingP2Quantile.html" class="btn btn-neutral float-left" title="Class StreamingP2Quantile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classKML_1_1Statistics_1_1WindowedFAME.html" class="btn btn-neutral float-right" title="Class WindowedFAME" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kevin Cox.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

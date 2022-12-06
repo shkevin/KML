@@ -1,0 +1,32 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_class_classKML_1_1Transformers_1_1ITransformer:
+
+Template Class ITransformer
+===========================
+
+- Defined in :ref:`file_KML_include_statistics_transformers_ITransformer.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Template Parameter Order
+------------------------
+
+#. ``typename T``
+
+
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: KML::Transformers::ITransformer
+   :project: kml
+   :members:
+   :protected-members:
+   :undoc-members:

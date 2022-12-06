@@ -1,0 +1,53 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_data_structures_IDataStructure.h:
+
+Program Listing for File IDataStructure.h
+=========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_data_structures_IDataStructure.h>` (``KML/include/data_structures/IDataStructure.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __DATA_STRUCTURE_H__
+   #define __DATA_STRUCTURE_H__
+   
+   #include <cstdint>
+   #include <vector>
+   
+   namespace KML
+   {
+       namespace DataStructures
+       {
+           template<typename T = double>
+           class IDataStructure
+           {
+               public:
+                   explicit IDataStructure(const size_t& windowSize);
+   
+                   virtual void update(const T& item) = 0;
+   
+                   virtual void update(const std::vector<T>& items);
+   
+                   virtual bool full() const = 0;
+   
+                   virtual bool empty() const = 0;
+   
+                   virtual size_t size() const = 0;
+   
+                   virtual void reset() = 0;
+   
+                   size_t m_windowSize;
+   
+                   size_t m_historyCount = 0;
+           };
+       }  // namespace DataStructures
+   }  // namespace KML
+   
+   #include "IDataStructure.tcc"
+   
+   #endif  // __DATA_STRUCTURE_H__

@@ -1,0 +1,83 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_data_structures_IDataStructure.h:
+
+File IDataStructure.h
+=====================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_data_structures>` (``KML/include/data_structures``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides interface for common data structures. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/data_structures/IDataStructure.h``)
+-------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_data_structures_IDataStructure.h.rst
+
+
+
+Detailed Description
+--------------------
+
+The data structure interface is supposed to represent any KML common data structure. Every data structure algorithm should inherit from this interface. 
+
+
+
+
+Includes
+--------
+
+
+- ``IDataStructure.tcc`` (:ref:`file_KML_include_data_structures_IDataStructure.tcc`)
+
+- ``cstdint``
+
+- ``vector``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_include_data_structures_histograms_IBin.h`
+
+- :ref:`file_KML_include_data_structures_histograms_IStreamingHistogram.h`
+
+- :ref:`file_KML_include_data_structures_LinkedList.h`
+
+- :ref:`file_KML_include_data_structures_RingBuffer.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__DataStructures`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1IDataStructure`
+

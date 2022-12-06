@@ -1,0 +1,46 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_summary_WindowedFAME.h:
+
+Program Listing for File WindowedFAME.h
+=======================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_summary_WindowedFAME.h>` (``KML/include/statistics/summary/WindowedFAME.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __WINDOWED_FAME_H__
+   #define __WINDOWED_FAME_H__
+   
+   #include "IStreamingStatistic.h"
+   
+   namespace KML
+   {
+       namespace Statistics
+       {
+           class WindowedFAME : public IStreamingStatistic<double>
+           {
+               public:
+                   explicit WindowedFAME(const double& stepSize = 0.1, const double& epsilon = 0.0);
+   
+                   void update(const double& observation) override;
+                   using IStreamingStatistic<double>::update;
+   
+                   double evaluate() const override;
+                   using IStreamingStatistic<double>::evaluate;
+   
+               private:
+                   double m_median = 0.0;
+   
+                   double m_stepSize = 0.0;
+   
+                   double m_epsilon = 0.0;
+           };
+       }  // namespace Statistics
+   }  // namespace KML
+   
+   #endif  // __WINDOWED_FAME_H__

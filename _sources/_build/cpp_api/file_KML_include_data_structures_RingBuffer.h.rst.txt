@@ -1,0 +1,73 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_data_structures_RingBuffer.h:
+
+File RingBuffer.h
+=================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_data_structures>` (``KML/include/data_structures``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides the declarations for the ring buffer data structure. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/data_structures/RingBuffer.h``)
+---------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_data_structures_RingBuffer.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``IDataStructure.h`` (:ref:`file_KML_include_data_structures_IDataStructure.h`)
+
+- ``RingBuffer.tcc`` (:ref:`file_KML_include_data_structures_RingBuffer.tcc`)
+
+- ``cstdint``
+
+- ``functional``
+
+- ``memory``
+
+- ``mutex``
+
+- ``vector``
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__DataStructures`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1RingBuffer`
+

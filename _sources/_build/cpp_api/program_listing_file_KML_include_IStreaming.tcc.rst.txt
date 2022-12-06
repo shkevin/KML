@@ -1,0 +1,51 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_IStreaming.tcc:
+
+Program Listing for File IStreaming.tcc
+=======================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_IStreaming.tcc>` (``KML/include/IStreaming.tcc``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /*!
+    * @file IStreaming.tcc
+    * @brief Contains the templated implementation for the abstract streaming class.
+    */
+   namespace KML
+   {
+       template<typename T>
+       IStreaming<T>::IStreaming(const size_t& windowSize)
+           : m_window(nullptr), m_windowSize(windowSize), m_historyCount(0)
+       {
+           if (m_windowSize > 0)
+           {
+               m_window = new std::deque<T>();
+           }
+       }
+   
+       template<typename T>
+       IStreaming<T>::~IStreaming()
+       {
+           delete m_window;
+       }
+   
+       template<typename T>
+       void IStreaming<T>::update(const std::vector<T>& observations)
+       {
+           for (auto it = observations.begin(); it != observations.end(); it++)
+           {
+               this->update(*it);
+           }
+       }
+   
+       template<typename T>
+       std::deque<T>* IStreaming<T>::getWindow()
+       {
+           return m_window;
+       }
+   }  // namespace KML

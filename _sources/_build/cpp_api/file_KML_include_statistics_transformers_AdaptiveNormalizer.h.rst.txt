@@ -1,0 +1,67 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_statistics_transformers_AdaptiveNormalizer.h:
+
+File AdaptiveNormalizer.h
+=========================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_statistics_transformers>` (``KML/include/statistics/transformers``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides declarations for adaptive normalization. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/statistics/transformers/AdaptiveNormalizer.h``)
+-------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_statistics_transformers_AdaptiveNormalizer.h.rst
+
+
+
+Detailed Description
+--------------------
+
+Reference: https://arxiv.org/ftp/arxiv/papers/1910/1910.07696.pdf 
+
+
+
+
+Includes
+--------
+
+
+- ``ITransformer.h`` (:ref:`file_KML_include_statistics_transformers_ITransformer.h`)
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Transformers`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Transformers_1_1AdaptiveNormalizer`
+

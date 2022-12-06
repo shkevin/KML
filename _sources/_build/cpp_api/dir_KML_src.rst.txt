@@ -1,0 +1,25 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _dir_KML_src:
+
+
+Directory src
+=============
+
+
+|exhale_lsh| :ref:`Parent directory <dir_KML>` (``KML``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+*Directory path:* ``KML/src``
+
+Subdirectories
+--------------
+
+- :ref:`dir_KML_src_metrics`
+- :ref:`dir_KML_src_statistics`
+- :ref:`dir_KML_src_utils`
+
+
+

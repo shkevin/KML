@@ -1,0 +1,24 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _namespace_KML__Metrics:
+
+Namespace KML::Metrics
+======================
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Metrics_1_1IMetric`
+
+- :ref:`exhale_class_classKML_1_1Metrics_1_1StreamingMAD`

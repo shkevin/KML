@@ -1,0 +1,40 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_metrics_IMetric.tcc:
+
+File IMetric.tcc
+================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_metrics>` (``KML/include/metrics``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/metrics/IMetric.tcc``)
+------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_metrics_IMetric.tcc.rst
+
+
+
+
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_include_metrics_IMetric.h`
+
+
+

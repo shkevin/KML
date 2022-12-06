@@ -1,0 +1,37 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_utils_Utils.h:
+
+Program Listing for File Utils.h
+================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_utils_Utils.h>` (``KML/include/utils/Utils.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #ifndef __UTILS_H__
+   #define __UTILS_H__
+   
+   #include <vector>
+   
+   namespace KML
+   {
+       namespace Utils
+       {
+           bool approximatelyEqual(const double& a, const double& b, const double& epsilon = 0.0001);
+   
+           bool essentiallyEqual(const double& a, const double& b, const double& epsilon = 0.0001);
+   
+           bool definitelyGreaterThan(const double& a, const double& b,
+                                      const double& epsilon = 0.0001);
+   
+           bool definitelyLessThan(const double& a, const double& b, const double& epsilon = 0.0001);
+   
+           double xlogx(const double& item);
+       }  // namespace Utils
+   }  // namespace KML
+   
+   #endif  // __UTILS_H__

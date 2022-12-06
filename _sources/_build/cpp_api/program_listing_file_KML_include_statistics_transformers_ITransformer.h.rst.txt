@@ -1,0 +1,53 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_transformers_ITransformer.h:
+
+Program Listing for File ITransformer.h
+=======================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_transformers_ITransformer.h>` (``KML/include/statistics/transformers/ITransformer.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_TRANSFORMER_H__
+   #define __STREAMING_TRANSFORMER_H__
+   
+   #include "vector"
+   
+   namespace KML
+   {
+       namespace Transformers
+       {
+   
+           template<typename T = double>
+           class ITransformer
+           {
+               public:
+                   ITransformer();
+   
+                   ITransformer(const ITransformer& a_rhs) = delete;
+   
+                   ITransformer<T>& operator=(const ITransformer& a_rhs) = delete;
+   
+                   ITransformer(ITransformer<T>&& other);
+   
+                   ITransformer<T>& operator=(ITransformer<T>&& rhs);
+   
+                   virtual ~ITransformer();
+   
+                   virtual void fit(const T& observation) = 0;
+   
+                   virtual void fit(const std::vector<T>& observations);
+   
+                   virtual T transform(const T& observation) = 0;
+   
+                   virtual std::vector<T>& transform(const std::vector<T>& observations);
+           };
+       }  // namespace Transformers
+   }  // namespace KML
+   
+   #endif  // __STREAMING_TRANSFORMER_H__

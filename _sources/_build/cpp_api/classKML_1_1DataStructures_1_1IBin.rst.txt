@@ -1,0 +1,32 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_class_classKML_1_1DataStructures_1_1IBin:
+
+Template Class IBin
+===================
+
+- Defined in :ref:`file_KML_include_data_structures_histograms_IBin.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Template Parameter Order
+------------------------
+
+#. ``typename T``
+
+
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: KML::DataStructures::IBin
+   :project: kml
+   :members:
+   :protected-members:
+   :undoc-members:

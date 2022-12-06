@@ -1,0 +1,16 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_function_Utils_8h_1aa001cc5572df708041983a7dc6a2e33d:
+
+Function KML::Utils::definitelyLessThan
+=======================================
+
+- Defined in :ref:`file_KML_src_utils_Utils.cc`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: KML::Utils::definitelyLessThan(const double&, const double&, const double&)
+   :project: kml

@@ -1,0 +1,15 @@
+kml.statistics package
+======================
+
+.. automodule:: kml.statistics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. Subpackages
+.. -----------
+
+.. toctree::
+   :maxdepth: 4
+
+   kml.statistics.summary

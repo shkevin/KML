@@ -1,0 +1,29 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _dir_KML_src_statistics_summary:
+
+
+Directory summary
+=================
+
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_src_statistics>` (``KML/src/statistics``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+*Directory path:* ``KML/src/statistics/summary``
+
+
+Files
+-----
+
+- :ref:`file_KML_src_statistics_summary_StreamingEntropy.cc`
+- :ref:`file_KML_src_statistics_summary_StreamingIQR.cc`
+- :ref:`file_KML_src_statistics_summary_StreamingMean.cc`
+- :ref:`file_KML_src_statistics_summary_StreamingP2Quantile.cc`
+- :ref:`file_KML_src_statistics_summary_StreamingVariance.cc`
+- :ref:`file_KML_src_statistics_summary_WindowedFAME.cc`
+- :ref:`file_KML_src_statistics_summary_WindowedP2Quantile.cc`
+
+

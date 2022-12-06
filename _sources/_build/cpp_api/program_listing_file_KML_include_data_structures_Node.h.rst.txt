@@ -1,0 +1,42 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_data_structures_Node.h:
+
+Program Listing for File Node.h
+===============================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_data_structures_Node.h>` (``KML/include/data_structures/Node.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __NODE_H__
+   #define __NODE_H__
+   
+   #include <cstdint>
+   
+   namespace KML
+   {
+       namespace DataStructures
+       {
+           template<typename T = double>
+           class Node
+           {
+               public:
+                   explicit Node(const T &value);
+   
+                   T m_value;
+   
+                   Node *m_next = nullptr;
+   
+                   Node *m_previous = nullptr;
+           };
+       }  // namespace DataStructures
+   }  // namespace KML
+   
+   #include "Node.tcc"
+   
+   #endif  // __NODE_H__

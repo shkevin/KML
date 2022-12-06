@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kml.data_structures.histograms package &mdash; KML unknown version documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="kml.metrics package" href="kml.metrics.html" />
+    <link rel="prev" title="kml.data_structures package" href="kml.data_structures.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #8d37d7" >
+            <a href="../index.html" class="icon icon-home"> KML
+            <img src="../_static/HQ 01-03-resized.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                unknown version
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pages/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/about.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/about.html#why-kml">Why KML?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/install.html#python">Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../pages/modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Python API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp_api/library_root.html">C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/roadmap.html">Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/roadmap.html#long-term-objective">Long-term Objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/roadmap.html#new-functionality">New Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/roadmap.html#maintenance-related">Maintenance Related</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#process-for-contributing">Process for Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#coding-styles">Coding Styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#building-the-documentation">Building the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#licensing">Licensing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/release.html">Release Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/readme.html">README</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#building-python-docker">Building Python Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#roadmap">Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#project-leaders">Project leaders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#contact">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #8d37d7" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">KML</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../pages/modules.html">API</a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Python API</a></li>
+          <li class="breadcrumb-item"><a href="kml.html">kml package</a></li>
+          <li class="breadcrumb-item"><a href="kml.data_structures.html">kml.data_structures package</a></li>
+      <li class="breadcrumb-item active">kml.data_structures.histograms package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_build/kml.data_structures.histograms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-kml.data_structures.histograms">
+<span id="kml-data-structures-histograms-package"></span><h1>kml.data_structures.histograms package<a class="headerlink" href="#module-kml.data_structures.histograms" title="Permalink to this headline"></a></h1>
+<p>KML Streaming Histograms.</p>
+<p>The KML streaming histograms module attempts to define common histograms used in
+streaming analyltics.</p>
+<section id="module-kml.data_structures.histograms.StreamingHistogram">
+<span id="kml-data-structures-histograms-streaminghistogram-module"></span><h2>kml.data_structures.histograms.StreamingHistogram module<a class="headerlink" href="#module-kml.data_structures.histograms.StreamingHistogram" title="Permalink to this headline"></a></h2>
+<p>StreamingHistogram Cython wrapper module for C++.</p>
+<p>This module is used to wrap the C++ StreamingHistogram implemtation.
+This module specifically uses the double generic template. This histogram
+implementation is an altered variant of the Ben-Haim and Tom-Tov histogram
+implementation.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kml.data_structures.histograms.StreamingHistogram</span> <span class="kn">import</span> <span class="n">PyStreamingHistogram</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">PyStreamingHistogram</span><span class="p">(</span><span class="n">num_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">window_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">SH</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">SH</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>Histogram - <a class="reference external" href="https://jmlr.csail.mit.edu/papers/volume11/ben-haim10a/ben-haim10a.pdf">https://jmlr.csail.mit.edu/papers/volume11/ben-haim10a/ben-haim10a.pdf</a></p></li>
+<li><p>Quantile Estimation - <a class="reference external" href="https://arxiv.org/pdf/1712.02476.pdf">https://arxiv.org/pdf/1712.02476.pdf</a></p></li>
+<li><p>Exponential Histogram - <a class="reference external" href="https://randorithms.com/2022/01/31/streaming-histograms.html">https://randorithms.com/2022/01/31/streaming-histograms.html</a></p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kml.data_structures.histograms.StreamingHistogram.</span></span><span class="sig-name descname"><span class="pre">PyStreamingHistogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decay_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">DecayType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">WINDOW</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class containing the StreamingHistogram implemenation in Cython.</p>
+<p>StreamingHistogram wrapper for the C++ StreamingHistogram class.
+This code contains the public interface usage for the StreamingHistogram
+data structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_bins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Number of bins the histogram should have.</p></li>
+<li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Desired window size for StreamingHistogram. Defaults to 100.</p></li>
+<li><p><strong>decay_type</strong> (<em>DecayType</em><em>, </em><em>optional</em>) – How to decay the counts when outside of scope.</p></li>
+<li><p><strong>c_SH</strong> (<em>StreamingHistogram</em><em>[</em><em>double</em><em>]</em><em>*</em>) – Pointer to the C++ StreamingHistogram implementation.</p></li>
+<li><p><strong>num_bins</strong> – Number of bins the histogram should have.</p></li>
+<li><p><strong>window_size</strong> – Desired window size for StreamingHistogram. Defaults to 100.</p></li>
+<li><p><strong>decay_type</strong> – How to decay the counts when outside of scope.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.bin_counts">
+<span class="sig-name descname"><span class="pre">bin_counts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">vector</span><span class="p"><span class="pre">[</span></span><span class="pre">uint64_t</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.bin_counts" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the current bin counts in the Histogram.</p>
+<p>Retrieve the current bin counts for each bin the current histogram.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The frequency counts for each bin.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>vector[size_t]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool</span> <span class="pre">normalize:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">vector</span><span class="p"><span class="pre">[</span></span><span class="pre">double</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.cdf" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the Cumulatitive Density Function of the Histogram.</p>
+<p>Calculate the Cumulatitive Density (CDF) of the Histogram. If the normalize
+option is true, this will normalie the CDF by the number of items in the
+window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – Normalize the CDF by the number of items
+in the current window.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The CDF of the current histogram.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>vector[double]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.empty">
+<span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.empty" title="Permalink to this definition"></a></dt>
+<dd><p>Determine if this StreamingHistogram is empty.</p>
+<p>Return a boolean value that showcases whether this StreamingHistogram contains
+any elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If StreamingHistogram is empty.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.full">
+<span class="sig-name descname"><span class="pre">full</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.full" title="Permalink to this definition"></a></dt>
+<dd><p>Determine if this StreamingHistogram is has window_size elements.</p>
+<p>Determine if this StreamingHistogram is full based off of the specified
+user input window_size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If StreamingHistogram is full (window_size).</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool</span> <span class="pre">normalize:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool</span> <span class="pre">density:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">vector</span><span class="p"><span class="pre">[</span></span><span class="pre">double</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.pdf" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the approximate PDF of the histogram.</p>
+<p>Calculate the approximate probability density function (PDF)
+for this histogram. The output can be normalized or calculated
+as the density based off of user input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to normalize the counts by the
+the number of items in the window..</p></li>
+<li><p><strong>density</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – Whether to calculate the histogram
+density from the frequency counts.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The counts of the histogram.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>vector[double]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.quantile">
+<span class="sig-name descname"><span class="pre">quantile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">double</span> <span class="pre">q_tile:</span> <span class="pre">double</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">double</span></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.quantile" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the bin edge that represents the input quantile value.</p>
+<p>Calculate the bin edge that represents the input quantile value. This
+quantile calculation is a rough approximation, based off of the Tille-
+Langel histogram quantile estimation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>q_tile</strong> (<em>double</em>) – Which quantile to estimate.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The bin edge representing the given quantile.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>double</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.report">
+<span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">map</span><span class="p"><span class="pre">[</span></span><span class="pre">pair</span><span class="p"><span class="pre">[</span></span><span class="pre">double</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">double</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">uint64_t</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.report" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the histogram report.</p>
+<p>Retrieve the histogram report that contains the bin boundaries
+and the associated bin boundaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Histogram report.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>map[pair[double, double], size_t]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.reset" title="Permalink to this definition"></a></dt>
+<dd><p>Reset this StreamingHistogram to empty.</p>
+<p>Reset will completely remove all elements in the current StreamingHistogram.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.size">
+<span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.size" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the current number of nodes.</p>
+<p>Retrieve the current number of nodes in this StreamingHistogram.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Size of StreamingHistogram.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.data_structures.histograms.StreamingHistogram.PyStreamingHistogram.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the Histogram with the given item.</p>
+<p>Update the streaming Histogram with the given item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> (<em>double</em><em>, </em><em>Iterable</em>) – Item to add to histogram.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="kml.data_structures.html" class="btn btn-neutral float-left" title="kml.data_structures package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="kml.metrics.html" class="btn btn-neutral float-right" title="kml.metrics package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kevin Cox.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

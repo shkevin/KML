@@ -1,0 +1,48 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_transformers_ITransformer.tcc:
+
+Program Listing for File ITransformer.tcc
+=========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_transformers_ITransformer.tcc>` (``KML/include/statistics/transformers/ITransformer.tcc``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /*!
+    * @file  ITransformers.tcc
+    * @brief Contains the templated implementation for the abstract transformer class.
+    */
+   namespace KML
+   {
+       namespace Transformers
+       {
+           template<typename T>
+           ITransformers<T>::ITransformer()
+           {
+               // Do nothing
+           }
+   
+           template<typename T>
+           void ITransformers<T>::fit(const std::vector<T>& observations)
+           {
+               for (auto it = observations.begin(); it != observations.end(); it++)
+               {
+                   this->fit(*it);
+               }
+           }
+   
+           template<typename T>
+           std::vector<T>& observations
+           ITransformers<T>::transform(const std::vector<T>& observations)
+           {
+               for (auto it = observations.begin(); it != observations.end(); it++)
+               {
+                   this->transform(*it);
+               }
+           }
+       }  // namespace Transformers
+   }  // namespace KML

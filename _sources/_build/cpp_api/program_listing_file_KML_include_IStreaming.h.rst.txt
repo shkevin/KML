@@ -1,0 +1,60 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_IStreaming.h:
+
+Program Listing for File IStreaming.h
+=====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_IStreaming.h>` (``KML/include/IStreaming.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_H__
+   #define __STREAMING_H__
+   
+   #include <cstddef>
+   #include <cstdint>
+   #include <deque>
+   #include <vector>
+   
+   namespace KML
+   {
+       template<typename T = double>
+       class IStreaming
+       {
+           public:
+               explicit IStreaming(const size_t& windowSize = 0);
+   
+               IStreaming(const IStreaming& a_rhs) = delete;
+   
+               IStreaming& operator=(const IStreaming& a_rhs) = delete;
+   
+               IStreaming(IStreaming<T>&& other);
+   
+               IStreaming<T>& operator=(IStreaming<T>&& rhs);
+   
+               virtual ~IStreaming();
+   
+               virtual void update(const T& observation) = 0;
+   
+               virtual void update(const std::vector<T>& observations);
+   
+               virtual double evaluate() const = 0;
+   
+               virtual std::deque<T>* getWindow();
+   
+               std::deque<T>* m_window;
+   
+               const size_t m_windowSize;
+   
+               size_t m_historyCount = 0;
+       };
+   }  // namespace KML
+   
+   #include "IStreaming.tcc"
+   
+   #endif  // __STREAMING_H__

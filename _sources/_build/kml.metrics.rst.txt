@@ -1,0 +1,18 @@
+kml.metrics package
+===================
+
+.. automodule:: kml.metrics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. Submodules
+.. ----------
+
+kml.metrics.StreamingMAD module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: kml.metrics.StreamingMAD
+   :members:
+   :undoc-members:
+   :show-inheritance:

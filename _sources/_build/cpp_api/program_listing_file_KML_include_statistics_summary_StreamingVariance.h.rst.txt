@@ -1,0 +1,55 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_summary_StreamingVariance.h:
+
+Program Listing for File StreamingVariance.h
+============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_summary_StreamingVariance.h>` (``KML/include/statistics/summary/StreamingVariance.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_VARIANCE_H__
+   #define __STREAMING_VARIANCE_H__
+   
+   #include "IStreamingStatistic.h"
+   #include "StreamingMean.h"
+   
+   namespace KML
+   {
+       namespace Statistics
+       {
+           class StreamingVariance : public IStreamingStatistic<double>
+           {
+               public:
+                   explicit StreamingVariance(const uint64_t& windowSize = 0);
+   
+                   StreamingVariance(const StreamingVariance&) = delete;
+   
+                   StreamingVariance& operator=(const StreamingVariance&) = delete;
+   
+                   StreamingVariance(StreamingVariance&& other);
+   
+                   StreamingVariance& operator=(StreamingVariance&& rhs);
+   
+                   ~StreamingVariance() override;
+   
+                   void update(const double& observation) override;
+                   using IStreamingStatistic<double>::update;
+   
+                   double evaluate() const override;
+                   using IStreamingStatistic<double>::evaluate;
+   
+               private:
+                   StreamingMean* m_mean;
+   
+                   StreamingMean* m_sumSquared;
+           };
+       }  // namespace Statistics
+   }  // namespace KML
+   
+   #endif  // __STREAMING_VARIANCE_H__

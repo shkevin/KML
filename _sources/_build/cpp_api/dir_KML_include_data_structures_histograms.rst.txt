@@ -1,0 +1,28 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _dir_KML_include_data_structures_histograms:
+
+
+Directory histograms
+====================
+
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_data_structures>` (``KML/include/data_structures``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+*Directory path:* ``KML/include/data_structures/histograms``
+
+
+Files
+-----
+
+- :ref:`file_KML_include_data_structures_histograms_IBin.h`
+- :ref:`file_KML_include_data_structures_histograms_IBin.tcc`
+- :ref:`file_KML_include_data_structures_histograms_IStreamingHistogram.h`
+- :ref:`file_KML_include_data_structures_histograms_IStreamingHistogram.tcc`
+- :ref:`file_KML_include_data_structures_histograms_StreamingHistogram.h`
+- :ref:`file_KML_include_data_structures_histograms_StreamingHistogram.tcc`
+
+

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Template Class IStreamingHistogram &mdash; KML unknown version documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Template Class LinkedList" href="classKML_1_1DataStructures_1_1LinkedList.html" />
+    <link rel="prev" title="Template Class IDataStructure" href="classKML_1_1DataStructures_1_1IDataStructure.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #8d37d7" >
+            <a href="../../index.html" class="icon icon-home"> KML
+            <img src="../../_static/HQ 01-03-resized.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                unknown version
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../pages/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/about.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/about.html#why-kml">Why KML?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/install.html#python">Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../pages/modules.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../modules.html">Python API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_root.html">C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/roadmap.html">Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/roadmap.html#long-term-objective">Long-term Objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/roadmap.html#new-functionality">New Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/roadmap.html#maintenance-related">Maintenance Related</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#process-for-contributing">Process for Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#coding-styles">Coding Styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#building-the-documentation">Building the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#licensing">Licensing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/release.html">Release Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/readme.html">README</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#building-python-docker">Building Python Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#roadmap">Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#project-leaders">Project leaders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#contact">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #8d37d7" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">KML</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../pages/modules.html">API</a></li>
+          <li class="breadcrumb-item"><a href="library_root.html">C++ API</a></li>
+      <li class="breadcrumb-item active">Template Class IStreamingHistogram</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/shkevin/KML" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="template-class-istreaminghistogram">
+<span id="exhale-class-classkml-1-1datastructures-1-1istreaminghistogram"></span><h1>Template Class IStreamingHistogram<a class="headerlink" href="#template-class-istreaminghistogram" title="Permalink to this headline"></a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_KML_include_data_structures_histograms_IStreamingHistogram.h.html#file-kml-include-data-structures-histograms-istreaminghistogram-h"><span class="std std-ref">File IStreamingHistogram.h</span></a></p></li>
+</ul>
+<div class="contents local topic" id="page-contents">
+<p class="topic-title">Page Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#inheritance-relationships" id="id1">Inheritance Relationships</a></p>
+<ul>
+<li><p><a class="reference internal" href="#base-type" id="id2">Base Type</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#template-parameter-order" id="id3">Template Parameter Order</a></p></li>
+<li><p><a class="reference internal" href="#class-documentation" id="id4">Class Documentation</a></p></li>
+</ul>
+</div>
+<section id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline"></a></h2>
+<section id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">KML::DataStructures::IDataStructure&lt;</span> <span class="pre">double</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="classKML_1_1DataStructures_1_1IDataStructure.html#exhale-class-classkml-1-1datastructures-1-1idatastructure"><span class="std std-ref">Template Class IDataStructure</span></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="template-parameter-order">
+<h2>Template Parameter Order<a class="headerlink" href="#template-parameter-order" title="Permalink to this headline"></a></h2>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">typename</span> <span class="pre">T</span></code></p></li>
+</ol>
+</section>
+<section id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE">
+<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IStreamingHistogram</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">KML</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">DataStructures</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classKML_1_1DataStructures_1_1IDataStructure.html#_CPPv4I0EN3KML14DataStructures14IDataStructureE" title="KML::DataStructures::IDataStructure"><span class="n"><span class="pre">IDataStructure</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>An Abstract Histogram interface for streaming histograms. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogram19IStreamingHistogramERK6size_tRK6size_tRK9DecayType">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1ac5239055c6fef2844addabd7ea744edf"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IStreamingHistogram</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">numBins</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">windowSize</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">100</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5.html#_CPPv4N3KML14DataStructures9DecayTypeE" title="KML::DataStructures::DecayType"><span class="n"><span class="pre">DecayType</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">decay</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5.html#_CPPv4N3KML14DataStructures9DecayTypeE" title="KML::DataStructures::DecayType"><span class="n"><span class="pre">DecayType</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5.html#_CPPv4N3KML14DataStructures9DecayType6WINDOWE" title="KML::DataStructures::DecayType::WINDOW"><span class="n"><span class="pre">WINDOW</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram19IStreamingHistogramERK6size_tRK6size_tRK9DecayType" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Default Constructor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numBins</strong> – Number of bins the Histogram should maintain. </p></li>
+<li><p><strong>windowSize</strong> – Desired window size of Histogram. This helps with data drift. </p></li>
+<li><p><strong>decay</strong> – How to decay the counts. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogram19IStreamingHistogramERK19IStreamingHistogramI1TE">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1aee97cab438511a75bb729072d8d14b99"></span><span class="sig-name descname"><span class="n"><span class="pre">IStreamingHistogram</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram19IStreamingHistogramERK19IStreamingHistogramI1TE" title="KML::DataStructures::IStreamingHistogram::IStreamingHistogram"><span class="n"><span class="pre">IStreamingHistogram</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram19IStreamingHistogramERK19IStreamingHistogramI1TE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Copy Constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogramaSERK19IStreamingHistogramI1TE">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1abbe6d8201088217ba6f87991f58f1d94"></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram"><span class="n"><span class="pre">IStreamingHistogram</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram"><span class="n"><span class="pre">IStreamingHistogram</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogramaSERK19IStreamingHistogramI1TE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Copy Assignment. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogram19IStreamingHistogramERR19IStreamingHistogramI1TE">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a5cecedd7840bd64ba1df5745edffb57e"></span><span class="sig-name descname"><span class="n"><span class="pre">IStreamingHistogram</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram19IStreamingHistogramERR19IStreamingHistogramI1TE" title="KML::DataStructures::IStreamingHistogram::IStreamingHistogram"><span class="n"><span class="pre">IStreamingHistogram</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram19IStreamingHistogramERR19IStreamingHistogramI1TE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Move Constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogramaSERR19IStreamingHistogramI1TE">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a1aa0d88d22647bf4104dd22cf5f6b092"></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram"><span class="n"><span class="pre">IStreamingHistogram</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram"><span class="n"><span class="pre">IStreamingHistogram</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogramaSERR19IStreamingHistogramI1TE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Move Assignment. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogramD0Ev">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a07991c13d6483711da8e6ac962588b3b"></span><span class="sig-name descname"><span class="n"><span class="pre">~IStreamingHistogram</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogramD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Default Destructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram4fullEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1ac4ecf3e197cd19b76bb8443f6f0342ee"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">full</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram4fullEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if the Linked List is full. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram5emptyEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a34bdf1f35c68ab5b0f170584610c9a9f"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram5emptyEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determine if the Linked List is empty. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram4sizeEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a90769d855ba4ff829d877ff7a75222cf"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram4sizeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Retrieve the current number of nodes in the list. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogram5resetEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1ada584dbc935c193e99c469e39104a7a9"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reset</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram5resetEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Completely reset the linked list. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram9binSearchERK4IBinI1TE">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a4819aace353706a906b7b7397e610340"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binSearch</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="classKML_1_1DataStructures_1_1IBin.html#_CPPv4I0EN3KML14DataStructures4IBinE" title="KML::DataStructures::IBin"><span class="n"><span class="pre">IBin</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">bin</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram9binSearchERK4IBinI1TE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the index where the given bin should be inserted. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bin</strong> – The bin to find where to place in histogram. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram9binSearchERK1T">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a6ab0bc77372875f330fe5634a86d32db"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binSearch</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">item</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram9binSearchERK1T" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the index where the given item should be inserted. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> – The item to find where to place in histogram. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram3pdfERKbRKb">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a91c56a07d3ab3c67469fedb29cebb6be"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pdf</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">normalize</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">density</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram3pdfERKbRKb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Calculate the approximate pdf from the histogram. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>normalize</strong> – Get the window normalized counts. </p></li>
+<li><p><strong>density</strong> – Calculate the density of the histogram. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram3cdfERKb">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a092484dcab817b4fd3216ba29f844489"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cdf</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">normalize</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram3cdfERKb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Calcualte the approximate cdf of bin counts. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>normalize</strong> – Normalize the counts by the window. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram8quantileERKd">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1afc853edfb08054ec621430c4fd8c365c"></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">quantile</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">qtile</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram8quantileERKd" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the bin edge corresponding to the pth percentile. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>qtile</strong> – Which quantile to estimate. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogram3addERK1T">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1ad513fdc3b6f11771dc217fe1ab8d8c9c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">item</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram3addERK1T" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add the given bin to the histogram. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> – Item to add in histogram. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram9binCountsEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a1eaefa8e6edb04a4c36c3c2ea817660c"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">binCounts</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram9binCountsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Retrieve the counts for each bin. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogram6reportEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a08555e36bf6d596aed583237b9087ffc"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">double</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">report</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram6reportEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Retrieve the bin boundaries and bin counts of the histogram. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogram11decayCountsEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1abd775d6f081e2e39b3fc08fe4240a97d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">decayCounts</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram11decayCountsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Decrease the count of an item outside of window. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram13getTotalCountEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a283cd90fb3e800fbc5d1ee6c9bd5f23b"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getTotalCount</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram13getTotalCountEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the total number of items across all bins. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram6getBinE6size_t">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a7bee23c1b3b8b62487fca29ef6839590"></span><a class="reference internal" href="classKML_1_1DataStructures_1_1IBin.html#_CPPv4I0EN3KML14DataStructures4IBinE" title="KML::DataStructures::IBin"><span class="n"><span class="pre">IBin</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getBin</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram6getBinE6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get bin at the given index. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> – Which bin to get from the histogram. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram9getWindowEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a63c81d639c25db12e778298900fdd1de"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">deque</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">getWindow</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram9getWindowEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the current window for the histogram. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3KML14DataStructures19IStreamingHistogram9mergeBinsERK6size_tRK6size_t">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1ac0be279e291fa91e9916f5d088f62fad"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mergeBins</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">lhs</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3KML14DataStructures19IStreamingHistogram9mergeBinsERK6size_tRK6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Merge the two bins by index. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lhs</strong> – Left most bin, with left bin boundary. </p></li>
+<li><p><strong>rhs</strong> – Right most bin, with right bin boundary. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram17getCurrentNumBinsEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1af1a9a4fa80100c1febf985cda1ebbc50"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getCurrentNumBins</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram17getCurrentNumBinsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the current number of bins in the histogram. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram10getNumBinsEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a954914ee790f8d22605418571b00ed26"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getNumBins</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram10getNumBinsEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the current number of bins in the histogram. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3KML14DataStructures19IStreamingHistogram12getDecayTypeEv">
+<span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1a62d2d9a8f419ba13d1055fc59d62ad27"></span><a class="reference internal" href="enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5.html#_CPPv4N3KML14DataStructures9DecayTypeE" title="KML::DataStructures::DecayType"><span class="n"><span class="pre">DecayType</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getDecayType</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3KML14DataStructures19IStreamingHistogram12getDecayTypeEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the set decay type. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN3KML14DataStructures19IStreamingHistogramlsERNSt7ostreamERNSt7ostreamERK19IStreamingHistogramI1FE">
+<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">F</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classKML_1_1DataStructures_1_1IStreamingHistogram_1adfb62b34b40ee753abd527c0f9d089e0"></span><span class="k"><span class="pre">friend</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">os</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramE" title="KML::DataStructures::IStreamingHistogram"><span class="n"><span class="pre">IStreamingHistogram</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramlsERNSt7ostreamERNSt7ostreamERK19IStreamingHistogramI1FE" title="KML::DataStructures::IStreamingHistogram::operator&lt;&lt;::F"><span class="n"><span class="pre">F</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hist</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN3KML14DataStructures19IStreamingHistogramlsERNSt7ostreamERNSt7ostreamERK19IStreamingHistogramI1FE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Print Operator. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="classKML_1_1DataStructures_1_1IDataStructure.html" class="btn btn-neutral float-left" title="Template Class IDataStructure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classKML_1_1DataStructures_1_1LinkedList.html" class="btn btn-neutral float-right" title="Template Class LinkedList" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kevin Cox.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

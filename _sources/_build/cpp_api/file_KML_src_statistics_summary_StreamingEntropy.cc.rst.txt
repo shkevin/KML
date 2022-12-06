@@ -1,0 +1,66 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_src_statistics_summary_StreamingEntropy.cc:
+
+File StreamingEntropy.cc
+========================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_src_statistics_summary>` (``KML/src/statistics/summary``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Contains the implementation of the StreamingEntropy calculation. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/src/statistics/summary/StreamingEntropy.cc``)
+---------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_src_statistics_summary_StreamingEntropy.cc.rst
+
+
+
+Detailed Description
+--------------------
+
+This implementation currently uses a variable width bin histogram. The entropy calculation would most likely be more accurate if this was changed.
+
+This class contains the Streaming Entropy calculation adapted from: https://arxiv.org/pdf/1403.6348.pdf 
+
+
+
+
+Includes
+--------
+
+
+- ``StreamingEntropy.h`` (:ref:`file_KML_include_statistics_summary_StreamingEntropy.h`)
+
+- ``Utils.h`` (:ref:`file_KML_include_utils_Utils.h`)
+
+- ``cmath``
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Statistics`
+

@@ -1,0 +1,72 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_utils_Utils.h:
+
+File Utils.h
+============
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_utils>` (``KML/include/utils``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/utils/Utils.h``)
+------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_utils_Utils.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``vector``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_src_statistics_summary_StreamingEntropy.cc`
+
+- :ref:`file_KML_src_utils_Utils.cc`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Utils`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_Utils_8h_1adb3e751390ae418164308cdf62e7bf60`
+
+- :ref:`exhale_function_Utils_8h_1a509627e1608d10a9d33c102075c23f8d`
+
+- :ref:`exhale_function_Utils_8h_1aa001cc5572df708041983a7dc6a2e33d`
+
+- :ref:`exhale_function_Utils_8h_1a533ff3bfdd93dc0fe9cb90a3667e2604`
+
+- :ref:`exhale_function_Utils_8h_1a0d1f642d4294abe7f4539dbc9fd46ce0`
+

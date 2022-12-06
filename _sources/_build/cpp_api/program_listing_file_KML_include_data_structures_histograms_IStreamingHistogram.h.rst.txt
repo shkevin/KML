@@ -1,0 +1,117 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_data_structures_histograms_IStreamingHistogram.h:
+
+Program Listing for File IStreamingHistogram.h
+==============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_data_structures_histograms_IStreamingHistogram.h>` (``KML/include/data_structures/histograms/IStreamingHistogram.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __ABSTRACT_HISTOGRAM_H__
+   #define __ABSTRACT_HISTOGRAM_H__
+   
+   #include <deque>
+   #include <map>
+   #include <utility>
+   #include <vector>
+   
+   #include "IBin.h"
+   #include "IDataStructure.h"
+   
+   namespace KML
+   {
+       namespace DataStructures
+       {
+           enum DecayType
+           {
+               WINDOW = 1, 
+           };
+   
+           template<typename T = double>
+           class IStreamingHistogram : public IDataStructure<T>
+           {
+               public:
+                   explicit IStreamingHistogram(const size_t& numBins, const size_t& windowSize = 100,
+                                                const DecayType& decay = DecayType::WINDOW);
+   
+                   IStreamingHistogram(const IStreamingHistogram<T>& other);
+   
+                   IStreamingHistogram<T>& operator=(const IStreamingHistogram<T>& rhs);
+   
+                   IStreamingHistogram(IStreamingHistogram<T>&& other);
+   
+                   IStreamingHistogram<T>& operator=(IStreamingHistogram<T>&& rhs);
+   
+                   ~IStreamingHistogram();
+   
+                   using IDataStructure<T>::update;
+   
+                   bool full() const override;
+   
+                   bool empty() const override;
+   
+                   size_t size() const override;
+   
+                   void reset() override;
+   
+                   size_t binSearch(const IBin<T>& bin) const;
+   
+                   size_t binSearch(const T& item) const;
+   
+                   std::vector<double> pdf(const bool& normalize = true,
+                                           const bool& density = true) const;
+   
+                   std::vector<double> cdf(const bool& normalize = true) const;
+   
+                   T quantile(const double& qtile) const;
+   
+                   void add(const T& item);
+   
+                   std::vector<size_t> binCounts() const;
+   
+                   std::map<std::pair<double, double>, size_t> report();
+   
+                   template<typename F>
+                   friend std::ostream& operator<<(std::ostream& os,
+                                                   const IStreamingHistogram<F>& hist);
+   
+                   void decayCounts();
+   
+                   size_t getTotalCount() const;
+   
+                   IBin<T>* getBin(size_t index) const;
+   
+               protected:
+                   std::deque<size_t>* getWindow() const;
+   
+                   void mergeBins(const size_t& lhs, const size_t& rhs);
+   
+                   size_t getCurrentNumBins() const;
+   
+                   size_t getNumBins() const;
+   
+                   DecayType getDecayType() const;
+   
+               private:
+                   std::vector<IBin<T>*> m_bins;
+   
+                   std::deque<size_t>* m_window = nullptr;
+   
+                   const size_t m_numBins;
+   
+                   const DecayType m_decay;
+   
+                   size_t m_totalCount = 0;
+           };
+       }  // namespace DataStructures
+   }  // namespace KML
+   
+   #include "IStreamingHistogram.tcc"
+   
+   #endif  // __ABSTRACT_HISTOGRAM_H__

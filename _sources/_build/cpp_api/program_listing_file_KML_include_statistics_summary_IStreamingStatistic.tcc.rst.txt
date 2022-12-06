@@ -1,0 +1,31 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_summary_IStreamingStatistic.tcc:
+
+Program Listing for File IStreamingStatistic.tcc
+================================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_summary_IStreamingStatistic.tcc>` (``KML/include/statistics/summary/IStreamingStatistic.tcc``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /*!
+    * @file  IStreamingStatistic.tcc
+    * @brief Contains the templated implementation for the abstract streaming
+    *        statistic class.
+    */
+   namespace KML
+   {
+       namespace Statistics
+       {
+           template<typename T>
+           IStreamingStatistic<T>::IStreamingStatistic(const size_t& windowSize)
+               : IStreaming<T>(windowSize)
+           {
+               // Do nothing.
+           }
+       }  // namespace Statistics
+   }  // namespace KML

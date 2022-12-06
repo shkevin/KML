@@ -1,0 +1,39 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_summary_IStreamingStatistic.h:
+
+Program Listing for File IStreamingStatistic.h
+==============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_summary_IStreamingStatistic.h>` (``KML/include/statistics/summary/IStreamingStatistic.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_STATISTIC_H__
+   #define __STREAMING_STATISTIC_H__
+   
+   #include <cstdint>
+   #include <vector>
+   
+   #include "IStreaming.h"
+   
+   namespace KML
+   {
+       namespace Statistics
+       {
+           template<typename T = double>
+           class IStreamingStatistic : public IStreaming<T>
+           {
+               public:
+                   explicit IStreamingStatistic(const size_t& windowSize = 0);
+           };
+       }  // namespace Statistics
+   }  // namespace KML
+   
+   #include "IStreamingStatistic.tcc"
+   
+   #endif  // __STREAMING_STATISTIC_H__

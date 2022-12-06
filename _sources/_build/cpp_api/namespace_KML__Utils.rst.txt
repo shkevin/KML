@@ -1,0 +1,30 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _namespace_KML__Utils:
+
+Namespace KML::Utils
+====================
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_Utils_8h_1adb3e751390ae418164308cdf62e7bf60`
+
+- :ref:`exhale_function_Utils_8h_1a509627e1608d10a9d33c102075c23f8d`
+
+- :ref:`exhale_function_Utils_8h_1aa001cc5572df708041983a7dc6a2e33d`
+
+- :ref:`exhale_function_Utils_8h_1a533ff3bfdd93dc0fe9cb90a3667e2604`
+
+- :ref:`exhale_function_Utils_8h_1a0d1f642d4294abe7f4539dbc9fd46ce0`

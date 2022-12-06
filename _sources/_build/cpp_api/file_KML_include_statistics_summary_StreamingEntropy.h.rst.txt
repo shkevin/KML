@@ -1,0 +1,76 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_statistics_summary_StreamingEntropy.h:
+
+File StreamingEntropy.h
+=======================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_statistics_summary>` (``KML/include/statistics/summary``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides the declarations for the StreamingEntropy calculation. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/statistics/summary/StreamingEntropy.h``)
+------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_statistics_summary_StreamingEntropy.h.rst
+
+
+
+Detailed Description
+--------------------
+
+The StreamingEntropy computes the entropy of a data stream. This class can work on all the data or a window of the data. 
+
+
+
+
+
+Includes
+--------
+
+
+- ``IStreamingStatistic.h`` (:ref:`file_KML_include_statistics_summary_IStreamingStatistic.h`)
+
+- ``StreamingHistogram.h`` (:ref:`file_KML_include_data_structures_histograms_IStreamingHistogram.h`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_src_statistics_summary_StreamingEntropy.cc`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Statistics`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1StreamingEntropy`
+

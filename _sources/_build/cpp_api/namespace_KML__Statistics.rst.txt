@@ -1,0 +1,36 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _namespace_KML__Statistics:
+
+Namespace KML::Statistics
+=========================
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1IStreamingStatistic`
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1StreamingEntropy`
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1StreamingIQR`
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1StreamingMean`
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1StreamingP2Quantile`
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1StreamingVariance`
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1WindowedFAME`
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1WindowedP2Quantile`

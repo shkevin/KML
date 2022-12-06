@@ -1,0 +1,36 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_optimizers_IOptimizer.h:
+
+Program Listing for File IOptimizer.h
+=====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_optimizers_IOptimizer.h>` (``KML/include/optimizers/IOptimizer.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __IOPTIMIZER_H__
+   #define __IOPTIMIZER_H__
+   
+   #include <iostream>
+   
+   namespace KML
+   {
+       namespace Optimizers
+       {
+           template<typename T = double>
+           class IOptimizer
+           {
+               public:
+                   IOptimizer();
+   
+                   virtual void update(const T& observation) = 0;
+           };
+       }  // namespace Optimizers
+   }  // namespace KML
+   
+   #endif  // __IOPTIMIZER_H__

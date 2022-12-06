@@ -1,0 +1,308 @@
+:orphan:
+
+
+Full API
+========
+
+Directories
+***********
+
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_include.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_include_data_structures.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_include_data_structures_histograms.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_include_metrics.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_include_optimizers.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_include_statistics.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_include_statistics_summary.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_include_statistics_transformers.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_include_utils.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_src.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_src_metrics.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_src_statistics.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_src_statistics_summary.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir_KML_src_utils.rst
+
+Files
+*****
+
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_transformers_AdaptiveNormalizer.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_histograms_IBin.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_histograms_IBin.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_IDataStructure.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_IDataStructure.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_metrics_IMetric.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_metrics_IMetric.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_optimizers_IOptimizer.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_optimizers_IOptimizer.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_IStreaming.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_IStreaming.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_histograms_IStreamingHistogram.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_histograms_IStreamingHistogram.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_summary_IStreamingStatistic.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_summary_IStreamingStatistic.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_transformers_ITransformer.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_transformers_ITransformer.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_LinkedList.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_LinkedList.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_Node.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_Node.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_RingBuffer.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_RingBuffer.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_optimizers_StochasticGradientDescent.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_src_statistics_summary_StreamingEntropy.cc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_summary_StreamingEntropy.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_histograms_StreamingHistogram.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_data_structures_histograms_StreamingHistogram.tcc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_src_statistics_summary_StreamingIQR.cc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_summary_StreamingIQR.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_src_metrics_StreamingMAD.cc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_metrics_StreamingMAD.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_src_statistics_summary_StreamingMean.cc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_summary_StreamingMean.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_src_statistics_summary_StreamingP2Quantile.cc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_summary_StreamingP2Quantile.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_src_statistics_summary_StreamingVariance.cc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_summary_StreamingVariance.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_src_utils_Utils.cc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_utils_Utils.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_src_statistics_summary_WindowedFAME.cc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_summary_WindowedFAME.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_src_statistics_summary_WindowedP2Quantile.cc.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file_KML_include_statistics_summary_WindowedP2Quantile.h.rst

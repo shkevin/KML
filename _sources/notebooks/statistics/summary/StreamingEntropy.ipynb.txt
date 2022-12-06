@@ -1,0 +1,280 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Streaming Entropy\n",
+    "The streaming entropy code was designed to approximate the entropy of a data stream. This works by approximating the\n",
+    "distribution using histograms, and then applying sovdat entropy updates.\n",
+    "\n",
+    "Reference:\n",
+    "    https://arxiv.org/pdf/1403.6348.pdf"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "from scipy.stats import entropy\n",
+    "\n",
+    "from kml.statistics.summary.StreamingEntropy import PyStreamingEntropy as pyentropy"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Define parameters"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "num_bins = 100\n",
+    "window_size = 1000"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Define data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "np.random.seed(42)\n",
+    "uniform_data = np.random.uniform(0, 1, 1000)\n",
+    "constant_data = np.ones(1000)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Compare approximations across different datasets\n",
+    "\n",
+    "By comparing the approximation on datasets where entropy should clearly be defined, we can get an understanding\n",
+    "of how close the approximation is."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Constant data\n",
+    "\n",
+    "Data that contains only a single value. The expected entropy of this dataset should be zero."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Visualize"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "fig, ax = plt.subplots(1, tight_layout=True)\n",
+    "_ = ax.hist(\n",
+    "    constant_data, bins=num_bins, align=\"mid\", ec=\"black\", alpha=0.75, linewidth=1\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Calculate"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "e = pyentropy(window_size, num_bins)\n",
+    "e.update(constant_data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0.0"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "e.evaluate()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Uniform data\n",
+    "This data set is drawn from a uniform distribution. The expected entropy should be close to the maximum entropy for \n",
+    "a dataset. In this instance, the expected entropy should be np.log2(1000)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Visualize"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "fig, ax = plt.subplots(1, tight_layout=True)\n",
+    "_ = ax.hist(\n",
+    "    uniform_data, bins=num_bins, align=\"mid\", ec=\"black\", alpha=0.75, linewidth=1\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Calculate"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "e = pyentropy(window_size, num_bins)\n",
+    "e.update(uniform_data)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "7.330546350478285"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "e.evaluate()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "9.965784284662087"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.log2(1000)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Why is there a big difference between the expected and approximated?\n",
+    "The difference in calculated value is due to the number of bins used to approximate the entropy. If the num_bins parameter \n",
+    "was set to 1000, the error would be much smaller."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

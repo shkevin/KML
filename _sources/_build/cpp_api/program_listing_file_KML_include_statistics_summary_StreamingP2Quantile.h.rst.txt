@@ -1,0 +1,62 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_summary_StreamingP2Quantile.h:
+
+Program Listing for File StreamingP2Quantile.h
+==============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_summary_StreamingP2Quantile.h>` (``KML/include/statistics/summary/StreamingP2Quantile.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_P2QUANTILE_H__
+   #define __STREAMING_P2QUANTILE_H__
+   
+   #include <vector>
+   
+   #include "IStreamingStatistic.h"
+   
+   namespace KML
+   {
+       namespace Statistics
+       {
+           class StreamingP2Quantile : public IStreamingStatistic<double>
+           {
+               public:
+                   explicit StreamingP2Quantile(const double& quantile = 0.5);
+   
+                   void update(const double& observation) override;
+                   using IStreamingStatistic<double>::update;
+   
+                   double evaluate() const override;
+                   using IStreamingStatistic<double>::evaluate;
+   
+                   void clear();
+   
+               private:
+                   int findK(const double& observation);
+   
+                   double parabolic(int i, double d_pos);
+   
+                   double linear(int i, double d_pos);
+   
+                   void adjustHeights(int i);
+   
+                   static int copysign(const double& number);
+   
+                   std::vector<int> m_markerPosition;
+   
+                   std::vector<double> m_desiredMarkerPosition;
+   
+                   mutable std::vector<double> m_heights;
+   
+                   const double m_quantile;
+           };
+       }  // namespace Statistics
+   }  // namespace KML
+   
+   #endif  // __STREAMING_P2QUANTILE_H__

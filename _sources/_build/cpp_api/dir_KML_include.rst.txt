@@ -1,0 +1,33 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _dir_KML_include:
+
+
+Directory include
+=================
+
+
+|exhale_lsh| :ref:`Parent directory <dir_KML>` (``KML``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+*Directory path:* ``KML/include``
+
+Subdirectories
+--------------
+
+- :ref:`dir_KML_include_data_structures`
+- :ref:`dir_KML_include_metrics`
+- :ref:`dir_KML_include_optimizers`
+- :ref:`dir_KML_include_statistics`
+- :ref:`dir_KML_include_utils`
+
+
+Files
+-----
+
+- :ref:`file_KML_include_IStreaming.h`
+- :ref:`file_KML_include_IStreaming.tcc`
+
+

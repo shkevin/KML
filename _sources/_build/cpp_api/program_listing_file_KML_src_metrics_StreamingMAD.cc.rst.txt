@@ -1,0 +1,45 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_src_metrics_StreamingMAD.cc:
+
+Program Listing for File StreamingMAD.cc
+========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_src_metrics_StreamingMAD.cc>` (``KML/src/metrics/StreamingMAD.cc``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #include "StreamingMAD.h"
+   
+   #include <cmath>
+   
+   namespace KML
+   {
+       namespace Metrics
+       {
+           StreamingMAD::StreamingMAD() : IMetric(0)
+           {
+               m_scoreMedian = new WindowedFAME();
+               m_errorMedian = new WindowedFAME();
+           }
+   
+           StreamingMAD::~StreamingMAD()
+           {
+               delete m_scoreMedian;
+               delete m_errorMedian;
+           }
+   
+           void StreamingMAD::update(const double& observation)
+           {
+               m_scoreMedian->update(observation);
+               m_errorMedian->update(std::abs(observation - m_scoreMedian->evaluate()));
+               m_historyCount += 1;
+           }
+   
+           double StreamingMAD::evaluate() const { return m_errorMedian->evaluate(); }
+       }  // namespace Metrics
+   }  // namespace KML

@@ -1,0 +1,33 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_class_classKML_1_1Metrics_1_1StreamingMAD:
+
+Class StreamingMAD
+==================
+
+- Defined in :ref:`file_KML_include_metrics_StreamingMAD.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public KML::Metrics::IMetric< double >`` (:ref:`exhale_class_classKML_1_1Metrics_1_1IMetric`)
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: KML::Metrics::StreamingMAD
+   :project: kml
+   :members:
+   :protected-members:
+   :undoc-members:

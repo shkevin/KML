@@ -1,0 +1,32 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_class_classKML_1_1Optimizers_1_1IOptimizer:
+
+Template Class IOptimizer
+=========================
+
+- Defined in :ref:`file_KML_include_optimizers_IOptimizer.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Template Parameter Order
+------------------------
+
+#. ``typename T``
+
+
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: KML::Optimizers::IOptimizer
+   :project: kml
+   :members:
+   :protected-members:
+   :undoc-members:

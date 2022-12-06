@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C++ API &mdash; KML unknown version documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Namespace KML" href="namespace_KML.html" />
+    <link rel="prev" title="kml.statistics.summary package" href="../kml.statistics.summary.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #8d37d7" >
+            <a href="../../index.html" class="icon icon-home"> KML
+            <img src="../../_static/HQ 01-03-resized.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                unknown version
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../pages/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/about.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/about.html#why-kml">Why KML?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/install.html#python">Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../pages/modules.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../modules.html">Python API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/roadmap.html">Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/roadmap.html#long-term-objective">Long-term Objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/roadmap.html#new-functionality">New Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/roadmap.html#maintenance-related">Maintenance Related</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#process-for-contributing">Process for Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#coding-styles">Coding Styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#building-the-documentation">Building the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/contributing.html#licensing">Licensing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/release.html">Release Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pages/readme.html">README</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#building-python-docker">Building Python Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#roadmap">Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#project-leaders">Project leaders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#contact">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pages/readme.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #8d37d7" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">KML</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../pages/modules.html">API</a></li>
+      <li class="breadcrumb-item active">C++ API</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/shkevin/KML" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="c-api">
+<h1>C++ API<a class="headerlink" href="#c-api" title="Permalink to this headline"></a></h1>
+<p>Welcome to the developer reference to the KML library. This documentation
+is specific only to the C++ library portion.</p>
+<section id="class-hierarchy">
+<h2>Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline"></a></h2>
+<ul class="treeView" id="class-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li class="lastChild">Namespace <a href="namespace_KML.html#namespace-KML">KML</a><ul><li>Namespace <a href="namespace_KML__DataStructures.html#namespace-KML-DataStructures">KML::DataStructures</a><ul><li>Template Class <a href="classKML_1_1DataStructures_1_1IBin.html#exhale-class-classKML-1-1DataStructures-1-1IBin">IBin</a></li><li>Template Class <a href="classKML_1_1DataStructures_1_1IDataStructure.html#exhale-class-classKML-1-1DataStructures-1-1IDataStructure">IDataStructure</a></li><li>Template Class <a href="classKML_1_1DataStructures_1_1IStreamingHistogram.html#exhale-class-classKML-1-1DataStructures-1-1IStreamingHistogram">IStreamingHistogram</a></li><li>Template Class <a href="classKML_1_1DataStructures_1_1LinkedList.html#exhale-class-classKML-1-1DataStructures-1-1LinkedList">LinkedList</a></li><li>Template Class <a href="classKML_1_1DataStructures_1_1Node.html#exhale-class-classKML-1-1DataStructures-1-1Node">Node</a></li><li>Template Class <a href="classKML_1_1DataStructures_1_1RingBuffer.html#exhale-class-classKML-1-1DataStructures-1-1RingBuffer">RingBuffer</a></li><li>Template Class <a href="classKML_1_1DataStructures_1_1StreamingHistogram.html#exhale-class-classKML-1-1DataStructures-1-1StreamingHistogram">StreamingHistogram</a></li><li class="lastChild">Enum <a href="enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5.html#exhale-enum-IStreamingHistogram-8h-1af7a5f7796c04f9fc428e106a42f0a0d5">DecayType</a></li></ul></li><li>Namespace <a href="namespace_KML__Metrics.html#namespace-KML-Metrics">KML::Metrics</a><ul><li>Template Class <a href="classKML_1_1Metrics_1_1IMetric.html#exhale-class-classKML-1-1Metrics-1-1IMetric">IMetric</a></li><li class="lastChild">Class <a href="classKML_1_1Metrics_1_1StreamingMAD.html#exhale-class-classKML-1-1Metrics-1-1StreamingMAD">StreamingMAD</a></li></ul></li><li>Namespace <a href="namespace_KML__Optimizers.html#namespace-KML-Optimizers">KML::Optimizers</a><ul><li>Template Class <a href="classKML_1_1Optimizers_1_1IOptimizer.html#exhale-class-classKML-1-1Optimizers-1-1IOptimizer">IOptimizer</a></li><li class="lastChild">Template Class <a href="classKML_1_1Optimizers_1_1StochasticGradientDescent.html#exhale-class-classKML-1-1Optimizers-1-1StochasticGradientDescent">StochasticGradientDescent</a></li></ul></li><li>Namespace <a href="namespace_KML__Statistics.html#namespace-KML-Statistics">KML::Statistics</a><ul><li>Template Class <a href="classKML_1_1Statistics_1_1IStreamingStatistic.html#exhale-class-classKML-1-1Statistics-1-1IStreamingStatistic">IStreamingStatistic</a></li><li>Class <a href="classKML_1_1Statistics_1_1StreamingEntropy.html#exhale-class-classKML-1-1Statistics-1-1StreamingEntropy">StreamingEntropy</a></li><li>Class <a href="classKML_1_1Statistics_1_1StreamingIQR.html#exhale-class-classKML-1-1Statistics-1-1StreamingIQR">StreamingIQR</a></li><li>Class <a href="classKML_1_1Statistics_1_1StreamingMean.html#exhale-class-classKML-1-1Statistics-1-1StreamingMean">StreamingMean</a></li><li>Class <a href="classKML_1_1Statistics_1_1StreamingP2Quantile.html#exhale-class-classKML-1-1Statistics-1-1StreamingP2Quantile">StreamingP2Quantile</a></li><li>Class <a href="classKML_1_1Statistics_1_1StreamingVariance.html#exhale-class-classKML-1-1Statistics-1-1StreamingVariance">StreamingVariance</a></li><li>Class <a href="classKML_1_1Statistics_1_1WindowedFAME.html#exhale-class-classKML-1-1Statistics-1-1WindowedFAME">WindowedFAME</a></li><li class="lastChild">Class <a href="classKML_1_1Statistics_1_1WindowedP2Quantile.html#exhale-class-classKML-1-1Statistics-1-1WindowedP2Quantile">WindowedP2Quantile</a></li></ul></li><li>Namespace <a href="namespace_KML__Transformers.html#namespace-KML-Transformers">KML::Transformers</a><ul><li>Class <a href="classKML_1_1Transformers_1_1AdaptiveNormalizer.html#exhale-class-classKML-1-1Transformers-1-1AdaptiveNormalizer">AdaptiveNormalizer</a></li><li class="lastChild">Template Class <a href="classKML_1_1Transformers_1_1ITransformer.html#exhale-class-classKML-1-1Transformers-1-1ITransformer">ITransformer</a></li></ul></li><li class="lastChild">Template Class <a href="classKML_1_1IStreaming.html#exhale-class-classKML-1-1IStreaming">IStreaming</a></li></ul></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView class-treeView --></section>
+<section id="file-hierarchy">
+<h2>File Hierarchy<a class="headerlink" href="#file-hierarchy" title="Permalink to this headline"></a></h2>
+<ul class="treeView" id="file-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li class="lastChild">Directory <a href="dir_KML.html#dir-KML">KML</a><ul><li>Directory <a href="dir_KML_include.html#dir-KML-include">include</a><ul><li>Directory <a href="dir_KML_include_data_structures.html#dir-KML-include-data-structures">data_structures</a><ul><li>Directory <a href="dir_KML_include_data_structures_histograms.html#dir-KML-include-data-structures-histograms">histograms</a><ul><li>File <a href="file_KML_include_data_structures_histograms_IBin.h.html#file-KML-include-data-structures-histograms-IBin.h">IBin.h</a></li><li>File <a href="file_KML_include_data_structures_histograms_IBin.tcc.html#file-KML-include-data-structures-histograms-IBin.tcc">IBin.tcc</a></li><li>File <a href="file_KML_include_data_structures_histograms_IStreamingHistogram.h.html#file-KML-include-data-structures-histograms-IStreamingHistogram.h">IStreamingHistogram.h</a></li><li>File <a href="file_KML_include_data_structures_histograms_IStreamingHistogram.tcc.html#file-KML-include-data-structures-histograms-IStreamingHistogram.tcc">IStreamingHistogram.tcc</a></li><li>File <a href="file_KML_include_data_structures_histograms_StreamingHistogram.h.html#file-KML-include-data-structures-histograms-StreamingHistogram.h">StreamingHistogram.h</a></li><li class="lastChild">File <a href="file_KML_include_data_structures_histograms_StreamingHistogram.tcc.html#file-KML-include-data-structures-histograms-StreamingHistogram.tcc">StreamingHistogram.tcc</a></li></ul></li><li>File <a href="file_KML_include_data_structures_IDataStructure.h.html#file-KML-include-data-structures-IDataStructure.h">IDataStructure.h</a></li><li>File <a href="file_KML_include_data_structures_IDataStructure.tcc.html#file-KML-include-data-structures-IDataStructure.tcc">IDataStructure.tcc</a></li><li>File <a href="file_KML_include_data_structures_LinkedList.h.html#file-KML-include-data-structures-LinkedList.h">LinkedList.h</a></li><li>File <a href="file_KML_include_data_structures_LinkedList.tcc.html#file-KML-include-data-structures-LinkedList.tcc">LinkedList.tcc</a></li><li>File <a href="file_KML_include_data_structures_Node.h.html#file-KML-include-data-structures-Node.h">Node.h</a></li><li>File <a href="file_KML_include_data_structures_Node.tcc.html#file-KML-include-data-structures-Node.tcc">Node.tcc</a></li><li>File <a href="file_KML_include_data_structures_RingBuffer.h.html#file-KML-include-data-structures-RingBuffer.h">RingBuffer.h</a></li><li class="lastChild">File <a href="file_KML_include_data_structures_RingBuffer.tcc.html#file-KML-include-data-structures-RingBuffer.tcc">RingBuffer.tcc</a></li></ul></li><li>Directory <a href="dir_KML_include_metrics.html#dir-KML-include-metrics">metrics</a><ul><li>File <a href="file_KML_include_metrics_IMetric.h.html#file-KML-include-metrics-IMetric.h">IMetric.h</a></li><li>File <a href="file_KML_include_metrics_IMetric.tcc.html#file-KML-include-metrics-IMetric.tcc">IMetric.tcc</a></li><li class="lastChild">File <a href="file_KML_include_metrics_StreamingMAD.h.html#file-KML-include-metrics-StreamingMAD.h">StreamingMAD.h</a></li></ul></li><li>Directory <a href="dir_KML_include_optimizers.html#dir-KML-include-optimizers">optimizers</a><ul><li>File <a href="file_KML_include_optimizers_IOptimizer.h.html#file-KML-include-optimizers-IOptimizer.h">IOptimizer.h</a></li><li>File <a href="file_KML_include_optimizers_IOptimizer.tcc.html#file-KML-include-optimizers-IOptimizer.tcc">IOptimizer.tcc</a></li><li class="lastChild">File <a href="file_KML_include_optimizers_StochasticGradientDescent.h.html#file-KML-include-optimizers-StochasticGradientDescent.h">StochasticGradientDescent.h</a></li></ul></li><li>Directory <a href="dir_KML_include_statistics.html#dir-KML-include-statistics">statistics</a><ul><li>Directory <a href="dir_KML_include_statistics_summary.html#dir-KML-include-statistics-summary">summary</a><ul><li>File <a href="file_KML_include_statistics_summary_IStreamingStatistic.h.html#file-KML-include-statistics-summary-IStreamingStatistic.h">IStreamingStatistic.h</a></li><li>File <a href="file_KML_include_statistics_summary_IStreamingStatistic.tcc.html#file-KML-include-statistics-summary-IStreamingStatistic.tcc">IStreamingStatistic.tcc</a></li><li>File <a href="file_KML_include_statistics_summary_StreamingEntropy.h.html#file-KML-include-statistics-summary-StreamingEntropy.h">StreamingEntropy.h</a></li><li>File <a href="file_KML_include_statistics_summary_StreamingIQR.h.html#file-KML-include-statistics-summary-StreamingIQR.h">StreamingIQR.h</a></li><li>File <a href="file_KML_include_statistics_summary_StreamingMean.h.html#file-KML-include-statistics-summary-StreamingMean.h">StreamingMean.h</a></li><li>File <a href="file_KML_include_statistics_summary_StreamingP2Quantile.h.html#file-KML-include-statistics-summary-StreamingP2Quantile.h">StreamingP2Quantile.h</a></li><li>File <a href="file_KML_include_statistics_summary_StreamingVariance.h.html#file-KML-include-statistics-summary-StreamingVariance.h">StreamingVariance.h</a></li><li>File <a href="file_KML_include_statistics_summary_WindowedFAME.h.html#file-KML-include-statistics-summary-WindowedFAME.h">WindowedFAME.h</a></li><li class="lastChild">File <a href="file_KML_include_statistics_summary_WindowedP2Quantile.h.html#file-KML-include-statistics-summary-WindowedP2Quantile.h">WindowedP2Quantile.h</a></li></ul></li><li class="lastChild">Directory <a href="dir_KML_include_statistics_transformers.html#dir-KML-include-statistics-transformers">transformers</a><ul><li>File <a href="file_KML_include_statistics_transformers_AdaptiveNormalizer.h.html#file-KML-include-statistics-transformers-AdaptiveNormalizer.h">AdaptiveNormalizer.h</a></li><li>File <a href="file_KML_include_statistics_transformers_ITransformer.h.html#file-KML-include-statistics-transformers-ITransformer.h">ITransformer.h</a></li><li class="lastChild">File <a href="file_KML_include_statistics_transformers_ITransformer.tcc.html#file-KML-include-statistics-transformers-ITransformer.tcc">ITransformer.tcc</a></li></ul></li></ul></li><li>Directory <a href="dir_KML_include_utils.html#dir-KML-include-utils">utils</a><ul><li class="lastChild">File <a href="file_KML_include_utils_Utils.h.html#file-KML-include-utils-Utils.h">Utils.h</a></li></ul></li><li>File <a href="file_KML_include_IStreaming.h.html#file-KML-include-IStreaming.h">IStreaming.h</a></li><li class="lastChild">File <a href="file_KML_include_IStreaming.tcc.html#file-KML-include-IStreaming.tcc">IStreaming.tcc</a></li></ul></li><li class="lastChild">Directory <a href="dir_KML_src.html#dir-KML-src">src</a><ul><li>Directory <a href="dir_KML_src_metrics.html#dir-KML-src-metrics">metrics</a><ul><li class="lastChild">File <a href="file_KML_src_metrics_StreamingMAD.cc.html#file-KML-src-metrics-StreamingMAD.cc">StreamingMAD.cc</a></li></ul></li><li>Directory <a href="dir_KML_src_statistics.html#dir-KML-src-statistics">statistics</a><ul><li class="lastChild">Directory <a href="dir_KML_src_statistics_summary.html#dir-KML-src-statistics-summary">summary</a><ul><li>File <a href="file_KML_src_statistics_summary_StreamingEntropy.cc.html#file-KML-src-statistics-summary-StreamingEntropy.cc">StreamingEntropy.cc</a></li><li>File <a href="file_KML_src_statistics_summary_StreamingIQR.cc.html#file-KML-src-statistics-summary-StreamingIQR.cc">StreamingIQR.cc</a></li><li>File <a href="file_KML_src_statistics_summary_StreamingMean.cc.html#file-KML-src-statistics-summary-StreamingMean.cc">StreamingMean.cc</a></li><li>File <a href="file_KML_src_statistics_summary_StreamingP2Quantile.cc.html#file-KML-src-statistics-summary-StreamingP2Quantile.cc">StreamingP2Quantile.cc</a></li><li>File <a href="file_KML_src_statistics_summary_StreamingVariance.cc.html#file-KML-src-statistics-summary-StreamingVariance.cc">StreamingVariance.cc</a></li><li>File <a href="file_KML_src_statistics_summary_WindowedFAME.cc.html#file-KML-src-statistics-summary-WindowedFAME.cc">WindowedFAME.cc</a></li><li class="lastChild">File <a href="file_KML_src_statistics_summary_WindowedP2Quantile.cc.html#file-KML-src-statistics-summary-WindowedP2Quantile.cc">WindowedP2Quantile.cc</a></li></ul></li></ul></li><li class="lastChild">Directory <a href="dir_KML_src_utils.html#dir-KML-src-utils">utils</a><ul><li class="lastChild">File <a href="file_KML_src_utils_Utils.cc.html#file-KML-src-utils-Utils.cc">Utils.cc</a></li></ul></li></ul></li></ul></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView file-treeView --></section>
+<section id="full-api">
+<h2>Full API<a class="headerlink" href="#full-api" title="Permalink to this headline"></a></h2>
+<section id="namespaces">
+<h3>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_KML.html">Namespace KML</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namespace_KML.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="namespace_KML.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_KML__DataStructures.html">Namespace KML::DataStructures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namespace_KML__DataStructures.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="namespace_KML__DataStructures.html#enums">Enums</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_KML__Metrics.html">Namespace KML::Metrics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namespace_KML__Metrics.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_KML__Optimizers.html">Namespace KML::Optimizers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namespace_KML__Optimizers.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_KML__Statistics.html">Namespace KML::Statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namespace_KML__Statistics.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_KML__Transformers.html">Namespace KML::Transformers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namespace_KML__Transformers.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_KML__Utils.html">Namespace KML::Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namespace_KML__Utils.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="classes-and-structs">
+<h3>Classes and Structs<a class="headerlink" href="#classes-and-structs" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1DataStructures_1_1IBin.html">Template Class IBin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1IBin.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1IBin.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1DataStructures_1_1IDataStructure.html">Template Class IDataStructure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1IDataStructure.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1IDataStructure.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1DataStructures_1_1IStreamingHistogram.html">Template Class IStreamingHistogram</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1IStreamingHistogram.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1DataStructures_1_1IStreamingHistogram.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1IStreamingHistogram.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1IStreamingHistogram.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1DataStructures_1_1LinkedList.html">Template Class LinkedList</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1LinkedList.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1DataStructures_1_1LinkedList.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1LinkedList.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1LinkedList.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1DataStructures_1_1Node.html">Template Class Node</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1Node.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1Node.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1DataStructures_1_1RingBuffer.html">Template Class RingBuffer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1RingBuffer.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1DataStructures_1_1RingBuffer.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1RingBuffer.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1RingBuffer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1DataStructures_1_1StreamingHistogram.html">Template Class StreamingHistogram</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1StreamingHistogram.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1DataStructures_1_1StreamingHistogram.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1StreamingHistogram.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1DataStructures_1_1StreamingHistogram.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1IStreaming.html">Template Class IStreaming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1IStreaming.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1IStreaming.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Metrics_1_1IMetric.html">Template Class IMetric</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Metrics_1_1IMetric.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Metrics_1_1IMetric.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Metrics_1_1IMetric.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Metrics_1_1IMetric.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Metrics_1_1StreamingMAD.html">Class StreamingMAD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Metrics_1_1StreamingMAD.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Metrics_1_1StreamingMAD.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Metrics_1_1StreamingMAD.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Optimizers_1_1IOptimizer.html">Template Class IOptimizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Optimizers_1_1IOptimizer.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Optimizers_1_1IOptimizer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Optimizers_1_1StochasticGradientDescent.html">Template Class StochasticGradientDescent</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Optimizers_1_1StochasticGradientDescent.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Optimizers_1_1StochasticGradientDescent.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Optimizers_1_1StochasticGradientDescent.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Optimizers_1_1StochasticGradientDescent.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Statistics_1_1IStreamingStatistic.html">Template Class IStreamingStatistic</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1IStreamingStatistic.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Statistics_1_1IStreamingStatistic.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1IStreamingStatistic.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1IStreamingStatistic.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingEntropy.html">Class StreamingEntropy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingEntropy.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingEntropy.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingEntropy.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingIQR.html">Class StreamingIQR</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingIQR.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingIQR.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingIQR.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingMean.html">Class StreamingMean</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingMean.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingMean.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingMean.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingP2Quantile.html">Class StreamingP2Quantile</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingP2Quantile.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingP2Quantile.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingP2Quantile.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingVariance.html">Class StreamingVariance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingVariance.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingVariance.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1StreamingVariance.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Statistics_1_1WindowedFAME.html">Class WindowedFAME</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1WindowedFAME.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Statistics_1_1WindowedFAME.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1WindowedFAME.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Statistics_1_1WindowedP2Quantile.html">Class WindowedP2Quantile</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1WindowedP2Quantile.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Statistics_1_1WindowedP2Quantile.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Statistics_1_1WindowedP2Quantile.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Transformers_1_1AdaptiveNormalizer.html">Class AdaptiveNormalizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Transformers_1_1AdaptiveNormalizer.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="classKML_1_1Transformers_1_1AdaptiveNormalizer.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Transformers_1_1AdaptiveNormalizer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classKML_1_1Transformers_1_1ITransformer.html">Template Class ITransformer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Transformers_1_1ITransformer.html#template-parameter-order">Template Parameter Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="classKML_1_1Transformers_1_1ITransformer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="enums">
+<h3>Enums<a class="headerlink" href="#enums" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5.html">Enum DecayType</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_IStreamingHistogram_8h_1af7a5f7796c04f9fc428e106a42f0a0d5.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Utils_8h_1adb3e751390ae418164308cdf62e7bf60.html">Function KML::Utils::approximatelyEqual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Utils_8h_1adb3e751390ae418164308cdf62e7bf60.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Utils_8h_1a509627e1608d10a9d33c102075c23f8d.html">Function KML::Utils::definitelyGreaterThan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Utils_8h_1a509627e1608d10a9d33c102075c23f8d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Utils_8h_1aa001cc5572df708041983a7dc6a2e33d.html">Function KML::Utils::definitelyLessThan</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Utils_8h_1aa001cc5572df708041983a7dc6a2e33d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Utils_8h_1a533ff3bfdd93dc0fe9cb90a3667e2604.html">Function KML::Utils::essentiallyEqual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Utils_8h_1a533ff3bfdd93dc0fe9cb90a3667e2604.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_Utils_8h_1a0d1f642d4294abe7f4539dbc9fd46ce0.html">Function KML::Utils::xlogx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_Utils_8h_1a0d1f642d4294abe7f4539dbc9fd46ce0.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../kml.statistics.summary.html" class="btn btn-neutral float-left" title="kml.statistics.summary package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="namespace_KML.html" class="btn btn-neutral float-right" title="Namespace KML" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kevin Cox.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_src_statistics_summary_WindowedFAME.cc:
+
+File WindowedFAME.cc
+====================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_src_statistics_summary>` (``KML/src/statistics/summary``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Contains the implementation of the WindowedFAME calculation. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/src/statistics/summary/WindowedFAME.cc``)
+-----------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_src_statistics_summary_WindowedFAME.cc.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``WindowedFAME.h`` (:ref:`file_KML_include_statistics_summary_WindowedFAME.h`)
+
+- ``cmath``
+
+- ``iostream``
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Statistics`
+

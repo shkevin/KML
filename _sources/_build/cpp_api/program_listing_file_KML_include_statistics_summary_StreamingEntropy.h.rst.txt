@@ -1,0 +1,52 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_summary_StreamingEntropy.h:
+
+Program Listing for File StreamingEntropy.h
+===========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_summary_StreamingEntropy.h>` (``KML/include/statistics/summary/StreamingEntropy.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_ENTROPY_H__
+   #define __STREAMING_ENTROPY_H__
+   
+   #include "IStreamingStatistic.h"
+   #include "StreamingHistogram.h"
+   
+   namespace KML
+   {
+       namespace Statistics
+       {
+           using KML::DataStructures::StreamingHistogram;
+   
+           class StreamingEntropy : public IStreamingStatistic<double>
+           {
+               public:
+                   explicit StreamingEntropy(const size_t& windowSize = 100,
+                                             const size_t& numBins = 0);
+   
+                   void update(const double& observation) override;
+                   using IStreamingStatistic<double>::update;
+   
+                   double evaluate() const override;
+                   using IStreamingStatistic<double>::evaluate;
+   
+               private:
+                   void increment(const size_t& index);
+   
+                   void decrement(const size_t& index);
+   
+                   StreamingHistogram<double>* m_histogram = nullptr;
+   
+                   double m_entropy = 0.0;
+           };
+       }  // namespace Statistics
+   }  // namespace KML
+   
+   #endif  // __STREAMING_ENTROPY_H__

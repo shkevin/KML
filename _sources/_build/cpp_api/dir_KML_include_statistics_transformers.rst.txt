@@ -1,0 +1,25 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _dir_KML_include_statistics_transformers:
+
+
+Directory transformers
+======================
+
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_statistics>` (``KML/include/statistics``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+*Directory path:* ``KML/include/statistics/transformers``
+
+
+Files
+-----
+
+- :ref:`file_KML_include_statistics_transformers_AdaptiveNormalizer.h`
+- :ref:`file_KML_include_statistics_transformers_ITransformer.h`
+- :ref:`file_KML_include_statistics_transformers_ITransformer.tcc`
+
+

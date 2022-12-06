@@ -1,0 +1,71 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_statistics_summary_WindowedP2Quantile.h:
+
+File WindowedP2Quantile.h
+=========================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_statistics_summary>` (``KML/include/statistics/summary``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Windowed version of the p2 quantile data stream estimation. This algorithm is adapted from https://aakinshin.net/tags/research-p2qe/. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/statistics/summary/WindowedP2Quantile.h``)
+--------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_statistics_summary_WindowedP2Quantile.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``IStreamingStatistic.h`` (:ref:`file_KML_include_statistics_summary_IStreamingStatistic.h`)
+
+- ``StreamingP2Quantile.h`` (:ref:`file_KML_include_statistics_summary_StreamingP2Quantile.h`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_include_statistics_summary_StreamingIQR.h`
+
+- :ref:`file_KML_src_statistics_summary_WindowedP2Quantile.cc`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Statistics`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1WindowedP2Quantile`
+

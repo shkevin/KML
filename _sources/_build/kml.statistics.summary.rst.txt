@@ -1,0 +1,66 @@
+kml.statistics.summary package
+==============================
+
+.. automodule:: kml.statistics.summary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. Submodules
+.. ----------
+
+kml.statistics.summary.StreamingEntropy module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: kml.statistics.summary.StreamingEntropy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+kml.statistics.summary.StreamingIQR module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: kml.statistics.summary.StreamingIQR
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+kml.statistics.summary.StreamingMean module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: kml.statistics.summary.StreamingMean
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+kml.statistics.summary.StreamingP2Quantile module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: kml.statistics.summary.StreamingP2Quantile
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+kml.statistics.summary.StreamingVariance module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: kml.statistics.summary.StreamingVariance
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+kml.statistics.summary.WindowedFAME module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: kml.statistics.summary.WindowedFAME
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+kml.statistics.summary.WindowedP2Quantile module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: kml.statistics.summary.WindowedP2Quantile
+   :members:
+   :undoc-members:
+   :show-inheritance:

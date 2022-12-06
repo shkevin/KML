@@ -1,0 +1,57 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_metrics_StreamingMAD.h:
+
+Program Listing for File StreamingMAD.h
+=======================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_metrics_StreamingMAD.h>` (``KML/include/metrics/StreamingMAD.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_MAD_H__
+   #define __STREAMING_MAD_H__
+   
+   #include "IMetric.h"
+   #include "WindowedFAME.h"
+   
+   namespace KML
+   {
+       namespace Metrics
+       {
+           using KML::Statistics::WindowedFAME;
+   
+           class StreamingMAD : public IMetric<double>
+           {
+               public:
+                   StreamingMAD();
+   
+                   StreamingMAD(const StreamingMAD&) = delete;
+   
+                   StreamingMAD& operator=(const StreamingMAD&) = delete;
+   
+                   StreamingMAD(StreamingMAD&& other);
+   
+                   StreamingMAD& operator=(StreamingMAD&& rhs);
+   
+                   ~StreamingMAD() override;
+   
+                   void update(const double& observation) override;
+                   using IMetric<double>::update;
+   
+                   double evaluate() const override;
+                   using IMetric<double>::evaluate;
+   
+               private:
+                   WindowedFAME* m_scoreMedian = nullptr;
+   
+                   WindowedFAME* m_errorMedian = nullptr;
+           };
+       }  // namespace Metrics
+   }  // namespace KML
+   
+   #endif  // __STREAMING_MAD_H__

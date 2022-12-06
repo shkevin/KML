@@ -1,0 +1,69 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_data_structures_Node.h:
+
+File Node.h
+===========
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_data_structures>` (``KML/include/data_structures``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides the declarations for the Node data structure. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/data_structures/Node.h``)
+---------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_data_structures_Node.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``Node.tcc`` (:ref:`file_KML_include_data_structures_Node.tcc`)
+
+- ``cstdint``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_include_data_structures_LinkedList.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__DataStructures`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1DataStructures_1_1Node`
+

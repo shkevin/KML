@@ -1,0 +1,39 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _namespace_KML:
+
+Namespace KML
+=============
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML__DataStructures`
+
+- :ref:`namespace_KML__Metrics`
+
+- :ref:`namespace_KML__Optimizers`
+
+- :ref:`namespace_KML__Statistics`
+
+- :ref:`namespace_KML__Transformers`
+
+- :ref:`namespace_KML__Utils`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1IStreaming`

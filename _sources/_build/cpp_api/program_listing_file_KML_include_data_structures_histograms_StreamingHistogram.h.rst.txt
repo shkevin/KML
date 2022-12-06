@@ -1,0 +1,56 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_data_structures_histograms_StreamingHistogram.h:
+
+Program Listing for File StreamingHistogram.h
+=============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_data_structures_histograms_StreamingHistogram.h>` (``KML/include/data_structures/histograms/StreamingHistogram.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_HISTOGRAM_H__
+   #define __STREAMING_HISTOGRAM_H__
+   
+   #include <vector>
+   
+   #include "IStreamingHistogram.h"
+   
+   namespace KML
+   {
+       namespace DataStructures
+       {
+           template<typename T = double>
+           class StreamingHistogram : public IStreamingHistogram<T>
+           {
+               public:
+                   explicit StreamingHistogram(const size_t& numBins, const size_t& windowSize,
+                                               const DecayType& decay = DecayType::WINDOW);
+   
+                   StreamingHistogram(const StreamingHistogram& a_rhs) = delete;
+   
+                   StreamingHistogram& operator=(const StreamingHistogram& a_rhs) = delete;
+   
+                   StreamingHistogram(StreamingHistogram<T>&& other);
+   
+                   StreamingHistogram<T>& operator=(StreamingHistogram<T>&& rhs);
+   
+                   ~StreamingHistogram();
+   
+                   void update(const T& item) override;
+   
+                   using IDataStructure<T>::update;
+   
+               private:
+                   size_t merge();
+           };
+       }  // namespace DataStructures
+   }  // namespace KML
+   
+   #include "StreamingHistogram.tcc"
+   
+   #endif  // __STREAMING_HISTOGRAM_H__

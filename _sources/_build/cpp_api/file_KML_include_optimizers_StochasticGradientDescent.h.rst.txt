@@ -1,0 +1,61 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_optimizers_StochasticGradientDescent.h:
+
+File StochasticGradientDescent.h
+================================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_optimizers>` (``KML/include/optimizers``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides interface for the stocashtic gradient descent class. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/optimizers/StochasticGradientDescent.h``)
+-------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_optimizers_StochasticGradientDescent.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``IOptimizer.h`` (:ref:`file_KML_include_optimizers_IOptimizer.h`)
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Optimizers`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Optimizers_1_1StochasticGradientDescent`
+

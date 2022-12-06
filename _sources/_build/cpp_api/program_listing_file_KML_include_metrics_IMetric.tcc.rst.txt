@@ -1,0 +1,30 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_metrics_IMetric.tcc:
+
+Program Listing for File IMetric.tcc
+====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_metrics_IMetric.tcc>` (``KML/include/metrics/IMetric.tcc``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /*!
+    * @file IMetric.tcc
+    * @brief Contains the templated implementation for the abstract streaming 
+    *        metric class.
+    */
+   namespace KML
+   {
+       namespace Metrics
+       {
+           template<typename T>
+           IMetric<T>::IMetric(const size_t& windowSize) : IStreaming<T>(windowSize)
+           {
+               // Do nothing.
+           }
+       }  // namespace Metrics
+   }  // namespace KML

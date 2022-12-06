@@ -1,0 +1,57 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_summary_StreamingIQR.h:
+
+Program Listing for File StreamingIQR.h
+=======================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_summary_StreamingIQR.h>` (``KML/include/statistics/summary/StreamingIQR.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STREAMING_IQR_H__
+   #define __STREAMING_IQR_H__
+   
+   #include "IStreamingStatistic.h"
+   #include "WindowedP2Quantile.h"
+   
+   namespace KML
+   {
+       namespace Statistics
+       {
+           class StreamingIQR : public IStreamingStatistic<double>
+           {
+               public:
+                   explicit StreamingIQR(const size_t& windowSize = 0);
+   
+                   StreamingIQR(const double& low, const double& high, const size_t& windowSize = 0);
+   
+                   StreamingIQR(const StreamingIQR&) = delete;  // No copy
+   
+                   StreamingIQR& operator=(const StreamingIQR&) = delete;  // No copy
+   
+                   StreamingIQR(StreamingIQR&& other);
+   
+                   StreamingIQR& operator=(StreamingIQR&& rhs);
+   
+                   ~StreamingIQR() override;
+   
+                   void update(const double& observation) override;
+                   using IStreamingStatistic<double>::update;
+   
+                   double evaluate() const override;
+                   using IStreamingStatistic<double>::evaluate;
+   
+               private:
+                   WindowedP2Quantile* m_low;  // Q1
+   
+                   WindowedP2Quantile* m_high;  // Q3
+           };
+       }  // namespace Statistics
+   }  // namespace KML
+   
+   #endif  // __STREAMING_IQR_H__

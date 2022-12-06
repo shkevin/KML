@@ -1,0 +1,64 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_metrics_StreamingMAD.h:
+
+File StreamingMAD.h
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_metrics>` (``KML/include/metrics``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/metrics/StreamingMAD.h``)
+---------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_metrics_StreamingMAD.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``IMetric.h`` (:ref:`file_KML_include_metrics_IMetric.h`)
+
+- ``WindowedFAME.h`` (:ref:`file_KML_include_statistics_summary_WindowedFAME.h`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_src_metrics_StreamingMAD.cc`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Metrics`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Metrics_1_1StreamingMAD`
+

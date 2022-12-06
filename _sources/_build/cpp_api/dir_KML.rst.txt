@@ -1,0 +1,19 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _dir_KML:
+
+
+Directory KML
+=============
+
+
+*Directory path:* ``KML``
+
+Subdirectories
+--------------
+
+- :ref:`dir_KML_include`
+- :ref:`dir_KML_src`
+
+
+

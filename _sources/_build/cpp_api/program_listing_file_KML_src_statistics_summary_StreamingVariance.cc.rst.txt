@@ -1,0 +1,47 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_src_statistics_summary_StreamingVariance.cc:
+
+Program Listing for File StreamingVariance.cc
+=============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_src_statistics_summary_StreamingVariance.cc>` (``KML/src/statistics/summary/StreamingVariance.cc``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #include "StreamingVariance.h"
+   
+   namespace KML
+   {
+       namespace Statistics
+       {
+           StreamingVariance::StreamingVariance(const uint64_t& windowSize)
+               : IStreamingStatistic(windowSize)
+           {
+               m_sumSquared = new StreamingMean(windowSize);
+               m_mean = new StreamingMean(windowSize);
+           }
+   
+           StreamingVariance::~StreamingVariance()
+           {
+               delete m_sumSquared;
+               delete m_mean;
+           }
+   
+           void StreamingVariance::update(const double& observation)
+           {
+               m_mean->update(observation);
+               m_sumSquared->update(observation * observation);
+           }
+   
+           double StreamingVariance::evaluate() const
+           {
+               double mean = m_mean->evaluate();
+               return m_sumSquared->evaluate() - (mean * mean);
+           }
+       }  // namespace Statistics
+   }  // namespace KML

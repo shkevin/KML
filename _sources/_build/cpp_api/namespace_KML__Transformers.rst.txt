@@ -1,0 +1,24 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _namespace_KML__Transformers:
+
+Namespace KML::Transformers
+===========================
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Transformers_1_1AdaptiveNormalizer`
+
+- :ref:`exhale_class_classKML_1_1Transformers_1_1ITransformer`

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kml.statistics.summary package &mdash; KML unknown version documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="C++ API" href="cpp_api/library_root.html" />
+    <link rel="prev" title="kml.statistics package" href="kml.statistics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #8d37d7" >
+            <a href="../index.html" class="icon icon-home"> KML
+            <img src="../_static/HQ 01-03-resized.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                unknown version
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pages/about.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/about.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/about.html#why-kml">Why KML?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/install.html#python">Python</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../pages/modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Python API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cpp_api/library_root.html">C++ API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/roadmap.html">Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/roadmap.html#long-term-objective">Long-term Objective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/roadmap.html#new-functionality">New Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/roadmap.html#maintenance-related">Maintenance Related</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#process-for-contributing">Process for Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#coding-styles">Coding Styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#building-the-documentation">Building the Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/contributing.html#licensing">Licensing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/release.html">Release Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pages/readme.html">README</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#about-the-project">About The Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#building-python-docker">Building Python Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#roadmap">Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#project-leaders">Project leaders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#contact">Contact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pages/readme.html#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #8d37d7" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">KML</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../pages/modules.html">API</a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Python API</a></li>
+          <li class="breadcrumb-item"><a href="kml.html">kml package</a></li>
+          <li class="breadcrumb-item"><a href="kml.statistics.html">kml.statistics package</a></li>
+      <li class="breadcrumb-item active">kml.statistics.summary package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_build/kml.statistics.summary.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-kml.statistics.summary">
+<span id="kml-statistics-summary-package"></span><h1>kml.statistics.summary package<a class="headerlink" href="#module-kml.statistics.summary" title="Permalink to this headline"></a></h1>
+<p>KML Summary Statistics Module.</p>
+<p>The Streaming Summary Statistics module attempts to define summary
+statistics on data streams.</p>
+<section id="module-kml.statistics.summary.StreamingEntropy">
+<span id="kml-statistics-summary-streamingentropy-module"></span><h2>kml.statistics.summary.StreamingEntropy module<a class="headerlink" href="#module-kml.statistics.summary.StreamingEntropy" title="Permalink to this headline"></a></h2>
+<p>Streaming entropy wrapper module for C++.</p>
+<p>This module is used to wrap the C++ Streaming entropy implemtation.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kml.statistics.summary.StreamingEntropy</span> <span class="kn">import</span> <span class="n">PyStreamingEntropy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sm</span> <span class="o">=</span> <span class="n">PyStreamingEntropy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sm</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingEntropy.PyStreamingEntropy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kml.statistics.summary.StreamingEntropy.</span></span><span class="sig-name descname"><span class="pre">PyStreamingEntropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingEntropy.PyStreamingEntropy" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class containing the Streaming Entropy implementation in Cython.</p>
+<p>Streaming entropy wrapper for the C++ StreamingEntropy class. This code contains
+the public interface usage for the streaming entropy statistic.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>if num_bins is set at 0, the StreamingEntropy class will calculate the
+number of bins to use based off of the Sturges rule.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Desired window size. Defaults to 100.</p></li>
+<li><p><strong>num_bins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Desired number of bins to approximate counts.
+Defaults to 0.</p></li>
+<li><p><strong>c_SE</strong> (<em>StreamingEntropy*</em>) – Pointer to the C++ StreamingEntropy implementation.</p></li>
+<li><p><strong>window_size</strong> – Desired window size. Defaults to 100.</p></li>
+<li><p><strong>num_bins</strong> – Desired number of bins to approximate counts.
+Defaults to 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingEntropy.PyStreamingEntropy.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingEntropy.PyStreamingEntropy.evaluate" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the current Streaming Entropy value.</p>
+<p>Retrieve the current streaming entropy value from the previous items
+updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Current Entropy value in window.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingEntropy.PyStreamingEntropy.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingEntropy.PyStreamingEntropy.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the Streaming Entropy with the given item.</p>
+<p>Update the streaming Entropy with the given item. The window_size
+parameter helps adjust for data drift within the entropy calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>Iterable</em>) – Item to update entropy.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kml.statistics.summary.StreamingIQR">
+<span id="kml-statistics-summary-streamingiqr-module"></span><h2>kml.statistics.summary.StreamingIQR module<a class="headerlink" href="#module-kml.statistics.summary.StreamingIQR" title="Permalink to this headline"></a></h2>
+<p>Streaming Interquartile Range wrapper module for C++.</p>
+<p>This module is used to wrap the C++ Streaming IQR implemtation.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kml.statistics.summary.StreamingIQR</span> <span class="kn">import</span> <span class="n">PyStreamingIQR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iqr</span> <span class="o">=</span> <span class="n">PyStreamingIQR</span><span class="p">(</span><span class="n">window_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iqr</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqr</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingIQR.PyStreamingIQR">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kml.statistics.summary.StreamingIQR.</span></span><span class="sig-name descname"><span class="pre">PyStreamingIQR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingIQR.PyStreamingIQR" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class containing the Streaming IQR implemenation in Cython.</p>
+<p>Streaming IQR wrapper for the C++ StreamingIQR class. This code contains
+the public interface usage for the streaming IQR statistic.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If window_size is set to None, or not specified, the IQR calculation
+will behave similar to a batch IQR calcuation.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>low</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Low range (defaults to 25% quartile). Defaults to None.</p></li>
+<li><p><strong>high</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – High range (defaults to 75% quartile). Defaults to None.</p></li>
+<li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Desired window size. Defaults to None.</p></li>
+<li><p><strong>c_IQR</strong> (<em>StreamingIqR*</em>) – Pointer to the C++ StreamingIQR implementation.</p></li>
+<li><p><strong>low</strong> – Low range (defaults to 25% quartile). Defaults to None.</p></li>
+<li><p><strong>high</strong> – High range (defaults to 75% quartile). Defaults to None.</p></li>
+<li><p><strong>window_size</strong> – Desired window size. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingIQR.PyStreamingIQR.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingIQR.PyStreamingIQR.evaluate" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the current Streaming IQR value.</p>
+<p>Retrieve the current streaming iqr value from the previous items
+updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Current IQR value in window.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingIQR.PyStreamingIQR.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingIQR.PyStreamingIQR.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the Streaming IQR with the given item.</p>
+<p>Update the streaming IQR with the given item. The window_size
+parameter helps adjust for data drift within the iqr calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>Iterable</em>) – Item to update iqr.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kml.statistics.summary.StreamingMean">
+<span id="kml-statistics-summary-streamingmean-module"></span><h2>kml.statistics.summary.StreamingMean module<a class="headerlink" href="#module-kml.statistics.summary.StreamingMean" title="Permalink to this headline"></a></h2>
+<p>Streaming mean wrapper module for C++.</p>
+<p>This module is used to wrap the C++ Streaming mean implemtation.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kml.statistics.summary.StreamingMean</span> <span class="kn">import</span> <span class="n">PyStreamingMean</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sm</span> <span class="o">=</span> <span class="n">PyStreamingMean</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sm</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingMean.PyStreamingMean">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kml.statistics.summary.StreamingMean.</span></span><span class="sig-name descname"><span class="pre">PyStreamingMean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingMean.PyStreamingMean" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class containing the Streaming Mean implementation in Cython.</p>
+<p>Streaming mean wrapper for the C++ StreamingMean class. This code contains
+the public interface usage for the streaming mean statistic.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If window_size is set to None, or not specified, the mean calculation
+will behave similar to the batch mean.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Desired window size. Defaults to None.</p></li>
+<li><p><strong>c_SM</strong> (<em>StreamingMean*</em>) – Pointer to the C++ StreamingMean implementation.</p></li>
+<li><p><strong>window_size</strong> – Desired window size. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingMean.PyStreamingMean.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingMean.PyStreamingMean.evaluate" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the current Streaming Mean value.</p>
+<p>Retrieve the current streaming mean value from the previous items
+updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Current Mean value in window.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingMean.PyStreamingMean.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingMean.PyStreamingMean.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the Streaming Mean with the given item.</p>
+<p>Update the streaming Mean with the given item. The window_size
+parameter helps adjust for data drift within the mean calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>Iterable</em>) – Item to update mean.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kml.statistics.summary.StreamingP2Quantile">
+<span id="kml-statistics-summary-streamingp2quantile-module"></span><h2>kml.statistics.summary.StreamingP2Quantile module<a class="headerlink" href="#module-kml.statistics.summary.StreamingP2Quantile" title="Permalink to this headline"></a></h2>
+<p>Streaming P2 Quantile wrapper module for C++.</p>
+<p>This module is used to wrap the C++ Streaming P2 Quantile implemtation.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kml.statistics.summary.StreamingP2Quantile</span> <span class="kn">import</span> <span class="n">PyStreamingP2Quantile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quant</span> <span class="o">=</span> <span class="n">PyStreamingP2Quantile</span><span class="p">(</span><span class="n">quantile</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quant</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">quant</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Reference:</dt><dd><p><a class="reference external" href="https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf">https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf</a></p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingP2Quantile.PyStreamingP2Quantile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kml.statistics.summary.StreamingP2Quantile.</span></span><span class="sig-name descname"><span class="pre">PyStreamingP2Quantile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingP2Quantile.PyStreamingP2Quantile" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class containing the Streaming P2 Quantile implemenation in Cython.</p>
+<p>Streaming P2 Quantile wrapper for the C++ StreamingP2Quantile class.
+This code contains the public interface usage for the streaming P2 quantile
+statistic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantile</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Quantile to calculate. Defaults to 0.5.</p></li>
+<li><p><strong>quantile</strong> – Quantile to calculate. Defaults to 0.5.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingP2Quantile.PyStreamingP2Quantile.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingP2Quantile.PyStreamingP2Quantile.evaluate" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the current Streaming P2 Quantile statistic.</p>
+<p>Retrieve the current streaming quantile statisic from the previous items
+updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Current quantile value.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingP2Quantile.PyStreamingP2Quantile.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingP2Quantile.PyStreamingP2Quantile.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the Streaming P2 Quantile with the given item.</p>
+<p>Update the streaming quantile with the given item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>Iterable</em>) – Item to update quantile value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kml.statistics.summary.StreamingVariance">
+<span id="kml-statistics-summary-streamingvariance-module"></span><h2>kml.statistics.summary.StreamingVariance module<a class="headerlink" href="#module-kml.statistics.summary.StreamingVariance" title="Permalink to this headline"></a></h2>
+<p>Streaming variance wrapper module for C++.</p>
+<p>This module is used to wrap the C++ Streaming variance implemtation.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kml.statistics.summary.StreamingVariance</span> <span class="kn">import</span> <span class="n">PyStreamingVariance</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sv</span> <span class="o">=</span> <span class="n">PyStreamingVariance</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sv</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingVariance.PyStreamingVariance">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kml.statistics.summary.StreamingVariance.</span></span><span class="sig-name descname"><span class="pre">PyStreamingVariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingVariance.PyStreamingVariance" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class containing the Streaming variance implementation in Cython.</p>
+<p>Streaming variance wrapper for the C++ StreamingVariance class. This code contains
+the public interface usage for the streaming variance statistic.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If window_size is set to None, or not specified, the variance calculation
+will behave similar to a batch setting.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Desired window size. Defaults to None.</p></li>
+<li><p><strong>c_SM</strong> (<em>StreamingVariance*</em>) – Pointer to the C++ StreamingVariance implementation.</p></li>
+<li><p><strong>window_size</strong> – Desired window size.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingVariance.PyStreamingVariance.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingVariance.PyStreamingVariance.evaluate" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the current Streaming Variance value.</p>
+<p>Retrieve the current streaming mean value from the previous items
+updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Current Variance value in window.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.StreamingVariance.PyStreamingVariance.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.StreamingVariance.PyStreamingVariance.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the Streaming Variance with the given item.</p>
+<p>Update the streaming Variance with the given item. The window_size
+parameter helps adjust for data drift within the variance calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>observation</strong> – Item to update variance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kml.statistics.summary.WindowedFAME">
+<span id="kml-statistics-summary-windowedfame-module"></span><h2>kml.statistics.summary.WindowedFAME module<a class="headerlink" href="#module-kml.statistics.summary.WindowedFAME" title="Permalink to this headline"></a></h2>
+<p>Windowed FAME wrapper module for C++.</p>
+<p>This module is used to wrap the C++ Windowed FAME implemtation.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kml.statistics.summary.WindowedFAME</span> <span class="kn">import</span> <span class="n">PyWindowedFAME</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fame</span> <span class="o">=</span> <span class="n">PyWindowedFAME</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fame</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fame</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Reference:</dt><dd><p><a class="reference external" href="https://ieeexplore.ieee.org/document/4261339">https://ieeexplore.ieee.org/document/4261339</a></p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="kml.statistics.summary.WindowedFAME.PyWindowedFAME">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kml.statistics.summary.WindowedFAME.</span></span><span class="sig-name descname"><span class="pre">PyWindowedFAME</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.WindowedFAME.PyWindowedFAME" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class containing the Windowed FAME implementation in Cython.</p>
+<p>Windowed FAME wrapper for the C++ WindowedFame class. This code contains
+the public interface usage for the Windowed FAME (Fast Algorithm for Median Estimation)
+statistic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – The step size to take when calculating median. Defaults to 0.1.</p></li>
+<li><p><strong>epsilon</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – epsilon The exponential growth factor. This gives the
+median calculation a “windowing flavor”. Defaults to 0.0.</p></li>
+<li><p><strong>c_FM</strong> (<em>WindowedFAME*</em>) – Pointer to the C++ WindowedFAME implementation.</p></li>
+<li><p><strong>step_size</strong> – The step size to take when calculating median. Defaults to 0.1.</p></li>
+<li><p><strong>epsilon</strong> – epsilon The exponential growth factor. This gives the
+median calculation a “windowing flavor”. Defaults to 0.0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.WindowedFAME.PyWindowedFAME.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.WindowedFAME.PyWindowedFAME.evaluate" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the current median approximation.</p>
+<p>Retrieve the current FAME median from the previous items updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Current median approximation.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.WindowedFAME.PyWindowedFAME.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.WindowedFAME.PyWindowedFAME.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the Median with the given item.</p>
+<p>Update the Windowed FAME median calculation with the given item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>observation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>Iterable</em>) – Item to update median.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kml.statistics.summary.WindowedP2Quantile">
+<span id="kml-statistics-summary-windowedp2quantile-module"></span><h2>kml.statistics.summary.WindowedP2Quantile module<a class="headerlink" href="#module-kml.statistics.summary.WindowedP2Quantile" title="Permalink to this headline"></a></h2>
+<p>Windowed P2 Quantile wrapper module for C++.</p>
+<p>This module is used to wrap the C++ Windowed P2 Quantile implemtation.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">kml.statistics.summary.WindowedP2Quantile</span> <span class="kn">import</span> <span class="n">PyWindowedP2Quantile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">PyWindowedP2Quantile</span><span class="p">(</span><span class="n">quantile</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p2</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="kml.statistics.summary.WindowedP2Quantile.PyWindowedP2Quantile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kml.statistics.summary.WindowedP2Quantile.</span></span><span class="sig-name descname"><span class="pre">PyWindowedP2Quantile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.WindowedP2Quantile.PyWindowedP2Quantile" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class containing the Windowed P2 Quantile implementation in Cython.</p>
+<p>Windowed P2 Quantile wrapper for the C++ WindowedP2Quantile class. This code contains
+the public interface usage for calculating the quantile value within a window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantile</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Quantile to calculate.</p></li>
+<li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Desired window size. Defaults to None.</p></li>
+<li><p><strong>c_WP2</strong> (<em>WindowedP2Quantile*</em>) – Pointer to the C++ WindowedP2Quantile implementation.</p></li>
+<li><p><strong>quantile</strong> – Quantile to calculate.</p></li>
+<li><p><strong>window_size</strong> – Desired window size. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.WindowedP2Quantile.PyWindowedP2Quantile.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.WindowedP2Quantile.PyWindowedP2Quantile.evaluate" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the current quantile statistic.</p>
+<p>Retrieve the current streaming quantile statisic from the previous items
+updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Current quantile value.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kml.statistics.summary.WindowedP2Quantile.PyWindowedP2Quantile.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#kml.statistics.summary.WindowedP2Quantile.PyWindowedP2Quantile.update" title="Permalink to this definition"></a></dt>
+<dd><p>Update the Windowed P2 Quantile with the given item.</p>
+<p>Update the streaming quantile with the given item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>item</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>Iterable</em>) – Item to update quantile value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="kml.statistics.html" class="btn btn-neutral float-left" title="kml.statistics package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cpp_api/library_root.html" class="btn btn-neutral float-right" title="C++ API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kevin Cox.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

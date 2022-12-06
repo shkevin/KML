@@ -1,0 +1,77 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _file_KML_include_statistics_summary_StreamingP2Quantile.h:
+
+File StreamingP2Quantile.h
+==========================
+
+|exhale_lsh| :ref:`Parent directory <dir_KML_include_statistics_summary>` (``KML/include/statistics/summary``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+
+
+Provides the declarations for the P2 quantile calculation. Reference: https://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf. 
+
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``KML/include/statistics/summary/StreamingP2Quantile.h``)
+---------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_KML_include_statistics_summary_StreamingP2Quantile.h.rst
+
+
+
+Detailed Description
+--------------------
+
+The StreamingP2Quantile computes quantile statistics of a data stream. This class can work on all the data or a window of the data. Each update is O(1), with low memory complexity. 
+
+
+
+
+Includes
+--------
+
+
+- ``IStreamingStatistic.h`` (:ref:`file_KML_include_statistics_summary_IStreamingStatistic.h`)
+
+- ``vector``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_KML_include_statistics_summary_WindowedP2Quantile.h`
+
+- :ref:`file_KML_src_statistics_summary_StreamingP2Quantile.cc`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_KML`
+
+- :ref:`namespace_KML__Statistics`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classKML_1_1Statistics_1_1StreamingP2Quantile`
+

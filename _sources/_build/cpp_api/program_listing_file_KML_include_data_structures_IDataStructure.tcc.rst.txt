@@ -1,0 +1,41 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_data_structures_IDataStructure.tcc:
+
+Program Listing for File IDataStructure.tcc
+===========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_data_structures_IDataStructure.tcc>` (``KML/include/data_structures/IDataStructure.tcc``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /*!
+    * @file IDataStructure.tcc
+    * @brief Contains the templated implementation for the abstract data structure class.
+    */
+   #include <stdexcept>
+   
+   namespace KML
+   {
+       namespace DataStructures
+       {
+           template<typename T>
+           IDataStructure<T>::IDataStructure(const size_t& windowSize)
+               : m_windowSize(windowSize)
+           {
+               // Do nothing.
+           }
+   
+           template<typename T>
+           void IDataStructure<T>::update(const std::vector<T>& items)
+           {
+               for (auto it = items.begin(); it != items.end(); it++)
+               {
+                   this->update(*it);
+               }
+           }
+       }  // namespace DataStructures
+   }  // namespace KML

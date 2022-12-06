@@ -1,0 +1,37 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_statistics_transformers_AdaptiveNormalizer.h:
+
+Program Listing for File AdaptiveNormalizer.h
+=============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_statistics_transformers_AdaptiveNormalizer.h>` (``KML/include/statistics/transformers/AdaptiveNormalizer.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __ADAPTIVE_TRANSFORMER_H__
+   #define __ADAPTIVE_TRANSFORMER_H__
+   
+   #include "ITransformer.h"
+   
+   namespace KML
+   {
+       namespace Transformers
+       {
+           class AdaptiveNormalizer : public ITransformer<double>
+           {
+               public:
+                   AdaptiveNormalizer();
+   
+                   void fit(const double& observation) override;
+   
+                   double transform(const double& observation) override;
+           };
+       }  // namespace Transformers
+   }  // namespace KML
+   
+   #endif  // __ADAPTIVE_TRANSFORMER_H__

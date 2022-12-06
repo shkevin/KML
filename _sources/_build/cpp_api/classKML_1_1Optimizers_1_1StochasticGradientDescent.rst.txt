@@ -1,0 +1,41 @@
+:github_url: https://github.com/shkevin/KML
+
+.. _exhale_class_classKML_1_1Optimizers_1_1StochasticGradientDescent:
+
+Template Class StochasticGradientDescent
+========================================
+
+- Defined in :ref:`file_KML_include_optimizers_StochasticGradientDescent.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public KML::Optimizers::IOptimizer< double >`` (:ref:`exhale_class_classKML_1_1Optimizers_1_1IOptimizer`)
+
+
+Template Parameter Order
+------------------------
+
+#. ``typename T``
+
+
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: KML::Optimizers::StochasticGradientDescent
+   :project: kml
+   :members:
+   :protected-members:
+   :undoc-members:

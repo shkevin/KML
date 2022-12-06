@@ -1,0 +1,36 @@
+:github_url: https://github.com/shkevin/KML
+
+
+.. _program_listing_file_KML_include_optimizers_StochasticGradientDescent.h:
+
+Program Listing for File StochasticGradientDescent.h
+====================================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_KML_include_optimizers_StochasticGradientDescent.h>` (``KML/include/optimizers/StochasticGradientDescent.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   
+   #ifndef __STOCHASTIC_GRADIENT_DESCENT_H__
+   #define __STOCHASTIC_GRADIENT_DESCENT_H__
+   
+   #include "IOptimizer.h"
+   
+   namespace KML
+   {
+       namespace Optimizers
+       {
+           template<typename T = double>
+           class StochasticGradientDescent : public IOptimizer<T>
+           {
+               public:
+                   StochasticGradientDescent();
+   
+                   void update(const T& observation) override;
+           };
+       }  // namespace Optimizers
+   }  // namespace KML
+   
+   #endif  //__STOCHASTIC_GRADIENT_DESCENT_H__

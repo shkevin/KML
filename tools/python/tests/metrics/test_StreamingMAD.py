@@ -1,6 +1,6 @@
 import unittest
 
-from KML.metrics.StreamingMAD import PyStreamingMAD
+from kml.metrics.StreamingMAD import PyStreamingMAD
 
 
 class TestStreamingMAD(unittest.TestCase):

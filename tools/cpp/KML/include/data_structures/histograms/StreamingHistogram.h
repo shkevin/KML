@@ -13,7 +13,7 @@ namespace KML
 {
     namespace DataStructures
     {
-        /*! @brief A Ben-Haim implementation to the Streaming Histogram problem. */
+        /*! @brief A Ben-Haim & Tom-Tov implementation to the Streaming Histogram problem. */
         template<typename T = double>
         class StreamingHistogram : public IStreamingHistogram<T>
         {

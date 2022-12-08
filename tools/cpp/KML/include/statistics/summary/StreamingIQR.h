@@ -37,8 +37,7 @@ namespace KML
                  *        This window size defaults to a window size of 0, meaning
                  *        the IQR is over the entire data stream.
                  */
-                explicit StreamingIQR(const double& low = 0.5, const double& high = 0.75,
-                                      const size_t& windowSize = 0);
+                StreamingIQR(const double& low, const double& high, const size_t& windowSize = 0);
 
                 /*!
                  * Copy Constructor.

@@ -51,5 +51,5 @@ Once the documentation is built, you can view it by opening
 Licensing
 ^^^^^^^^^
 
-Contributors should keep in mind that the source of KML and therefore of any contributions are licensed under the permissive `MIT license <license.html>`_.
+Contributors should keep in mind that the source of KML and therefore any contributions are licensed under the permissive `MIT license <license.html>`_.
 By contributing to KML, you are agreeing to release your code under this license.

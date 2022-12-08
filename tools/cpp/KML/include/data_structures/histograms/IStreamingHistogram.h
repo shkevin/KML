@@ -6,6 +6,8 @@
 #define __ABSTRACT_HISTOGRAM_H__
 
 #include <deque>
+#include <map>
+#include <utility>
 #include <vector>
 
 #include "IBin.h"
@@ -36,6 +38,31 @@ namespace KML
                  */
                 explicit IStreamingHistogram(const size_t& numBins, const size_t& windowSize = 100,
                                              const DecayType& decay = DecayType::WINDOW);
+
+                /*!
+                 * @brief Copy Constructor.
+                 */
+                IStreamingHistogram(const IStreamingHistogram<T>& other);
+
+                /*!
+                 * @brief Copy Assignment.
+                 */
+                IStreamingHistogram<T>& operator=(const IStreamingHistogram<T>& rhs);
+
+                /*!
+                 * @brief Move Constructor.
+                 */
+                IStreamingHistogram(IStreamingHistogram<T>&& other);
+
+                /*!
+                 * @brief Move Assignment.
+                 */
+                IStreamingHistogram<T>& operator=(IStreamingHistogram<T>&& rhs);
+
+                /*!
+                 * @brief Default Destructor.
+                 */
+                ~IStreamingHistogram();
 
                 /*!
                  * @copydoc IDataStructure::update()
@@ -69,18 +96,24 @@ namespace KML
                 size_t binSearch(const IBin<T>& bin) const;
 
                 /*!
+                 * @brief Get the index where the given item should be inserted.
+                 * @param item The item to find where to place in histogram.
+                 */
+                size_t binSearch(const T& item) const;
+
+                /*!
                  * @brief Calculate the approximate pdf from the histogram.
                  * @param normalize Get the window normalized counts.
                  * @param density Calculate the density of the histogram.
                  */
-                std::vector<double> pdf(const bool normalize = true,
-                                        const bool density = true) const;
+                std::vector<double> pdf(const bool& normalize = true,
+                                        const bool& density = true) const;
 
                 /*!
                  * @brief Calcualte the approximate cdf of bin counts.
                  * @param normalize Normalize the counts by the window.
                  */
-                std::vector<double> cdf(const bool normalize = true) const;
+                std::vector<double> cdf(const bool& normalize = true) const;
 
                 /*!
                  * @brief Get the bin edge corresponding to the pth percentile.
@@ -89,9 +122,20 @@ namespace KML
                 T quantile(const double& qtile) const;
 
                 /*!
+                 * @brief Add the given bin to the histogram.
+                 * @param item Item to add in histogram.
+                 */
+                void add(const T& item);
+
+                /*!
                  * @brief Retrieve the counts for each bin.
                  */
                 std::vector<size_t> binCounts() const;
+
+                /*!
+                 * @brief Retrieve the bin boundaries and bin counts of the histogram.
+                 */
+                std::map<std::pair<double, double>, size_t> report();
 
                 /*!
                  * @brief Print Operator.
@@ -101,15 +145,50 @@ namespace KML
                                                 const IStreamingHistogram<F>& hist);
 
                 /*!
-                 * @brief Update the value used in normalizing the counts.
-                 */
-                void updateNormalizer();
-
-                /*!
                  * @brief Decrease the count of an item outside of window.
                  */
                 void decayCounts();
 
+                /*!
+                 * @brief Get the total number of items across all bins.
+                 */
+                size_t getTotalCount() const;
+
+                /*!
+                 * @brief Get bin at the given index.
+                 * @param index Which bin to get from the histogram.
+                 */
+                IBin<T>* getBin(size_t index) const;
+
+            protected:
+                /*!
+                 * @brief Get the current window for the histogram.
+                 */
+                std::deque<size_t>* getWindow() const;
+
+                /*!
+                 * @brief Merge the two bins by index.
+                 * @param lhs Left most bin, with left bin boundary.
+                 * @param rhs Right most bin, with right bin boundary.
+                 */
+                void mergeBins(const size_t& lhs, const size_t& rhs);
+
+                /*!
+                 * @brief Get the current number of bins in the histogram.
+                 */
+                size_t getCurrentNumBins() const;
+
+                /*!
+                 * @brief Get the current number of bins in the histogram.
+                 */
+                size_t getNumBins() const;
+
+                /*!
+                 * @brief Get the set decay type.
+                 */
+                DecayType getDecayType() const;
+
+            private:
                 /*!
                  * @brief Vector of Bins in the Histogram.
                  */
@@ -131,11 +210,10 @@ namespace KML
                  */
                 const DecayType m_decay;
 
-            private:
                 /*!
-                 * @brief The value to normalize the counts in the histogram.
+                 * @brief Total count of items inside all current bins.
                  */
-                double m_normalizer = 0.0;
+                size_t m_totalCount = 0;
         };
     }  // namespace DataStructures
 }  // namespace KML

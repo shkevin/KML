@@ -34,7 +34,7 @@ Folder Structure and File Naming
 - Source files should be in a folder named `src/`. The file should have the same name as the header with extension `.cc`.
 - When using templates:  If you want to separate declaration and definition, put the declaration to a `.h` header file as usual and the definition to a file with extension `.tcc` in the same directory (which is included at the bottom of the `.h` file).
 - Preferably each class should be in a separate file with name class_name_in_lower_case.  However, this is not a strict rule, if several smaller classes are logically closely related, they may go to the same file.
-- The C++/Cython code for wrapping C++ code to Python must be placed in `tools/cython/KML` in the corresponding folder, relative to the C++ folder structure.
+- The C++/Cython code for wrapping C++ code to Python must be placed in `tools/cython/kml` in the corresponding folder, relative to the C++ folder structure.
 
 Naming
 ~~~~~~

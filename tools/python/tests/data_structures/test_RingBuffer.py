@@ -1,6 +1,6 @@
 import unittest
 
-from KML.data_structures.RingBuffer import PyRingBuffer
+from kml.data_structures.RingBuffer import PyRingBuffer
 
 
 class TestRingBuffer(unittest.TestCase):

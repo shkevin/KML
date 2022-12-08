@@ -1,5 +1,5 @@
 ---
-name: Docs
+name: Build and Deploy Docs
 
 on:
   workflow_run:
@@ -8,34 +8,49 @@ on:
     types:
       - completed
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
+    name: Build and Deploy Docs
     steps:
-      - name: Requirements
-        run: |
-          sudo apt-get install doxygen ninja-build cmake gcovr ccache
-          pip3 install -U cython wheel setuptools>=61.0.0 setuptools_scm
-          pip3 install -U sphinx sphinx-rtd-theme sphinx-sitemap breathe exhale
-
-      - name: Checkout repo
-        uses: actions/checkout@3
-
-      - name: Build docs
-        run: |
-            cmake -S . -B ${{github.workspace}}/build \
-              -DBUILD_TESTING=OFF \
-              -DBUILD_PYTHON=ON \
-              -DBUILD_COVERAGE=OFF \
-              -DBUILD_DOCUMENTATION=ON \
-              -DCMAKE_BUILD_TYPE=release
-            cmake --build ${{github.workspace}}/build -j
-            cd ${{github.workspace}}/build/docs/source/_build/html
-            touch .nojekyll
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: cd ${{github.workspace}}/build/docs/source/_build/html
+          python-version: "3.8"
+
+      - name: Install Requirements
+        run: |
+          sudo apt-get install doxygen ninja-build cmake ccache
+          pip3 install -U cython wheel setuptools>=61.0.0 setuptools_scm
+          pip3 install -U sphinx sphinx-rtd-theme sphinx_sitemap breathe \
+            exhale sphinx_gallery nbsphinx nbconvert pandoc IPython \
+            sphinx_copybutton
+
+      - name: Force Version Creation
+        run: python setup.py --version
+
+      - name: Configure CMake
+        run: >-
+          cmake
+          -DBUILD_TESTING=OFF
+          -DBUILD_PYTHON=ON
+          -DBUILD_COVERAGE=OFF
+          -DBUILD_DOCUMENTATION=ON
+          -DBUILD_STATIC_ANALYSIS=OFF
+          -DCMAKE_BUILD_TYPE=Release
+          -S . -B ${{github.workspace}}/build
+
+      - name: Build Docs
+        run: |
+          cmake --build ${{github.workspace}}/build --config Release -j
+          cd ${{github.workspace}}/build/docs/source/_build/html
+          touch .nojekyll
+
+      - name: Deploy Docs
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ${{github.workspace}}/build/docs/source/_build/html

@@ -1,9 +1,13 @@
 [build-system]
-requires = ["setuptools>=61.0.0", "wheel", "Cython>=0.29.22", "setuptools_scm[toml]>=6.2"]
+requires = ["setuptools>=61.0.0",
+            "wheel",
+            "Cython>=0.29.22",
+            "setuptools_scm[toml]>=6.2",
+            "toml"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "KML"
+name = "kml"
 authors = [{name = "Kevin Cox", email = "shk3vin7@gmail.com"}]
 maintainers = [{name = "Kevin Cox", email = "shk3vin7@gmail.com"}]
 readme = "README.rst"
@@ -20,8 +24,7 @@ classifiers=[
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Operating System :: MacOS",
-    "Operating System :: Unix",
-]
+    "Operating System :: Unix"]
 requires-python = ">=3.7,<=3.11"
 dependencies = []
 dynamic = ["version"]
@@ -43,24 +46,46 @@ dev = ["black>=22.0.0,<23.0.0",
        "yapf>=0.32.0",
        "pyproject-flake8>=5.0.0",
        "pydocstyle>=6.1.1",
-       "toml==0.10.1"]
-docs = ["sphinx", "sphinx_rtd_theme", "breathe",
-        "exhale", "sphinx_gallery", "nbsphinx",
-        "nbconvert", "pandoc"]
+       "toml==0.10.1",
+       "pylint>=2.0.0"]
+docs = ["sphinx", "sphinx_rtd_theme", "sphinx_sitemap",
+        "breathe", "exhale", "sphinx_gallery", "nbsphinx",
+        "nbconvert", "pandoc", "IPython", "sphinx_copybutton"]
 
 [tool.setuptools.package-data]
-KML = ["*.rst"]
+kml = ["*.rst"]
 
 [tool.setuptools.exclude-package-data]
-KML = [".gitattributes", "build"]
+kml = [".gitattributes", "build"]
 
 [tool.setuptools_scm]
-write_to = "tools/cython/KML/_version.py"
+write_to = "tools/cython/kml/_version.py"
 version_scheme = "release-branch-semver"
 
 [tool.coverage.run]
-source = ["tools/python/KML"]
+branch = true
+parallel = true
+omit = ["build/*", "tools/cython/kml/_version.py"]
 
+[tool.coverage.report]
+precision = 2
+omit = ["build/*", "tools/cython/kml/_version.py"]
+
+[tool.mypy]
+warn_unreachable = true
+warn_unused_ignores = true
+follow_imports = "skip"
+show_error_context = true
+warn_incomplete_stub = true
+ignore_missing_imports = true
+check_untyped_defs = true
+cache_dir = "/dev/null"
+warn_redundant_casts = true
+warn_unused_configs = true
+strict_optional = true
+plugins = ["pydantic.mypy"]
+
+# Flake8 doesn't use pyproject yet. This is just here for reference.
 [tool.flake8]
 filename = ["*.py", "*.pxd", "*.pyx"]
 max-line-length = 100
@@ -79,18 +104,18 @@ disable = [
     # "R0903", # (too-few-public-methods)
     # "R0913", # (too-many-arguments)
     # "W0105", # (pointless-string-statement)
-    "E0401", # (Unable to import)
-    "E0611", # (No name)
-]
+    "E0401",   # (Unable to import)
+    "E0611",   # (No name)
+    "W0406",   # (Module import self)
+    ]
 
 [tool.pytest.ini_options]
-addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 95"
+addopts = "-doctest --cov-report term --cov-fail-under 95"
 minversion = "2.0"
-# addopts = "-rfEX -p pytester --strict-markers"
 python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test", "Acceptance"]
 python_functions = ["test"]
-testpaths = ["tests"]
+# testpaths = ["./tools/python/"]
 xfail_strict = true
 filterwarnings = [
     "error",
@@ -113,11 +138,10 @@ filterwarnings = [
     # module being the filename (with .py removed).
     "default:invalid escape sequence:DeprecationWarning",
     # ignore use of unregistered marks, because we use many to test the implementation
-    "ignore::_pytest.warning_types.PytestUnknownMarkWarning",
-]
+    "ignore::_pytest.warning_types.PytestUnknownMarkWarning",]
 
 [tool.black]
-target-version = ['py36'] # Test the minimum version supported.
+target-version = ['py37', 'py38', 'py39', 'py310']
 
 [tool.isort]
 profile = "black"

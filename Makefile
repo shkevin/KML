@@ -34,7 +34,7 @@ YELLOW := $(shell tput -Txterm setaf 3)
 WHITE  := $(shell tput -Txterm setaf 7)
 RESET  := $(shell tput -Txterm sgr0)
 
-all: directories compile-all test test_wheel coverage
+all: directories compile-all test_wheel coverage
 	@echo '*******************Compiled*********************'
 
 ## Build the docker image for KML.
@@ -65,12 +65,25 @@ python: directories
 		-DBUILD_DOCUMENTATION=ON && \
 	make -j
 
+## Build and compile with just C++/python and testing.
+dev: directories
+	cd $(BUILDDIR) && \
+	cmake \
+	    .. \
+	    -DCMAKE_BUILD_TYPE=Debug \
+	    -DBUILD_TESTING=ON \
+		-DBUILD_PYTHON=ON \
+		-DBUILD_COVERAGE=OFF \
+		-DBUILD_DOCUMENTATION=OFF \
+		-DBUILD_STATIC_ANALYSIS=OFF && \
+	make -j
+
 ## Build and compile with every option on.
 compile-all: directories
 	cd $(BUILDDIR) && \
 	cmake \
 	    .. \
-	    -DCMAKE_BUILD_TYPE=Debug \
+	    -DCMAKE_BUILD_TYPE=Release \
 	    -DBUILD_TESTING=ON \
 		-DBUILD_PYTHON=ON \
 		-DBUILD_COVERAGE=ON \
@@ -92,6 +105,12 @@ analyze: directories
 		-DBUILD_STATIC_ANALYSIS=ON && \
 	make -j
 
+## Build the docker image.
+docker:
+	docker build \
+		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
+		.
+
 ## Mount the docker image and run.
 develop:
 	docker run --rm -i \
@@ -102,34 +121,30 @@ develop:
 
 ## Call Unittests for C++/Python.
 test:
-	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V
+	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && ctest -V && \
+    PYTHONPATH=$(BUILDDIR) python3 -m pytest -c $(ROOT_DIR)/pyproject.toml \
+		-doctest -n auto --cov-report term --cov-report html:./html_dir \
+		--cov tools/python/tests tools/python/tests
 
 ## Call Unittests for C++/Python for built wheel. Requires prior build.
 test_wheel:
 	[ -d $(BUILDDIR) ] && \
-	cd $(BUILDDIR)/tools/packages && \
-	python3 -m pip install KML*.whl --force-reinstall && \
-	python3 -m pytest -p no:cacheprovider ../python/tests && \
+	cd $(BUILDDIR)/tools && \
+	python3 -m pip install packages/*.whl --force-reinstall && \
+    python3 -m pytest -c $(ROOT_DIR)/pyproject.toml -doctest -n auto --cov-report term --cov-report html:./html_dir --cov python/tests python/tests
 	pip uninstall KML -y
 
 ## Call Unittests for C++/Python for sdist. Requires prior build.
 test_source:
 	[ -d $(BUILDDIR) ] && \
-	cd $(BUILDDIR)/tools/packages && \
-	pip3 install KML*.tar.gz --force-reinstall && \
-	python3 -m pytest -p no:cacheprovider ../python/tests && \
+	cd $(BUILDDIR)/tools/ && \
+	pip3 install packages/*.tar.gz --force-reinstall && \
+    python3 -m pytest -c $(ROOT_DIR)/pyproject.toml -doctest -n auto --cov-report term --cov-report html:./html_dir --cov python/tests python/tests
 	pip uninstall KML -y
-
-## Test Docker image
-docker_test: build
-	docker run \
-		-t ${DOCKER_IMAGE}:${DOCKER_TAG} \
-		make test \
-		make test_wheel
 
 ## Create the C++ Coverage.
 coverage:
-	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) make coverage
+	[ -d $(BUILDDIR) ] && cd $(BUILDDIR) && make coverage
 
 ## Remake entire project.
 remake: clean all
@@ -140,7 +155,7 @@ directories:
 
 ## Clean build folder.
 clean:
-	@$(RM) -rf $(BUILDDIR) ./tox
+	@$(RM) -rf $(BUILDDIR) .tox
 
 ## Full Clean of entire project. This project formats c++ as .cc
 cleaner: clean

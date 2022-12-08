@@ -1,6 +1,6 @@
 import unittest
 
-from KML.data_structures.histograms.StreamingHistogram import PyStreamingHistogram
+from kml.data_structures.histograms.StreamingHistogram import PyStreamingHistogram
 
 
 class TestStreamingHistogram(unittest.TestCase):
@@ -47,7 +47,7 @@ class TestStreamingHistogram(unittest.TestCase):
     def test_windowed_quantile(self):
         self.SH.update(self.DATA)
         q = self.SH.quantile(0.8)
-        self.assertEqual(q, 9.2)
+        self.assertEqual(q, 9.0)
 
     def test_empty(self):
         self.assertEqual(self.SH.empty(), True)

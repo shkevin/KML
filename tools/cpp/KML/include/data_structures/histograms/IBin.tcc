@@ -2,6 +2,8 @@
  * @file  Bin.tcc
  * @brief Contains the templated implementation for the abstract Bin class.
  */
+#include "Utils.h"  // Float comparison
+
 namespace KML
 {
     namespace DataStructures
@@ -64,8 +66,14 @@ namespace KML
         IBin<T> IBin<T>::operator+(const IBin<T>& rhs) const
         {
             IBin l_bin = *this;
-            if (rhs.m_left < l_bin.m_left) l_bin.m_left = rhs.m_left;
-            if (rhs.m_right > l_bin.m_right) l_bin.m_right = rhs.m_right;
+            if (Utils::definitelyLessThan(rhs.m_left, l_bin.m_left, 0.000001))
+            {
+                l_bin.m_left = rhs.m_left;
+            }
+            if (Utils::definitelyGreaterThan(rhs.m_right, l_bin.m_right, 0.000001))
+            {
+                l_bin.m_right = rhs.m_right;
+            }
             l_bin.m_count += rhs.m_count;
 
             return l_bin;
@@ -81,13 +89,14 @@ namespace KML
         template<typename T>
         bool IBin<T>::operator<(const IBin& rhs) const
         {
-            return this->m_left < rhs.m_left;
+            return Utils::definitelyLessThan(this->m_left, rhs.m_left);
         }
 
         template<typename T>
         bool IBin<T>::operator==(const IBin& rhs) const
         {
-            return this->m_left == rhs.m_left && this->m_right == rhs.m_right;
+            return Utils::essentiallyEqual(this->m_left, rhs.m_left) &&
+                   Utils::essentiallyEqual(this->m_right, rhs.m_right);
         }
 
         template<typename T>

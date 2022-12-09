@@ -165,6 +165,19 @@ SET(CPP_DIR "${CMAKE_SOURCE_DIR}/tools/cpp")
 ADD_SUBDIRECTORY("${CPP_DIR}/KML")
 ADD_SUBDIRECTORY("${CPP_DIR}/apps")
 
+# Include Eigen Library
+OPTION(BUILD_EIGEN "Build EIGEN" ON)
+if(BUILD_EIGEN)
+    FIND_PACKAGE(Eigen3 REQUIRED)
+    if(NOT EIGEN3_INCLUDE_DIR)
+        MESSAGE(FATAL_ERROR "EIGEN Not Found!")
+    else()
+        MESSAGE(STATUS "EIGEN Found!")
+        add_compile_options(-DWITH_EIGEN)
+        INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIR})
+    endif()
+endif(BUILD_EIGEN)
+
 ################################
 # Python
 ################################
@@ -288,12 +301,16 @@ if(BUILD_STATIC_ANALYSIS)
     # CLANG-TIDY
     FIND_PROGRAM(CLANG_TIDY "clang-tidy-12")
 	if(CLANG_TIDY)
+        # KMatrix.h throws errors for code that has to be written the way it is.
+        # Just remove the file entirely.
+        LIST(REMOVE_ITEM CPP_HEADERS "${CPP_DIR}/KML/include/data_structures/KMatrix.h")
+
         # Need to add each header directory with -I separately.
         foreach(h_dir IN LISTS HEADERS)
-            set(TIDY_INCLUDE_DIRS "${TIDY_INCLUDE_DIRS}" "-I${h_dir}")
+            SET(TIDY_INCLUDE_DIRS "${TIDY_INCLUDE_DIRS}" "-I${h_dir}")
         endforeach()
 
-        add_custom_target(CMAKE_CXX_CLANG_TIDY ALL DEPENDS ${BINARY}
+        ADD_CUSTOM_TARGET(CMAKE_CXX_CLANG_TIDY ALL DEPENDS ${BINARY}
             COMMAND clang-tidy
                 ${CPP_SOURCES}
                 -header-filter=${CPP_HEADERS}
